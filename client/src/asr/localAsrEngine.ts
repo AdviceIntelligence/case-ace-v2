@@ -87,8 +87,11 @@ export class LocalAsrEngine {
     return new Promise((resolve, reject) => {
       try {
         // Instantiate Worker
-        const workerUrl = new URL('../workers/localAsrWorker.ts', import.meta.url);
-        this.activeWorker = new Worker(workerUrl, { type: 'module' });
+        // NOTE: the new URL(...) call must remain inline inside the Worker constructor.
+        // Vite only compiles and bundles the worker when it can statically match this
+        // exact pattern; hoisting the URL into a variable causes the raw .ts file to be
+        // copied into dist and the worker fails to load in production.
+        this.activeWorker = new Worker(new URL('../workers/localAsrWorker.ts', import.meta.url), { type: 'module' });
 
         this.activeWorker.onmessage = (e: MessageEvent<WorkerAsrResponse>) => {
           const data = e.data;

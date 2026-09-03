@@ -10,6 +10,7 @@ export interface EnvironmentConfig {
   name: EnvironmentName;
   apiBaseUrl: string;
   gcpRegion: 'europe-west2';
+  gcpProjectId: string;
   isSyntheticOnly: boolean;
   allowRealClientData: boolean;
   cspConnectAllowlist: readonly string[];
@@ -26,6 +27,7 @@ const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
     name: 'local',
     apiBaseUrl: 'http://localhost:8080',
     gcpRegion: 'europe-west2',
+    gcpProjectId: 'case-ace-v2-local',
     isSyntheticOnly: true,
     allowRealClientData: false,
     cspConnectAllowlist: ['http://localhost:8080', 'ws://localhost:5173'],
@@ -40,6 +42,7 @@ const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
     name: 'test',
     apiBaseUrl: 'https://test-api.caw-case-ace.internal',
     gcpRegion: 'europe-west2',
+    gcpProjectId: 'case-ace-v2-test',
     isSyntheticOnly: true,
     allowRealClientData: false,
     cspConnectAllowlist: ['https://test-api.caw-case-ace.internal'],
@@ -54,6 +57,7 @@ const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
     name: 'pilot',
     apiBaseUrl: 'https://api.caseace.adviceintelligence.tech',
     gcpRegion: 'europe-west2',
+    gcpProjectId: 'case-ace-v2',
     isSyntheticOnly: false,
     allowRealClientData: true,
     cspConnectAllowlist: [

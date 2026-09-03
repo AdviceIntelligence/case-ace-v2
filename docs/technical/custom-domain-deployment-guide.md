@@ -39,118 +39,82 @@
 
 ## 2. DNS Zone Record Configuration (`adviceintelligence.tech`)
 
-Log in to your DNS provider (e.g. Cloudflare, Google Cloud DNS, AWS Route 53, Namecheap, GoDaddy) for the **`adviceintelligence.tech`** zone and configure the following records:
+DNS for `adviceintelligence.tech` is registered and served by **IONOS**. Both hostnames are
+CNAME records pointing at their Firebase Hosting sites. These records are in place and
+resolving.
 
-### Table of DNS Records
-
-| Type | Host / Name | Target / Value | TTL | Proxy / CDN Status |
+| Type | Host / Name | Target / Value | TTL | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **CNAME** | `caseace` | `ghs.googlehosted.com.` *(or Cloud Run / Vercel CNAME)* | Auto / 300s | DNS Only (or Proxied) |
-| **CNAME** | `api.caseace` | `ghs.googlehosted.com.` *(or Cloud Run CNAME)* | Auto / 300s | DNS Only (or Proxied) |
-| **TXT** | `caseace` | `google-site-verification=...` *(if prompted for domain ownership)* | Auto / 300s | N/A |
+| **CNAME** | `caseace` | `case-ace-app.web.app.` | 300s | In place |
+| **CNAME** | `api.caseace` | `case-ace-api.web.app.` | 300s | In place |
 
-> [!TIP]
-> If using **Cloudflare DNS**, ensure SSL/TLS encryption mode is set to **Full (Strict)** to guarantee end-to-end TLS 1.3 encryption between Cloudflare edge and the Google Cloud origin.
+DNS resolving is necessary but not sufficient. Each hostname must also be registered against
+its site inside Firebase Hosting. If it is not, the site answers "Site Not Found" even though
+the CNAME resolves correctly. Firebase issues and renews the TLS certificate automatically
+once the domain is connected and DNS has propagated.
 
 ---
 
-## 3. Hosting & Deployment Options
+## 3. Hosting & Deployment Model
 
-Choose the deployment model that fits your infrastructure:
+### The route in use: Firebase Hosting in front of Cloud Run
 
-### Option A: Google Cloud Run (Recommended — UK Sovereign `europe-west2`)
+> [!IMPORTANT]
+> **Cloud Run domain mappings are not available in `europe-west2`.** The custom domains
+> therefore cannot be mapped directly onto the Cloud Run service. Firebase Hosting provides
+> the custom domain and TLS, and rewrites requests to the Cloud Run service behind it.
 
-Deploying directly to Google Cloud Run maintains strict `europe-west2` sovereignty and provides automated Google-managed SSL certificates.
-
-#### Step 1: Build & Push Container Images
-```bash
-# 1. Set GCP project and region
-export GCP_PROJECT_ID="advice-intelligence-prod"
-export REGION="europe-west2"
-gcloud config set project $GCP_PROJECT_ID
-gcloud config set compute/region $REGION
-
-# 2. Authenticate Docker with Google Artifact Registry
-gcloud auth configure-docker ${REGION}-docker.pkg.dev
-
-# 3. Build & push Backend container image
-docker build -f infrastructure/docker/Dockerfile.backend \
-  -t ${REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/case-ace/backend:2.0.0 .
-docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/case-ace/backend:2.0.0
-
-# 4. Build & push Frontend SPA container image (Nginx hardened)
-docker build -f infrastructure/docker/Dockerfile.client \
-  --build-arg VITE_APP_ENV=pilot \
-  -t ${REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/case-ace/frontend:2.0.0 .
-docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/case-ace/frontend:2.0.0
+```
+   caseace.adviceintelligence.tech      api.caseace.adviceintelligence.tech
+                |                                        |
+   Firebase Hosting site                    Firebase Hosting site
+        case-ace-app                             case-ace-api
+                |                                        |
+   serves client/dist (static SPA)      rewrites ** to Cloud Run service
+                                          case-ace-api (europe-west2)
 ```
 
-#### Step 2: Deploy Cloud Run Services
+Both sites live on the `case-ace-v2` project and are described by `firebase.json` at the
+repository root, so the routing and the security headers are version controlled rather than
+configured by hand in a console.
+
+#### Step 1: Deploy the backend
+
+Cloud Build compiles the container image in Google Cloud from repository source. No local
+Docker installation is needed.
+
 ```bash
-# Deploy Backend API Service
 gcloud run deploy case-ace-api \
-  --image ${REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/case-ace/backend:2.0.0 \
-  --region ${REGION} \
-  --platform managed \
+  --project=case-ace-v2 \
+  --region=europe-west2 \
+  --source=. \
+  --dockerfile=infrastructure/docker/Dockerfile.backend \
+  --service-account=case-ace-api-sa@case-ace-v2.iam.gserviceaccount.com \
   --allow-unauthenticated \
-  --set-env-vars APP_ENV=pilot,GCP_REGION=europe-west2,CORS_ORIGIN="https://caseace.adviceintelligence.tech,https://api.caseace.adviceintelligence.tech"
-
-# Deploy Frontend SPA Service
-gcloud run deploy case-ace-frontend \
-  --image ${REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/case-ace/frontend:2.0.0 \
-  --region ${REGION} \
-  --platform managed \
-  --allow-unauthenticated
+  --set-env-vars=APP_ENV=pilot,GCP_REGION=europe-west2,GCP_PROJECT_ID=case-ace-v2,ALLOW_TOTP_IN_PILOT=true \
+  --set-secrets=JWT_SECRET=case-ace-jwt-secret:latest
 ```
 
-#### Step 3: Map Custom Domains in Cloud Run
+#### Step 2: Build and deploy the SPA
+
 ```bash
-# Map Frontend to caseace.adviceintelligence.tech
-gcloud beta run domain-mappings create \
-  --service case-ace-frontend \
-  --domain caseace.adviceintelligence.tech \
-  --region ${REGION}
-
-# Map Backend to api.caseace.adviceintelligence.tech
-gcloud beta run domain-mappings create \
-  --service case-ace-api \
-  --domain api.caseace.adviceintelligence.tech \
-  --region ${REGION}
+VITE_APP_ENV=pilot npm run build
+firebase deploy --only hosting --project case-ace-v2
 ```
-*Cloud Run will display the exact DNS records (typically `ghs.googlehosted.com.`). Google will automatically provision and renew a managed SSL/TLS certificate within 15–30 minutes of DNS propagation.*
+
+`VITE_APP_ENV` is required. `client/src/config/environments.ts` fails closed to the `local`
+environment, so a build without it produces an SPA pointing at `http://localhost:8080`.
 
 ---
 
-### Option B: Deploying Frontend via Vercel / Cloudflare Pages
+### Residency caveat
 
-If hosting the frontend on modern edge CDN:
-1. Connect your repository to **Vercel** or **Cloudflare Pages**.
-2. Set Root Directory to `client/`.
-3. Set Build Command to `npm run build` and Output Directory to `dist`.
-4. Configure Environment Variable: `VITE_APP_ENV=pilot`.
-5. Add Custom Domain: `caseace.adviceintelligence.tech`.
-6. Add rewrite rule in `vercel.json` or Cloudflare Transform Rules to route `/api/*` to `https://api.caseace.adviceintelligence.tech/:splat`.
-
----
-
-### Option C: Ubuntu Linux VPS / Dedicated NGINX Server
-
-If deploying on a managed Ubuntu VM:
-```bash
-# 1. Clone repository on server
-git clone https://github.com/adviceintelligence/case-ace-v2.git /opt/case-ace-v2
-cd /opt/case-ace-v2
-
-# 2. Configure Environment File
-cp infrastructure/env/.env.pilot.example /etc/case-ace/production.env
-
-# 3. Issue SSL Certificate via Let's Encrypt Certbot
-sudo apt-get install -y certbot python3-certbot-nginx
-sudo certbot certonly --nginx -d caseace.adviceintelligence.tech -d api.caseace.adviceintelligence.tech
-
-# 4. Start Docker Containers
-docker compose -f docker-compose.prod.yml up -d --build
-```
+Cloud Run, Speech-to-Text and Vertex AI are pinned to `europe-west2`. Firebase Hosting is a
+global anycast CDN, so TLS terminates at the Google edge nearest the adviser, which may be
+outside the United Kingdom. A **regional** external Application Load Balancer in
+`europe-west2` would keep termination inside the UK. A *global* external load balancer would
+not, since it terminates at the same global edge. This is an open decision that should be
+settled and recorded in the DPIA before the pilot processes real client consultations.
 
 ---
 
@@ -190,11 +154,15 @@ curl -s -I https://caseace.adviceintelligence.tech | grep -iE "http/|content-sec
 # strict-transport-security: max-age=63072000; includeSubDomains; preload
 # content-security-policy: default-src 'none'; script-src 'self' 'wasm-unsafe-eval'...
 
-# 2. Test Backend Health Check & Cloud Sovereignty
+# 2. Test Backend Health Check & Region Pinning
 curl -s https://api.caseace.adviceintelligence.tech/health
 
 # Expected Output:
-# {"status":"healthy","gcpRegion":"europe-west2","version":"2.0.0"}
+# {"status":"healthy","environment":"pilot","gcpRegion":"europe-west2",
+#  "isSyntheticOnly":false,"timestamp":"2026-..."}
+#
+# An HTML page headed "Congratulations | Cloud Run" means the placeholder image is
+# still deployed and the backend deployment has not taken effect.
 
 # 3. Test Ephemeral Credential Minting Endpoint (Authenticated)
 curl -s -X POST https://api.caseace.adviceintelligence.tech/api/v1/credentials/issue \

@@ -1,13 +1,23 @@
 # Google Cloud Run Service Specification for Case Ace v2.0 Backend
-# Pinning: europe-west2 (London, United Kingdom)
+#
+# Names in this file are the live, verified names of the deployed estate:
+#   Google Cloud / Firebase project : case-ace-v2
+#   Region                          : europe-west2 (London, United Kingdom)
+#   Cloud Run service               : case-ace-api
+#   Runtime service account         : case-ace-api-sa@case-ace-v2.iam.gserviceaccount.com
+#
+# Note on ingress: this service sits behind Firebase Hosting, which reaches it over the
+# public Cloud Run endpoint. Ingress must therefore remain "all" while that routing is in
+# use. It can be tightened to internal-and-cloud-load-balancing only once the service is
+# fronted by a load balancer instead of Firebase Hosting.
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: case-ace-backend
-  namespace: caw-case-ace-pilot-london
+  name: case-ace-api
+  namespace: case-ace-v2
   labels:
     cloud.google.com/location: europe-west2
-    app: case-ace-backend
+    app: case-ace-api
     tier: api
 spec:
   template:
@@ -16,11 +26,11 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "10"
         run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/ingress: internal-and-cloud-load-balancing
+        run.googleapis.com/ingress: all
     spec:
-      serviceAccountName: case-ace-backend-sa@caw-case-ace-pilot-london.iam.gserviceaccount.com
+      serviceAccountName: case-ace-api-sa@case-ace-v2.iam.gserviceaccount.com
       containers:
-        - image: europe-west2-docker.pkg.dev/caw-case-ace-pilot-london/case-ace-artifacts/backend:2.0.0
+        - image: europe-west2-docker.pkg.dev/case-ace-v2/case-ace/backend:2.0.0
           env:
             - name: APP_ENV
               value: pilot
@@ -29,7 +39,15 @@ spec:
             - name: GCP_REGION
               value: europe-west2
             - name: GCP_PROJECT_ID
-              value: caw-case-ace-pilot-london
+              value: case-ace-v2
+            # TOTP override for the pilot while the Entra ID tenant is unavailable.
+            # See docs/authentication-and-authorisation.md s3.2. Remove when SSO is enabled.
+            - name: ALLOW_TOTP_IN_PILOT
+              value: "true"
+          # JWT_SECRET is deliberately NOT set here. It is injected from Secret Manager at
+          # deploy time. The application has a development fallback value committed to the
+          # repository; if the secret is absent, session tokens would be signed with a
+          # publicly readable key.
           resources:
             limits:
               cpu: "1000m"

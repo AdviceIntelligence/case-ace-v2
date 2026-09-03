@@ -17,10 +17,10 @@
 | Variable Name                  | Default Value               | Description                         |
 +----------------------------------------------------------------------------------------------------+
 | `NODE_ENV`                     | `production`                | Application execution environment   |
-| `PORT`                         | `4000`                      | Backend HTTP server listening port  |
-| `HOST`                         | `127.0.0.1`                 | Local host bind address             |
+| `PORT`                         | `8080`                      | Backend HTTP port (injected by Cloud Run) |
+| `APP_ENV`                      | `pilot`                     | Selects the config block in backend/src/config |
 | `CORS_ORIGIN`                  | `https://caseace.adviceintelligence.tech` | Allowed client web origin           |
-| `GCP_PROJECT_ID`               | `caw-case-ace-prod-2026`    | Google Cloud Project identifier     |
+| `GCP_PROJECT_ID`               | `case-ace-v2`               | Google Cloud Project identifier     |
 | `GCP_REGION`                   | `europe-west2`              | Pinned UK sovereign GCP region      |
 | `GCP_SPEECH_RECOGNIZER`        | `chirp2-uk-english`         | Google STT v2 Recognizer resource   |
 | `GCP_VERTEX_MODEL`             | `gemini-1.5-pro-002`        | Large Language Model for drafting   |
@@ -30,6 +30,9 @@
 | `WEBEX_CLIENT_ID`              | *(Encrypted Secret)*        | Cisco Webex OAuth 2.0 Client ID     |
 | `WEBEX_REDIRECT_URI`           | `https://caseace.adviceintelligence.tech/api/auth/webex/callback` | Webex OAuth callback URI            |
 | `ENTRA_REDIRECT_URI`           | `https://caseace.adviceintelligence.tech/auth/callback` | Microsoft Entra ID callback URI     |
+| `ALLOW_TOTP_IN_PILOT`          | `true`                      | Interim TOTP login while Entra ID is unavailable |
+| `JWT_SECRET`                   | *(Secret Manager: case-ace-jwt-secret)* | Session token signing key. Never use the committed fallback |
+| `VITE_APP_ENV`                 | `pilot`                     | Build-time only. Omitting it makes the SPA fail closed to `local` |
 +----------------------------------------------------------------------------------------------------+
 ```
 

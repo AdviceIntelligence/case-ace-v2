@@ -1,17 +1,21 @@
-# Multi-stage minimal build for Case Ace Backend Service
-FROM node:22-alpine AS build
-WORKDIR /app
-COPY backend/package.json ./
-RUN npm install --package-lock=false
-COPY backend/ ./
-RUN npm run build
-
+# Container image for the Case Ace v2.0 backend service.
+#
+# The backend is NOT compiled to JavaScript. backend/tsconfig.json sets both
+# "noEmit": true and "allowImportingTsExtensions": true, because the whole codebase
+# imports modules with explicit .ts extensions and TypeScript will not emit output in
+# that mode. The service therefore runs its TypeScript sources directly using Node's
+# built-in type stripping. "npm run build" in the backend workspace is a type check
+# only; it deliberately produces no dist directory.
 FROM node:22-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
+
 COPY backend/package.json ./
 RUN npm install --omit=dev --package-lock=false
-COPY --from=build /app/dist ./dist
+
+COPY backend/tsconfig.json ./
+COPY backend/src ./src
+
 USER node
 EXPOSE 8080
-CMD ["node", "dist/server.js"]
+CMD ["node", "--experimental-strip-types", "src/server.ts"]

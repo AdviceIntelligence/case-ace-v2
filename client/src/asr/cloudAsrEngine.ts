@@ -16,6 +16,7 @@
 import { volatileSessionStore, type SessionState, type CloudAsrResult, type CloudAsrSegment, type CloudAsrWord } from '../state/volatileStore.ts';
 import { buildCloudSttPhraseSet, ADVICE_SECTOR_PHRASE_SET_VERSION } from './adviceSectorPhraseSet.ts';
 import { logSecurityEvent } from '../monitoring/eventLogger.ts';
+import { environment } from '../config/environments.ts';
 
 export class UnauthorizedAudioTransmissionError extends Error {
   constructor(message: string) {
@@ -45,10 +46,14 @@ export interface CloudSttConfig {
   enableDataLogging: boolean; // MUST be false
 }
 
+// The backend lives on its own subdomain (api.caseace...), not on the SPA origin.
+// Deriving both values from the environment config keeps a single source of truth and
+// prevents the credential request being sent to the SPA host, where the SPA rewrite
+// would answer it with index.html instead of JSON.
 export const DEFAULT_CLOUD_STT_CONFIG: CloudSttConfig = {
-  backendBaseUrl: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000',
-  gcpRegion: 'europe-west2',
-  projectId: 'case-ace-caw-prod',
+  backendBaseUrl: environment.apiBaseUrl,
+  gcpRegion: environment.gcpRegion,
+  projectId: environment.gcpProjectId,
   languageCode: 'en-GB',
   model: 'latest_long',
   enableDataLogging: false,

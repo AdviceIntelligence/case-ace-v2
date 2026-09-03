@@ -1,0 +1,8 @@
+.git
+node_modules
+**/node_modules
+client/dist
+coverage
+test-results
+*.docx
+*.pdf

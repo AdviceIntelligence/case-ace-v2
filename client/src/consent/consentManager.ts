@@ -17,8 +17,6 @@
  *    zero free text fields, and file names must never be recorded.
  */
 
-import { volatileSessionStore } from '../state/volatileStore.ts';
-import { sessionRecoveryManager } from '../state/sessionRecoveryManager.ts';
 import { destroySession } from '../state/sessionDestruction.ts';
 
 export type IntakeRoute = 'live_in_person' | 'webex_telephony' | 'file_import';

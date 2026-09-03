@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "case-ace-v2"
+  },
+  "targets": {
+    "case-ace-v2": {
+      "hosting": {
+        "app": ["case-ace-app"],
+        "api": ["case-ace-api"]
+      }
+    }
+  }
+}

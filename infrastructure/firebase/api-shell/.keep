@@ -1,0 +1,3 @@
+Placeholder public directory for the api hosting target.
+All requests to api.caseace.adviceintelligence.tech are rewritten to the
+case-ace-api Cloud Run service in europe-west2; nothing is served from here.
