@@ -8,6 +8,8 @@
  * 4. Transmits to /api/v1/monitoring/events.
  */
 
+import { apiFetch } from '../config/apiClient.ts';
+
 export interface ClientSecurityEvent {
   type: string;
   timestamp?: string;
@@ -73,7 +75,7 @@ export function logSecurityEvent(event: ClientSecurityEvent): void {
   buffer.push(payload);
 
   if (typeof window !== 'undefined' && typeof fetch !== 'undefined') {
-    fetch('/api/v1/monitoring/events', {
+    apiFetch('/api/v1/monitoring/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

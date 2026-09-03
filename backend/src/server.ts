@@ -9,6 +9,7 @@ import { createAuthRouter } from './routes/auth.ts';
 import { createCredentialsRouter } from './routes/credentials.ts';
 import { createMonitoringRouter } from './routes/monitoring.ts';
 import { configRouter } from './routes/config.ts';
+import { caseNoteRouter } from './routes/casenote.ts';
 
 export function createApp() {
   const app = express();
@@ -52,6 +53,7 @@ export function createApp() {
   app.use('/api/v1/credentials', createCredentialsRouter(authProvider));
   app.use('/api/v1/monitoring', createMonitoringRouter(authProvider));
   app.use('/api/v1/config', configRouter);
+  app.use('/api/v1/casenote', caseNoteRouter);
 
   return { app, authProvider };
 }

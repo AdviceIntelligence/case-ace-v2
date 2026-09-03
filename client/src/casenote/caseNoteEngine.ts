@@ -12,6 +12,7 @@
 import { volatileSessionStore, type StructuredCaseNote, type CaseNoteAttribution } from '../state/volatileStore.ts';
 import { tokenisationEngine } from '../tokenisation/tokenisationEngine.ts';
 import { logSecurityEvent } from '../monitoring/eventLogger.ts';
+import { apiFetch } from '../config/apiClient.ts';
 
 export class CaseNotePrivacyViolationError extends Error {
   constructor(message: string) {
@@ -94,7 +95,7 @@ export class CaseNoteEngine {
 
     const startTime = Date.now();
 
-    const response = await fetch('/api/v1/casenote/generate', {
+    const response = await apiFetch('/api/v1/casenote/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

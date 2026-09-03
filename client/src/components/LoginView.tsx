@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Shield, KeyRound, Lock, AlertCircle } from 'lucide-react';
 import { volatileAuthStore, AuthUser } from '../state/authStore.ts';
+import { apiFetch } from '../config/apiClient.ts';
 
 interface LoginViewProps {
   onLoginSuccess: (user: AuthUser) => void;
@@ -18,7 +19,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/v1/auth/login', {
+      const response = await apiFetch('/api/v1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -52,7 +53,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/v1/auth/login', {
+      const response = await apiFetch('/api/v1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

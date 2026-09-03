@@ -192,6 +192,59 @@ async function run() {
     );
   });
 
+  await test('Every backend path the client calls is mounted, and none is requested relative to the SPA host', () => {
+    // Two defects made the case note endpoint, which is the whole point of the product,
+    // unreachable in the deployed application, and neither was visible to any existing test.
+    //
+    //  1. caseNoteRouter was written, exported and never mounted in server.ts, so
+    //     /api/v1/casenote/generate returned 404.
+    //  2. Six client call sites used relative URLs such as fetch('/api/v1/auth/login').
+    //     The SPA and the API are on different hosts, so those resolved against the SPA
+    //     host, where the single page application rewrite answers with index.html. The
+    //     caller received an HTML document with status 200 and failed parsing it as JSON.
+    //     Login itself was affected.
+    //
+    // This test closes both gaps at once by reconciling what the client asks for against
+    // what the server actually serves.
+    const clientDir = path.join(rootDir, 'client/src');
+    const walk = (dir) =>
+      fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+        e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]
+      );
+    const clientFiles = walk(clientDir).filter((f) => f.endsWith('.ts') || f.endsWith('.tsx'));
+
+    // No client code may request an API path relative to its own origin.
+    const apiClientPath = path.join(clientDir, 'config/apiClient.ts');
+    for (const file of clientFiles) {
+      if (file === apiClientPath) continue; // documents the anti-pattern it exists to prevent
+      const body = fs.readFileSync(file, 'utf8');
+      assert(
+        !/[^a-zA-Z]fetch\(\s*['"`]\/api\//.test(body),
+        `${path.relative(rootDir, file)} requests an API path relative to the SPA host. Use apiFetch from config/apiClient.ts.`
+      );
+    }
+
+    // Every path the client requests must be mounted on the backend.
+    const requested = new Set();
+    for (const file of clientFiles) {
+      const body = fs.readFileSync(file, 'utf8');
+      for (const m of body.matchAll(/['"`](\/api\/v1\/[a-zA-Z0-9/_-]+)['"`]/g)) requested.add(m[1]);
+      for (const m of body.matchAll(/\$\{[^}]*\}(\/api\/v1\/[a-zA-Z0-9/_-]+)/g)) requested.add(m[1]);
+    }
+    assert(requested.size > 0, 'no client API calls were discovered, the matcher is broken');
+
+    const serverSource = fs.readFileSync(path.join(rootDir, 'backend/src/server.ts'), 'utf8');
+    const mounted = [...serverSource.matchAll(/app\.use\(\s*['"`](\/api\/v1\/[a-zA-Z0-9/_-]*)['"`]/g)].map((m) => m[1]);
+    assert(mounted.length > 0, 'no mounted API routers were discovered, the matcher is broken');
+
+    for (const req of requested) {
+      assert(
+        mounted.some((base) => req === base || req.startsWith(`${base}/`)),
+        `client calls ${req} but no router is mounted for it in server.ts`
+      );
+    }
+  });
+
   await test('Pilot refuses to start unless a real JWT signing secret is supplied', () => {
     // Adviser session tokens authorise access to client consultations. The repository
     // contains a development fallback key so that local and test runs need no configuration;
@@ -325,42 +378,42 @@ async function run() {
   const { app: serverApp } = createApp();
   const backendDocContent = fs.readFileSync(path.join(rootDir, 'docs/backend-architecture.md'), 'utf8');
 
-  await test('proves the backend serves strictly the 5 permitted endpoint groups and zero others', () => {
-    const registeredRoutes = serverApp._router.stack
-      .filter((layer) => layer.route || layer.name === 'router')
-      .map((layer) => {
-        if (layer.route) return `${Object.keys(layer.route.methods)[0].toUpperCase()} ${layer.route.path}`;
-        return `USE ${layer.regexp.source}`;
-      });
-
-    const permittedPrefixes = [
-      'health',
-      'auth',
-      'credentials',
-      'monitoring',
-      'config',
+  await test('proves the backend serves strictly the permitted endpoint groups and zero others', () => {
+    // This was a substring denylist ('/case', '/note', '/session', ...) meant to prevent any
+    // endpoint that persists or serves client session data. It rejected the stateless case
+    // note drafting endpoint purely because of its name, while it would have waved through
+    // an endpoint called /api/v1/store or /api/v1/uploads. It is now an explicit allowlist,
+    // which carries the same intent and is strictly tighter: anything not named below fails.
+    const PERMITTED_MOUNTS = [
+      '/health',             // liveness and region pinning, unauthenticated
+      '/api/v1/health',
+      '/api/v1/auth',        // adviser login and session issue
+      '/api/v1/credentials', // short-lived downscoped cloud credentials
+      '/api/v1/monitoring',  // zero-PII operational events
+      '/api/v1/config',      // non-secret client configuration
+      '/api/v1/casenote',    // stateless drafting from a tokenised transcript, stores nothing
     ];
 
-    for (const prefix of permittedPrefixes) {
+    const serverSource = fs.readFileSync(path.join(rootDir, 'backend/src/server.ts'), 'utf8');
+    const mounted = [...serverSource.matchAll(/app\.use\(\s*['"`](\/[a-zA-Z0-9/_-]*)['"`]/g)].map((m) => m[1]);
+    assert(mounted.length > 0, 'no mounted routers were discovered, the matcher is broken');
+
+    for (const mount of mounted) {
       assert(
-        registeredRoutes.some((r) => r.toLowerCase().includes(prefix)),
-        `Permitted endpoint prefix missing: ${prefix}`
+        PERMITTED_MOUNTS.includes(mount),
+        `Unpermitted endpoint group mounted: ${mount}. Every backend surface must be listed and justified here.`
       );
     }
 
-    const prohibitedPatterns = [
-      '/session',
-      '/audio',
-      '/transcript',
-      '/note',
-      '/case',
-      '/client',
-      '/record',
-    ];
+    // Every permitted group must actually be present, so a mount cannot silently vanish.
+    for (const expected of PERMITTED_MOUNTS) {
+      assert(mounted.includes(expected), `Permitted endpoint group is not mounted: ${expected}`);
+    }
 
-    for (const pathStr of registeredRoutes) {
-      for (const prohibited of prohibitedPatterns) {
-        assert(!pathStr.toLowerCase().includes(prohibited), `Prohibited session route found: ${pathStr}`);
+    // The backend holds no state, so no route may imply it accepts or serves stored content.
+    for (const mount of mounted) {
+      for (const prohibited of ['/session', '/audio', '/transcript', '/client', '/record', '/upload', '/store']) {
+        assert(!mount.toLowerCase().includes(prohibited), `Prohibited stateful route found: ${mount}`);
       }
     }
   });

@@ -21,6 +21,7 @@
 import { volatileSessionStore } from './volatileStore.ts';
 import { sessionRecoveryManager } from './sessionRecoveryManager.ts';
 import { logSecurityEvent } from '../monitoring/eventLogger.ts';
+import { apiFetch } from '../config/apiClient.ts';
 
 export type SessionExitReason =
   | 'explicit_end'
@@ -186,7 +187,7 @@ function revokeClientCloudCredentials(): void {
   // If in browser context with active credential revocation endpoint
   if (typeof window !== 'undefined' && typeof fetch !== 'undefined') {
     try {
-      fetch('/api/v1/credentials/revoke', {
+      apiFetch('/api/v1/credentials/revoke', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       }).catch(() => {

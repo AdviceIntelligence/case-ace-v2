@@ -17,6 +17,7 @@
 
 import type { IntakeRoute, ConsentRecord } from '../consent/consentManager.ts';
 import { volatileSessionStore } from '../state/volatileStore.ts';
+import { apiFetch } from '../config/apiClient.ts';
 
 export interface SpeakerChannelMap {
   isDualChannel: boolean;
@@ -160,7 +161,7 @@ export class AudioNormalizer {
   private async sendIntakeTelemetry(intakeRoute: IntakeRoute, durationMs: number): Promise<void> {
     try {
       if (typeof fetch !== 'undefined') {
-        await fetch('/api/v1/monitoring/events', {
+        await apiFetch('/api/v1/monitoring/events', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
