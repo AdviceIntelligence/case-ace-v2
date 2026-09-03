@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Ace v2.0 - Data Flow & Trust Boundary Architecture</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.03); }
+    }
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -40; }
+    }
+    .flow-active {
+      stroke-dasharray: 8 4;
+      animation: dashFlow 1.2s linear infinite;
+    }
+    .badge-pill {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.4);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-4 font-sans">
+  <div class="max-w-7xl mx-auto space-y-4">
+
+    <!-- Header Banner -->
+    <header class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="badge-pill bg-blue-900 text-blue-100">Citizens Advice Wandsworth</span>
+            <span class="badge-pill bg-emerald-900 text-emerald-100">Verified Architecture v2.0</span>
+            <span class="badge-pill bg-amber-900 text-amber-100">Official-Sensitive</span>
+          </div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
+            <svg class="w-6 h-6 text-[#004B87] dark:text-[#38bdf8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            Case Ace v2.0 — End-to-End Data Flow & Trust Boundary Architecture
+          </h1>
+          <p class="text-xs md:text-sm text-[var(--muted-foreground)] mt-1">
+            Zero-Retention Client-Side Sandbox &bull; Google Cloud (<code class="text-xs bg-slate-800 text-slate-200 px-1 py-0.5 rounded">europe-west2</code> London) &bull; Entra ID Login Isolation
+          </p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap items-center gap-1.5 bg-slate-100 dark:bg-slate-800/70 p-1.5 rounded-xl border border-[var(--border)] text-xs font-semibold">
+          <button id="tab-btn-system" onclick="switchView('system')" class="tab-btn px-3 py-2 rounded-lg transition-all bg-[#004B87] text-white shadow-sm">
+            1. System Architecture
+          </button>
+          <button id="tab-btn-lifecycle" onclick="switchView('lifecycle')" class="tab-btn px-3 py-2 rounded-lg transition-all hover:bg-slate-200 dark:hover:bg-slate-700 text-[var(--foreground)]">
+            2. 10-Step Lifecycle
+          </button>
+          <button id="tab-btn-payload" onclick="switchView('payload')" class="tab-btn px-3 py-2 rounded-lg transition-all hover:bg-slate-200 dark:hover:bg-slate-700 text-[var(--foreground)]">
+            3. Payload & Privacy Gate
+          </button>
+          <button id="tab-btn-auth" onclick="switchView('auth')" class="tab-btn px-3 py-2 rounded-lg transition-all hover:bg-slate-200 dark:hover:bg-slate-700 text-[var(--foreground)]">
+            4. Auth & STS Brokering
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- VIEW 1: Full System Trust Boundary Diagram -->
+    <section id="view-system" class="space-y-4">
+      <!-- Diagram Card -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 shadow-sm overflow-hidden">
+        <div class="flex items-center justify-between pb-3 border-b border-[var(--border)] mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-blue-500 animate-ping"></span>
+            <span class="text-sm font-bold text-[var(--foreground)]">Trust Boundary Network Map (TB0 &rarr; TB4)</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-amber-500/20 border border-amber-500 inline-block"></span> TB0 Audio Ingress</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-emerald-500/20 border border-emerald-500 inline-block"></span> TB1 Browser RAM (Sandbox)</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-cyan-500/20 border border-cyan-500 inline-block"></span> TB2 CAW Backend (europe-west2)</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-purple-500/20 border border-purple-500 inline-block"></span> TB3 Google Cloud (London)</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-blue-500/20 border border-blue-500 inline-block"></span> TB4 National Casebook</span>
+          </div>
+        </div>
+
+        <!-- SVG Architecture Canvas -->
+        <div class="w-full overflow-x-auto custom-scrollbar bg-slate-950/90 rounded-xl p-4 border border-slate-800">
+          <svg viewBox="0 0 1200 680" class="w-full min-w-[1000px] h-auto select-none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Gradients -->
+              <linearGradient id="grad-tb0" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#78350f" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#451a03" stop-opacity="0.2"/>
+              </linearGradient>
+              <linearGradient id="grad-tb1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#064e3b" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#022c22" stop-opacity="0.25"/>
+              </linearGradient>
+              <linearGradient id="grad-tb2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#082f49" stop-opacity="0.25"/>
+              </linearGradient>
+              <linearGradient id="grad-tb3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#581c87" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#3b0764" stop-opacity="0.25"/>
+              </linearGradient>
+              <linearGradient id="grad-tb4" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#172554" stop-opacity="0.25"/>
+              </linearGradient>
+              <linearGradient id="grad-ms" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#334155" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#1e293b" stop-opacity="0.3"/>
+              </linearGradient>
+
+              <!-- Node Fill Gradients -->
+              <linearGradient id="node-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#059669"/>
+                <stop offset="100%" stop-color="#047857"/>
+              </linearGradient>
+              <linearGradient id="node-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0284c7"/>
+                <stop offset="100%" stop-color="#0369a1"/>
+              </linearGradient>
+              <linearGradient id="node-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#9333ea"/>
+                <stop offset="100%" stop-color="#7e22ce"/>
+              </linearGradient>
+              <linearGradient id="node-amber" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#d97706"/>
+                <stop offset="100%" stop-color="#b45309"/>
+              </linearGradient>
+
+              <!-- Markers -->
+              <marker id="arrow-emerald" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#10b981"/>
+              </marker>
+              <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#c084fc"/>
+              </marker>
+              <marker id="arrow-cyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#38bdf8"/>
+              </marker>
+              <marker id="arrow-amber" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#fbbf24"/>
+              </marker>
+              <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#60a5fa"/>
+              </marker>
+            </defs>
+
+            <!-- ================= TB0: Audio Sources ================= -->
+            <rect x="20" y="20" width="220" height="420" rx="16" fill="url(#grad-tb0)" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 3"/>
+            <text x="35" y="46" font-size="12" font-weight="bold" fill="#fbbf24" letter-spacing="1">TRUST BOUNDARY 0: AUDIO SOURCES</text>
+            <text x="35" y="62" font-size="10" fill="#fde68a">Physical &amp; Network Ingress</text>
+
+            <!-- Mic Node -->
+            <g transform="translate(35, 80)">
+              <rect width="190" height="70" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="14" y="26" font-size="11" font-weight="bold" fill="#f8fafc">1. In-Person Microphone</text>
+              <text x="14" y="42" font-size="9" fill="#94a3b8">Web Audio API (16kHz PCM)</text>
+              <text x="14" y="56" font-size="8.5" fill="#fbbf24">&bull; Client/Adviser Voice Streams</text>
+            </g>
+
+            <!-- Webex Node -->
+            <g transform="translate(35, 170)">
+              <rect width="190" height="80" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="14" y="24" font-size="11" font-weight="bold" fill="#f8fafc">2. Cisco Webex Telephony</text>
+              <text x="14" y="40" font-size="9" fill="#94a3b8">Webex Calling SRTP / TLS 1.3</text>
+              <text x="14" y="54" font-size="8.5" fill="#fbbf24">&bull; Two-Sided PSTN Ingest</text>
+              <text x="14" y="68" font-size="8.5" fill="#f87171">&bull; Cloud Recording Disabled</text>
+            </g>
+
+            <!-- File Upload Node -->
+            <g transform="translate(35, 270)">
+              <rect width="190" height="80" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="14" y="24" font-size="11" font-weight="bold" fill="#f8fafc">3. File Upload / Import</text>
+              <text x="14" y="40" font-size="9" fill="#94a3b8">WAV / MP3 / M4A / MP4 / OGG</text>
+              <text x="14" y="54" font-size="8.5" fill="#10b981">&bull; Video track stripped in RAM</text>
+              <text x="14" y="68" font-size="8.5" fill="#fbbf24">&bull; Linear ArrayBuffer Decode</text>
+            </g>
+
+            <!-- Consent Verification Gate Box -->
+            <g transform="translate(35, 365)">
+              <rect width="190" height="60" rx="8" fill="#451a03" stroke="#f97316" stroke-width="1.5"/>
+              <text x="12" y="24" font-size="10" font-weight="bold" fill="#ffedd5">Client Consent Gate</text>
+              <text x="12" y="40" font-size="8.5" fill="#fed7aa">Explicit oral/written consent confirmed</text>
+              <text x="12" y="52" font-size="8" fill="#f97316">&bull; Refusal reverts to manual notes</text>
+            </g>
+
+            <!-- ================= TB1: Client Browser Sandbox ================= -->
+            <rect x="270" y="20" width="450" height="640" rx="16" fill="url(#grad-tb1)" stroke="#10b981" stroke-width="2.5"/>
+            <text x="290" y="46" font-size="13" font-weight="bold" fill="#34d399" letter-spacing="1">TRUST BOUNDARY 1: CLIENT BROWSER SANDBOX</text>
+            <text x="290" y="62" font-size="10" fill="#a7f3d0">Volatile RAM Only &bull; Zero Disk Writes &bull; Runtime Storage Guards Active</text>
+
+            <!-- Sub-container: Volatile RAM -->
+            <rect x="285" y="75" width="420" height="570" rx="12" fill="#022c22" fill-opacity="0.6" stroke="#059669" stroke-width="1.5"/>
+            <text x="300" y="96" font-size="11" font-weight="bold" fill="#6ee7b7">VOLATILE IN-MEMORY DATA STATE (Isolated Browser RAM)</text>
+
+            <!-- Browser Step 1: Raw Audio Buffer -->
+            <g transform="translate(300, 110)">
+              <rect width="390" height="52" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="1.2"/>
+              <text x="14" y="20" font-size="10" font-weight="bold" fill="#f8fafc">Raw Audio Buffer (Float32Array / Uint8Array)</text>
+              <text x="14" y="34" font-size="8.5" fill="#94a3b8">Uncompressed audio in volatile RAM &bull; No disk caching</text>
+              <text x="14" y="46" font-size="8" fill="#ef4444">&bull; Zeroed on verification via Uint8Array.fill(0) [Constraint C1/C7]</text>
+            </g>
+
+            <!-- Browser Step 2: Whisper WASM Engine -->
+            <g transform="translate(300, 172)">
+              <rect width="390" height="52" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+              <text x="14" y="20" font-size="10" font-weight="bold" fill="#6ee7b7">Pass 1 Local ASR: Whisper WASM Engine</text>
+              <text x="14" y="34" font-size="8.5" fill="#cbd5e1">Local Web Worker execution &bull; 0 network calls for transcription</text>
+              <text x="14" y="46" font-size="8" fill="#34d399">&bull; Generates initial raw transcript entirely on device CPU/GPU</text>
+            </g>
+
+            <!-- Browser Step 3: Multi-Layer NER Engine -->
+            <g transform="translate(300, 234)">
+              <rect width="390" height="56" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+              <text x="14" y="19" font-size="10" font-weight="bold" fill="#6ee7b7">Multi-Layer Identifier Detection (NER + Regex)</text>
+              <text x="14" y="33" font-size="8.5" fill="#cbd5e1">Layer 1 (Direct Regex: NINOs, Tel, Postcodes, Acc No.)</text>
+              <text x="14" y="47" font-size="8" fill="#a7f3d0">Layer 2 (Local NER: Names, Orgs, Locs) &bull; Layer 3 (Contextual Spans)</text>
+            </g>
+
+            <!-- Browser Step 4: Surrogate Tokenisation Engine -->
+            <g transform="translate(300, 300)">
+              <rect width="390" height="60" rx="8" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+              <text x="14" y="20" font-size="10.5" font-weight="bold" fill="#f0fdf4">Surrogate Tokenisation &amp; Ephemeral Keyring (C5)</text>
+              <text x="14" y="36" font-size="8.5" fill="#bbf7d0">Real PII &rarr; Synthetic Tokens: [CLIENT_NAME_1], [TEL_1], [NINO_1]</text>
+              <text x="14" y="50" font-size="8" fill="#86efac">Dictionary stored in isolated RAM closure &bull; Never leaves browser</text>
+            </g>
+
+            <!-- Browser Step 5: Phase 9 Review Gate -->
+            <g transform="translate(300, 370)">
+              <rect width="390" height="48" rx="8" fill="#0f172a" stroke="#eab308" stroke-width="1.2"/>
+              <text x="14" y="18" font-size="10" font-weight="bold" fill="#fde047">Phase 9 Redaction Review Gate (Adviser UI)</text>
+              <text x="14" y="32" font-size="8.5" fill="#cbd5e1">Adviser inspects highlighted tokens &amp; manually adds missed PII</text>
+              <text x="14" y="44" font-size="8" fill="#facc15">&bull; Active approval required before cloud synthesis proceeds</text>
+            </g>
+
+            <!-- Browser Step 6: Phase 10 Acoustic Redaction & Muting -->
+            <g transform="translate(300, 428)">
+              <rect width="390" height="56" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+              <text x="14" y="19" font-size="10" font-weight="bold" fill="#6ee7b7">Phase 10 Acoustic Alignment &amp; Verification (C2/C8)</text>
+              <text x="14" y="33" font-size="8.5" fill="#cbd5e1">Aligns text timestamps &bull; Overwrites PII audio spans with silence</text>
+              <text x="14" y="47" font-size="8" fill="#4ade80">&bull; Raw audio zeroed &bull; Fail-closed assertion: 0 PII survivors</text>
+            </g>
+
+            <!-- Browser Step 7: Detokenisation & Case Note UI -->
+            <g transform="translate(300, 494)">
+              <rect width="390" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="14" y="20" font-size="10.5" font-weight="bold" fill="#f8fafc">In-Browser Detokenisation &amp; Sign-off (C6)</text>
+              <text x="14" y="36" font-size="8.5" fill="#94a3b8">Receives tokenised draft note &bull; Replaces surrogates with real PII in RAM</text>
+              <text x="14" y="50" font-size="8" fill="#38bdf8">&bull; Adviser edits, validates advice accuracy, and signs off</text>
+            </g>
+
+            <!-- Browser Step 8: destroySession() Cleaner -->
+            <g transform="translate(300, 564)">
+              <rect width="390" height="64" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
+              <text x="14" y="20" font-size="10.5" font-weight="bold" fill="#fecaca">destroySession() Deterministic Zeroing (C7)</text>
+              <text x="14" y="36" font-size="8.5" fill="#fca5a5">Overwrites audio TypedArrays with zeroes &bull; Drops crypto keys</text>
+              <text x="14" y="50" font-size="8" fill="#f87171">Deletes token dictionary &bull; Wipes clipboard &bull; Terminates Web Workers</text>
+            </g>
+
+
+            <!-- ================= TB2: CAW Backend Server ================= -->
+            <rect x="750" y="20" width="430" height="200" rx="16" fill="url(#grad-tb2)" stroke="#0284c7" stroke-width="2"/>
+            <text x="770" y="46" font-size="12" font-weight="bold" fill="#38bdf8" letter-spacing="1">TRUST BOUNDARY 2: CAW BACKEND PROXY</text>
+            <text x="770" y="62" font-size="10" fill="#bae6fd">Google Cloud Run (europe-west2 London) &bull; Stateless Microservice</text>
+
+            <!-- Auth & STS Token Broker -->
+            <g transform="translate(770, 78)">
+              <rect width="185" height="60" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+              <text x="10" y="20" font-size="10" font-weight="bold" fill="#f8fafc">Scoped GCP STS Broker</text>
+              <text x="10" y="36" font-size="8.5" fill="#94a3b8">Exchanges Entra JWT for</text>
+              <text x="10" y="50" font-size="8" fill="#38bdf8">15-min downscoped token</text>
+            </g>
+
+            <!-- Audit Log Server -->
+            <g transform="translate(975, 78)">
+              <rect width="185" height="60" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+              <text x="10" y="20" font-size="10" font-weight="bold" fill="#f8fafc">Strict Audit Log Store</text>
+              <text x="10" y="36" font-size="8.5" fill="#94a3b8">Whitelist Schema Only</text>
+              <text x="10" y="50" font-size="8" fill="#ef4444">0 PII / Zero Free-Text</text>
+            </g>
+
+            <!-- Webex Ingest & RBAC -->
+            <g transform="translate(770, 148)">
+              <rect width="390" height="60" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+              <text x="14" y="20" font-size="10" font-weight="bold" fill="#f8fafc">Webex Telephony Webhook Ingest &amp; RBAC Validation</text>
+              <text x="14" y="36" font-size="8.5" fill="#94a3b8">Validates HMAC-SHA256 signatures &bull; Enforces Entra ID group roles</text>
+              <text x="14" y="50" font-size="8" fill="#38bdf8">&bull; Zero audio persists on backend &bull; Proxies directly to browser RAM</text>
+            </g>
+
+
+            <!-- ================= TB3: Google Cloud (europe-west2) ================= -->
+            <rect x="750" y="240" width="430" height="230" rx="16" fill="url(#grad-tb3)" stroke="#9333ea" stroke-width="2"/>
+            <text x="770" y="266" font-size="12" font-weight="bold" fill="#c084fc" letter-spacing="1">TRUST BOUNDARY 3: GOOGLE CLOUD (europe-west2)</text>
+            <text x="770" y="282" font-size="10" fill="#e9d5ff">London Region Pinned &bull; Zero Data Retention (ZDR) Legal Agreement</text>
+
+            <!-- Cloud STT v2 -->
+            <g transform="translate(770, 298)">
+              <rect width="390" height="65" rx="8" fill="#2e1065" stroke="#a855f7" stroke-width="1.5"/>
+              <text x="14" y="22" font-size="11" font-weight="bold" fill="#f5f3ff">Google Cloud Speech-to-Text v2 (Chirp 2)</text>
+              <text x="14" y="38" font-size="9" fill="#d8b4fe">Receives ONLY Verified Redacted Audio (LINEAR16 WAV)</text>
+              <text x="14" y="54" font-size="8.5" fill="#4ade80">&bull; Second-pass high-accuracy ASR &bull; PII spans are muted silence</text>
+            </g>
+
+            <!-- Vertex AI Gemini 1.5 -->
+            <g transform="translate(770, 375)">
+              <rect width="390" height="80" rx="8" fill="#2e1065" stroke="#a855f7" stroke-width="1.5"/>
+              <text x="14" y="22" font-size="11" font-weight="bold" fill="#f5f3ff">Google Cloud Vertex AI (Gemini 1.5 Enterprise)</text>
+              <text x="14" y="38" font-size="9" fill="#d8b4fe">Receives ONLY Surrogate-Tokenised Text ([CLIENT_NAME_1]...)</text>
+              <text x="14" y="54" font-size="8.5" fill="#f0abfc">&bull; Synthesises Casebook-formatted structured case note</text>
+              <text x="14" y="68" font-size="8.5" fill="#38bdf8">&bull; Zero data retained &bull; No prompt logging &bull; No model retraining</text>
+            </g>
+
+
+            <!-- ================= TB4 & Entra ID Isolation ================= -->
+            <!-- Entra ID Login Screen Perimeter (Isolated) -->
+            <g transform="translate(750, 490)">
+              <rect width="205" height="170" rx="14" fill="url(#grad-ms)" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <text x="14" y="24" font-size="10.5" font-weight="bold" fill="#e2e8f0">Microsoft Entra ID</text>
+              <text x="14" y="38" font-size="8.5" fill="#94a3b8">ORGANISATIONAL LOGIN ONLY</text>
+              <rect x="12" y="50" width="181" height="106" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+              <text x="20" y="70" font-size="8.5" font-weight="bold" fill="#f8fafc">&bull; Adviser SSO &amp; MFA Login</text>
+              <text x="20" y="86" font-size="8.5" fill="#94a3b8">&bull; OIDC Authorization Code</text>
+              <text x="20" y="102" font-size="8" fill="#ef4444">&bull; ZERO Case Data Access</text>
+              <text x="20" y="118" font-size="8" fill="#ef4444">&bull; ZERO Audio Traversal</text>
+              <text x="20" y="134" font-size="8" fill="#10b981">&bull; Strictly Isolated to Screen 1</text>
+            </g>
+
+            <!-- TB4: National Casebook CRM -->
+            <g transform="translate(975, 490)">
+              <rect width="205" height="170" rx="14" fill="url(#grad-tb4)" stroke="#3b82f6" stroke-width="2"/>
+              <text x="14" y="24" font-size="10.5" font-weight="bold" fill="#93c5fd">TRUST BOUNDARY 4</text>
+              <text x="14" y="38" font-size="8.5" fill="#bfdbfe">National Casebook CRM</text>
+              <rect x="12" y="50" width="181" height="106" rx="6" fill="#1e293b" stroke="#2563eb" stroke-width="1"/>
+              <text x="20" y="70" font-size="8.5" font-weight="bold" fill="#f8fafc">&bull; Citizens Advice System</text>
+              <text x="20" y="88" font-size="8" fill="#cbd5e1">&bull; Adviser pastes final note</text>
+              <text x="20" y="104" font-size="8" fill="#cbd5e1">&bull; Human-in-the-loop signoff</text>
+              <text x="20" y="122" font-size="8" fill="#60a5fa">&bull; Permanent Client Record</text>
+              <text x="20" y="138" font-size="8" fill="#34d399">&bull; Official System of Record</text>
+            </g>
+
+
+            <!-- ================= INTER-BOUNDARY TRANSIT CONNECTORS ================= -->
+
+            <!-- Audio Ingress to Browser -->
+            <path d="M 225 115 L 300 135" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)" class="flow-active"/>
+            <path d="M 225 210 L 300 145" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)" class="flow-active"/>
+            <path d="M 225 310 L 300 155" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)" class="flow-active"/>
+
+            <!-- Internal Browser Pipeline Flows -->
+            <line x1="495" y1="162" x2="495" y2="172" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-emerald)"/>
+            <line x1="495" y1="224" x2="495" y2="234" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-emerald)"/>
+            <line x1="495" y1="290" x2="495" y2="300" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-emerald)"/>
+            <line x1="495" y1="360" x2="495" y2="370" stroke="#fde047" stroke-width="2" marker-end="url(#arrow-amber)"/>
+            <line x1="495" y1="418" x2="495" y2="428" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-emerald)"/>
+
+            <!-- Browser -> Cloud Transits -->
+            <!-- 1. Redacted Audio to GCP STT -->
+            <path d="M 690 450 C 730 450, 730 330, 770 330" stroke="#10b981" stroke-width="2.5" fill="none" marker-end="url(#arrow-emerald)" class="flow-active"/>
+            <rect x="695" y="375" width="70" height="20" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+            <text x="700" y="389" font-size="8" font-weight="bold" fill="#a7f3d0">Redacted WAV</text>
+
+            <!-- 2. Surrogate Tokenised Prompt to Vertex AI -->
+            <path d="M 690 330 C 735 330, 735 415, 770 415" stroke="#c084fc" stroke-width="2.5" fill="none" marker-end="url(#arrow-purple)" class="flow-active"/>
+            <rect x="695" y="345" width="70" height="20" rx="4" fill="#581c87" stroke="#c084fc" stroke-width="1"/>
+            <text x="702" y="359" font-size="8" font-weight="bold" fill="#f5d0fe">Tokens Only</text>
+
+            <!-- Cloud Return: Vertex AI -> Browser Detokeniser -->
+            <path d="M 770 435 C 730 435, 730 520, 690 520" stroke="#38bdf8" stroke-width="2.5" fill="none" marker-end="url(#arrow-cyan)" class="flow-active"/>
+            <rect x="700" y="470" width="62" height="20" rx="4" fill="#0c4a6e" stroke="#38bdf8" stroke-width="1"/>
+            <text x="705" y="484" font-size="8" font-weight="bold" fill="#bae6fd">Draft Note</text>
+
+            <!-- Final Human-in-the-loop Transfer: Browser -> Casebook CRM -->
+            <path d="M 690 535 C 800 535, 870 565, 975 565" stroke="#60a5fa" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)"/>
+            <rect x="800" y="535" width="120" height="20" rx="4" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1"/>
+            <text x="807" y="549" font-size="8" font-weight="bold" fill="#dbeafe">Adviser Signed Copy &amp; Paste</text>
+
+            <!-- Auth Link: Entra ID -> Backend Auth -->
+            <path d="M 850 490 L 850 140" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#arrow-cyan)"/>
+            <rect x="815" y="215" width="70" height="18" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+            <text x="822" y="228" font-size="8" fill="#e2e8f0">OIDC / PKCE</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 shadow-sm">
+          <div class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Zero-Persistence Invariant</div>
+          <div class="text-lg font-bold text-[var(--foreground)] mt-0.5">Volatile RAM Only</div>
+          <p class="text-[11px] text-[var(--muted-foreground)] mt-1">Audio &amp; token maps zeroed on session destruction (C1, C4, C7).</p>
+        </div>
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 shadow-sm">
+          <div class="text-xs font-semibold text-purple-600 dark:text-purple-400">Cloud Note Generation</div>
+          <div class="text-lg font-bold text-[var(--foreground)] mt-0.5">Google Cloud (London)</div>
+          <p class="text-[11px] text-[var(--muted-foreground)] mt-1">Vertex AI Gemini 1.5 in <code class="text-xs">europe-west2</code> with ZDR agreement.</p>
+        </div>
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 shadow-sm">
+          <div class="text-xs font-semibold text-blue-600 dark:text-blue-400">Identity Isolation</div>
+          <div class="text-lg font-bold text-[var(--foreground)] mt-0.5">Microsoft Entra ID</div>
+          <p class="text-[11px] text-[var(--muted-foreground)] mt-1">Strictly isolated to initial login screen. Zero case data access.</p>
+        </div>
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 shadow-sm">
+          <div class="text-xs font-semibold text-amber-600 dark:text-amber-400">Human Governance</div>
+          <div class="text-lg font-bold text-[var(--foreground)] mt-0.5">Adviser Professional Sign-off</div>
+          <p class="text-[11px] text-[var(--muted-foreground)] mt-1">Human-in-the-loop gate before manual transfer to Casebook CRM.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: 10-Step Lifecycle Pipeline (Interactive) -->
+    <section id="view-lifecycle" class="hidden space-y-4">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-[var(--border)] pb-3">
+          <div>
+            <h3 class="text-base font-bold text-[var(--foreground)]">Step-by-Step Consultation Data Transformation Pipeline</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Click any lifecycle step below to inspect data state, protocols, and security invariants.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="prevStep()" class="px-2.5 py-1 text-xs font-semibold bg-slate-200 dark:bg-slate-700 rounded-lg hover:bg-slate-300 transition">&larr; Previous</button>
+            <span id="step-counter" class="text-xs font-mono font-bold px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 rounded">Step 1 / 10</span>
+            <button onclick="nextStep()" class="px-2.5 py-1 text-xs font-semibold bg-[#004B87] text-white rounded-lg hover:bg-blue-800 transition">Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 10 Step Stepper Bar -->
+        <div class="grid grid-cols-5 md:grid-cols-10 gap-1.5 text-center text-[10px] font-bold">
+          <button onclick="setStep(1)" id="step-btn-1" class="step-nav-btn p-2 rounded-lg border border-blue-500 bg-blue-500/20 text-blue-400">1. Consent</button>
+          <button onclick="setStep(2)" id="step-btn-2" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">2. Ingest</button>
+          <button onclick="setStep(3)" id="step-btn-3" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">3. WASM ASR</button>
+          <button onclick="setStep(4)" id="step-btn-4" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">4. NER Detect</button>
+          <button onclick="setStep(5)" id="step-btn-5" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">5. Surrogate</button>
+          <button onclick="setStep(6)" id="step-btn-6" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">6. Gate Review</button>
+          <button onclick="setStep(7)" id="step-btn-7" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">7. Audio Mute</button>
+          <button onclick="setStep(8)" id="step-btn-8" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">8. Vertex AI</button>
+          <button onclick="setStep(9)" id="step-btn-9" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">9. Detokenise</button>
+          <button onclick="setStep(10)" id="step-btn-10" class="step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400">10. Casebook</button>
+        </div>
+
+        <!-- Dynamic Step Detail Card -->
+        <div id="step-content" class="bg-slate-900 border border-slate-800 rounded-xl p-5 text-slate-200 space-y-4">
+          <!-- Step details injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: Payload & Privacy Firewall Gate -->
+    <section id="view-payload" class="hidden space-y-4">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm space-y-4">
+        <div>
+          <h3 class="text-base font-bold text-[var(--foreground)]">Surrogate Tokenisation &amp; Payload Inspection</h3>
+          <p class="text-xs text-[var(--muted-foreground)]">Comparing data payload states across trust boundaries to demonstrate zero direct PII transmission.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Left: In-Browser Raw State (TB1) -->
+          <div class="bg-slate-950 border border-emerald-900/50 rounded-xl p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge-pill bg-emerald-900 text-emerald-200">TB1: Local In-Browser RAM</span>
+              <span class="text-[11px] font-mono text-emerald-400">Special Category &amp; Direct PII</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-300">Raw Whisper WASM Transcript (Local Only):</h4>
+            <div class="bg-slate-900 p-3 rounded-lg font-mono text-xs text-slate-300 leading-relaxed border border-slate-800">
+              "Client <span class="bg-red-950 text-red-300 px-1 py-0.5 rounded border border-red-800 font-bold">John Smith</span> (DOB 14/05/1982, NINO: <span class="bg-red-950 text-red-300 px-1 py-0.5 rounded border border-red-800 font-bold">QQ123456C</span>) attends regarding Universal Credit deductions at <span class="bg-red-950 text-red-300 px-1 py-0.5 rounded border border-red-800 font-bold">14 Falcon Road, Battersea SW11 2LN</span>. Client phone: <span class="bg-red-950 text-red-300 px-1 py-0.5 rounded border border-red-800 font-bold">07700 900123</span>."
+            </div>
+            <div class="text-[11px] text-emerald-400/90 pt-1 flex items-center gap-1">
+              <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Retained solely in volatile heap memory closure &bull; Destroyed on session end
+            </div>
+          </div>
+
+          <!-- Right: Transit to Google Cloud (TB3) -->
+          <div class="bg-slate-950 border border-purple-900/50 rounded-xl p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge-pill bg-purple-900 text-purple-200">TB3: Google Cloud (Vertex AI)</span>
+              <span class="text-[11px] font-mono text-purple-400">Surrogate-Tokenised Payload</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-300">Prompt Transmitted to Gemini 1.5 in europe-west2:</h4>
+            <div class="bg-slate-900 p-3 rounded-lg font-mono text-xs text-slate-300 leading-relaxed border border-slate-800">
+              "Client <span class="bg-purple-950 text-purple-300 px-1 py-0.5 rounded border border-purple-800 font-bold">[CLIENT_NAME_1]</span> (DOB [DOB_1], NINO: <span class="bg-purple-950 text-purple-300 px-1 py-0.5 rounded border border-purple-800 font-bold">[NINO_1]</span>) attends regarding Universal Credit deductions at <span class="bg-purple-950 text-purple-300 px-1 py-0.5 rounded border border-purple-800 font-bold">[ADDRESS_1], [POSTCODE_1]</span>. Client phone: <span class="bg-purple-950 text-purple-300 px-1 py-0.5 rounded border border-purple-800 font-bold">[TEL_1]</span>."
+            </div>
+            <div class="text-[11px] text-purple-400/90 pt-1 flex items-center gap-1">
+              <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Zero direct PII &bull; Zero Data Retention (ZDR) guarantee &bull; Pinned to London
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy Invariant Table -->
+        <div class="overflow-x-auto custom-scrollbar border border-[var(--border)] rounded-xl">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-100 dark:bg-slate-800 text-[var(--foreground)] border-b border-[var(--border)]">
+              <tr>
+                <th class="p-2.5 font-bold">Invariant</th>
+                <th class="p-2.5 font-bold">Rule &amp; Target</th>
+                <th class="p-2.5 font-bold">Boundary Check</th>
+                <th class="p-2.5 font-bold">Enforcement Mechanism</th>
+                <th class="p-2.5 font-bold">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--border)] text-[var(--foreground)]">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-2.5 font-bold text-emerald-600 dark:text-emerald-400">Constraint C1</td>
+                <td class="p-2.5">Audio Ephemerality</td>
+                <td class="p-2.5 font-mono">TB0 &rarr; TB1</td>
+                <td class="p-2.5">In-memory Web Audio API buffer only; 0 localStorage/IDB writes.</td>
+                <td class="p-2.5"><span class="badge-pill bg-emerald-900 text-emerald-200">Enforced</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-2.5 font-bold text-emerald-600 dark:text-emerald-400">Constraint C2</td>
+                <td class="p-2.5">Zero Unredacted Cloud Audio</td>
+                <td class="p-2.5 font-mono">TB1 &rarr; TB3</td>
+                <td class="p-2.5">Phase 10 acoustic verification mutes audio; raw audio zeroed before upload.</td>
+                <td class="p-2.5"><span class="badge-pill bg-emerald-900 text-emerald-200">Enforced</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-2.5 font-bold text-emerald-600 dark:text-emerald-400">Constraint C5</td>
+                <td class="p-2.5">Surrogate Tokenisation</td>
+                <td class="p-2.5 font-mono">TB1 &rarr; TB3</td>
+                <td class="p-2.5">Multi-layer NER replaces all direct identifiers before prompt transit.</td>
+                <td class="p-2.5"><span class="badge-pill bg-emerald-900 text-emerald-200">Enforced</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-2.5 font-bold text-emerald-600 dark:text-emerald-400">Constraint C6</td>
+                <td class="p-2.5">In-Browser Detokenisation</td>
+                <td class="p-2.5 font-mono">TB3 &rarr; TB1</td>
+                <td class="p-2.5">Real client names re-inserted locally in RAM; never sent back to cloud.</td>
+                <td class="p-2.5"><span class="badge-pill bg-emerald-900 text-emerald-200">Enforced</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-2.5 font-bold text-emerald-600 dark:text-emerald-400">Constraint C7</td>
+                <td class="p-2.5">Deterministic Memory Zeroing</td>
+                <td class="p-2.5 font-mono">TB1 Internal</td>
+                <td class="p-2.5"><code class="text-xs">Uint8Array.fill(0)</code> wipes buffers, keyrings, and transcripts upon exit.</td>
+                <td class="p-2.5"><span class="badge-pill bg-emerald-900 text-emerald-200">Enforced</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: Auth & STS Brokering -->
+    <section id="view-auth" class="hidden space-y-4">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm space-y-4">
+        <div>
+          <h3 class="text-base font-bold text-[var(--foreground)]">Authentication &amp; Downscoped Token Brokering</h3>
+          <p class="text-xs text-[var(--muted-foreground)]">Clear architectural separation between Microsoft Entra ID login and Google Cloud STS security tokens.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Auth Flow 1 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">A</span>
+              <h4 class="text-sm font-bold text-white">1. Adviser Enterprise Login (Microsoft Entra ID)</h4>
+            </div>
+            <ol class="list-decimal list-inside text-xs text-slate-300 space-y-2 leading-relaxed">
+              <li>Adviser navigates to Case Ace web application.</li>
+              <li>Browser initiates <strong class="text-blue-400">OIDC Authorization Code Flow with PKCE</strong> against Microsoft Entra ID.</li>
+              <li>Adviser completes organisational SSO with mandatory FIDO2 / Authenticator MFA.</li>
+              <li>Entra ID issues signed ID Token asserting adviser identity &amp; RBAC role (<code class="text-xs text-blue-300">CaseAce.Adviser</code>).</li>
+              <li><strong class="text-emerald-400">Zero case data, audio, or client details touch Microsoft</strong>.</li>
+            </ol>
+          </div>
+
+          <!-- Auth Flow 2 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">B</span>
+              <h4 class="text-sm font-bold text-white">2. Scoped GCP STS Credential Minting</h4>
+            </div>
+            <ol class="list-decimal list-inside text-xs text-slate-300 space-y-2 leading-relaxed">
+              <li>Browser presents validated Entra ID JWT to CAW Backend (<code class="text-xs text-purple-300">europe-west2</code> Cloud Run).</li>
+              <li>Backend validates signature, claims, and session active status.</li>
+              <li>Backend invokes <strong class="text-purple-400">Google Cloud Security Token Service (STS)</strong> to mint a downscoped OAuth access token.</li>
+              <li>Token is strictly restricted: <strong>15-minute TTL</strong>, scoped solely to Vertex AI &amp; STT APIs in <code class="text-xs text-purple-300">europe-west2</code>.</li>
+              <li>Browser uses STS token directly for encrypted TLS 1.3 model invocation.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Tab Switching Logic
+    function switchView(viewName) {
+      const views = ['system', 'lifecycle', 'payload', 'auth'];
+      views.forEach(v => {
+        const el = document.getElementById('view-' + v);
+        const btn = document.getElementById('tab-btn-' + v);
+        if (v === viewName) {
+          el.classList.remove('hidden');
+          btn.classList.add('bg-[#004B87]', 'text-white', 'shadow-sm');
+          btn.classList.remove('text-[var(--foreground)]');
+        } else {
+          el.classList.add('hidden');
+          btn.classList.remove('bg-[#004B87]', 'text-white', 'shadow-sm');
+          btn.classList.add('text-[var(--foreground)]');
+        }
+      });
+    }
+
+    // Lifecycle Data
+    const lifecycleSteps = [
+      {
+        step: 1,
+        title: "Client Consent & Case Setup",
+        boundary: "TB0 (Physical Consultation) &rarr; TB1 (Browser)",
+        dataState: "Oral or Signed Consent Form",
+        protocol: "Manual Confirmation UI Checkbox",
+        security: "Constraint C0: No recording starts without explicit client affirmative consent. Easy Read / translated scripts supported.",
+        details: "Adviser explains the tool in plain English. If client refuses or withdraws at any point, Case Ace immediately disables recording and adviser proceeds with traditional manual typing."
+      },
+      {
+        step: 2,
+        title: "Audio Capture & Channel Ingestion",
+        boundary: "TB0 (Audio Ingress) &rarr; TB1 (Browser RAM)",
+        dataState: "Raw 16kHz Mono PCM Audio (Float32Array)",
+        protocol: "Web Audio API / Webex Calling SRTP (TLS 1.3)",
+        security: "Constraint C1: Volatile RAM only. Video tracks in uploaded files are discarded immediately on decode. Storage guards block disk writes.",
+        details: "Microphone, Webex phone call, or imported audio file is streamed directly into an isolated Float32Array in browser memory. Zero bytes are written to disk or browser cache."
+      },
+      {
+        step: 3,
+        title: "Pass 1 Local ASR (Whisper WASM)",
+        boundary: "TB1 Internal (Client Web Worker Sandbox)",
+        dataState: "Raw Unredacted Transcript Text",
+        protocol: "In-Memory Web Worker MessageChannel",
+        security: "Constraint C3: Local-first inference. Whisper Tiny/Base WASM runs on client CPU/GPU. Zero network packets leave the device.",
+        details: "The Web Worker converts audio to text locally in the browser sandbox. The transcript contains real client names and numbers, held strictly in volatile RAM."
+      },
+      {
+        step: 4,
+        title: "Multi-Layer Identifier Detection (NER)",
+        boundary: "TB1 Internal (Local Detection Engine)",
+        dataState: "Transcript + Detected PII Span Indices",
+        protocol: "In-Memory AST / Span Array",
+        security: "Constraint C3: Layer 1 Regex (NINO, Tel, Postcode, Bank), Layer 2 Local Named Entity Recognition (Names, Orgs, Places), Layer 3 Contextual Grammar.",
+        details: "The multi-layer detector identifies all personal and special category data spans, assigning high-confidence classification to each detected entity."
+      },
+      {
+        step: 5,
+        title: "Surrogate Tokenisation & Ephemeral Keyring",
+        boundary: "TB1 Internal (Session Closure)",
+        dataState: "Surrogate Text ([CLIENT_NAME_1]...) + Token Map",
+        protocol: "In-Memory Map Object",
+        security: "Constraint C5: Real identifiers are replaced with synthetic placeholders. The translation dictionary is isolated in memory.",
+        details: "John Smith becomes [CLIENT_NAME_1], SW11 2LN becomes [POSTCODE_1]. The lookup map is stored in an unexported JS closure in RAM."
+      },
+      {
+        step: 6,
+        title: "Phase 9 Redaction Review Gate",
+        boundary: "TB1 Internal (Adviser UI Screen)",
+        dataState: "Highlighted Tokenised Transcript",
+        protocol: "DOM Rendering in Volatile Page State",
+        security: "Constraint C5 Gate: Human-in-the-loop review. Adviser visually verifies that all direct identifiers are properly tokenised.",
+        details: "Adviser can click to redact any unflagged text. Cloud note generation cannot be triggered until the adviser clicks 'Confirm Redactions'."
+      },
+      {
+        step: 7,
+        title: "Phase 10 Acoustic Muting & Audio Verification",
+        boundary: "TB1 Internal (WAV Encoder & Audio Muter)",
+        dataState: "Redacted LINEAR16 WAV Audio (Muted Spans)",
+        protocol: "In-Memory WAV Buffer Allocation",
+        security: "Constraint C2 / C4 / C8: PII audio timestamps are overwritten with zero-amplitude silence. Raw unredacted audio is immediately wiped via Uint8Array.fill(0).",
+        details: "Fail-closed check: If any unredacted speech leaks past acoustic alignment, the session halts and aborts upload."
+      },
+      {
+        step: 8,
+        title: "Cloud Note Synthesis (Vertex AI Gemini 1.5)",
+        boundary: "TB1 (Browser) &rarr; TB3 (Google Cloud in europe-west2)",
+        dataState: "Surrogate Prompt &rarr; Tokenised Structured Case Note",
+        protocol: "HTTPS / TLS 1.3 with 15-min Scoped GCP STS Token",
+        security: "Constraint C5: Pinned to London (europe-west2). Zero Data Retention (ZDR) guarantee. Zero training, zero prompt logging.",
+        details: "Gemini 1.5 processes the tokenised transcript and returns a professionally structured Citizens Advice case note draft containing only [CLIENT_NAME_1] tokens."
+      },
+      {
+        step: 9,
+        title: "In-Browser Detokenisation & Adviser Review",
+        boundary: "TB3 &rarr; TB1 (Browser RAM)",
+        dataState: "Re-Identified Case Note in RAM",
+        protocol: "Local String Substitution in RAM",
+        security: "Constraint C6: Detokenisation happens 100% on the client. Real names are substituted back in RAM. Adviser reviews advice quality.",
+        details: "The browser swaps [CLIENT_NAME_1] back to 'John Smith'. The adviser reviews the note for technical advice accuracy, edits gaps, and clicks 'Sign Off'."
+      },
+      {
+        step: 10,
+        title: "Casebook CRM Transfer & Deterministic Memory Wipe",
+        boundary: "TB1 &rarr; TB4 (Casebook) &amp; Memory Destruction",
+        dataState: "Final Case Note in Casebook &bull; ZERO Local Residue",
+        protocol: "Manual Adviser Copy/Paste into Casebook",
+        security: "Constraint C7: destroySession() fills all audio buffers with 0s, clears token maps, drops STS keys, and terminates Web Workers.",
+        details: "The adviser pastes the signed case note into national Casebook. Upon session finish or tab close, all memory buffers are wiped with zero persistence."
+      }
+    ];
+
+    let currentStep = 1;
+
+    function setStep(stepNum) {
+      currentStep = stepNum;
+      document.getElementById('step-counter').innerText = `Step ${stepNum} / 10`;
+
+      // Update Nav Buttons
+      document.querySelectorAll('.step-nav-btn').forEach((btn, idx) => {
+        if (idx + 1 === stepNum) {
+          btn.className = "step-nav-btn p-2 rounded-lg border border-blue-500 bg-blue-500/20 text-blue-400 font-bold";
+        } else {
+          btn.className = "step-nav-btn p-2 rounded-lg border border-[var(--border)] bg-slate-800/40 text-slate-400 font-bold";
+        }
+      });
+
+      const s = lifecycleSteps[stepNum - 1];
+      const html = `
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <span class="badge-pill bg-blue-900 text-blue-200">Phase ${s.step}</span>
+            <h4 class="text-base font-bold text-white mt-1">${s.title}</h4>
+          </div>
+          <div class="text-xs font-mono text-cyan-400 bg-slate-950 px-2.5 py-1 rounded border border-slate-800">
+            ${s.boundary}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px]">Data Payload State:</span>
+            <div class="font-mono text-emerald-300 font-medium">${s.dataState}</div>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1">
+            <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px]">Protocol / Transport:</span>
+            <div class="font-mono text-blue-300 font-medium">${s.protocol}</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-1.5">
+          <span class="text-amber-400 font-bold uppercase tracking-wider text-[10px] flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            Security &amp; Privacy Invariant Enforcement:
+          </span>
+          <p class="text-xs text-slate-200 leading-relaxed">${s.security}</p>
+        </div>
+
+        <div class="text-xs text-slate-300 leading-relaxed pt-1">
+          <strong class="text-white">Operational Workflow:</strong> ${s.details}
+        </div>
+      `;
+      document.getElementById('step-content').innerHTML = html;
+    }
+
+    function prevStep() {
+      if (currentStep > 1) setStep(currentStep - 1);
+    }
+    function nextStep() {
+      if (currentStep < 10) setStep(currentStep + 1);
+    }
+
+    // Initialize Step 1 on load
+    setStep(1);
+  </script>
+</body>
+</html>

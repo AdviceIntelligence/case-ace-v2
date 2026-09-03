@@ -1,0 +1,368 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:ff837445-90a0-4b7c-910e-174b529c5c60",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-01T22:04:31.279Z",
+    "tools": [
+      {
+        "vendor": "Citizens Advice Wandsworth",
+        "name": "Case Ace SBOM Generator",
+        "version": "2.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "case-ace-v2",
+      "version": "2.0.0",
+      "description": "Privacy-preserving AI-assisted case note drafting tool for Citizens Advice Wandsworth",
+      "properties": [
+        {
+          "name": "region-pinned",
+          "value": "europe-west2"
+        },
+        {
+          "name": "data-classification",
+          "value": "Special Category Data (UK GDPR Art 9)"
+        },
+        {
+          "name": "control-standard",
+          "value": "ISO/IEC 27001:2022 / 27701:2019 / 42001:2023"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "react",
+      "version": "19.0.0",
+      "purl": "pkg:npm/react@19.0.0",
+      "scope": "required",
+      "runtime": "client-browser",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "Declarative UI library",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "react-dom",
+      "version": "19.0.0",
+      "purl": "pkg:npm/react-dom@19.0.0",
+      "scope": "required",
+      "runtime": "client-browser",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "DOM renderer for React",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lucide-react",
+      "version": "0.475.0",
+      "purl": "pkg:npm/lucide-react@0.475.0",
+      "scope": "required",
+      "runtime": "client-browser",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "Tree-shakeable SVG UI icons",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@vitejs/plugin-react",
+      "version": "4.3.4",
+      "purl": "pkg:npm/@vitejs/plugin-react@4.3.4",
+      "scope": "optional",
+      "runtime": "client-build",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "Vite JSX plugin",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "vite",
+      "version": "6.1.0",
+      "purl": "pkg:npm/vite@6.1.0",
+      "scope": "optional",
+      "runtime": "client-build",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "Frontend build tool",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "typescript",
+      "version": "5.7.3",
+      "purl": "pkg:npm/typescript@5.7.3",
+      "scope": "optional",
+      "runtime": "build-tool",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "description": "TypeScript compiler",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "express",
+      "version": "4.21.2",
+      "purl": "pkg:npm/express@4.21.2",
+      "scope": "required",
+      "runtime": "backend-node",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "Stateless API web framework",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "helmet",
+      "version": "8.0.0",
+      "purl": "pkg:npm/helmet@8.0.0",
+      "scope": "required",
+      "runtime": "backend-node",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "Security headers middleware",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "cors",
+      "version": "2.8.5",
+      "purl": "pkg:npm/cors@2.8.5",
+      "scope": "required",
+      "runtime": "backend-node",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "CORS middleware",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "dotenv",
+      "version": "16.4.7",
+      "purl": "pkg:npm/dotenv@16.4.7",
+      "scope": "required",
+      "runtime": "backend-node",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "description": "Environment variable loader",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tsx",
+      "version": "4.19.2",
+      "purl": "pkg:npm/tsx@4.19.2",
+      "scope": "optional",
+      "runtime": "backend-dev",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "description": "TypeScript execution runner",
+      "properties": [
+        {
+          "name": "network-activity",
+          "value": "none"
+        },
+        {
+          "name": "telemetry-enabled",
+          "value": "false"
+        },
+        {
+          "name": "pinned",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

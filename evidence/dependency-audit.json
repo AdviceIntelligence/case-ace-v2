@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-09-01T22:04:27.690Z",
+  "target": "Case Ace v2.0 Client Supply Chain",
+  "status": "PASS",
+  "evaluatedDependencies": [
+    {
+      "name": "lucide-react",
+      "version": "0.475.0",
+      "type": "runtime",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "react",
+      "version": "19.0.0",
+      "type": "runtime",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.0.0",
+      "type": "runtime",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "@types/react",
+      "version": "19.0.8",
+      "type": "development",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "@types/react-dom",
+      "version": "19.0.3",
+      "type": "development",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "@vitejs/plugin-react",
+      "version": "4.3.4",
+      "type": "development",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "typescript",
+      "version": "5.7.3",
+      "type": "development",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    },
+    {
+      "name": "vite",
+      "version": "6.1.0",
+      "type": "development",
+      "isPinned": true,
+      "isJustifiedInDocs": true,
+      "isTelemetryBlocked": true,
+      "networkCallsPermitted": false,
+      "status": "PASS"
+    }
+  ],
+  "violations": []
+}

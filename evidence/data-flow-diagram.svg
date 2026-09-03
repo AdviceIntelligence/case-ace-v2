@@ -1,0 +1,293 @@
+<svg viewBox="0 0 1280 800" width="1280" height="800" xmlns="http://www.w3.org/2000/svg" style="background:#0b0f19; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="grad-tb0" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#1c1917" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="grad-tb1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="grad-tb2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="grad-tb3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="grad-tb4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#172554" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="grad-ms" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <!-- Markers -->
+    <marker id="arrow-emerald" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#10b981"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#c084fc"/>
+    </marker>
+    <marker id="arrow-cyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#60a5fa"/>
+    </marker>
+  </defs>
+
+  <!-- Title Header -->
+  <g transform="translate(30, 25)">
+    <text x="0" y="24" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="-0.5">Citizens Advice Wandsworth &bull; Case Ace v2.0</text>
+    <text x="0" y="46" font-size="13" font-weight="500" fill="#94a3b8">End-to-End Data Flow, Security Boundaries &amp; Zero-Retention Cloud Architecture</text>
+    <rect x="1000" y="5" width="220" height="36" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="1015" y="28" font-size="11" font-weight="700" fill="#38bdf8">&bull; VERIFIED BASELINE v2.0</text>
+  </g>
+
+  <!-- ================= TB0: Audio Sources ================= -->
+  <g transform="translate(30, 90)">
+    <rect width="230" height="680" rx="14" fill="url(#grad-tb0)" stroke="#d97706" stroke-width="2" stroke-dasharray="6 3"/>
+    <text x="16" y="28" font-size="12" font-weight="800" fill="#fbbf24" letter-spacing="0.5">TRUST BOUNDARY 0</text>
+    <text x="16" y="44" font-size="10" font-weight="600" fill="#fde68a">Audio Ingress &amp; Consent</text>
+
+    <!-- Ingress 1: Mic -->
+    <g transform="translate(15, 60)">
+      <rect width="200" height="85" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="12" y="22" font-size="11" font-weight="700" fill="#f8fafc">1. In-Person Mic</text>
+      <text x="12" y="38" font-size="9" fill="#94a3b8">Web Audio API PCM</text>
+      <text x="12" y="54" font-size="8.5" fill="#cbd5e1">&bull; 16kHz mono sampling</text>
+      <text x="12" y="68" font-size="8.5" fill="#34d399">&bull; In-memory AudioNode</text>
+    </g>
+
+    <!-- Ingress 2: Webex Telephony -->
+    <g transform="translate(15, 160)">
+      <rect width="200" height="100" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="12" y="22" font-size="11" font-weight="700" fill="#f8fafc">2. Cisco Webex Calls</text>
+      <text x="12" y="38" font-size="9" fill="#94a3b8">SRTP / TLS 1.3 Telephony</text>
+      <text x="12" y="54" font-size="8.5" fill="#cbd5e1">&bull; Dual-channel PSTN stream</text>
+      <text x="12" y="68" font-size="8.5" fill="#f87171">&bull; Cloud Recording: DISABLED</text>
+      <text x="12" y="82" font-size="8.5" fill="#38bdf8">&bull; OAuth2 scoped stream</text>
+    </g>
+
+    <!-- Ingress 3: File Import -->
+    <g transform="translate(15, 275)">
+      <rect width="200" height="100" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="12" y="22" font-size="11" font-weight="700" fill="#f8fafc">3. Audio/Video Import</text>
+      <text x="12" y="38" font-size="9" fill="#94a3b8">WAV / MP3 / M4A / MP4</text>
+      <text x="12" y="54" font-size="8.5" fill="#34d399">&bull; Video track dropped in RAM</text>
+      <text x="12" y="68" font-size="8.5" fill="#cbd5e1">&bull; AudioContext PCM decode</text>
+      <text x="12" y="82" font-size="8.5" fill="#fbbf24">&bull; 0 disk buffer creation</text>
+    </g>
+
+    <!-- Ingress 4: Consent Gate Box -->
+    <g transform="translate(15, 390)">
+      <rect width="200" height="275" rx="8" fill="#451a03" fill-opacity="0.8" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="14" y="26" font-size="11" font-weight="800" fill="#ffedd5">Client Consent Gate</text>
+      <text x="14" y="44" font-size="9.5" fill="#fed7aa">Mandatory Pre-Condition</text>
+
+      <rect x="10" y="55" width="180" height="50" rx="5" fill="#1c1917" stroke="#78350f" stroke-width="1"/>
+      <text x="18" y="73" font-size="8.5" font-weight="700" fill="#fef3c7">&bull; Face-to-Face Script</text>
+      <text x="18" y="90" font-size="8" fill="#d6d3d1">Plain English / Easy Read</text>
+
+      <rect x="10" y="115" width="180" height="50" rx="5" fill="#1c1917" stroke="#78350f" stroke-width="1"/>
+      <text x="18" y="133" font-size="8.5" font-weight="700" fill="#fef3c7">&bull; Telephony Script</text>
+      <text x="18" y="150" font-size="8" fill="#d6d3d1">Read before call unmute</text>
+
+      <rect x="10" y="175" width="180" height="85" rx="5" fill="#292524" stroke="#9a3412" stroke-width="1"/>
+      <text x="16" y="193" font-size="8.5" font-weight="700" fill="#f87171">Consent Refusal / Exit:</text>
+      <text x="16" y="210" font-size="8" fill="#e7e5e4">&bull; Immediate capture stop</text>
+      <text x="16" y="224" font-size="8" fill="#e7e5e4">&bull; Buffers wiped instantly</text>
+      <text x="16" y="238" font-size="8" fill="#e7e5e4">&bull; Reverts to manual typing</text>
+      <text x="16" y="252" font-size="8" fill="#e7e5e4">&bull; Zero service penalty</text>
+    </g>
+  </g>
+
+  <!-- ================= TB1: Client Browser Sandbox ================= -->
+  <g transform="translate(285, 90)">
+    <rect width="470" height="680" rx="14" fill="url(#grad-tb1)" stroke="#10b981" stroke-width="2.5"/>
+    <text x="20" y="28" font-size="13" font-weight="800" fill="#34d399" letter-spacing="0.5">TRUST BOUNDARY 1: CLIENT BROWSER SANDBOX</text>
+    <text x="20" y="44" font-size="10" font-weight="600" fill="#a7f3d0">Volatile RAM Heap Only &bull; Zero Disk Writes &bull; Storage Guards Active</text>
+
+    <!-- Node 1: Raw Audio Memory -->
+    <g transform="translate(20, 58)">
+      <rect width="430" height="58" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.3"/>
+      <text x="14" y="20" font-size="10.5" font-weight="700" fill="#f8fafc">1. Raw Audio Buffer (Float32Array / Uint8Array)</text>
+      <text x="14" y="36" font-size="8.5" fill="#94a3b8">Uncompressed audio in volatile browser RAM &bull; 0 disk caching</text>
+      <text x="14" y="48" font-size="8.5" fill="#f87171">&bull; Invariant C1/C7: Line-rate zeroing via Uint8Array.fill(0)</text>
+    </g>
+
+    <!-- Node 2: Whisper WASM -->
+    <g transform="translate(20, 126)">
+      <rect width="430" height="58" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.3"/>
+      <text x="14" y="20" font-size="10.5" font-weight="700" fill="#34d399">2. Pass 1 Local ASR (Whisper WASM Engine)</text>
+      <text x="14" y="36" font-size="8.5" fill="#cbd5e1">Local Web Worker execution &bull; 0 network calls for transcription</text>
+      <text x="14" y="48" font-size="8.5" fill="#6ee7b7">&bull; Generates initial unredacted transcript entirely on client CPU</text>
+    </g>
+
+    <!-- Node 3: Multi-Layer NER -->
+    <g transform="translate(20, 194)">
+      <rect width="430" height="62" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.3"/>
+      <text x="14" y="20" font-size="10.5" font-weight="700" fill="#34d399">3. Multi-Layer Identifier Detection (NER &amp; Regex)</text>
+      <text x="14" y="36" font-size="8.5" fill="#cbd5e1">Layer 1: Regex (NINO, Tel, Postcode, Bank Account, DOB)</text>
+      <text x="14" y="50" font-size="8.5" fill="#a7f3d0">Layer 2: Local Transformer NER (Names, Orgs) &bull; Layer 3: Context Rules</text>
+    </g>
+
+    <!-- Node 4: Surrogate Tokeniser -->
+    <g transform="translate(20, 266)">
+      <rect width="430" height="68" rx="8" fill="#064e3b" stroke="#22c55e" stroke-width="1.5"/>
+      <text x="14" y="20" font-size="11" font-weight="800" fill="#f0fdf4">4. Surrogate Tokenisation &amp; Ephemeral Keyring (C5)</text>
+      <text x="14" y="36" font-size="8.5" fill="#bbf7d0">Replaces PII: 'Jane Doe' &rarr; [CLIENT_NAME_1], 'SW11 2LN' &rarr; [POSTCODE_1]</text>
+      <text x="14" y="50" font-size="8.5" fill="#86efac">Dictionary Map stored in isolated memory closure &bull; Never leaves RAM</text>
+      <text x="14" y="62" font-size="8" fill="#4ade80">&bull; window.crypto.subtle session-scoped cryptographic protection</text>
+    </g>
+
+    <!-- Node 5: Review Gate -->
+    <g transform="translate(20, 344)">
+      <rect width="430" height="54" rx="8" fill="#0f172a" stroke="#eab308" stroke-width="1.3"/>
+      <text x="14" y="20" font-size="10.5" font-weight="700" fill="#fde047">5. Phase 9 Redaction Review Gate (Adviser UI)</text>
+      <text x="14" y="36" font-size="8.5" fill="#cbd5e1">Adviser visually inspects tokenised spans &amp; clicks to add missed entities</text>
+      <text x="14" y="48" font-size="8.5" fill="#facc15">&bull; Mandatory active sign-off before cloud synthesis is unlocked</text>
+    </g>
+
+    <!-- Node 6: Phase 10 Acoustic Mute -->
+    <g transform="translate(20, 408)">
+      <rect width="430" height="64" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.3"/>
+      <text x="14" y="20" font-size="10.5" font-weight="700" fill="#34d399">6. Phase 10 Acoustic Muting &amp; Audio Redaction (C2/C8)</text>
+      <text x="14" y="36" font-size="8.5" fill="#cbd5e1">Aligns token timestamps &bull; Overwrites PII audio segments with silence</text>
+      <text x="14" y="50" font-size="8.5" fill="#4ade80">&bull; Raw audio zeroed &bull; Fail-closed assertion: 0 unredacted survivors</text>
+      <text x="14" y="60" font-size="8" fill="#86efac">&bull; Produces sanitized LINEAR16 WAV for second-pass STT</text>
+    </g>
+
+    <!-- Node 7: Detokenisation -->
+    <g transform="translate(20, 482)">
+      <rect width="430" height="68" rx="8" fill="#0c4a6e" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="14" y="20" font-size="11" font-weight="800" fill="#f0f9ff">7. In-Browser Detokenisation &amp; Final Note QA (C6)</text>
+      <text x="14" y="36" font-size="8.5" fill="#bae6fd">Receives draft note with surrogate tokens &bull; In-memory dictionary swap</text>
+      <text x="14" y="50" font-size="8.5" fill="#7dd3fc">&bull; Re-inserts real names locally in client browser memory</text>
+      <text x="14" y="62" font-size="8" fill="#38bdf8">&bull; Adviser validates technical advice, edits gaps, and clicks 'Sign Off'</text>
+    </g>
+
+    <!-- Node 8: destroySession -->
+    <g transform="translate(20, 560)">
+      <rect width="430" height="100" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="11" font-weight="800" fill="#fecaca">8. destroySession() Deterministic Zeroing Engine (C7)</text>
+      <text x="14" y="40" font-size="8.5" fill="#fca5a5">&bull; Overwrites all TypedArrays with zeroes (Uint8Array.fill(0))</text>
+      <text x="14" y="54" font-size="8.5" fill="#fca5a5">&bull; Deletes token map dictionary &amp; transcript strings</text>
+      <text x="14" y="68" font-size="8.5" fill="#fca5a5">&bull; Terminates Web Workers &amp; drops WebCrypto subtle keys</text>
+      <text x="14" y="82" font-size="8.5" fill="#f87171">&bull; Clipboard buffer wiped on exit &bull; Zero persistent residue</text>
+      <text x="14" y="94" font-size="8" fill="#ef4444">&bull; Triggered on: Finish, Logout, Timeout, Consent Revocation, Tab Close</text>
+    </g>
+  </g>
+
+  <!-- ================= TB2: CAW Backend Server ================= -->
+  <g transform="translate(780, 90)">
+    <rect width="470" height="195" rx="14" fill="url(#grad-tb2)" stroke="#0284c7" stroke-width="2"/>
+    <text x="20" y="28" font-size="12" font-weight="800" fill="#38bdf8" letter-spacing="0.5">TRUST BOUNDARY 2: CAW BACKEND PROXY</text>
+    <text x="20" y="44" font-size="10" font-weight="600" fill="#bae6fd">Google Cloud Run (europe-west2 London) &bull; Stateless Broker</text>
+
+    <!-- STS Issuer -->
+    <g transform="translate(20, 58)">
+      <rect width="205" height="60" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="12" y="20" font-size="10" font-weight="700" fill="#f8fafc">Scoped GCP STS Issuer</text>
+      <text x="12" y="36" font-size="8.5" fill="#94a3b8">Exchanges Entra ID JWT for</text>
+      <text x="12" y="50" font-size="8.5" fill="#38bdf8">15-min downscoped GCP token</text>
+    </g>
+
+    <!-- Audit Logger -->
+    <g transform="translate(245, 58)">
+      <rect width="205" height="60" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="12" y="20" font-size="10" font-weight="700" fill="#f8fafc">Strict Audit Log Store</text>
+      <text x="12" y="36" font-size="8.5" fill="#94a3b8">Whitelist JSON Schema</text>
+      <text x="12" y="50" font-size="8.5" fill="#f87171">0 PII / Zero Free-Text</text>
+    </g>
+
+    <!-- Webex Ingest & RBAC -->
+    <g transform="translate(20, 128)">
+      <rect width="430" height="55" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="12" y="20" font-size="10" font-weight="700" fill="#f8fafc">Webex Telephony Webhook Ingest &amp; RBAC Validation</text>
+      <text x="12" y="36" font-size="8.5" fill="#94a3b8">Validates HMAC-SHA256 signatures &bull; Enforces Entra ID group roles</text>
+      <text x="12" y="48" font-size="8" fill="#38bdf8">&bull; Zero audio persists on backend &bull; Direct TLS 1.3 proxy to browser</text>
+    </g>
+  </g>
+
+  <!-- ================= TB3: Google Cloud (London) ================= -->
+  <g transform="translate(780, 305)">
+    <rect width="470" height="230" rx="14" fill="url(#grad-tb3)" stroke="#9333ea" stroke-width="2"/>
+    <text x="20" y="28" font-size="12" font-weight="800" fill="#c084fc" letter-spacing="0.5">TRUST BOUNDARY 3: GOOGLE CLOUD (europe-west2 London)</text>
+    <text x="20" y="44" font-size="10" font-weight="600" fill="#e9d5ff">Pinned to London Region &bull; Zero Data Retention (ZDR) Legal Terms</text>
+
+    <!-- Cloud STT v2 -->
+    <g transform="translate(20, 58)">
+      <rect width="430" height="70" rx="8" fill="#2e1065" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="11" font-weight="700" fill="#f5f3ff">Google Cloud Speech-to-Text v2 (Chirp 2)</text>
+      <text x="14" y="38" font-size="9" fill="#d8b4fe">Receives ONLY Verified Redacted Audio (LINEAR16 WAV)</text>
+      <text x="14" y="52" font-size="8.5" fill="#4ade80">&bull; Second-pass high accuracy ASR &bull; All PII audio spans are muted silence</text>
+      <text x="14" y="64" font-size="8" fill="#e9d5ff">&bull; Scoped 15-min STS auth &bull; Zero persistent audio storage</text>
+    </g>
+
+    <!-- Vertex AI Gemini 1.5 -->
+    <g transform="translate(20, 140)">
+      <rect width="430" height="80" rx="8" fill="#2e1065" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="14" y="22" font-size="11" font-weight="700" fill="#f5f3ff">Google Cloud Vertex AI (Gemini 1.5 Enterprise)</text>
+      <text x="14" y="38" font-size="9" fill="#d8b4fe">Receives ONLY Surrogate-Tokenised Text ([CLIENT_NAME_1]...)</text>
+      <text x="14" y="54" font-size="8.5" fill="#f0abfc">&bull; Synthesises Casebook-formatted structured case note</text>
+      <text x="14" y="68" font-size="8.5" fill="#38bdf8">&bull; Zero data retained &bull; No prompt logging &bull; No model retraining</text>
+    </g>
+  </g>
+
+  <!-- ================= TB4 & Entra ID Isolation ================= -->
+  <!-- Entra ID Login Screen (Isolated) -->
+  <g transform="translate(780, 555)">
+    <rect width="225" height="215" rx="14" fill="url(#grad-ms)" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="16" y="26" font-size="11" font-weight="800" fill="#e2e8f0">Microsoft Entra ID</text>
+    <text x="16" y="42" font-size="8.5" font-weight="600" fill="#94a3b8">ORGANISATIONAL LOGIN ONLY</text>
+    <rect x="14" y="52" width="197" height="150" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="22" y="74" font-size="9" font-weight="700" fill="#f8fafc">&bull; Adviser SSO &amp; MFA Login</text>
+    <text x="22" y="92" font-size="8.5" fill="#cbd5e1">&bull; OIDC Authorization Code</text>
+    <text x="22" y="110" font-size="8.5" fill="#cbd5e1">&bull; Issues Scoped ID Token</text>
+    <text x="22" y="132" font-size="8.5" font-weight="700" fill="#f87171">&bull; ZERO Case Data Access</text>
+    <text x="22" y="150" font-size="8.5" font-weight="700" fill="#f87171">&bull; ZERO Audio Traversal</text>
+    <text x="22" y="168" font-size="8.5" font-weight="700" fill="#f87171">&bull; ZERO Note Processing</text>
+    <text x="22" y="188" font-size="8.5" fill="#34d399">&bull; Isolated to Login Screen</text>
+  </g>
+
+  <!-- TB4: Casebook CRM -->
+  <g transform="translate(1025, 555)">
+    <rect width="225" height="215" rx="14" fill="url(#grad-tb4)" stroke="#3b82f6" stroke-width="2"/>
+    <text x="16" y="26" font-size="11" font-weight="800" fill="#93c5fd">TRUST BOUNDARY 4</text>
+    <text x="16" y="42" font-size="8.5" font-weight="600" fill="#bfdbfe">National Casebook CRM</text>
+    <rect x="14" y="52" width="197" height="150" rx="6" fill="#1e293b" stroke="#2563eb" stroke-width="1"/>
+    <text x="22" y="74" font-size="9" font-weight="700" fill="#f8fafc">&bull; Citizens Advice CRM</text>
+    <text x="22" y="94" font-size="8.5" fill="#cbd5e1">&bull; Adviser pastes final note</text>
+    <text x="22" y="114" font-size="8.5" fill="#cbd5e1">&bull; Active human sign-off</text>
+    <text x="22" y="136" font-size="8.5" font-weight="700" fill="#60a5fa">&bull; Official Case Record</text>
+    <text x="22" y="156" font-size="8.5" fill="#34d399">&bull; National Retention Policy</text>
+    <text x="22" y="180" font-size="8" fill="#93c5fd">&bull; Clipboard wiped post-paste</text>
+  </g>
+
+  <!-- ================= FLOW CONNECTORS ================= -->
+  <!-- Audio to Browser -->
+  <path d="M 245 190 L 305 170" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <path d="M 245 295 L 305 180" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <path d="M 245 410 L 305 190" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+  <!-- Redacted Audio to GCP STT -->
+  <path d="M 735 530 C 765 530, 765 395, 800 395" stroke="#10b981" stroke-width="2.5" fill="none" marker-end="url(#arrow-emerald)"/>
+
+  <!-- Surrogate Text to Vertex AI -->
+  <path d="M 735 390 C 765 390, 765 480, 800 480" stroke="#c084fc" stroke-width="2.5" fill="none" marker-end="url(#arrow-purple)"/>
+
+  <!-- Draft Note Return: Vertex AI -> Browser Detokeniser -->
+  <path d="M 800 500 C 765 500, 765 605, 735 605" stroke="#38bdf8" stroke-width="2.5" fill="none" marker-end="url(#arrow-cyan)"/>
+
+  <!-- Final Copy: Browser -> Casebook CRM -->
+  <path d="M 735 615 C 850 615, 930 655, 1039 655" stroke="#60a5fa" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)"/>
+</svg>

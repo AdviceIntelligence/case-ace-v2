@@ -1,0 +1,42 @@
+{
+  "evaluationTimestamp": "2026-09-01T22:45:00.000Z",
+  "evaluatedDirectives": {
+    "default-src": {
+      "value": "'none'",
+      "status": "PASS",
+      "compliance": "Fail-closed default baseline enforced."
+    },
+    "script-src": {
+      "value": "'self' 'wasm-unsafe-eval'",
+      "status": "PASS",
+      "compliance": "Zero unsafe-inline; wasm-unsafe-eval scoped exclusively for on-device WASM model compilation."
+    },
+    "style-src": {
+      "value": "'self'",
+      "status": "PASS",
+      "compliance": "Self-hosted CSS only. Zero unsafe-inline. Zero external CDNs."
+    },
+    "font-src": {
+      "value": "'self' data:",
+      "status": "PASS",
+      "compliance": "Zero external font CDNs. System fonts utilized."
+    },
+    "connect-src": {
+      "value": "Restricted per environment allowlist",
+      "status": "PASS",
+      "compliance": "Strictly limited to self and europe-west2 GCP endpoints in pilot; zero wildcards."
+    },
+    "frame-ancestors": {
+      "value": "'none'",
+      "status": "PASS",
+      "compliance": "Prevents clickjacking."
+    },
+    "form-action": {
+      "value": "'none'",
+      "status": "PASS",
+      "compliance": "Disables form submissions."
+    }
+  },
+  "overallCspStatus": "PASS",
+  "assessor": "Case Ace Automated Control Engine"
+}
