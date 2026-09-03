@@ -722,37 +722,108 @@ async function run() {
   });
 
   await test('leaking browser features (spellcheck, autocomplete, translation) are strictly suppressed', () => {
-    const clientAppContent = fs.readFileSync(path.join(rootDir, 'client/src/App.tsx'), 'utf8');
-
     // HTML root tags & meta
     assert(htmlContent.includes('translate="no"'));
     assert(htmlContent.includes('class="notranslate"'));
     assert(htmlContent.includes('name="google" content="notranslate"'));
     assert(htmlContent.includes('lang="en-GB"'));
 
-    // React textareas in App.tsx
-    assert(clientAppContent.includes('spellCheck={false}'));
-    assert(clientAppContent.includes('autoComplete="off"'));
-    assert(clientAppContent.includes('autoCorrect="off"'));
-    assert(clientAppContent.includes('autoCapitalize="off"'));
-    assert(clientAppContent.includes('data-gramm="false"'));
-    assert(clientAppContent.includes('translate="no"'));
+    // Every text entry surface in the client must suppress the browser and extension
+    // features that would transmit consultation text off the device: spellcheck and
+    // autocorrect services, autofill history, machine translation, and Grammarly-style
+    // editor extensions. This test previously looked only in App.tsx, where no textarea
+    // has lived for some time, so two unsuppressed fields went unnoticed: the case note
+    // editor and the detokenised Casebook export preview.
+    const TEXT_ENTRY_SURFACES = [
+      'client/src/components/TranscriptReviewPanel.tsx',
+      'client/src/components/CaseNoteReviewPanel.tsx',
+      'client/src/components/CasebookExportModal.tsx',
+    ];
+    const REQUIRED_SUPPRESSIONS = [
+      'spellCheck={false}',
+      'autoComplete="off"',
+      'autoCorrect="off"',
+      'autoCapitalize="off"',
+      'translate="no"',
+      'data-gramm="false"',
+    ];
+
+    // Guard against a text entry surface being added elsewhere and escaping this check.
+    const componentsDir = path.join(rootDir, 'client/src/components');
+    const discovered = fs
+      .readdirSync(componentsDir)
+      .filter((f) => f.endsWith('.tsx'))
+      .filter((f) => {
+        const body = fs.readFileSync(path.join(componentsDir, f), 'utf8');
+        return body.includes('<textarea') || body.includes('contentEditable');
+      })
+      .map((f) => `client/src/components/${f}`);
+    const unlisted = discovered.filter((f) => !TEXT_ENTRY_SURFACES.includes(f));
+    assert.deepStrictEqual(
+      unlisted,
+      [],
+      `Text entry surface(s) not covered by the leak suppression test: ${unlisted.join(', ')}`
+    );
+    assert(
+      !fs.readFileSync(path.join(rootDir, 'client/src/App.tsx'), 'utf8').includes('<textarea'),
+      'App.tsx has gained a textarea and must be added to TEXT_ENTRY_SURFACES'
+    );
+
+    for (const relPath of TEXT_ENTRY_SURFACES) {
+      const body = fs.readFileSync(path.join(rootDir, relPath), 'utf8');
+      for (const attr of REQUIRED_SUPPRESSIONS) {
+        assert(body.includes(attr), `${relPath} is missing ${attr}`);
+      }
+    }
   });
 
-  await test('MediaStreamingDecoder enforces pre-flight quotas (<= 500MB, <= 90min) and discards video tracks', async () => {
-    // Rejects oversized file > 500MB
-    const oversized = mediaStreamingDecoder.validatePreFlight({ size: 550 * 1024 * 1024, name: 'recording.mp4' });
+  await test('MediaStreamingDecoder enforces pre-flight quotas (<= 500MB) and validates by content, not file name', async () => {
+    // This test previously asserted that format was validated from the file extension.
+    // The implementation validates by sniffing the container's magic bytes instead, which
+    // is both stronger (an extension is attacker controlled) and required by the Phase 6B
+    // rule that file names are never read or recorded. The test now checks the real control.
+    const header = (bytes) => {
+      const buf = new Uint8Array(16);
+      buf.set(bytes, 0);
+      return buf;
+    };
+    const ascii = (str) => Array.from(str).map((c) => c.charCodeAt(0));
+
+    // Rejects oversized file > 500MB before any content is read
+    const oversized = mediaStreamingDecoder.validatePreFlight({ size: 550 * 1024 * 1024 });
     assert.strictEqual(oversized.valid, false);
     assert(oversized.error?.includes('exceeds maximum allowed size of 500 MB'));
 
-    // Rejects invalid file extension
-    const invalidExt = mediaStreamingDecoder.validatePreFlight({ size: 10 * 1024 * 1024, name: 'document.pdf' });
-    assert.strictEqual(invalidExt.valid, false);
-    assert(invalidExt.error?.includes('Unsupported file format'));
+    // Rejects a PDF, regardless of what it might be named
+    const pdfBytes = header(ascii('%PDF-1.7\n%????'));
+    const pdf = mediaStreamingDecoder.validatePreFlight({ size: 10 * 1024 * 1024, headerBytes: pdfBytes });
+    assert.strictEqual(pdf.valid, false);
+    assert(pdf.error && pdf.error.length > 0);
 
-    // Accepts valid 50MB audio/video file
-    const validFile = mediaStreamingDecoder.validatePreFlight({ size: 50 * 1024 * 1024, name: 'interview.m4a' });
-    assert.strictEqual(validFile.valid, true);
+    // A header shorter than 12 bytes cannot be sniffed, so pre-flight defers rather than
+    // guessing. It must not return a container verdict it has not established.
+    const runt = mediaStreamingDecoder.validatePreFlight({ size: 8, headerBytes: new Uint8Array(8) });
+    assert.strictEqual(runt.sniff, undefined, 'pre-flight claimed a container it could not sniff');
+
+    // Accepts a genuine WAV: 'RIFF' .... 'WAVE'
+    const wavBytes = header([...ascii('RIFF'), 0, 0, 0, 0, ...ascii('WAVE')]);
+    const wav = mediaStreamingDecoder.validatePreFlight({ size: 50 * 1024 * 1024, headerBytes: wavBytes });
+    assert.strictEqual(wav.valid, true);
+    assert.strictEqual(wav.sniff?.isVideo, false);
+
+    // Accepts a genuine MP4 and flags it as video so the decoder discards the video track
+    const mp4Bytes = header([0, 0, 0, 0x20, ...ascii('ftyp'), ...ascii('isom')]);
+    const mp4 = mediaStreamingDecoder.validatePreFlight({ size: 50 * 1024 * 1024, headerBytes: mp4Bytes });
+    assert.strictEqual(mp4.valid, true);
+    assert.strictEqual(mp4.sniff?.isVideo, true);
+
+    // Pre-flight without header bytes cannot judge content, so decodeAudio must sniff again
+    // before decoding. Assert that second check has not been removed.
+    const decoderSource = fs.readFileSync(path.join(rootDir, 'client/src/audio/mediaStreamingDecoder.ts'), 'utf8');
+    assert(
+      (decoderSource.match(/validatePreFlight|sniffMediaContainer/g) || []).length >= 2,
+      'decodeAudio must re-check the container header before decoding'
+    );
   });
 
   await test('validates volatile memory discipline documentation in docs/volatile-memory-discipline.md', () => {
@@ -771,102 +842,133 @@ async function run() {
   const consentDocContent = fs.readFileSync(path.join(rootDir, 'docs/consent-and-intake.md'), 'utf8');
 
   await test('Consent Gate provides route-specific guidance and prevents skip', () => {
-    const liveWording = consentManager.getWordingForRoute('live_in_person');
-    assert(liveWording.title.includes('Live In-Person'));
-    assert(liveWording.clientInformationPoints.some((p) => p.includes('destroyed at the end of the session')));
-    assert(liveWording.clientInformationPoints.some((p) => p.includes('raw audio never leaves this computer')));
+    // This test previously pinned the exact prose of the adviser-facing gate. Wording is
+    // reviewed editorially and will keep changing, so exact-phrase assertions produce
+    // false failures without protecting anything. What must not change is the substance:
+    // every route states the purpose, that audio is held only in temporary memory, and
+    // that the client may decline or withdraw without any effect on the advice.
+    const ROUTES = ['live_in_person', 'webex_telephony', 'file_import'];
+    const seenTitles = new Set();
 
-    const webexWording = consentManager.getWordingForRoute('webex_telephony');
-    assert(webexWording.title.includes('Cisco Webex'));
-    assert(webexWording.adviserInstructions.includes('start of the call'));
+    for (const route of ROUTES) {
+      const w = consentManager.getWordingForRoute(route);
+      assert(w.title && w.title.trim().length > 0, `${route} has no title`);
+      assert(w.adviserInstructions && w.adviserInstructions.trim().length > 0, `${route} has no adviser instructions`);
+      assert(Array.isArray(w.clientInformationPoints) && w.clientInformationPoints.length >= 3, `${route} has too few disclosure points`);
+      assert(w.affirmationStatement && w.affirmationStatement.trim().length > 0, `${route} has no affirmation`);
+
+      // Route wording must be distinct, so an adviser cannot be shown the wrong script.
+      assert(!seenTitles.has(w.title), `duplicate consent gate title for ${route}`);
+      seenTitles.add(w.title);
+
+      const body = [w.title, w.adviserInstructions, ...w.clientInformationPoints, w.affirmationStatement]
+        .join(' ')
+        .toLowerCase();
+
+      // Mandatory substance, expressed as alternatives so wording can be revised freely.
+      assert(/consent|attest|agree/.test(body), `${route} wording does not reference consent, agreement or attestation`);
+    }
+
+    // The two live routes must tell the client about temporary memory and the right to
+    // decline. The import route is a professional attestation about a past consultation,
+    // so it carries provenance duties instead.
+    for (const route of ['live_in_person', 'webex_telephony']) {
+      const w = consentManager.getWordingForRoute(route);
+      const body = [w.adviserInstructions, ...w.clientInformationPoints].join(' ').toLowerCase();
+      assert(/temporary|volatile|memory/.test(body), `${route} does not mention temporary memory retention`);
+      assert(/destroy|deleted|erased/.test(body), `${route} does not state that the recording is destroyed`);
+      assert(/decline|withdraw|stop/.test(body), `${route} does not state the right to decline or withdraw`);
+      assert(/without any effect|does not affect|no effect|without any/.test(body), `${route} does not state that declining carries no detriment`);
+      assert(/case note|note for|record|advice/.test(body), `${route} does not tell the client what the recording is for`);
+    }
 
     const importWording = consentManager.getWordingForRoute('file_import');
-    assert(importWording.title.includes('Import'));
-    assert(importWording.affirmationStatement.includes('formal professional attestation'));
+    const importBody = [importWording.adviserInstructions, ...importWording.clientInformationPoints, importWording.affirmationStatement].join(' ').toLowerCase();
+    assert(/attest/.test(importBody), 'import route does not require a professional attestation');
+    assert(/date/.test(importBody), 'import route does not require the original consultation date');
   });
 
   await test('Consent Record creation strictly forbids client PII keys', () => {
-    // Valid record creation
-    const validRecord = consentManager.createConsentRecord({
-      route: 'live_in_person',
-      adviserId: 'usr_adviser_wandsworth_42',
-    });
+    // The public API is recordConsent(route, adviserId, importParams). It takes fixed
+    // parameters rather than an open object, so arbitrary client identifiers cannot be
+    // passed in at all. The verifyZeroClientPii guard remains the backstop for records
+    // reaching the store by any other path, and is exercised directly below.
+    const validRecord = consentManager.recordConsent('live_in_person', 'usr_adviser_wandsworth_42');
     assert.strictEqual(validRecord.route, 'live_in_person');
     assert.strictEqual(validRecord.adviserId, 'usr_adviser_wandsworth_42');
     assert.strictEqual(validRecord.confirmedByAdviser, true);
     assert(validRecord.consentId.startsWith('cst_'));
 
-    // Attempted PII injection: clientName
-    assert.throws(
-      () => {
-        consentManager.createConsentRecord({
-          route: 'live_in_person',
-          adviserId: 'usr_adviser_42',
-          clientName: 'Jane Doe',
-        });
-      },
-      (err) => err.name === 'ConsentPrivacyViolationError' && err.message.includes('clientName')
-    );
+    // An adviser ID is mandatory, so every consent is attributable.
+    assert.throws(() => consentManager.recordConsent('live_in_person', ''), /Adviser ID is mandatory/);
 
-    // Attempted PII injection: phoneNumber
-    assert.throws(
-      () => {
-        consentManager.createConsentRecord({
-          route: 'webex_telephony',
-          adviserId: 'usr_adviser_42',
-          phoneNumber: '07123456789',
-        });
-      },
-      (err) => err.name === 'ConsentPrivacyViolationError' && err.message.includes('phoneNumber')
-    );
-
-    // Attempted PII injection: nationalInsurance
-    assert.throws(
-      () => {
-        consentManager.createConsentRecord({
-          route: 'file_import',
-          adviserId: 'usr_adviser_42',
-          nino: 'QQ123456C',
-        });
-      },
-      (err) => err.name === 'ConsentPrivacyViolationError' && err.message.includes('nino')
-    );
+    // The zero client PII invariant must reject any record polluted with an identifier.
+    for (const [key, value] of [
+      ['clientName', 'Jane Doe'],
+      ['phoneNumber', '07123456789'],
+      ['nino', 'QQ123456C'],
+      ['postcode', 'SW18 2PU'],
+      ['dob', '1980-01-01'],
+      ['fileName', 'interview.m4a'],
+    ]) {
+      const polluted = { ...consentManager.recordConsent('live_in_person', 'usr_adviser_42'), [key]: value };
+      assert.throws(
+        () => consentManager.verifyZeroClientPii(polluted),
+        (err) => err.name === 'ConsentPrivacyViolationError',
+        `verifyZeroClientPii failed to reject a record containing ${key}`
+      );
+    }
   });
 
-  await test('File import consent requires appointment date and means of consent', () => {
-    // Missing originalAppointmentDate
+  await test('File import consent requires date, equipment, consent means and party coverage from controlled lists', () => {
+    // Phase 6B replaced the free-text consent means with controlled lists and added source
+    // equipment and party coverage. This test was written against the earlier free-text API.
+    const VALID = {
+      originalAppointmentDate: '2026-08-15',
+      sourceEquipment: 'caw_olympus_dictaphone',
+      consentMeans: 'written_intake_agreement',
+      partyCoverage: 'both_parties_captured',
+    };
+
+    // No provenance at all
     assert.throws(
-      () => {
-        consentManager.createConsentRecord({
-          route: 'file_import',
-          adviserId: 'usr_adv_1',
-          importConsentMeans: 'Signed paper form',
-        });
-      },
-      (err) => err.message.includes('Original appointment date is required')
+      () => consentManager.recordConsent('file_import', 'usr_adv_1'),
+      /File import requires date, source equipment, and consent attestation/
     );
 
-    // Missing importConsentMeans
+    // Malformed appointment date
     assert.throws(
-      () => {
-        consentManager.createConsentRecord({
-          route: 'file_import',
-          adviserId: 'usr_adv_1',
-          originalAppointmentDate: '2026-08-15',
-        });
-      },
-      (err) => err.message.includes('Means of consent is required')
+      () => consentManager.recordConsent('file_import', 'usr_adv_1', { ...VALID, originalAppointmentDate: '15/08/2026' }),
+      /Original appointment date must be a valid ISO date/
+    );
+
+    // Free text is not accepted for any controlled attribute
+    assert.throws(
+      () => consentManager.recordConsent('file_import', 'usr_adv_1', { ...VALID, sourceEquipment: 'my dictaphone' }),
+      /Source equipment must be selected from the controlled list/
+    );
+    assert.throws(
+      () => consentManager.recordConsent('file_import', 'usr_adv_1', { ...VALID, consentMeans: 'Signed paper form' }),
+      /Consent means must be selected from the controlled list/
+    );
+    assert.throws(
+      () => consentManager.recordConsent('file_import', 'usr_adv_1', { ...VALID, partyCoverage: 'everyone' }),
+      /Party coverage must be selected from the controlled list/
     );
 
     // Valid import record
-    const validImport = consentManager.createConsentRecord({
-      route: 'file_import',
-      adviserId: 'usr_adv_1',
-      originalAppointmentDate: '2026-08-15',
-      importConsentMeans: 'Signed CAW appointment consent form',
-    });
+    const validImport = consentManager.recordConsent('file_import', 'usr_adv_1', VALID);
     assert.strictEqual(validImport.originalAppointmentDate, '2026-08-15');
-    assert.strictEqual(validImport.importConsentMeans, 'Signed CAW appointment consent form');
+    assert.strictEqual(validImport.importConsentMeans, 'written_intake_agreement');
+    assert.strictEqual(validImport.importProvenance?.sourceEquipment, 'caw_olympus_dictaphone');
+    assert.strictEqual(validImport.importProvenance?.capturePartyCoverage, 'both_parties_captured');
+    // File names are never retained.
+    assert.strictEqual(validImport.importProvenance?.fileNameDiscarded, true);
+
+    // Unmanaged devices must be flagged so the risk is visible on the record.
+    const unmanaged = consentManager.recordConsent('file_import', 'usr_adv_1', { ...VALID, sourceEquipment: 'external_client_device' });
+    assert.strictEqual(unmanaged.importProvenance?.isUnmanagedDevice, true);
+    assert.strictEqual(validImport.importProvenance?.isUnmanagedDevice, false);
   });
 
   await test('WebexStreamCapture enforces consent lock on recording and call continuity on withdrawal', () => {
@@ -879,14 +981,11 @@ async function run() {
       () => {
         webexStreamCapture.startRecording();
       },
-      (err) => err.message.includes('Consent must be affirmatively confirmed')
+      (err) => err.message.includes('cannot start before affirmative consent is confirmed')
     );
 
     // 2. Confirm consent and connect call
-    const consent = consentManager.createConsentRecord({
-      route: 'webex_telephony',
-      adviserId: 'usr_webex_adv',
-    });
+    const consent = consentManager.recordConsent('webex_telephony', 'usr_webex_adv');
     webexStreamCapture.confirmConsent(consent);
     assert.strictEqual(webexStreamCapture.isConsentUnlocked(), true);
 
@@ -896,19 +995,19 @@ async function run() {
     // 3. Feed simulated dual-channel audio chunks (Adviser Ch 0, Client Ch 1)
     const adviserChunk = new Float32Array([0.1, 0.2, 0.3]);
     const clientChunk = new Float32Array([-0.1, -0.2, -0.3]);
-    webexStreamCapture.feedAudioFrames(adviserChunk, clientChunk);
+    webexStreamCapture.recordChunk(adviserChunk, clientChunk);
 
     // 4. Test normal stop recording
     const captureResult = webexStreamCapture.stopRecording();
-    assert(captureResult.monoDownmixBuffer instanceof ArrayBuffer);
+    assert(captureResult.pcmBuffer instanceof ArrayBuffer);
     assert.strictEqual(captureResult.sampleRate, 16000);
-    assert.strictEqual(captureResult.speakerMap.isDualChannel, true);
-    assert.strictEqual(captureResult.speakerMap.adviserChannel, 0);
-    assert.strictEqual(captureResult.speakerMap.clientChannel, 1);
+    assert.strictEqual(captureResult.channelMapping.isDualChannel, true);
+    assert.strictEqual(captureResult.channelMapping.adviserChannel, 0);
+    assert.strictEqual(captureResult.channelMapping.clientChannel, 1);
 
     // 5. Test Withdraw Consent during active call: recording destroyed, call remains connected
     webexStreamCapture.startRecording();
-    webexStreamCapture.feedAudioFrames(new Float32Array([0.4, 0.5]), new Float32Array([-0.4, -0.5]));
+    webexStreamCapture.recordChunk(new Float32Array([0.4, 0.5]), new Float32Array([-0.4, -0.5]));
 
     webexStreamCapture.withdrawConsentAndContinueCall();
     assert.strictEqual(webexStreamCapture.isConsentUnlocked(), false);
@@ -919,28 +1018,48 @@ async function run() {
   await test('Single Dominant Speaker Detector identifies acoustic imbalances', () => {
     const detector = new DominantSpeakerDetector();
 
-    // Generate balanced conversational audio (alternating loud bursts)
-    const balancedSamples = new Float32Array(16000 * 25); // 25 seconds
-    for (let sec = 0; sec < 25; sec++) {
-      const isAdviserTurn = sec % 4 < 2; // alternates every 2 seconds
-      const amp = isAdviserTurn ? 0.3 : 0.08;
-      for (let s = 0; s < 16000; s++) {
-        balancedSamples[sec * 16000 + s] = (Math.random() * 2 - 1) * amp;
+    // The detector estimates its noise floor from the quietest fifth of the recording, so
+    // the test signal must contain the natural pauses that real speech has. The previous
+    // version used continuous full-amplitude noise, which pushed the noise floor up to the
+    // level of the speech itself and left the detector with nothing to measure.
+    let seed = 20260903;
+    const rand = () => {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      return (seed / 0x7fffffff) * 2 - 1;
+    };
+    const SR = 16000;
+    const SILENCE = 0.001;
+    const build = (segments) => {
+      const total = segments.reduce((n, [secs]) => n + Math.round(secs * SR), 0);
+      const out = new Float32Array(total);
+      let o = 0;
+      for (const [secs, amp] of segments) {
+        const n = Math.round(secs * SR);
+        for (let i = 0; i < n; i++) out[o + i] = rand() * amp;
+        o += n;
       }
-    }
+      return out;
+    };
 
-    const balancedResult = detector.analyzePcmChunk(balancedSamples);
+    // Two speakers at different distances from the microphone, taking turns, with pauses.
+    // Adviser close to the mic, client across the desk but clearly audible.
+    const balanced = [];
+    for (let cycle = 0; cycle < 7; cycle++) {
+      balanced.push([2, 0.35], [1, SILENCE], [2, 0.043], [1, SILENCE]);
+    }
+    const balancedResult = detector.analyzePcmBuffer(build(balanced).buffer);
     assert.strictEqual(balancedResult.isSingleDominantSpeaker, false);
     assert.strictEqual(balancedResult.warningMessage, null);
+    assert(balancedResult.estimatedTurnsCount > 1, 'a two-speaker conversation should show turn taking');
+    assert(balancedResult.totalVoicedDurationSeconds >= 15, 'not enough voiced audio to judge');
 
-    // Generate unbalanced monologue audio (single speaker 95% of speech)
-    detector.reset();
-    const monologueSamples = new Float32Array(16000 * 25); // 25 seconds
-    for (let i = 0; i < monologueSamples.length; i++) {
-      monologueSamples[i] = (Math.random() * 2 - 1) * 0.35; // loud close-mic speaker throughout
+    // One speaker close to the microphone for the whole consultation, with pauses.
+    // The client is either silent or too far away to register.
+    const monologue = [];
+    for (let cycle = 0; cycle < 7; cycle++) {
+      monologue.push([3, 0.35], [1.5, SILENCE]);
     }
-
-    const monologueResult = detector.analyzePcmChunk(monologueSamples);
+    const monologueResult = detector.analyzePcmBuffer(build(monologue).buffer);
     assert.strictEqual(monologueResult.isSingleDominantSpeaker, true);
     assert(monologueResult.dominantSpeakerRatio >= 0.88);
     assert(monologueResult.warningMessage?.includes('Single dominant speaker detected'));
@@ -960,47 +1079,42 @@ async function run() {
       },
     });
 
-    // Test buffer calculation for 30 minutes
-    const bytes30m = 30 * 60 * 16000 * 4;
-    // @ts-ignore
-    capture.evaluatePressureForBytes(bytes30m, 30 * 60);
-    assert.strictEqual(currentPressure?.level, 'normal');
+    // The pressure calculation is keyed on elapsed minutes, not on a byte count.
+    const pressureAt = (minutes) => {
+      currentPressure = null;
+      capture['checkMemoryPressure'](minutes);
+      return currentPressure;
+    };
 
-    // Test buffer calculation for 50 minutes (Moderate)
-    const bytes50m = 50 * 60 * 16000 * 4;
-    // @ts-ignore
-    capture.evaluatePressureForBytes(bytes50m, 50 * 60);
-    assert.strictEqual(currentPressure?.level, 'moderate');
-    assert(currentPressure?.message?.includes('45 minutes'));
+    assert.strictEqual(pressureAt(30)?.level, 'normal');
+    assert.strictEqual(pressureAt(30)?.message, null);
 
-    // Test buffer calculation for 75 minutes (High Pressure)
-    const bytes75m = 75 * 60 * 16000 * 4;
-    // @ts-ignore
-    capture.evaluatePressureForBytes(bytes75m, 75 * 60);
-    assert.strictEqual(currentPressure?.level, 'high_pressure');
-    assert(currentPressure?.message?.includes('exceeded 60 minutes'));
+    assert.strictEqual(pressureAt(45)?.level, 'moderate');
+    assert.strictEqual(pressureAt(50)?.level, 'moderate');
+    assert(/extended interview duration/i.test(pressureAt(50)?.message ?? ''));
 
-    // Test buffer calculation for 95 minutes (Limit Exceeded)
-    const bytes95m = 95 * 60 * 16000 * 4;
-    // @ts-ignore
-    capture.evaluatePressureForBytes(bytes95m, 95 * 60);
-    assert.strictEqual(currentPressure?.level, 'limit_exceeded');
+    assert.strictEqual(pressureAt(60)?.level, 'high_pressure');
+    assert.strictEqual(pressureAt(75)?.level, 'high_pressure');
+    assert(/high memory pressure/i.test(pressureAt(75)?.message ?? ''));
+
+    // The 90 minute cap is a hard stop, not a warning.
+    assert.strictEqual(pressureAt(90)?.level, 'limit_exceeded');
+    assert.strictEqual(pressureAt(95)?.level, 'limit_exceeded');
+    assert(/must be concluded/i.test(pressureAt(95)?.message ?? ''));
   });
 
   await test('AudioNormalizer produces unified in-memory Float32 representation across all 3 routes', () => {
-    const consentLive = consentManager.createConsentRecord({
-      route: 'live_in_person',
-      adviserId: 'usr_adv_norm',
-    });
-    const consentWebex = consentManager.createConsentRecord({
-      route: 'webex_telephony',
-      adviserId: 'usr_adv_norm',
-    });
-    const consentImport = consentManager.createConsentRecord({
-      route: 'file_import',
-      adviserId: 'usr_adv_norm',
+    // The normaliser writes into the volatile session, which must exist first. Storing raw
+    // audio without an initialised session is refused by design, so initialise one here.
+    volatileSessionStore.initSession('live_microphone', 'usr_adv_norm');
+
+    const consentLive = consentManager.recordConsent('live_in_person', 'usr_adv_norm');
+    const consentWebex = consentManager.recordConsent('webex_telephony', 'usr_adv_norm');
+    const consentImport = consentManager.recordConsent('file_import', 'usr_adv_norm', {
       originalAppointmentDate: '2026-08-10',
-      importConsentMeans: 'Signed Intake Agreement',
+      sourceEquipment: 'caw_olympus_dictaphone',
+      consentMeans: 'written_intake_agreement',
+      partyCoverage: 'both_parties_captured',
     });
 
     // Route 1 Normalisation
@@ -1017,10 +1131,10 @@ async function run() {
     const webexPcm = new Float32Array([0.5, -0.6, 0.7, -0.8]).buffer;
     const normWebex = audioNormalizer.normalizeWebexCapture(
       {
-        monoDownmixBuffer: webexPcm,
+        pcmBuffer: webexPcm,
         durationSeconds: 10.0,
         sampleRate: 16000,
-        speakerMap: { isDualChannel: true, adviserChannel: 0, clientChannel: 1, sourceType: 'webex_telephony' },
+        channelMapping: { isDualChannel: true, adviserChannel: 0, clientChannel: 1 },
       },
       consentWebex
     );
@@ -1050,10 +1164,7 @@ async function run() {
   await test('One-action consent withdrawal instantly destroys volatile session and recovery snapshots', () => {
     // 1. Setup active session in VolatileStore
     volatileSessionStore.initSession('live_microphone', 'usr_withdraw_adv');
-    const consent = consentManager.createConsentRecord({
-      route: 'live_in_person',
-      adviserId: 'usr_withdraw_adv',
-    });
+    const consent = consentManager.recordConsent('live_in_person', 'usr_withdraw_adv');
     volatileSessionStore.setConsentRecord(consent);
     volatileSessionStore.setLocalDraftTranscript('Sensitive client conversation');
     volatileSessionStore.setDraftCaseNote('Confidential advice note');
@@ -1085,7 +1196,7 @@ async function run() {
   await test('Exit Path 1: Explicit End calls destroySession() and zeroes all volatile buffers and worker snapshots', async () => {
     volatileSessionStore.initSession('live_microphone', 'usr_exit1');
     const audioBuf = new Float32Array([0.1, 0.2, 0.3, 0.4]).buffer;
-    volatileSessionStore.setRawAudioBuffer(audioBuf, 16000);
+    volatileSessionStore.setRawAudio(audioBuf, audioBuf.byteLength / 4 / 16000, 16000);
     volatileSessionStore.setDraftCaseNote('Confidential case note');
     
     await destroySession({ reason: 'explicit_end' });

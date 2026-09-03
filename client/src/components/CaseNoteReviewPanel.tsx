@@ -446,6 +446,15 @@ export const CaseNoteReviewPanel: React.FC<CaseNoteReviewPanelProps> = ({
             value={noteContent}
             onChange={handleContentChange}
             rows={18}
+            spellCheck={false}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            translate="no"
+            className="notranslate"
+            data-gramm="false"
+            data-gramm_editor="false"
+            data-enable-grammarly="false"
             style={{
               width: '100%',
               padding: '0.875rem',

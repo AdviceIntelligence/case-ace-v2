@@ -171,6 +171,15 @@ export const CasebookExportModal: React.FC<CasebookExportModalProps> = ({
             readOnly
             value={casebookNote}
             rows={14}
+            spellCheck={false}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            translate="no"
+            className="notranslate"
+            data-gramm="false"
+            data-gramm_editor="false"
+            data-enable-grammarly="false"
             style={{
               width: '100%',
               padding: '0.875rem',

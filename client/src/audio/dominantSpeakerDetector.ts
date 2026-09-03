@@ -110,9 +110,12 @@ export class DominantSpeakerDetector {
           estimatedTurns++;
         }
         lastVoiceTier = currentTier;
-      } else {
-        lastVoiceTier = 'none';
       }
+      // A pause deliberately does NOT reset the tier. Previously an unvoiced frame set the
+      // tier back to 'none', so a change of speaker across a natural pause was never counted
+      // as a turn. Since people pause when they hand over, a normal two-way consultation
+      // scored zero turns, and the "turns <= 1 over 20s of speech" branch below then flagged
+      // it as a single dominant speaker. That produced a warning on ordinary interviews.
     }
 
     const voicedDurationSeconds = (voicedEnergies.length * this.frameDurationMs) / 1000;
