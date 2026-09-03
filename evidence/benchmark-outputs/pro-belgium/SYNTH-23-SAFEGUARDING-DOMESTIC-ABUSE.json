@@ -1,0 +1,117 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated that her ex-partner, [EX_PARTNER_NAME], attacked her with a knife on the previous night. Client reported that he threatened to kill her and her 4-year-old son, [CHILD_1_FORENAME]. Client also stated that he took her front door keys and is currently waiting outside the location of the interview.",
+    "relevantBackground": "Not established during this interview.",
+    "relevantDocuments": "No documents were mentioned or seen during this interview.",
+    "emergencyOrRisk": "Yes, there is an immediate and high risk of harm. Client reports her ex-partner, who has allegedly assaulted her with a knife and made death threats, is waiting outside. This constitutes a severe and immediate threat to the life and safety of the client and her child.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Yes, there is a significant and immediate safeguarding concern for both the client, [CLIENT_FORENAME], and her 4-year-old son, [CHILD_1_FORENAME], due to severe domestic violence, death threats, and the perpetrator's immediate proximity."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not explicitly stated, but the immediate and implicit goal is to secure safety for herself and her son from her ex-partner.",
+    "immediatePriority": "Immediate safety from the perpetrator, [EX_PARTNER_NAME], who is reportedly waiting outside.",
+    "outcomeAchievableDiscussion": "Not discussed during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview. The immediate purpose is to address the emergency safeguarding situation."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], DOB [DOB].",
+    "partner": "Client's ex-partner is [EX_PARTNER_NAME], who is the alleged perpetrator and does not live with the client.",
+    "childrenDependants": "Client has one 4-year-old son, [CHILD_1_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Client is the parent of a 4-year-old child.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client lives at [ADDRESS_LINE_1], [POSTCODE]. The tenure and suitability of this accommodation following the incident were not established."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "All financial information is required for a full assessment but was not gathered due to the immediate emergency."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "No research was undertaken during this brief initial contact.",
+    "researchConfirmed": "No research was undertaken during this brief initial contact.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "No advice was given. The interview focused on establishing the immediate risk and safety status of the client."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Immediate threat: Perpetrator is reportedly outside the premises now."
+    ],
+    "applicableTimeLimit": "Not applicable in the context of legal deadlines; this is an immediate safety issue.",
+    "finalDateForAction": "Immediate action is required.",
+    "clientAdvisedOfDeadline": "Not applicable.",
+    "urgentActionRequired": "Yes, urgent action is required to ensure the physical safety of the client and her child from the perpetrator."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client was whispering, indicating high levels of fear and distress. Her ability to take action independently is likely severely compromised by the immediate trauma and threat.",
+    "vulnerabilitySupportNeeds": "Client is extremely vulnerable as a victim of a recent, violent assault (attack with a knife) and is under immediate threat from the perpetrator. She has a young child who is also at risk. This is a high-risk domestic violence situation.",
+    "effectOnAbility": "The client's state of fear and distress likely impacts her ability to process information and make decisions.",
+    "reasonableAdjustments": "The adviser confirmed the client was in a safe place before proceeding. The client was whispering, requiring the adviser to listen carefully.",
+    "practicalAssistanceRequired": "Not established, but likely to require significant practical assistance with safety planning, housing, and police liaison.",
+    "clientAccess": "Client's contact number is [PHONE_NUMBER].",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "None identified.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser confirmed with the client that she was in a safe place at the time of the call."
+    ],
+    "outcomeOfActionTaken": "Client's immediate location was confirmed to be safe.",
+    "documentsProducedSent": "No documents were produced or sent.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "All issues are outstanding. The immediate priority for any next contact is to implement a safety plan, liaise with the police, and secure safe accommodation."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "No information on whether the police have been contacted or are aware of the incident.",
+    "No information on the client's housing tenure (e.g., owner, tenant).",
+    "No information on the client's financial situation (income, benefits, savings).",
+    "No details about the client's support network (family, friends).",
+    "No information regarding any past incidents of domestic violence.",
+    "No information on any court orders or injunctions that may be in place.",
+    "Client's goals beyond immediate safety were not established.",
+    "No options were discussed or advice given due to the emergency nature of the disclosure.",
+    "Permission to share information with other agencies was not obtained."
+  ],
+  "attributions": [],
+  "formattedMarkdown": "### PRESENTING ISSUE\n**As explained by the client:** Client stated that her ex-partner, [EX_PARTNER_NAME], attacked her with a knife on the previous night. Client reported that he threatened to kill her and her 4-year-old son, [CHILD_1_FORENAME]. Client also stated that he took her front door keys and is currently waiting outside the location of the interview.\n\n**Emergency/Risk:** Yes, there is an immediate and high risk of harm. Client reports her ex-partner, who has allegedly assaulted her with a knife and made death threats, is waiting outside. This constitutes a severe and immediate threat to the life and safety of the client and her child.\n\n**Safeguarding Concern:** Yes, there is a significant and immediate safeguarding concern for both the client, [CLIENT_FORENAME], and her 4-year-old son, [CHILD_1_FORENAME], due to severe domestic violence, death threats, and the perpetrator's immediate proximity.\n\n### CLIENT GOALS\n**Immediate Priority:** Immediate safety from the perpetrator, [EX_PARTNER_NAME], who is reportedly waiting outside.\n\n### HOUSEHOLD MAKE UP\n**Client:** [CLIENT_FORENAME] (DOB: [DOB])\n**Children/Dependants:** One 4-year-old son, [CHILD_1_FORENAME].\n**Other:** Client's ex-partner is [EX_PARTNER_NAME], who is the alleged perpetrator.\n**Current Accommodation:** Client lives at [ADDRESS_LINE_1], [POSTCODE].\n\n### INCOME / FINANCES (INCL. BENEFITS)\n*Not established during this interview due to the immediate emergency.*\n\n### OPTIONS DISCUSSED\nNo options were discussed during this brief initial contact, which focused on the immediate emergency.\n\n### DEADLINES / KEY DATES\n- **Immediate Threat:** Perpetrator is reportedly outside the premises now. Urgent action is required.\n\n### SUPPORT NEEDS / VULNERABILITY\nClient is extremely vulnerable as a victim of a recent, violent assault (attack with a knife) and is under immediate threat. She was whispering, indicating high levels of fear and distress. Her ability to take action independently is likely severely compromised. This is a high-risk domestic violence situation involving a child.\n\n### ACTION TAKEN\n- Adviser confirmed with the client that she was in a safe place at the time of the call.\n\n### NEXT STEPS (CLIENT)\n*Not established during this interview.*\n\n### NEXT STEPS (ADVISER)\n*Not established during this interview. Immediate safeguarding actions are required.*\n\n### ONWARD REFERRALS / SIGNPOSTING\n*Not established during this interview.*\n\n### GAPS AND LIMITATIONS\n- Police involvement status is unknown.\n- Client's housing tenure and financial situation were not established.\n- Client's wider support network is unknown.\n- History of domestic violence was not explored.\n- No advice was given due to the emergency nature of the disclosure."
+}

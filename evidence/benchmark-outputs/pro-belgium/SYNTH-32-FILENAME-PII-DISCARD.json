@@ -1,0 +1,169 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client, [CLIENT_FORENAME], stated they have brought a recording of a phone call with the DWP. (Attribution ID: 1)",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Client stated they have a recording of a DWP phone call. (Attribution ID: 2)",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview",
+    "immediatePriority": "Not established during this interview",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO]. (Attribution ID: 3)",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1] [POSTCODE]. (Attribution ID: 4)"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "This was an initial consultation to establish the client's issue; no advice was provided as the full circumstances were not explored."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Client's phone number is [PHONE_NUMBER]. (Attribution ID: 5)",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser recorded client's personal details: Name [CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address [ADDRESS_LINE_1] [POSTCODE], Phone [PHONE_NUMBER]. (Attribution ID: 6)"
+    ],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "The specific nature of the presenting issue with the DWP was not established.",
+    "Client's goals and desired outcomes were not established.",
+    "Full household composition was not established.",
+    "Details of income, benefits, finances, and any debts were not established.",
+    "Any relevant deadlines or key dates were not established.",
+    "Client's support needs or vulnerabilities were not established.",
+    "No advice was given or options discussed as the interview did not progress beyond initial introductions.",
+    "Agreed next steps for both client and adviser were not established."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client, [CLIENT_FORENAME], stated they have brought a recording of a phone call with the DWP.",
+      "segmentId": "1",
+      "timestampRange": "00:00:01-00:00:06",
+      "transcriptSnippet": "Client: Hello, I brought this recording of my DWP phone call. I am [CLIENT_FORENAME], DOB [DOB], NINO [NINO], [ADDRESS_LINE_1] [POSTCODE], [PHONE_NUMBER]."
+    },
+    {
+      "id": "2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantDocuments",
+      "statementText": "Client stated they have a recording of a DWP phone call.",
+      "segmentId": "1",
+      "timestampRange": "00:00:01-00:00:06",
+      "transcriptSnippet": "Client: Hello, I brought this recording of my DWP phone call."
+    },
+    {
+      "id": "3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:00:01-00:00:06",
+      "transcriptSnippet": "Client: ...I am [CLIENT_FORENAME], DOB [DOB], NINO [NINO]..."
+    },
+    {
+      "id": "4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1] [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:00:01-00:00:06",
+      "transcriptSnippet": "Client: ...[ADDRESS_LINE_1] [POSTCODE]..."
+    },
+    {
+      "id": "5",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client's phone number is [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:01-00:00:06",
+      "transcriptSnippet": "Client: ...[PHONE_NUMBER]."
+    },
+    {
+      "id": "6",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser recorded client's personal details: Name [CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address [ADDRESS_LINE_1] [POSTCODE], Phone [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:01-00:00:06",
+      "transcriptSnippet": "Client: ...I am [CLIENT_FORENAME], DOB [DOB], NINO [NINO], [ADDRESS_LINE_1] [POSTCODE], [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### AQS Level 3 Case Note\n\n**PRESENTING ISSUE**\n- **Client's Explanation:** Client, [CLIENT_FORENAME], stated they have brought a recording of a phone call with the DWP. (Attribution ID: 1)\n- **Relevant Documents Seen:** Client stated they have a recording of a DWP phone call. (Attribution ID: 2)\n\n**CLIENT GOALS**\n- Not established during this interview.\n\n**HOUSEHOLD MAKE UP**\n- **Client:** Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO]. (Attribution ID: 3)\n- **Current Accommodation:** Client resides at [ADDRESS_LINE_1] [POSTCODE]. (Attribution ID: 4)\n\n**INCOME / FINANCES (INCL. BENEFITS)**\n- Not established during this interview.\n\n**OPTIONS DISCUSSED**\n- No options were discussed during this initial contact.\n\n**DEADLINES / KEY DATES**\n- No deadlines were established during this interview.\n\n**SUPPORT NEEDS / VULNERABILITY**\n- **Contact Arrangements:** Client's phone number is [PHONE_NUMBER]. (Attribution ID: 5)\n- Other support needs were not established.\n\n**ACTION TAKEN**\n- Adviser recorded client's personal details: Name [CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address [ADDRESS_LINE_1] [POSTCODE], Phone [PHONE_NUMBER]. (Attribution ID: 6)\n\n**NEXT STEPS (CLIENT)**\n- Not established during this interview.\n\n**NEXT STEPS (ADVISER)**\n- Not established during this interview.\n\n**ONWARD REFERRALS / SIGNPOSTING**\n- No onward referrals or signposting were made.\n\n**GAPS AND LIMITATIONS**\n- The specific nature of the presenting issue with the DWP was not established.\n- Client's goals and desired outcomes were not established.\n- Full household composition was not established.\n- Details of income, benefits, finances, and any debts were not established.\n- Any relevant deadlines or key dates were not established.\n- Client's support needs or vulnerabilities were not established.\n- No advice was given or options discussed as the interview did not progress beyond initial introductions.\n- Agreed next steps for both client and adviser were not established."
+}

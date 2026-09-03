@@ -1,0 +1,143 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client, [CLIENT_FORENAME], attended the session to seek assistance on behalf of their mother, Mrs [MOTHER_NAME]. The client explained that their mother has vascular dementia and severe osteoarthritis, and requires assistance day and night to get out of bed and take her medication.",
+    "relevantBackground": "The client's mother, Mrs [MOTHER_NAME] (DOB: [DOB], NINO: [NINO]), suffers from vascular dementia and severe osteoarthritis, resulting in significant day and night care needs.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To obtain support and advice regarding care and potential entitlements for their mother, Mrs [MOTHER_NAME].",
+    "immediatePriority": "Not established during this interview",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], residing at [ADDRESS_LINE_1], London [POSTCODE], Telephone: [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Mother: Mrs [MOTHER_NAME] (DOB: [DOB], NINO: [NINO]). It is not established whether she lives with the client.",
+    "caringResponsibilities": "The client provides day and night care for their mother, Mrs [MOTHER_NAME], assisting her with getting out of bed and administering medication.",
+    "relevantCircumstances": "Mother has vascular dementia and severe osteoarthritis.",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview was an initial intake where the client presented the facts of the situation; detailed advice on options was not yet formulated or discussed."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "The client's mother has vascular dementia and severe osteoarthritis, making her highly vulnerable and dependent on day and night care.",
+    "effectOnAbility": "The mother is unable to get out of bed or manage her medication independently.",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Client can be contacted via telephone at [PHONE_NUMBER].",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded the client's personal details, address, and contact number.",
+      "Recorded the client's mother's details (name, DOB, NINO, and health conditions)."
+    ],
+    "outcomeOfActionTaken": "Initial client and third-party details have been successfully logged.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Verify if the client has legal authority (e.g., Power of Attorney) to act on behalf of Mrs [MOTHER_NAME].",
+      "Assess potential benefit entitlements for Mrs [MOTHER_NAME] (e.g., Attendance Allowance) and the client (e.g., Carer's Allowance).",
+      "Explore social care assessment options via the local authority."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Establish authorization/consent to act on behalf of the mother, and conduct a full benefits and social care options assessment."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No documents (such as proof of identity, medical letters, or Power of Attorney) have been seen.",
+    "The living arrangements (whether the client lives with the mother) are not established.",
+    "The financial situation of both the client and the mother is completely unknown.",
+    "Consent or legal authority to act on behalf of the mother has not yet been verified."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "[CLIENT_FORENAME], residing at [ADDRESS_LINE_1], London [POSTCODE], Telephone: [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:02 - 00:15",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]. My address is [ADDRESS_LINE_1], London [POSTCODE]. Telephone [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "otherHouseholdMembers",
+      "statementText": "Mother: Mrs [MOTHER_NAME] (DOB: [DOB], NINO: [NINO]).",
+      "segmentId": "1",
+      "timestampRange": "00:15 - 00:22",
+      "transcriptSnippet": "I am here for my mam, Mrs [MOTHER_NAME], born [DOB], NINO [NINO]."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "She has vascular dementia and severe osteoarthritis, needing help day and night to get out of bed and take medication.",
+      "segmentId": "1",
+      "timestampRange": "00:22 - 00:30",
+      "transcriptSnippet": "She has vascular dementia and severe osteoarthritis, needing help day and night to get out of bed and take medication."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client's Explanation:** The client, [CLIENT_FORENAME], attended the session to seek assistance on behalf of their mother, Mrs [MOTHER_NAME]. The client explained that their mother has vascular dementia and severe osteoarthritis, and requires assistance day and night to get out of bed and take her medication.\n* **Relevant Background:** The client's mother, Mrs [MOTHER_NAME] (DOB: [DOB], NINO: [NINO]), suffers from vascular dementia and severe osteoarthritis, resulting in significant day and night care needs.\n* **Relevant Documents:** Not established during this interview\n* **Emergency/Risk:** Not established during this interview\n* **Related Issues:** Not established during this interview\n* **Discrimination Issue:** Not established during this interview\n* **Safeguarding Concern:** Not established during this interview\n\n## CLIENT GOALS\n* **Client Wishes:** To obtain support and advice regarding care and potential entitlements for their mother, Mrs [MOTHER_NAME].\n* **Immediate Priority:** Not established during this interview\n* **Outcome Discussion:** Not established during this interview\n* **Agreed Purpose:** Not established during this interview\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME], residing at [ADDRESS_LINE_1], London [POSTCODE], Telephone: [PHONE_NUMBER].\n* **Partner:** Not established during this interview\n* **Children/Dependants:** Not established during this interview\n* **Other Household Members:** Mother: Mrs [MOTHER_NAME] (DOB: [DOB], NINO: [NINO]). It is not established whether she lives with the client.\n* **Caring Responsibilities:** The client provides day and night care for their mother, Mrs [MOTHER_NAME], assisting her with getting out of bed and administering medication.\n* **Relevant Circumstances:** Mother has vascular dementia and severe osteoarthritis.\n* **Current Accommodation:** Not established during this interview\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Employment Income:** Not established during this interview\n* **Benefits Received:** Not established during this interview\n* **Benefits Claimed/Pending:** Not established during this interview\n* **Benefit Entitlement Considered:** Not established during this interview\n* **Housing Costs:** Not established during this interview\n* **Other Debts/Liabilities:** Not established during this interview\n* **Savings/Capital:** Not established during this interview\n* **Immediate Financial Hardship:** Not established during this interview\n* **Financial Info Required:** Not established during this interview\n\n## OPTIONS DISCUSSED\n* **Research Undertaken:** Not established during this interview\n* **Research Confirmed:** Not established during this interview\n* **Options:** None discussed during this initial intake.\n* **Client Preferred Option:** Not established during this interview\n* **Client Understanding:** Not established during this interview\n* **Partial Advice Reason:** The interview was an initial intake where the client presented the facts of the situation; detailed advice on options was not yet formulated or discussed.\n\n## DEADLINES / KEY DATES\n* **Dates:** None established.\n* **Applicable Time Limit:** Not established during this interview\n* **Final Date for Action:** Not established during this interview\n* **Client Advised of Deadline:** Not established during this interview\n* **Urgent Action Required:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Client Capability:** Not established during this interview\n* **Vulnerability/Support Needs:** The client's mother has vascular dementia and severe osteoarthritis, making her highly vulnerable and dependent on day and night care.\n* **Effect on Ability:** The mother is unable to get out of bed or manage her medication independently.\n* **Reasonable Adjustments:** Not established during this interview\n* **Practical Assistance Required:** Not established during this interview\n* **Client Access:** Not established during this interview\n* **Contact Arrangements:** Client can be contacted via telephone at [PHONE_NUMBER].\n* **Conflict of Interest:** Not established during this interview\n* **Permission to Share:** Not established during this interview\n\n## ACTION TAKEN\n* **Actions During Intervention:**\n  1. Recorded the client's personal details, address, and contact number.\n  2. Recorded the client's mother's details (name, DOB, NINO, and health conditions).\n* **Outcome of Action Taken:** Initial client and third-party details have been successfully logged.\n* **Documents Produced/Sent:** Not established during this interview\n* **Client Confirmed Understanding:** Not established during this interview\n\n## NEXT STEPS (CLIENT)\n* **Agreed Actions:** None established.\n* **Obtain:** None established.\n* **Contact:** None established.\n* **Submit:** None established.\n* **Contingency (No Response):** Not established during this interview\n* **Contingency (Circumstances Change):** Not established during this interview\n* **Seek Advice Before:** Not established during this interview\n* **Invited to Return:** Not established during this interview\n\n## NEXT STEPS (ADVISER)\n* **Adviser Actions:**\n  1. Verify if the client has legal authority (e.g., Power of Attorney) to act on behalf of Mrs [MOTHER_NAME].\n  2. Assess potential benefit entitlements for Mrs [MOTHER_NAME] (e.g., Attendance Allowance) and the client (e.g., Carer's Allowance).\n  3. Explore social care assessment options via the local authority.\n* **Follow-up Contact:** Not established during this interview\n* **Contingency (No Doc Received):** Not established during this interview\n* **Outstanding Issues:** Establish authorization/consent to act on behalf of the mother, and conduct a full benefits and social care options assessment.\n\n## ONWARD REFERRALS / SIGNPOSTING\n* **Organisation:** Not established during this interview\n* **Reason:** Not established during this interview\n* **Method:** Not established during this interview\n* **Contact Details Provided:** Not established during this interview\n* **Urgency Communicated:** Not established during this interview\n* **Consent Obtained:** Not established during this interview\n* **Assisted Info Provided:** Not established during this interview\n* **Client Understood:** Not established during this interview\n\n## GAPS AND LIMITATIONS\n* No documents (such as proof of identity, medical letters, or Power of Attorney) have been seen.\n* The living arrangements (whether the client lives with the mother) are not established.\n* The financial situation of both the client and the mother is completely unknown.\n* Consent or legal authority to act on behalf of the mother has not yet been verified."
+}

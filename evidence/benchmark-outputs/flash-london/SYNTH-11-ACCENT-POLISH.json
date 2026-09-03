@@ -1,0 +1,147 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client explained that HMRC has stopped Child Benefit payments for their two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME], on the grounds that the client does not have a right to reside in the UK.",
+    "relevantBackground": "The client states they have held full settled status under the EU Settlement Scheme (EUSS) since 2020.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To have their Child Benefit reinstated for their two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME].",
+    "immediatePriority": "To resolve the suspension/termination of Child Benefit by proving their right to reside via their EUSS settled status.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], residing at [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Two daughters: [CHILD_1_FORENAME] and [CHILD_2_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Responsible for two dependent children, [CHILD_1_FORENAME] and [CHILD_2_FORENAME].",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Child Benefit (recently stopped by HMRC).",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview was limited to the client's initial presentation of the issue; no advice has been formulated or delivered yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Potential language barrier indicated by Polish greeting ('Dzień dobry'), but full support needs are not established.",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details, contact information, and initial presenting issue."
+    ],
+    "outcomeOfActionTaken": "Client's details and core issue have been logged for further advice and action.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [
+      "HMRC decision letter stopping the Child Benefit.",
+      "EUSS Share Code or proof of Settled Status from 2020."
+    ],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Review the HMRC decision letter once provided by the client.",
+      "Verify the client's EUSS settled status using the share code.",
+      "Advise on the process and deadlines for challenging the decision (Mandatory Reconsideration)."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "The HMRC decision letter has not been seen; the exact date of the decision and specific reasons given are unknown.",
+    "No proof of EUSS settled status (such as a share code or decision letter) has been seen by the adviser.",
+    "The client's wider financial situation, household income, and potential eligibility for other benefits or immediate hardship support have not been established.",
+    "The deadline for submitting a Mandatory Reconsideration is not established due to the missing decision letter.",
+    "Whether the client has a partner or other household members has not been established.",
+    "The client's English language proficiency and need for an interpreter have not been fully assessed."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], born [DOB], NINO [NINO], living at [ADDRESS_LINE_1], [POSTCODE], phone [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:30",
+      "transcriptSnippet": "my name is [CLIENT_FORENAME]. Born [DOB]. NINO is [NINO]. I live at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "HMRC stopped Child Benefit for two daughters [CHILD_1_FORENAME] and [CHILD_2_FORENAME] saying client has no right to reside.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:30",
+      "transcriptSnippet": "HMRC stopped Child Benefit for my two daughters [CHILD_1_FORENAME] and [CHILD_2_FORENAME] saying I have no right to reside"
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client has full settled status under EU Settlement Scheme since 2020.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:30",
+      "transcriptSnippet": "but I have full settled status under EU Settlement Scheme since 2020."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client's Account:** The client explained that HMRC has stopped Child Benefit payments for their two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME], on the grounds that the client does not have a right to reside in the UK.\n* **Background:** The client states they have held full settled status under the EU Settlement Scheme (EUSS) since 2020.\n* **Documents:** Not established during this interview\n* **Emergency/Risk:** Not established during this interview\n* **Related Issues:** Not established during this interview\n* **Discrimination:** Not established during this interview\n* **Safeguarding:** Not established during this interview\n\n## CLIENT GOALS\n* **Client Wishes:** To have their Child Benefit reinstated for their two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME].\n* **Immediate Priority:** To resolve the suspension/termination of Child Benefit by proving their right to reside via their EUSS settled status.\n* **Outcome Discussion:** Not established during this interview\n* **Purpose of Intervention:** Not established during this interview\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], residing at [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER].\n* **Partner:** Not established during this interview\n* **Children/Dependants:** Two daughters: [CHILD_1_FORENAME] and [CHILD_2_FORENAME].\n* **Other Household Members:** Not established during this interview\n* **Caring Responsibilities:** Responsible for two dependent children, [CHILD_1_FORENAME] and [CHILD_2_FORENAME].\n* **Relevant Circumstances:** Not established during this interview\n* **Accommodation:** Not established during this interview\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Employment:** Not established during this interview\n* **Benefits Received:** Child Benefit (recently stopped by HMRC).\n* **Benefits Claimed/Pending:** Not established during this interview\n* **Entitlement Considered:** Not established during this interview\n* **Housing Costs:** Not established during this interview\n* **Debts/Liabilities:** Not established during this interview\n* **Savings/Capital:** Not established during this interview\n* **Financial Hardship:** Not established during this interview\n* **Information Required:** Not established during this interview\n\n## OPTIONS DISCUSSED\n* **Research Undertaken:** Not established during this interview\n* **Research Confirmed:** Not established during this interview\n* **Options:** No options have been discussed yet.\n* **Preferred Option:** Not established during this interview\n* **Understanding:** Not established during this interview\n* **Reason for Partial Advice:** The interview was limited to the client's initial presentation of the issue; no advice has been formulated or delivered yet.\n\n## DEADLINES / KEY DATES\n* **Key Dates:** Not established during this interview\n* **Time Limits:** Not established during this interview\n* **Final Date for Action:** Not established during this interview\n* **Client Advised:** Not established during this interview\n* **Urgent Action:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Capability:** Not established during this interview\n* **Vulnerabilities:** Potential language barrier indicated by Polish greeting ('Dzień dobry'), but full support needs are not established.\n* **Effect on Ability:** Not established during this interview\n* **Adjustments:** Not established during this interview\n* **Practical Assistance:** Not established during this interview\n* **Access:** Not established during this interview\n* **Contact:** Not established during this interview\n* **Conflict of Interest:** Not established during this interview\n* **Permission to Share:** Not established during this interview\n\n## ACTION TAKEN\n* **Actions During Interview:** Recorded client's personal details, contact information, and initial presenting issue.\n* **Outcome:** Client's details and core issue have been logged for further advice and action.\n* **Documents Produced:** Not established during this interview\n* **Client Confirmed Understanding:** Not established during this interview\n\n## NEXT STEPS (CLIENT)\n* **Agreed Actions:**\n  * Obtain the HMRC decision letter stopping the Child Benefit.\n  * Obtain EUSS Share Code or proof of Settled Status from 2020.\n* **Contingency (No Response):** Not established during this interview\n* **Contingency (Change in Circumstances):** Not established during this interview\n* **Seek Advice Before:** Not established during this interview\n* **Invited to Return:** Not established during this interview\n\n## NEXT STEPS (ADVISER)\n* **Adviser Actions:**\n  * Review the HMRC decision letter once provided by the client.\n  * Verify the client's EUSS settled status using the share code.\n  * Advise on the process and deadlines for challenging the decision (Mandatory Reconsideration).\n* **Follow-up Contact:** Not established during this interview\n* **Contingency (No Docs):** Not established during this interview\n* **Outstanding Issues:** Not established during this interview\n\n## ONWARD REFERRALS / SIGNPOSTING\n* **Referrals:** Not established during this interview\n\n## GAPS AND LIMITATIONS\n* The HMRC decision letter has not been seen; the exact date of the decision and specific reasons given are unknown.\n* No proof of EUSS settled status (such as a share code or decision letter) has been seen by the adviser.\n* The client's wider financial situation, household income, and potential eligibility for other benefits or immediate hardship support have not been established.\n* The deadline for submitting a Mandatory Reconsideration is not established due to the missing decision letter.\n* Whether the client has a partner or other household members has not been established.\n* The client's English language proficiency and need for an interpreter have not been fully assessed."
+}

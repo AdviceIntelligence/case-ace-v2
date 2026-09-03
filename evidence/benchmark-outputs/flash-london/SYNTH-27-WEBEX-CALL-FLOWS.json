@@ -1,0 +1,160 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client received an urgent message on their Universal Credit journal regarding a work search sanction.",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Universal Credit journal message (not seen by adviser, reported by client).",
+    "emergencyOrRisk": "Risk of financial hardship due to Universal Credit work search sanction.",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To resolve the urgent work search sanction on their Universal Credit account.",
+    "immediatePriority": "To address the work search sanction to prevent or lift any reduction in Universal Credit payments.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "To contact the work coach and establish the requirements for lifting the sanction."
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address [ADDRESS_LINE_1], [POSTCODE], Phone [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Universal Credit (subject to a work search sanction).",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Potential hardship due to the work search sanction.",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Adviser checked the sanction rules during a brief hold.",
+    "researchConfirmed": "Sanction rules checked; work coach can lift the sanction if evidence is provided.",
+    "options": [
+      {
+        "optionTitle": "Provide evidence to lift sanction",
+        "whatThisInvolves": "Providing the necessary evidence requested by the work coach to justify why the work search requirements were not met.",
+        "eligibilityGrounds": "Work coach [WORK_COACH_NAME] confirmed they can lift the sanction if evidence is provided.",
+        "advantages": "Lifting of the sanction and restoration of full Universal Credit entitlement.",
+        "disadvantages": "Requires gathering and submitting evidence.",
+        "risksConsequences": "If evidence is not provided or accepted, the sanction will remain in place, reducing UC payments.",
+        "costs": "None",
+        "likelyPracticalEffect": "Sanction lifted.",
+        "evidenceRequired": "Evidence to support why work search was not completed (specifics not established).",
+        "relevantDeadline": "Not established during this interview"
+      }
+    ],
+    "clientPreferredOption": "Provide evidence to lift the sanction.",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "Not established during this interview"
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Provide evidence to the work coach to lift the sanction."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Adviser patched in the work coach [WORK_COACH_NAME] directly to facilitate communication.",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "None identified.",
+    "permissionToShare": "Implied/given to patch in the work coach [WORK_COACH_NAME]."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser researched sanction rules during a brief hold.",
+      "Adviser patched in the client's work coach [WORK_COACH_NAME] from [IDENTIFYING_ORGANISATION] to the call."
+    ],
+    "outcomeOfActionTaken": "Work coach confirmed that the sanction can be lifted if evidence is provided.",
+    "documentsProducedSent": "None",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [
+      "Provide the required evidence to the work coach [WORK_COACH_NAME] to lift the sanction."
+    ],
+    "obtain": [
+      "Evidence supporting why work search requirements were not met."
+    ],
+    "contact": [
+      "Work coach [WORK_COACH_NAME] via UC Journal."
+    ],
+    "submit": [
+      "Evidence to [IDENTIFYING_ORGANISATION] / Work Coach."
+    ],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Specific details of the work search sanction (e.g., date of sanction, reason for sanction) were not established.",
+    "The specific evidence required by the work coach was not detailed during the call.",
+    "Client's household makeup, full financial situation, and vulnerability status were not established.",
+    "Deadlines for submitting the evidence were not established."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client received an urgent message on their Universal Credit journal regarding a work search sanction.",
+      "segmentId": "S1",
+      "timestampRange": "Not established",
+      "transcriptSnippet": "My Universal Credit journal has an urgent message about a work search sanction."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser patched in the client's work coach [WORK_COACH_NAME] from [IDENTIFYING_ORGANISATION] to the call.",
+      "segmentId": "S2",
+      "timestampRange": "Not established",
+      "transcriptSnippet": "I have also patched in your work coach [WORK_COACH_NAME]."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "optionsDiscussed",
+      "fieldKey": "options",
+      "statementText": "Work coach confirmed they can lift the sanction if evidence is provided.",
+      "segmentId": "S3",
+      "timestampRange": "Not established",
+      "transcriptSnippet": "We can lift the sanction if evidence is provided."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING: CITIZENS ADVICE WANDSWORTH\n\n## PRESENTING ISSUE\n- **Client Explanation**: The client, [CLIENT_FORENAME], reported receiving an urgent message on their Universal Credit journal regarding a work search sanction.\n- **Relevant Background**: Not established during this interview.\n- **Relevant Documents**: Universal Credit journal message (not seen by adviser).\n- **Emergency/Risk**: Risk of financial hardship due to the work search sanction.\n\n## CLIENT GOALS\n- **Client Wishes**: To resolve the urgent work search sanction on their Universal Credit account.\n- **Immediate Priority**: To address the work search sanction to prevent or lift any reduction in Universal Credit payments.\n\n## HOUSEHOLD MAKE UP\n- **Client**: [CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address [ADDRESS_LINE_1], [POSTCODE], Phone [PHONE_NUMBER].\n- **Other Household Details**: Not established during this interview.\n\n## INCOME / FINANCES (INCL. BENEFITS)\n- **Benefits Received**: Universal Credit (subject to a work search sanction).\n- **Other Financial Details**: Not established during this interview.\n\n## OPTIONS DISCUSSED\n- **Option 1: Provide evidence to lift sanction**\n  - *What this involves*: Providing the necessary evidence requested by the work coach to justify why the work search requirements were not met.\n  - *Eligibility*: Work coach [WORK_COACH_NAME] confirmed they can lift the sanction if evidence is provided.\n  - *Advantages*: Lifting of the sanction and restoration of full Universal Credit entitlement.\n  - *Disadvantages*: Requires gathering and submitting evidence.\n  - *Risks*: If evidence is not provided or accepted, the sanction will remain in place.\n\n## DEADLINES / KEY DATES\n- **Key Dates**: Not established during this interview.\n\n## SUPPORT NEEDS / VULNERABILITY\n- **Practical Assistance**: Adviser patched in the work coach [WORK_COACH_NAME] directly to facilitate communication.\n\n## ACTION TAKEN\n- Adviser researched sanction rules during a brief hold.\n- Adviser patched in the client's work coach [WORK_COACH_NAME] from [IDENTIFYING_ORGANISATION] to the call.\n- Work coach confirmed that the sanction can be lifted if evidence is provided.\n\n## NEXT STEPS (CLIENT)\n- Gather and submit the required evidence to work coach [WORK_COACH_NAME] via the UC Journal.\n\n## NEXT STEPS (ADVISER)\n- None.\n\n## GAPS AND LIMITATIONS\n- Specific details of the work search sanction (e.g., date of sanction, reason for sanction) were not established.\n- The specific evidence required by the work coach was not detailed during the call.\n- Client's household makeup, full financial situation, and vulnerability status were not established.\n- Deadlines for submitting the evidence were not established."
+}

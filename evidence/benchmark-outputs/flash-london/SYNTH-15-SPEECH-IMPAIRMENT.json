@@ -1,0 +1,142 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client wants to know if his enhanced mobility Personal Independence Payment (PIP) award allows him to obtain a vehicle through the Motability scheme.",
+    "relevantBackground": "The client states he is currently in receipt of the enhanced mobility component of Personal Independence Payment (PIP).",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To confirm whether his PIP enhanced mobility award qualifies him for a Motability scheme car.",
+    "immediatePriority": "To establish eligibility for the Motability scheme.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "To verify Motability eligibility criteria against the client's current PIP award."
+  },
+  "householdMakeUp": {
+    "client": "Brian Peterson, DOB: [DOB], NINO: [NINO], Address: 8 Trinity Crescent, [POSTCODE], Phone: [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Client presents with slurred and slow speech.",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Personal Independence Payment (PIP) - Enhanced Mobility Component (as stated by client).",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview transcript concludes immediately after the client's initial query; no advice has been delivered yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "The client has slurred and slow speech, which may affect communication flow and require additional time during consultations.",
+    "vulnerabilitySupportNeeds": "Speech impairment / slurred speech.",
+    "effectOnAbility": "Requires the adviser to listen carefully and allow extra time for the client to articulate his queries.",
+    "reasonableAdjustments": "The adviser actively listened and explicitly told the client to take his time.",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded the client's personal details (name, DOB, NINO, address, phone number).",
+      "Listened to and recorded the client's presenting query regarding Motability eligibility."
+    ],
+    "outcomeOfActionTaken": "Client's details and core query have been documented for follow-up.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Verify the eligibility criteria for the Motability Scheme in relation to the PIP Enhanced Mobility component.",
+      "Contact the client to provide advice on eligibility and explain the application process."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Providing the core advice regarding Motability eligibility and checking if the client has his official PIP award letter."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No advice has been delivered yet as the transcript ends immediately after the client's query.",
+    "No physical evidence or documentation of the PIP award has been seen.",
+    "The client's wider household, housing, and financial circumstances have not been established.",
+    "Consent to share or record information has not been formally documented in this brief opening exchange."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "PRESENTING ISSUE",
+      "fieldKey": "clientExplained",
+      "statementText": "The client wants to know if his enhanced mobility Personal Independence Payment (PIP) award allows him to obtain a vehicle through the Motability scheme.",
+      "segmentId": "1",
+      "timestampRange": "00:00",
+      "transcriptSnippet": "W... want to know... if... my enhanced... mobility... PIP... allows... Motability... car."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "SUPPORT NEEDS / VULNERABILITY",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client presents with slurred and slow speech.",
+      "segmentId": "1",
+      "timestampRange": "00:00",
+      "transcriptSnippet": "(slurred) H... hello."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "SUPPORT NEEDS / VULNERABILITY",
+      "fieldKey": "reasonableAdjustments",
+      "statementText": "The adviser actively listened and explicitly told the client to take his time.",
+      "segmentId": "1",
+      "timestampRange": "00:00",
+      "transcriptSnippet": "Adviser: Take your time, I am listening carefully."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n- **Client's Query:** The client wants to know if his enhanced mobility Personal Independence Payment (PIP) award allows him to obtain a vehicle through the Motability scheme.\n- **Background:** The client states he is currently in receipt of the enhanced mobility component of PIP.\n- **Documents Seen:** Not established during this interview\n- **Emergency/Risk:** Not established during this interview\n- **Related Issues:** Not established during this interview\n- **Discrimination/Safeguarding:** Not established during this interview\n\n## CLIENT GOALS\n- **Goal:** To confirm whether his PIP enhanced mobility award qualifies him for a Motability scheme car.\n- **Immediate Priority:** To establish eligibility for the Motability scheme.\n- **Outcome Achievability:** Not established during this interview\n- **Agreed Purpose:** To verify Motability eligibility criteria against the client's current PIP award.\n\n## HOUSEHOLD MAKE UP\n- **Client Details:** Brian Peterson, DOB: [DOB], NINO: [NINO], Address: 8 Trinity Crescent, [POSTCODE], Phone: [PHONE_NUMBER].\n- **Partner/Dependants:** Not established during this interview\n- **Relevant Circumstances:** Client presents with slurred and slow speech.\n- **Accommodation:** Not established during this interview\n\n## INCOME / FINANCES (INCL. BENEFITS)\n- **Benefits Received:** Personal Independence Payment (PIP) - Enhanced Mobility Component (as stated by client).\n- **Other Income/Debts/Capital:** Not established during this interview\n\n## OPTIONS DISCUSSED\n- *No options or advice have been discussed yet as the transcript cuts off after the client's initial inquiry.*\n\n## DEADLINES / KEY DATES\n- **Deadlines:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n- **Vulnerability:** Speech impairment / slurred speech.\n- **Effect on Ability:** Requires the adviser to listen carefully and allow extra time for the client to articulate his queries.\n- **Reasonable Adjustments:** The adviser actively listened and explicitly told the client to take his time.\n\n## ACTION TAKEN\n- Recorded the client's personal details (name, DOB, NINO, address, phone number).\n- Listened to and recorded the client's presenting query regarding Motability eligibility.\n\n## NEXT STEPS (CLIENT)\n- Not established during this interview\n\n## NEXT STEPS (ADVISER)\n- Verify the eligibility criteria for the Motability Scheme in relation to the PIP Enhanced Mobility component.\n- Contact the client to provide advice on eligibility and explain the application process.\n\n## ONWARD REFERRALS / SIGNPOSTING\n- Not established during this interview\n\n## GAPS AND LIMITATIONS\n- No advice has been delivered yet as the transcript ends immediately after the client's query.\n- No physical evidence or documentation of the PIP award has been seen.\n- The client's wider household, housing, and financial circumstances have not been established.\n- Consent to share or record information has not been formally documented in this brief opening exchange."
+}

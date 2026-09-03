@@ -1,0 +1,151 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client's husband, [DECEASED_SPOUSE_NAME], passed away suddenly last week. The client has received a funeral bill for £3,500 from [IDENTIFYING_ORGANISATION] which she cannot afford to pay. Additionally, she has no money to buy food for her son, [CHILD_1_FORENAME].",
+    "relevantBackground": "The client's husband passed away suddenly last week, leaving her in immediate financial distress.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Immediate risk of food deprivation for the client's son, [CHILD_1_FORENAME], as the client has no money for food.",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To find a way to pay the £3,500 funeral bill from [IDENTIFYING_ORGANISATION] and to secure immediate financial support or food for her son, [CHILD_1_FORENAME].",
+    "immediatePriority": "Securing food/emergency financial assistance for her son and addressing the outstanding £3,500 funeral bill.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address: [ADDRESS_LINE_1], London [POSTCODE], Phone: [PHONE_NUMBER].",
+    "partner": "Deceased husband: [DECEASED_SPOUSE_NAME] (passed away last week).",
+    "childrenDependants": "Son: [CHILD_1_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Caring for her dependent son, [CHILD_1_FORENAME].",
+    "relevantCircumstances": "Recently bereaved (husband passed away suddenly last week).",
+    "currentAccommodation": "[ADDRESS_LINE_1], London [POSTCODE] (tenure type not established)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "£3,500 funeral bill from [IDENTIFYING_ORGANISATION].",
+    "savingsCapital": "No savings (client states she has \"no money\").",
+    "immediateFinancialHardship": "Yes, client has no money for food for her son.",
+    "financialInfoRequired": "Full details of income, benefits, savings, and housing costs are required to assess eligibility for assistance."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview was an initial crisis presentation where the client disclosed her immediate bereavement and financial distress; no options have been formally discussed yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Immediate crisis support is required to address the lack of food for the client's son."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "The client is highly distressed and sobbing heavily, which may impact her ability to process complex information without support.",
+    "vulnerabilitySupportNeeds": "Severe emotional distress due to sudden bereavement, coupled with extreme financial crisis.",
+    "effectOnAbility": "The client's heavy sobbing and distress make it difficult to conduct a detailed diagnostic interview immediately.",
+    "reasonableAdjustments": "Offered water, tissues, and allowed the client time to compose herself during the interview.",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER].",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Provided immediate emotional support, offering water, tissues, and time for the client to compose herself."
+    ],
+    "outcomeOfActionTaken": "The client was supported to compose herself sufficiently to provide her basic details and outline her immediate crisis.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Explore immediate crisis support options, including local food bank referrals and local welfare assistance schemes.",
+      "Conduct a full benefit check to identify potential entitlement to Bereavement Support Payment and Funeral Expenses Payment.",
+      "Gather details regarding the client's income, capital, and housing tenure to complete the financial assessment."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Address the immediate food crisis, assess eligibility for bereavement/funeral benefits, and obtain full financial details."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Full financial details (income, benefits, savings) have not been established.",
+    "Housing tenure and housing costs have not been established.",
+    "Eligibility for Funeral Expenses Payment or Bereavement Support Payment has not yet been assessed.",
+    "No options or formal advice have been discussed due to the brief, crisis-focused nature of this initial contact."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "The client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO], living at [ADDRESS_LINE_1], London [POSTCODE], phone [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:03 - 00:18",
+      "transcriptSnippet": "I am [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]. Address [ADDRESS_LINE_1], London [POSTCODE]. Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The client's husband [DECEASED_SPOUSE_NAME] passed away suddenly last week.",
+      "segmentId": "1",
+      "timestampRange": "00:18 - 00:22",
+      "transcriptSnippet": "My husband [DECEASED_SPOUSE_NAME] passed away suddenly last week."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "incomeFinances",
+      "fieldKey": "otherDebtsLiabilities",
+      "statementText": "The client cannot afford a £3,500 funeral bill from [IDENTIFYING_ORGANISATION].",
+      "segmentId": "1",
+      "timestampRange": "00:22 - 00:26",
+      "transcriptSnippet": "I cannot afford the £3,500 funeral bill from [IDENTIFYING_ORGANISATION]"
+    },
+    {
+      "id": "attr_4",
+      "sectionName": "incomeFinances",
+      "fieldKey": "immediateFinancialHardship",
+      "statementText": "The client has no money for food for her son [CHILD_1_FORENAME].",
+      "segmentId": "1",
+      "timestampRange": "00:26 - 00:30",
+      "transcriptSnippet": "and I have no money for food for our son [CHILD_1_FORENAME]."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client's Disclosure:** The client's husband, [DECEASED_SPOUSE_NAME], passed away suddenly last week. She has received a funeral bill for £3,500 from [IDENTIFYING_ORGANISATION] which she cannot afford, and she has no money to buy food for her son, [CHILD_1_FORENAME].\n* **Relevant Background:** Sudden bereavement of spouse last week.\n* **Relevant Documents:** Not established during this interview\n* **Emergency / Risk:** Immediate risk of food deprivation for the client's son.\n* **Related Issues:** Not established during this interview\n* **Discrimination / Safeguarding:** Not established during this interview\n\n## CLIENT GOALS\n* **Client's Desired Outcome:** To resolve the £3,500 funeral bill and secure immediate food/financial support for her son.\n* **Immediate Priority:** Emergency food assistance and addressing the funeral debt.\n* **Outcome Discussion:** Not established during this interview\n* **Agreed Purpose:** Not established during this interview\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME], DOB [DOB], NINO [NINO], Address: [ADDRESS_LINE_1], London [POSTCODE], Phone: [PHONE_NUMBER].\n* **Partner:** Deceased husband [DECEASED_SPOUSE_NAME].\n* **Dependants:** Son [CHILD_1_FORENAME].\n* **Caring Responsibilities:** Caring for dependent son.\n* **Accommodation:** [ADDRESS_LINE_1], London [POSTCODE] (tenure not established).\n\n## INCOME / FINANCES\n* **Income & Benefits:** Not established during this interview\n* **Debts:** £3,500 funeral bill from [IDENTIFYING_ORGANISATION].\n* **Savings:** None (client states she has no money).\n* **Immediate Hardship:** Yes, no money for food.\n\n## OPTIONS DISCUSSED\n* *No options or advice were discussed during this initial crisis presentation due to the client's high level of distress and the brief nature of the contact.*\n\n## DEADLINES / KEY DATES\n* **Urgent Action Required:** Immediate crisis support for food.\n* **Other Deadlines:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Vulnerability:** Severe emotional distress due to sudden bereavement; extreme financial crisis.\n* **Adjustments:** Offered water, tissues, and time to compose herself.\n* **Contact:** Phone [PHONE_NUMBER].\n\n## ACTION TAKEN\n* Provided immediate emotional support (water, tissues, time to compose herself) during initial disclosure.\n\n## NEXT STEPS (CLIENT)\n* *None agreed during this initial crisis presentation.*\n\n## NEXT STEPS (ADVISER)\n* Explore immediate crisis support (food bank/welfare assistance referrals).\n* Conduct full benefit check (Bereavement Support Payment, Funeral Expenses Payment).\n* Gather full financial and housing details at next contact.\n\n## GAPS AND LIMITATIONS\n* Full financial details (income, benefits, savings) not established.\n* Housing tenure and costs not established.\n* Eligibility for bereavement/funeral benefits not yet assessed.\n* No formal advice or options discussed during this initial contact."
+}

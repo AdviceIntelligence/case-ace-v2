@@ -1,0 +1,235 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client reports that bailiffs are scheduled to attend their property for an eviction at 2pm on the day of the interview. [ATT_1]",
+    "relevantBackground": "Not established during this interview.",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Yes, there is an imminent risk of homelessness as an eviction is scheduled for 2pm today. [ATT_2] There is also an immediate and serious risk of harm to the client. [ATT_3]",
+    "relatedIssues": "Client is experiencing a severe mental health crisis. [ATT_4]",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Yes, a serious and immediate safeguarding concern was identified. The client stated they have purchased pills and intend to end their life today if the eviction proceeds. [ATT_5]"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not explicitly stated, but the implied goal is to prevent the eviction scheduled for today.",
+    "immediatePriority": "To stop the bailiff eviction scheduled for 2pm today. [ATT_6]",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance Number is [NINO]. Address is [ADDRESS_LINE_1], [POSTCODE]. Phone number is [PHONE_NUMBER]. [ATT_7]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE], and is facing eviction from this property. [ATT_8]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "The interview did not proceed to the advice stage due to the immediate safeguarding crisis presented by the client at the outset."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Today at 2pm: Bailiff attendance for eviction. [ATT_9]"
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Today, before 2pm.",
+    "clientAdvisedOfDeadline": "Client is aware of the deadline, as they reported it. [ATT_10]",
+    "urgentActionRequired": "Yes, immediate action is required to address the imminent eviction and the client's stated intention to self-harm."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client presented as extremely distressed and overwhelmed. [ATT_11] The client's expression of suicidal ideation indicates their capability to engage with advice or take constructive action is severely impaired. [ATT_12]",
+    "vulnerabilitySupportNeeds": "Client is highly vulnerable due to a severe mental health crisis, evidenced by their statement of suicidal intent. [ATT_13]",
+    "effectOnAbility": "The client's acute distress and suicidal thoughts significantly impact their ability to process information, make decisions, or follow instructions.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview, but immediate safeguarding intervention is paramount.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview. Adviser will need to consider duties under safeguarding policy which may override the need for explicit consent."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Not established during this interview."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Not established during this interview. Immediate action would be required under the organisation's safeguarding procedure."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "The interview ended after the client's initial disclosure, before any advice could be given or actions taken.",
+    "The reason for the eviction and details of any court proceedings (e.g., warrant number) were not established.",
+    "The client's household composition, financial circumstances, and any existing support network were not established.",
+    "No information was gathered on the client's tenancy type or landlord details.",
+    "No options were discussed with the client.",
+    "No next steps were agreed with the client or for the adviser.",
+    "Client's consent to share information for safeguarding purposes was not obtained."
+  ],
+  "attributions": [
+    {
+      "id": "ATT_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client reports that bailiffs are scheduled to attend their property for an eviction at 2pm on the day of the interview.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:07",
+      "transcriptSnippet": "The bailiffs are coming at 2pm today."
+    },
+    {
+      "id": "ATT_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Yes, there is an imminent risk of homelessness as an eviction is scheduled for 2pm today.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:07",
+      "transcriptSnippet": "The bailiffs are coming at 2pm today."
+    },
+    {
+      "id": "ATT_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "There is also an immediate and serious risk of harm to the client.",
+      "segmentId": "1",
+      "timestampRange": "00:00:07 - 00:00:11",
+      "transcriptSnippet": "I have bought pills. If I lose this home I am going to end my life today."
+    },
+    {
+      "id": "ATT_4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relatedIssues",
+      "statementText": "Client is experiencing a severe mental health crisis.",
+      "segmentId": "1",
+      "timestampRange": "00:00:07 - 00:00:11",
+      "transcriptSnippet": "I have bought pills. If I lose this home I am going to end my life today."
+    },
+    {
+      "id": "ATT_5",
+      "sectionName": "presentingIssue",
+      "fieldKey": "safeguardingConcern",
+      "statementText": "Yes, a serious and immediate safeguarding concern was identified. The client stated they have purchased pills and intend to end their life today if the eviction proceeds.",
+      "segmentId": "1",
+      "timestampRange": "00:00:07 - 00:00:11",
+      "transcriptSnippet": "I have bought pills. If I lose this home I am going to end my life today."
+    },
+    {
+      "id": "ATT_6",
+      "sectionName": "clientGoals",
+      "fieldKey": "immediatePriority",
+      "statementText": "To stop the bailiff eviction scheduled for 2pm today.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:07",
+      "transcriptSnippet": "The bailiffs are coming at 2pm today."
+    },
+    {
+      "id": "ATT_7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance Number is [NINO]. Address is [ADDRESS_LINE_1], [POSTCODE]. Phone number is [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:01 - 00:00:05",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]. [ADDRESS_LINE_1], [POSTCODE]. [PHONE_NUMBER]."
+    },
+    {
+      "id": "ATT_8",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE], and is facing eviction from this property.",
+      "segmentId": "1",
+      "timestampRange": "00:00:03 - 00:00:07",
+      "transcriptSnippet": "[ADDRESS_LINE_1], [POSTCODE]... The bailiffs are coming at 2pm today."
+    },
+    {
+      "id": "ATT_9",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "dates",
+      "statementText": "Today at 2pm: Bailiff attendance for eviction.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:07",
+      "transcriptSnippet": "The bailiffs are coming at 2pm today."
+    },
+    {
+      "id": "ATT_10",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "clientAdvisedOfDeadline",
+      "statementText": "Client is aware of the deadline, as they reported it.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:07",
+      "transcriptSnippet": "The bailiffs are coming at 2pm today."
+    },
+    {
+      "id": "ATT_11",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client presented as extremely distressed and overwhelmed.",
+      "segmentId": "1",
+      "timestampRange": "00:00:00 - 00:00:01",
+      "transcriptSnippet": "I hear how overwhelmed you are feeling."
+    },
+    {
+      "id": "ATT_12",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "The client's expression of suicidal ideation indicates their capability to engage with advice or take constructive action is severely impaired.",
+      "segmentId": "1",
+      "timestampRange": "00:00:07 - 00:00:11",
+      "transcriptSnippet": "I have bought pills. If I lose this home I am going to end my life today."
+    },
+    {
+      "id": "ATT_13",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client is highly vulnerable due to a severe mental health crisis, evidenced by their statement of suicidal intent.",
+      "segmentId": "1",
+      "timestampRange": "00:00:07 - 00:00:11",
+      "transcriptSnippet": "I have bought pills. If I lose this home I am going to end my life today."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n### PRESENTING ISSUE\nClient reports that bailiffs are scheduled to attend their property for an eviction at 2pm on the day of the interview. [ATT_1] There is an imminent risk of homelessness as an eviction is scheduled for 2pm today. [ATT_2] There is also an immediate and serious risk of harm to the client. [ATT_3] A serious and immediate safeguarding concern was identified. The client stated they have purchased pills and intend to end their life today if the eviction proceeds. [ATT_5]\n\n### CLIENT GOALS\nThe immediate priority is to stop the bailiff eviction scheduled for 2pm today. [ATT_6]\n\n### HOUSEHOLD MAKE UP\nClient is [CLIENT_FORENAME], DOB [DOB], NINO [NINO], residing at [ADDRESS_LINE_1], [POSTCODE]. Phone number is [PHONE_NUMBER]. [ATT_7] They are facing eviction from this property. [ATT_8]\n\n### INCOME / FINANCES (INCL. BENEFITS)\nNot established during this interview.\n\n### OPTIONS DISCUSSED\nThe interview did not proceed to the advice stage due to the immediate safeguarding crisis presented by the client at the outset.\n\n### DEADLINES / KEY DATES\n- **Today at 2pm:** Bailiff attendance for eviction. [ATT_9]\nClient is aware of this deadline. [ATT_10] Urgent action is required.\n\n### SUPPORT NEEDS / VULNERABILITY\nClient presented as extremely distressed and overwhelmed. [ATT_11] They are highly vulnerable due to a severe mental health crisis, evidenced by their statement of suicidal intent. [ATT_13] This severely impairs their capability to engage with advice. [ATT_12] Permission to share information for safeguarding purposes was not established; adviser will need to consider duties under safeguarding policy.\n\n### ACTION TAKEN\nNot established during this interview.\n\n### NEXT STEPS (CLIENT)\nNot established during this interview.\n\n### NEXT STEPS (ADVISER)\nNot established during this interview. Immediate action would be required under the organisation's safeguarding procedure.\n\n### ONWARD REFERRALS / SIGNPOSTING\nNot established during this interview.\n\n### GAPS AND LIMITATIONS\n- The interview ended after the client's initial disclosure, before any advice could be given or actions taken.\n- The reason for the eviction and details of any court proceedings (e.g., warrant number) were not established.\n- The client's household composition, financial circumstances, and any existing support network were not established.\n- No information was gathered on the client's tenancy type or landlord details.\n- No options were discussed with the client.\n- No next steps were agreed with the client or for the adviser.\n- Client's consent to share information for safeguarding purposes was not obtained."
+}

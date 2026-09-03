@@ -1,0 +1,307 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client is panicked as a bailiff named [OFFICER_NAME] from [IDENTIFYING_ORGANISATION] has delivered a letter threatening to force entry to her property. (ref: a1)",
+    "relevantBackground": "The threatened action is for an unpaid council tax debt of £1,450 owed to [IDENTIFYING_ORGANISATION]. (ref: a2)",
+    "relevantDocuments": "Client reports receiving a letter from the bailiff. This document was not seen by the adviser during the interview. (ref: a3)",
+    "emergencyOrRisk": "Yes, there is an immediate risk of forced entry by a bailiff. The presence of a 6-month-old baby in the property elevates the risk. (ref: a4)",
+    "relatedIssues": "Potential benefit entitlement issues, as client states she has 'no money'. (ref: a5)",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Potential safeguarding concern due to the presence of a 6-month-old infant in a household facing imminent bailiff action and reported financial hardship. (ref: a6)"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To prevent the bailiff from forcing entry. (ref: a7)",
+    "immediatePriority": "To address the imminent threat of forced entry from the bailiff. (ref: a8)",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME]. (ref: a9)",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Client has one 6-month-old baby girl, [CHILD_1_FORENAME]. (ref: a10)",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Client is the primary carer for her 6-month-old baby. (ref: a11)",
+    "relevantCircumstances": "Client is a new mother with a very young infant. (ref: a12)",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], London [POSTCODE]. Tenure is not established. (ref: a13)"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Client reports a council tax debt of £1,450 to [IDENTIFYING_ORGANISATION]. (ref: a14)",
+    "savingsCapital": "Client states she has 'no money'. (ref: a15)",
+    "immediateFinancialHardship": "Yes, client reports having 'no money' and is facing bailiff action for a significant debt. (ref: a16)",
+    "financialInfoRequired": "A full financial statement including all income, benefits, expenditure, and details of any other debts is required for a full assessment."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial assessment only. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "The date of the bailiff's letter was not established during this interview."
+    ],
+    "applicableTimeLimit": "Not established during this interview, but the threat of forced entry implies urgency.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Yes, action is required to prevent forced entry by the bailiff. (ref: a17)"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client presented as 'panicked', which may impact her ability to deal with the issue without support. (ref: a18)",
+    "vulnerabilitySupportNeeds": "Client has a 6-month-old baby, which constitutes a vulnerability in the context of bailiff enforcement action. She also reports extreme financial hardship. (ref: a19)",
+    "effectOnAbility": "Client's state of panic may impair her ability to process information and make decisions. (ref: a20)",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Client attended in person. Contact telephone number is [PHONE_NUMBER]. (ref: a21)",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Initial information gathered from the client regarding the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "Full details of the council tax debt, including the period it covers and the date of the liability order.",
+    "The specific type of notice delivered by the bailiff (e.g., Notice of Enforcement) and its date.",
+    "Client's full financial circumstances, including all sources of income, benefits, expenditure, and any other debts.",
+    "Client's housing tenure (e.g., owner-occupier, tenant).",
+    "Client's partnership status and details of any other household members.",
+    "Any advice given or options discussed with the client.",
+    "Any actions agreed upon for the client or adviser.",
+    "Client's specific support needs and whether permission to share information was granted.",
+    "Client's National Insurance Number."
+  ],
+  "attributions": [
+    {
+      "id": "a1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client is panicked as a bailiff named [OFFICER_NAME] from [IDENTIFYING_ORGANISATION] has delivered a letter threatening to force entry to her property.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I am panicked. ... A bailiff from [IDENTIFYING_ORGANISATION] named [OFFICER_NAME] shoved a letter through my door saying they will force entry..."
+    },
+    {
+      "id": "a2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The threatened action is for an unpaid council tax debt of £1,450 owed to [IDENTIFYING_ORGANISATION].",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...for £1,450 unpaid council tax to [IDENTIFYING_ORGANISATION]."
+    },
+    {
+      "id": "a3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantDocuments",
+      "statementText": "Client reports receiving a letter from the bailiff. This document was not seen by the adviser during the interview.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...shoved a letter through my door..."
+    },
+    {
+      "id": "a4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Yes, there is an immediate risk of forced entry by a bailiff. The presence of a 6-month-old baby in the property elevates the risk.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...saying they will force entry... I have a 6-month-old baby girl [CHILD_1_FORENAME]..."
+    },
+    {
+      "id": "a5",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relatedIssues",
+      "statementText": "Potential benefit entitlement issues, as client states she has 'no money'.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...and no money."
+    },
+    {
+      "id": "a6",
+      "sectionName": "presentingIssue",
+      "fieldKey": "safeguardingConcern",
+      "statementText": "Potential safeguarding concern due to the presence of a 6-month-old infant in a household facing imminent bailiff action and reported financial hardship.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...they will force entry... I have a 6-month-old baby girl... and no money."
+    },
+    {
+      "id": "a7",
+      "sectionName": "clientGoals",
+      "fieldKey": "clientWouldLike",
+      "statementText": "To prevent the bailiff from forcing entry.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I am panicked. ... A bailiff ... saying they will force entry"
+    },
+    {
+      "id": "a8",
+      "sectionName": "clientGoals",
+      "fieldKey": "immediatePriority",
+      "statementText": "To address the imminent threat of forced entry from the bailiff.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I am panicked. ... A bailiff ... saying they will force entry"
+    },
+    {
+      "id": "a9",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME].",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]..."
+    },
+    {
+      "id": "a10",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client has one 6-month-old baby girl, [CHILD_1_FORENAME].",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I have a 6-month-old baby girl [CHILD_1_FORENAME]..."
+    },
+    {
+      "id": "a11",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "caringResponsibilities",
+      "statementText": "Client is the primary carer for her 6-month-old baby.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I have a 6-month-old baby girl [CHILD_1_FORENAME]..."
+    },
+    {
+      "id": "a12",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "relevantCircumstances",
+      "statementText": "Client is a new mother with a very young infant.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I have a 6-month-old baby girl [CHILD_1_FORENAME]..."
+    },
+    {
+      "id": "a13",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], London [POSTCODE]. Tenure is not established.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...and I live at [ADDRESS_LINE_1], London [POSTCODE]."
+    },
+    {
+      "id": "a14",
+      "sectionName": "incomeFinances",
+      "fieldKey": "otherDebtsLiabilities",
+      "statementText": "Client reports a council tax debt of £1,450 to [IDENTIFYING_ORGANISATION].",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...for £1,450 unpaid council tax to [IDENTIFYING_ORGANISATION]."
+    },
+    {
+      "id": "a15",
+      "sectionName": "incomeFinances",
+      "fieldKey": "savingsCapital",
+      "statementText": "Client states she has 'no money'.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...and no money."
+    },
+    {
+      "id": "a16",
+      "sectionName": "incomeFinances",
+      "fieldKey": "immediateFinancialHardship",
+      "statementText": "Yes, client reports having 'no money' and is facing bailiff action for a significant debt.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...for £1,450 unpaid council tax... and no money."
+    },
+    {
+      "id": "a17",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "urgentActionRequired",
+      "statementText": "Yes, action is required to prevent forced entry by the bailiff.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "...saying they will force entry..."
+    },
+    {
+      "id": "a18",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client presented as 'panicked', which may impact her ability to deal with the issue without support.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I am panicked."
+    },
+    {
+      "id": "a19",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client has a 6-month-old baby, which constitutes a vulnerability in the context of bailiff enforcement action. She also reports extreme financial hardship.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I have a 6-month-old baby girl [CHILD_1_FORENAME] and no money."
+    },
+    {
+      "id": "a20",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "effectOnAbility",
+      "statementText": "Client's state of panic may impair her ability to process information and make decisions.",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "I am panicked."
+    },
+    {
+      "id": "a21",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client attended in person. Contact telephone number is [PHONE_NUMBER].",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:12",
+      "transcriptSnippet": "Mobile [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### Case Note Summary\n\n**Client:** [CLIENT_FORENAME]\n**Contact:** [PHONE_NUMBER]\n\n**Presenting Issue:**\nClient is in a state of panic due to receiving a letter from a bailiff, [OFFICER_NAME] of [IDENTIFYING_ORGANISATION], threatening forced entry. The action relates to a council tax debt of £1,450 owed to [IDENTIFYING_ORGANISATION]. This is an emergency situation, with a significant risk of forced entry. A potential safeguarding concern is noted due to the presence of a 6-month-old baby, [CHILD_1_FORENAME], in the household.\n\n**Client's Goal:**\nThe client's immediate priority is to prevent the bailiff from forcing entry into her home.\n\n**Household & Finances:**\nThe client lives with her 6-month-old baby at [ADDRESS_LINE_1], London [POSTCODE]. She reports having 'no money', indicating immediate financial hardship. Full financial details were not established.\n\n**Vulnerability & Support Needs:**\nThe client is considered vulnerable due to having a 6-month-old baby, her reported state of panic, and her financial situation. Her distress may affect her ability to manage the situation without support.\n\n**Urgency:**\nUrgent action is required to address the threat of forced entry. The deadline associated with the bailiff's notice was not established.\n\n**Gaps & Limitations:**\nThis was an initial assessment only. Key information is missing, including: details of the bailiff notice, the period of the council tax debt, the client's full financial circumstances (income/benefits), housing tenure, and consent to share information. No advice was provided or actions taken beyond initial information gathering."
+}

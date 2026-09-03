@@ -1,0 +1,226 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client, speaking via a LanguageLine Spanish interpreter, stated that her employer, [EMPLOYER], has refused to provide her with form SMP1 for Statutory Maternity Pay. [Attribution ID: 1]",
+    "relevantBackground": "Client stated her manager, [MANAGER_NAME], gave the reason for refusal as the client having taken sick leave during her pregnancy. [Attribution ID: 2]",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Not established during this interview.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO]. [Attribution ID: 3]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Client is pregnant. [Attribution ID: 4]",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. [Attribution ID: 5]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client is employed by [EMPLOYER]. [Attribution ID: 6] Specific income details were not established.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Client is attempting to claim Statutory Maternity Pay. [Attribution ID: 7]",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial contact to establish the presenting issue. The call appears to have ended before advice could be given."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Client requires a Spanish interpreter to communicate. [Attribution ID: 8]",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "A LanguageLine Spanish interpreter (ID 4821) was used for the duration of the call. [Attribution ID: 9]",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Client can be contacted by phone on [PHONE_NUMBER]. [Attribution ID: 10]",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser initiated a conference call with a LanguageLine Spanish interpreter (ID 4821) to facilitate the interview. [Attribution ID: 11]",
+      "Adviser recorded client's personal details and the outline of the presenting issue. [Attribution ID: 12]"
+    ],
+    "outcomeOfActionTaken": "The basic details of the client's issue were established.",
+    "documentsProducedSent": "No documents were produced or sent during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "The entire case requires further exploration, including employment history, dates of sick leave, expected week of childbirth, and full financial circumstances to advise on options regarding the refusal of the SMP1 form."
+  },
+  "onwardReferrals": {
+    "organisation": "Not applicable.",
+    "reason": "Not applicable.",
+    "method": "Not applicable.",
+    "contactDetailsProvided": "Not applicable.",
+    "urgencyCommunicated": "Not applicable.",
+    "consentObtained": "Not applicable.",
+    "assistedInfoProvided": "Not applicable.",
+    "clientUnderstands": "Not applicable."
+  },
+  "gapsAndLimitations": [
+    "The interview was very brief and appears to have been cut short after the initial problem was stated.",
+    "Client's specific goals were not established.",
+    "No background information was gathered (e.g., length of employment, earnings, sick leave dates, expected date of birth).",
+    "No documents were seen or discussed.",
+    "Client's full household composition and financial situation were not explored.",
+    "No advice or options were discussed.",
+    "No deadlines were identified.",
+    "Client's capability, beyond the need for an interpreter, was not assessed.",
+    "No next steps were agreed with the client or for the adviser.",
+    "Permission to share data was not obtained."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client, speaking via a LanguageLine Spanish interpreter, stated that her employer, [EMPLOYER], has refused to provide her with form SMP1 for Statutory Maternity Pay.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "My boss at [EMPLOYER] [MANAGER_NAME] refused to give me form SMP1 for Statutory Maternity Pay"
+    },
+    {
+      "id": "2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client stated her manager, [MANAGER_NAME], gave the reason for refusal as the client having taken sick leave during her pregnancy.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "saying I took sick leave during pregnancy."
+    },
+    {
+      "id": "3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO].",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "The client says: My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]."
+    },
+    {
+      "id": "4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client is pregnant.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "refused to give me form SMP1 for Statutory Maternity Pay, saying I took sick leave during pregnancy."
+    },
+    {
+      "id": "5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "Address [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "6",
+      "sectionName": "incomeFinances",
+      "fieldKey": "employmentIncome",
+      "statementText": "Client is employed by [EMPLOYER].",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "My boss at [EMPLOYER]"
+    },
+    {
+      "id": "7",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsClaimedPending",
+      "statementText": "Client is attempting to claim Statutory Maternity Pay.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "refused to give me form SMP1 for Statutory Maternity Pay"
+    },
+    {
+      "id": "8",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client requires a Spanish interpreter to communicate.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "Conference call connected with LanguageLine Spanish interpreter 4821. Interpreter: The client says:"
+    },
+    {
+      "id": "9",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "reasonableAdjustments",
+      "statementText": "A LanguageLine Spanish interpreter (ID 4821) was used for the duration of the call.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "Conference call connected with LanguageLine Spanish interpreter 4821."
+    },
+    {
+      "id": "10",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client can be contacted by phone on [PHONE_NUMBER].",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "11",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser initiated a conference call with a LanguageLine Spanish interpreter (ID 4821) to facilitate the interview.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "Conference call connected with LanguageLine Spanish interpreter 4821."
+    },
+    {
+      "id": "12",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser recorded client's personal details and the outline of the presenting issue.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:10",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]. Address [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]. My boss at [EMPLOYER] [MANAGER_NAME] refused to give me form SMP1 for Statutory Maternity Pay, saying I took sick leave during pregnancy."
+    }
+  ],
+  "formattedMarkdown": "### AQS Level 3 Case Note\n\n**PRESENTING ISSUE**\nClient, speaking via a LanguageLine Spanish interpreter, stated that her employer, [EMPLOYER], has refused to provide her with form SMP1 for Statutory Maternity Pay. Client stated her manager, [MANAGER_NAME], gave the reason for refusal as the client having taken sick leave during her pregnancy. No relevant documents were seen. No emergency or risk was established.\n\n**CLIENT GOALS**\nClient's goals and priorities were not established during this brief initial contact.\n\n**HOUSEHOLD MAKE UP**\nClient is [CLIENT_FORENAME], DOB [DOB], NINO [[NINO]]. She is pregnant and resides at [ADDRESS_LINE_1], [POSTCODE]. Other household details were not established.\n\n**INCOME / FINANCES (INCL. BENEFITS)**\nClient is employed by [EMPLOYER] and is attempting to claim Statutory Maternity Pay. Specific income details, other benefits, and financial circumstances were not established.\n\n**OPTIONS DISCUSSED**\nThe interview ended before any options could be researched or discussed.\n\n**DEADLINES / KEY DATES**\nNo deadlines or key dates were established during this interview.\n\n**SUPPORT NEEDS / VULNERABILITY**\nClient requires a Spanish interpreter to communicate. A LanguageLine interpreter (ID 4821) was used for the call. Client's contact number is [PHONE_NUMBER].\n\n**ACTION TAKEN**\n- Adviser initiated a conference call with a LanguageLine Spanish interpreter (ID 4821) to facilitate the interview.\n- Adviser recorded client's personal details and the outline of the presenting issue.\n\n**NEXT STEPS (CLIENT)**\nNo next steps were agreed with the client.\n\n**NEXT STEPS (ADVISER)**\nNo next steps were agreed for the adviser. The entire case requires further exploration, including employment history, dates of sick leave, expected week of childbirth, and full financial circumstances to advise on options regarding the refusal of the SMP1 form.\n\n**ONWARD REFERRALS / SIGNPOSTING**\nNo onward referrals or signposting were made.\n\n**GAPS AND LIMITATIONS**\n- The interview was very brief and appears to have been cut short after the initial problem was stated.\n- Client's specific goals were not established.\n- No background information was gathered (e.g., length of employment, earnings, sick leave dates, expected date of birth).\n- No documents were seen or discussed.\n- Client's full household composition and financial situation were not explored.\n- No advice or options were discussed.\n- No deadlines were identified.\n- Client's capability, beyond the need for an interpreter, was not assessed.\n- No next steps were agreed with the client or for the adviser.\n- Permission to share data was not obtained."
+}

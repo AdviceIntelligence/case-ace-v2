@@ -1,0 +1,182 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client reports that their employer, [EMPLOYER], ceased trading last Friday (att_1). The client states their manager, [MANAGER_NAME], informed them that there is no money available to pay their statutory redundancy or 3 weeks of accrued holiday pay (att_2).",
+    "relevantBackground": "The client's employment ended due to the closure of their employer, [EMPLOYER], last Friday (att_1).",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Client has lost their source of income and has been told they will not receive their final entitlements, indicating a risk of immediate financial hardship.",
+    "relatedIssues": "Potential issues include unpaid wages, holiday pay, notice pay, and statutory redundancy pay. The employer may be insolvent, which would affect how these claims are pursued.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "To recover the redundancy pay and 3 weeks of accrued holiday pay they believe they are owed (att_2).",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME] (att_3), DOB [DOB] (att_4), NINO [NINO] (att_5). Contact number is [PHONE_NUMBER] (att_6).",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE] (att_7)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client's employment with [EMPLOYER] ended last Friday (att_1). They are currently not in receipt of an income from employment.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Client has lost their employment and has been informed they will not receive final pay, indicating a high risk of immediate financial hardship (att_2).",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial consultation to gather facts. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Last Friday: Date client's employer, [EMPLOYER], closed down (att_1)."
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser recorded client's personal details (att_3, att_4, att_5, att_6, att_7).",
+      "Adviser recorded the details of the presenting issue regarding the closure of [EMPLOYER] and non-payment of entitlements (att_1, att_2)."
+    ],
+    "outcomeOfActionTaken": "Factual basis of the case established for further advice.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "No documents were seen (e.g., contract of employment, payslips).",
+    "Client's length of service with [EMPLOYER] was not established.",
+    "Client's weekly pay and contract type were not established.",
+    "The formal insolvency status of [EMPLOYER] (e.g., liquidation, administration) was not established.",
+    "Client's wider financial circumstances (e.g., savings, debts, benefit entitlement) were not explored.",
+    "Client's full household composition was not established.",
+    "No advice was provided or options discussed during this initial contact.",
+    "No next steps were agreed with the client or for the adviser.",
+    "Client's support needs or vulnerabilities were not assessed."
+  ],
+  "attributions": [
+    {
+      "id": "att_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client reports that their employer, [EMPLOYER], ceased trading last Friday.",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "The firm, [EMPLOYER], closed down last Friday."
+    },
+    {
+      "id": "att_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client states their manager, [MANAGER_NAME], informed them that there is no money available to pay their statutory redundancy or 3 weeks of accrued holiday pay.",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "The gaffer [MANAGER_NAME] says there is no money in the pot for our redundancy or 3 weeks accrued holiday."
+    },
+    {
+      "id": "att_3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME].",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "Howay man, name is [CLIENT_FORENAME]."
+    },
+    {
+      "id": "att_4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "DOB [DOB].",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "Born [DOB]."
+    },
+    {
+      "id": "att_5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "NINO [NINO].",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "NINO is [NINO]."
+    },
+    {
+      "id": "att_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Contact number is [PHONE_NUMBER].",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "att_7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:09",
+      "transcriptSnippet": "Address [ADDRESS_LINE_1], [POSTCODE]."
+    }
+  ],
+  "formattedMarkdown": "### Case Note Summary\n\n**Client:** [CLIENT_FORENAME]\n**Date of Birth:** [DOB]\n**NINO:** [NINO]\n\n**Presenting Issue:**\nThe client, [CLIENT_FORENAME], presented following the closure of their employer, [EMPLOYER], last Friday (att_1). The client was informed by their manager, [MANAGER_NAME], that the company has no funds to pay redundancy or 3 weeks of accrued holiday pay (att_2). This has resulted in a loss of income and potential immediate financial hardship.\n\n**Client's Goal:**\nThe client wishes to recover the redundancy and holiday pay they are owed (att_2).\n\n**Household & Finances:**\nThe client lives at [ADDRESS_LINE_1], [POSTCODE] (att_7). Further details regarding their household composition, income, benefits, and overall financial situation were not established during this initial interview.\n\n**Actions Taken:**\n- Recorded client's personal details (att_3, att_4, att_5, att_6, att_7).\n- Documented the presenting employment issue (att_1, att_2).\n\n**Gaps and Limitations:**\nThis was a brief initial contact. Key information is missing, including the client's length of service, weekly pay, the formal insolvency status of the employer, and the client's wider financial circumstances. No advice was provided, and no next steps were agreed."
+}

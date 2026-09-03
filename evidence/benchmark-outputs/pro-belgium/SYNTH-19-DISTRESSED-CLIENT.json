@@ -1,0 +1,200 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client's husband, [DECEASED_SPOUSE_NAME], passed away suddenly last week. Client states she cannot afford the £3,500 funeral bill from [IDENTIFYING_ORGANISATION] and has no money for food for her son, [CHILD_1_FORENAME].",
+    "relevantBackground": "Client is recently bereaved, with her husband having passed away in the last week.",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Client is in immediate financial hardship, stating she has no money for food for her child.",
+    "relatedIssues": "Bereavement, debt (funeral costs), potential welfare benefits entitlement.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Client is highly distressed. A potential safeguarding risk exists for the child, [CHILD_1_FORENAME], due to the client's statement of having no money for food."
+  },
+  "clientGoals": {
+    "clientWouldLike": "To find a way to pay for the funeral and to obtain money for food.",
+    "immediatePriority": "Obtaining money for food for her son, [CHILD_1_FORENAME].",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], DOB [DOB].",
+    "partner": "Client's husband, [DECEASED_SPOUSE_NAME], passed away last week.",
+    "childrenDependants": "Client has one son, [CHILD_1_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Client is the parent of [CHILD_1_FORENAME].",
+    "relevantCircumstances": "Client is a recent widow.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], London [POSTCODE]. Tenure not established."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Client reports a £3,500 funeral bill from [IDENTIFYING_ORGANISATION].",
+    "savingsCapital": "Client states she has 'no money'.",
+    "immediateFinancialHardship": "Yes, client states she has no money for food.",
+    "financialInfoRequired": "A full financial statement is required, including details of any income, benefits, savings, and other debts."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial contact where the client was highly distressed; the interview did not progress to the stage of discussing options."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Death of spouse [DECEASED_SPOUSE_NAME]: 'last week'."
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Yes, client requires immediate funds for food."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client was observed to be highly distressed and sobbing heavily, which may impact her ability to process information and take action at this time.",
+    "vulnerabilitySupportNeeds": "Client is vulnerable due to recent bereavement, significant emotional distress, and immediate financial hardship.",
+    "effectOnAbility": "The client's current emotional state may affect her ability to engage with complex advice or undertake required actions without support.",
+    "reasonableAdjustments": "Adviser provided a glass of water, tissues, and allowed the client time to compose herself.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client provided a phone number: [PHONE_NUMBER].",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser provided a glass of water and tissues to the client."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "No advice was provided or options discussed as the interview did not progress past the initial information gathering stage due to client distress.",
+    "Client's full financial circumstances (income, benefits, savings, capital, full debt schedule) were not established.",
+    "Client's employment status was not established.",
+    "Details of the deceased spouse's financial situation (e.g., NI contributions, pensions, insurance) were not established.",
+    "Eligibility for any bereavement benefits or a Funeral Expenses Payment was not explored.",
+    "The age of the dependent child, [CHILD_1_FORENAME], was not established.",
+    "Client's housing tenure and costs were not established.",
+    "Client's wider support network was not established.",
+    "Permission to share data was not obtained.",
+    "No next steps were agreed with the client or for the adviser."
+  ],
+  "attributions": [
+    {
+      "id": "att_1",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "reasonableAdjustments",
+      "statementText": "Adviser provided a glass of water, tissues, and allowed the client time to compose herself.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:00 - 00:00:02",
+      "transcriptSnippet": "Adviser: Here is a glass of water and some tissues. Take all the time you need."
+    },
+    {
+      "id": "att_2",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client was observed to be highly distressed and sobbing heavily",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:02 - 00:00:04",
+      "transcriptSnippet": "Client: (sobbing heavily) Thank you..."
+    },
+    {
+      "id": "att_3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], DOB [DOB].",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:04 - 00:00:07",
+      "transcriptSnippet": "I am [CLIENT_FORENAME]. DOB [DOB]."
+    },
+    {
+      "id": "att_4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], London [POSTCODE].",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:07 - 00:00:10",
+      "transcriptSnippet": "Address [ADDRESS_LINE_1], London [POSTCODE]."
+    },
+    {
+      "id": "att_5",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a phone number: [PHONE_NUMBER].",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:10 - 00:00:11",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "att_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "partner",
+      "statementText": "Client's husband, [DECEASED_SPOUSE_NAME], passed away last week.",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:11 - 00:00:14",
+      "transcriptSnippet": "My husband [DECEASED_SPOUSE_NAME] passed away suddenly last week."
+    },
+    {
+      "id": "att_7",
+      "sectionName": "incomeFinances",
+      "fieldKey": "otherDebtsLiabilities",
+      "statementText": "Client reports a £3,500 funeral bill from [IDENTIFYING_ORGANISATION].",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:14 - 00:00:17",
+      "transcriptSnippet": "I cannot afford the £3,500 funeral bill from [IDENTIFYING_ORGANISATION]"
+    },
+    {
+      "id": "att_8",
+      "sectionName": "incomeFinances",
+      "fieldKey": "immediateFinancialHardship",
+      "statementText": "Yes, client states she has no money for food.",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:17 - 00:00:20",
+      "transcriptSnippet": "and I have no money for food for our son [CHILD_1_FORENAME]."
+    },
+    {
+      "id": "att_9",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client has one son, [CHILD_1_FORENAME].",
+      "segmentId": "seg_2",
+      "timestampRange": "00:00:17 - 00:00:20",
+      "transcriptSnippet": "for our son [CHILD_1_FORENAME]."
+    }
+  ],
+  "formattedMarkdown": "### AQS Level 3 Case Note\n\n**Client:** [CLIENT_FORENAME] ([DOB])\n**Adviser:** Benchmark Adviser\n**Date:** Not established during this interview.\n\n#### PRESENTING ISSUE\nClient is recently bereaved following the sudden death of her husband, [DECEASED_SPOUSE_NAME], last week. She presented in a highly distressed state, reporting that she cannot afford a £3,500 funeral bill from [IDENTIFYING_ORGANISATION] and has no money for food for her son, [CHILD_1_FORENAME]. This situation presents an immediate risk of financial hardship and a potential safeguarding concern for the child.\n\n#### CLIENT GOALS\nThe client's immediate priority is to obtain money for food. Her overall goal is to find a way to manage the funeral costs.\n\n#### HOUSEHOLD & FINANCES\n- **Household:** The client lives with her son, [CHILD_1_FORENAME], at [ADDRESS_LINE_1], London [POSTCODE].\n- **Finances:** The client states she has 'no money'. She has a reported debt of a £3,500 funeral bill. Her income, benefits, savings, and employment status were not established during this initial contact.\n\n#### SUPPORT NEEDS & VULNERABILITY\nThe client is considered vulnerable due to recent bereavement, significant emotional distress, and acute financial hardship. She was sobbing heavily during the interview. The adviser made reasonable adjustments by providing water, tissues, and allowing the client time.\n\n#### ACTIONS & NEXT STEPS\n- **Action Taken by Adviser:** The adviser provided immediate comfort measures (water, tissues).\n- **Advice/Options:** The interview did not progress to a stage where advice or options could be discussed.\n- **Next Steps:** No next steps were agreed upon for the client or the adviser during this brief and emotional initial contact.\n\n#### GAPS AND LIMITATIONS\nThis was an initial, partial interview. Key information is missing across all areas, including the client's full financial situation, eligibility for state support (e.g., Funeral Expenses Payment, bereavement benefits), housing tenure, and support network. No advice was given, and no action plan was formulated."
+}

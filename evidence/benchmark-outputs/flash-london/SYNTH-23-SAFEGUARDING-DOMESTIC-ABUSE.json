@@ -1,0 +1,156 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client stated that her ex-partner, [EX_PARTNER_NAME], attacked her with a knife last night, threatened to kill her and her 4-year-old son [CHILD_1_FORENAME], took her front door keys, and is currently waiting outside the building.",
+    "relevantBackground": "The client experienced a violent attack by her ex-partner last night involving a knife and death threats.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Extremely high risk of immediate physical harm or death. The perpetrator is armed with a knife, has taken the client's keys, and is waiting outside the premises.",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Severe safeguarding concern involving immediate threat to life of the client and her 4-year-old child [CHILD_1_FORENAME]."
+  },
+  "clientGoals": {
+    "clientWouldLike": "To secure immediate safety for herself and her son [CHILD_1_FORENAME].",
+    "immediatePriority": "Immediate protection from the ex-partner waiting outside.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "To secure immediate emergency police intervention and safe shelter."
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB [DOB], NINO [NINO], Phone [PHONE_NUMBER]",
+    "partner": "Ex-partner: [EX_PARTNER_NAME] (perpetrator of violence)",
+    "childrenDependants": "Son: [CHILD_1_FORENAME], aged 4",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Mother of 4-year-old son [CHILD_1_FORENAME]",
+    "relevantCircumstances": "Active domestic abuse and immediate threat to life.",
+    "currentAccommodation": "[ADDRESS_LINE_1], [POSTCODE] (compromised as perpetrator has keys)"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [
+      {
+        "optionTitle": "Emergency Police Intervention",
+        "whatThisInvolves": "Calling 999 immediately to report the threat to life and the presence of the armed perpetrator outside.",
+        "eligibilityGrounds": "Immediate threat to life and active harassment/stalking.",
+        "advantages": "Provides immediate physical protection and potential arrest of the perpetrator.",
+        "disadvantages": "None in an emergency context.",
+        "risksConsequences": "Potential escalation if perpetrator attempts to flee or resist, but necessary for survival.",
+        "costs": "Free",
+        "likelyPracticalEffect": "Police dispatch to secure the area and protect the client.",
+        "evidenceRequired": "Client's testimony of the knife attack and current threat.",
+        "relevantDeadline": "Immediate"
+      }
+    ],
+    "clientPreferredOption": "Emergency Police Intervention",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "Interview cut short to prioritize immediate physical safety and emergency response."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Immediate",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Immediate emergency police dispatch required."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Highly distressed, whispering, in immediate fear for her life.",
+    "vulnerabilitySupportNeeds": "Victim of severe domestic violence and active stalking/threats.",
+    "effectOnAbility": "Severely limits ability to think long-term or travel safely.",
+    "reasonableAdjustments": "Providing a secure, private room; whispering/lowering voice to maintain safety; handling emergency calls on her behalf.",
+    "practicalAssistanceRequired": "Immediate physical security and liaison with emergency services.",
+    "clientAccess": "In-person",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Reassured the client that she is currently in a safe place inside the office."
+    ],
+    "outcomeOfActionTaken": "Client was able to safely disclose her identity and the immediate threat.",
+    "documentsProducedSent": "None",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [
+      "Remain in the secure area of the office while emergency services are contacted."
+    ],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Call 999 immediately to report the active threat to life and request urgent police presence.",
+      "Lock down the immediate office entry points if possible to ensure the perpetrator cannot gain access.",
+      "Liaise with the office safeguarding lead."
+    ],
+    "followUpContact": {
+      "date": "Immediate",
+      "time": "Immediate",
+      "channel": "In-person / Emergency Services",
+      "purpose": "Ensure immediate safety of client and child"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Emergency Services (Police)",
+    "reason": "Immediate threat to life, armed perpetrator outside.",
+    "method": "Emergency phone call (999)",
+    "contactDetailsProvided": "999",
+    "urgencyCommunicated": "Critical / Immediate",
+    "consentObtained": "Implied by emergency disclosure of immediate threat to life.",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No financial, employment, or housing details established due to the emergency nature of the presentation.",
+    "Location and current safety status of the 4-year-old child [CHILD_1_FORENAME] not fully clarified (whether he is currently with the mother or elsewhere).",
+    "Explicit consent to share details with the police was not formally recorded due to the immediate crisis."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Reassured the client that she is currently in a safe place inside the office.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00 - 00:02",
+      "transcriptSnippet": "Adviser: You are in a safe place."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "[CLIENT_FORENAME], DOB [DOB], NINO [NINO], Phone [PHONE_NUMBER]",
+      "segmentId": "seg_2",
+      "timestampRange": "00:02 - 00:15",
+      "transcriptSnippet": "Client: (whispering) My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]. I live at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client stated that her ex-partner, [EX_PARTNER_NAME], attacked her with a knife last night, threatened to kill her and her 4-year-old son [CHILD_1_FORENAME], took her front door keys, and is currently waiting outside the building.",
+      "segmentId": "seg_2",
+      "timestampRange": "00:15 - 00:30",
+      "transcriptSnippet": "My ex-partner [EX_PARTNER_NAME] attacked me with a knife last night. He threatened to kill me and my 4-year-old son [CHILD_1_FORENAME]. He took my front door keys and is waiting outside."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n- **Client Explanation:** The client disclosed that her ex-partner, [EX_PARTNER_NAME], attacked her with a knife last night, threatened to kill her and her 4-year-old son [CHILD_1_FORENAME], stole her keys, and is currently waiting outside the office.\n- **Emergency/Risk:** Critical. Immediate threat to life. Perpetrator is armed and waiting outside.\n- **Safeguarding:** Severe safeguarding risk to client and child.\n\n## HOUSEHOLD MAKE UP\n- **Client:** [CLIENT_FORENAME] (DOB: [DOB], NINO: [NINO])\n- **Dependants:** Son, [CHILD_1_FORENAME] (Age 4)\n- **Perpetrator:** Ex-partner [EX_PARTNER_NAME]\n- **Address:** [ADDRESS_LINE_1], [POSTCODE]\n\n## OPTIONS DISCUSSED\n- **Emergency Police Intervention (999):** Immediate dispatch of emergency services to secure the client's safety and apprehend the suspect.\n\n## ACTION TAKEN\n- Reassured client of her safety within the office.\n\n## NEXT STEPS (ADVISER)\n- Call 999 immediately to report the threat to life.\n- Secure the office premises.\n\n## GAPS AND LIMITATIONS\n- No financial or long-term housing details established due to the emergency nature of the presentation.\n- Current physical location of the child needs immediate verification."
+}

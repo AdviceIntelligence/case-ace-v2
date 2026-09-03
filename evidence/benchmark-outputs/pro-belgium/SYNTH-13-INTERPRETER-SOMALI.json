@@ -1,0 +1,240 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client states, via an interpreter, that her private landlord has given her 7 days to leave her property. [ATT_1]",
+    "relevantBackground": "Client is a private tenant. [ATT_2]",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Yes, there is an immediate risk of homelessness. The client has been given 7 days' notice to leave, has four children, and states she has nowhere to go. [ATT_3] This suggests a potential illegal eviction.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Potential safeguarding concern due to the imminent risk of homelessness for a family with four children. [ATT_4]"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Mrs [CLIENT_FORENAME], DOB [DOB]. [ATT_5]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Client has four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME]. [ATT_6]",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview, but implied care for four children.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Private rented property at [ADDRESS_LINE_1], Battersea [POSTCODE]. [ATT_7]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview, but client states she has 'nowhere to go', implying lack of funds for alternative accommodation. [ATT_8]",
+    "financialInfoRequired": "A full financial statement is required to assess benefit entitlement and ability to afford alternative housing."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial assessment to gather the presenting issue. No advice has been provided yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Client states she has been given '7 days to leave' by the landlord. [ATT_9]"
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Yes, the 7-day notice from the landlord, while likely invalid, creates an urgent situation requiring immediate advice and potential intervention. [ATT_9]"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client cannot speak English and requires an interpreter to communicate. [ATT_10]",
+    "vulnerabilitySupportNeeds": "Client is vulnerable due to a language barrier and the immediate risk of homelessness with her four children. [ATT_11]",
+    "effectOnAbility": "The language barrier prevents the client from communicating directly with the adviser, the landlord, or other agencies without assistance.",
+    "reasonableAdjustments": "An interpreter was used for the consultation. [ATT_12]",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client's telephone number is [PHONE_NUMBER]. [ATT_13]",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Initial details of the presenting issue were taken via an interpreter."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "A full housing and welfare benefits assessment is required."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "Nature of the notice to quit (verbal or written, e.g., Section 21, Section 8).",
+    "Date the notice was served.",
+    "Landlord's name and contact details.",
+    "Type of tenancy agreement (e.g., AST, excluded occupier).",
+    "Start date of tenancy.",
+    "Deposit protection status.",
+    "Rent amount and any arrears.",
+    "Client's immigration status.",
+    "Ages of the four children.",
+    "Client's full financial circumstances (income, benefits, capital).",
+    "Client's specific goals for the intervention.",
+    "Client's permission to share data.",
+    "Any advice given or options discussed.",
+    "Any actions agreed for client or adviser."
+  ],
+  "attributions": [
+    {
+      "id": "ATT_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client states, via an interpreter, that her private landlord has given her 7 days to leave her property.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "The private landlord has given her 7 days to leave."
+    },
+    {
+      "id": "ATT_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client is a private tenant.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "The private landlord has given her 7 days to leave."
+    },
+    {
+      "id": "ATT_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Yes, there is an immediate risk of homelessness. The client has been given 7 days' notice to leave, has four children, and states she has nowhere to go.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "The private landlord has given her 7 days to leave. She has four children... She has nowhere to go."
+    },
+    {
+      "id": "ATT_4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "safeguardingConcern",
+      "statementText": "Potential safeguarding concern due to the imminent risk of homelessness for a family with four children.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "She has four children... She has nowhere to go."
+    },
+    {
+      "id": "ATT_5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Mrs [CLIENT_FORENAME], DOB [DOB].",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "I am translating for Mrs [CLIENT_FORENAME]. Her DOB is [DOB]..."
+    },
+    {
+      "id": "ATT_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client has four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME].",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "She has four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME]."
+    },
+    {
+      "id": "ATT_7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Private rented property at [ADDRESS_LINE_1], Battersea [POSTCODE].",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "Address is [ADDRESS_LINE_1], Battersea [POSTCODE]."
+    },
+    {
+      "id": "ATT_8",
+      "sectionName": "incomeFinances",
+      "fieldKey": "immediateFinancialHardship",
+      "statementText": "Not established during this interview, but client states she has 'nowhere to go', implying lack of funds for alternative accommodation.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "She has nowhere to go."
+    },
+    {
+      "id": "ATT_9",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "dates",
+      "statementText": "Client states she has been given '7 days to leave' by the landlord.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "The private landlord has given her 7 days to leave."
+    },
+    {
+      "id": "ATT_10",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client cannot speak English and requires an interpreter to communicate.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "She cannot speak English..."
+    },
+    {
+      "id": "ATT_11",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client is vulnerable due to a language barrier and the immediate risk of homelessness with her four children.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "She has four children... She cannot speak English and has nowhere to go."
+    },
+    {
+      "id": "ATT_12",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "reasonableAdjustments",
+      "statementText": "An interpreter was used for the consultation.",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "I am translating for Mrs [CLIENT_FORENAME]."
+    },
+    {
+      "id": "ATT_13",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client's telephone number is [PHONE_NUMBER].",
+      "segmentId": "Interpreter",
+      "timestampRange": "N/A",
+      "transcriptSnippet": "Telephone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n**Client:** Mrs [CLIENT_FORENAME]\n**Date of Birth:** [DOB]\n**NINO:** [NINO]\n\n### PRESENTING ISSUE\nClient states, via an interpreter, that her private landlord has given her 7 days to leave her property at [ADDRESS_LINE_1], Battersea [POSTCODE] [ATT_1]. This presents an immediate risk of homelessness for the client and her four children, as she states she has nowhere else to go [ATT_3]. This may constitute an illegal eviction. A potential safeguarding concern is noted due to the risk of street homelessness for a family with children [ATT_4].\n\n### CLIENT GOALS\nClient's specific goals were not established during this initial interview.\n\n### HOUSEHOLD MAKE UP\nThe client, Mrs [CLIENT_FORENAME] [ATT_5], lives with her four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME] [ATT_6]. No other household members were mentioned. The property is a private rental [ATT_7].\n\n### INCOME / FINANCES (INCL. BENEFITS)\nThe client's financial situation, including income, benefits, and housing costs, was not established during this interview.\n\n### OPTIONS DISCUSSED\nNo options were discussed as this was an initial fact-finding interview.\n\n### DEADLINES / KEY DATES\nThe client reports a deadline of '7 days to leave' given by the landlord [ATT_9]. The exact date this notice was given was not established. This situation is considered urgent.\n\n### SUPPORT NEEDS / VULNERABILITY\nThe client is vulnerable due to having a language barrier and facing homelessness with four children [ATT_11]. She cannot speak English and required an interpreter for the consultation [ATT_10]. The reasonable adjustment of using an interpreter was made [ATT_12]. Contact can be made via telephone at [PHONE_NUMBER] [ATT_13].\n\n### ACTION TAKEN\n- Initial details of the presenting issue were taken via an interpreter.\n\n### NEXT STEPS (CLIENT)\nNo next steps were agreed with the client during this interview.\n\n### NEXT STEPS (ADVISER)\nNo next steps were agreed for the adviser during this interview. A full housing and welfare benefits assessment is required at the next contact.\n\n### GAPS AND LIMITATIONS\nSignificant information is missing, including: the nature of the tenancy and the notice provided, landlord's details, rent/arrears status, client's immigration status, children's ages, and the client's full financial circumstances. Permission to share data was not obtained."
+}

@@ -1,0 +1,277 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client, [CLIENT_FORENAME], attended with their father, [FATHER_NAME], to seek assistance with claiming Pension Credit and the associated Carer Addition for the father. (ID: 1, Seg: 1, 00:02-00:16)",
+    "relevantBackground": "Client stated their father, [FATHER_NAME] (DOB [DOB], NINO [NINO]), receives a State Pension of £165 per week. (ID: 2, Seg: 1, 00:02-00:16) The client reports providing 40 hours of care per week for their father. (ID: 3, Seg: 1, 00:02-00:16) They live together at [ADDRESS_LINE_1], Wandsworth [POSTCODE]. (ID: 4, Seg: 1, 00:02-00:16)",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Potential entitlement to Carer's Allowance for the client, [CLIENT_FORENAME], was noted as a related issue to explore, given they provide 40 hours of care per week. (ID: 5, Seg: 1, 00:02-00:16)",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Client stated they want to claim Pension Credit and the Carer Addition for the father, [FATHER_NAME]. (ID: 6, Seg: 1, 00:02-00:16)",
+    "immediatePriority": "To initiate claims for Pension Credit and the Carer Addition. (ID: 7, Seg: 1, 00:02-00:16)",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME]. (ID: 8, Seg: 1, 00:02-00:16)",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Client lives with their father, [FATHER_NAME]. Client provided his DOB as [DOB] and NINO as [NINO]. (ID: 9, Seg: 1, 00:02-00:16)",
+    "caringResponsibilities": "Client stated they provide 40 hours of care per week for their father. (ID: 10, Seg: 1, 00:02-00:16)",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Client stated they live at [ADDRESS_LINE_1], Wandsworth [POSTCODE]. (ID: 11, Seg: 1, 00:02-00:16) Tenure not established."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Client stated father, [FATHER_NAME], receives £165 per week in State Pension. (ID: 12, Seg: 1, 00:02-00:16)",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Pension Credit and Carer Addition for the father, [FATHER_NAME]. (ID: 13, Seg: 1, 00:02-00:16)",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Full financial details for the father ([FATHER_NAME]) including any savings, capital, or other income will be required to assess Pension Credit entitlement."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "This was an initial consultation to gather the presenting issue. No advice has been provided yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client attended the appointment with their father and was able to articulate the presenting issue on his behalf. (ID: 14, Seg: 1, 00:02-00:16)",
+    "vulnerabilitySupportNeeds": "The father, [FATHER_NAME], requires 40 hours of care per week from the client. (ID: 15, Seg: 1, 00:02-00:16) The client greeted the adviser in Punjabi ('Sat Sri Akal'), which may indicate a language preference, but this was not explored further. (ID: 16, Seg: 1, 00:02-00:16)",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Client has requested assistance with benefit claims. (ID: 17, Seg: 1, 00:02-00:16)",
+    "clientAccess": "Client attended in person and provided a phone number: [PHONE_NUMBER]. (ID: 18, Seg: 1, 00:02-00:16)",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's and father's personal details and the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Initial information gathered to inform the next steps of the advice process.",
+    "documentsProducedSent": "No documents were produced or sent during this interview.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "The interview was only an initial check-in; no advice was provided or options discussed.",
+    "Full financial circumstances for the father ([FATHER_NAME]), including capital, savings, and any other income, were not established.",
+    "The client's ([CLIENT_FORENAME]'s) own financial, employment, and benefit status was not established.",
+    "The nature of the father's health conditions and specific care needs were not discussed.",
+    "Housing tenure, housing costs, and council tax liability were not established.",
+    "Details of any other household members, debts, or liabilities were not established.",
+    "Language preference and any associated support needs were not confirmed.",
+    "Permission to act on the father's behalf or share information was not established."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client, [CLIENT_FORENAME], attended with their father, [FATHER_NAME], to seek assistance with claiming Pension Credit and the associated Carer Addition for the father.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "Sat Sri Akal, my name is [CLIENT_FORENAME]. I am here with my father [FATHER_NAME]... We need to claim Pension Credit and Carer Addition."
+    },
+    {
+      "id": "2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client stated their father, [FATHER_NAME] (DOB [DOB], NINO [NINO]), receives a State Pension of £165 per week.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "...my father [FATHER_NAME], DOB [DOB], NINO [NINO]... Father gets £165 state pension..."
+    },
+    {
+      "id": "3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The client reports providing 40 hours of care per week for their father.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "...and I provide 40 hours care a week."
+    },
+    {
+      "id": "4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "They live together at [ADDRESS_LINE_1], Wandsworth [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "We live at [ADDRESS_LINE_1], Wandsworth [POSTCODE]."
+    },
+    {
+      "id": "5",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relatedIssues",
+      "statementText": "Potential entitlement to Carer's Allowance for the client, [CLIENT_FORENAME], was noted as a related issue to explore, given they provide 40 hours of care per week.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "...and I provide 40 hours care a week."
+    },
+    {
+      "id": "6",
+      "sectionName": "clientGoals",
+      "fieldKey": "clientWouldLike",
+      "statementText": "Client stated they want to claim Pension Credit and the Carer Addition for the father, [FATHER_NAME].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "We need to claim Pension Credit and Carer Addition."
+    },
+    {
+      "id": "7",
+      "sectionName": "clientGoals",
+      "fieldKey": "immediatePriority",
+      "statementText": "To initiate claims for Pension Credit and the Carer Addition.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "We need to claim Pension Credit and Carer Addition."
+    },
+    {
+      "id": "8",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "...my name is [CLIENT_FORENAME]."
+    },
+    {
+      "id": "9",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "otherHouseholdMembers",
+      "statementText": "Client lives with their father, [FATHER_NAME]. Client provided his DOB as [DOB] and NINO as [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "I am here with my father [FATHER_NAME], DOB [DOB], NINO [NINO]. We live at [ADDRESS_LINE_1]..."
+    },
+    {
+      "id": "10",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "caringResponsibilities",
+      "statementText": "Client stated they provide 40 hours of care per week for their father.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "...and I provide 40 hours care a week."
+    },
+    {
+      "id": "11",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client stated they live at [ADDRESS_LINE_1], Wandsworth [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "We live at [ADDRESS_LINE_1], Wandsworth [POSTCODE]."
+    },
+    {
+      "id": "12",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsReceived",
+      "statementText": "Client stated father, [FATHER_NAME], receives £165 per week in State Pension.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "Father gets £165 state pension..."
+    },
+    {
+      "id": "13",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitEntitlementConsidered",
+      "statementText": "Pension Credit and Carer Addition for the father, [FATHER_NAME].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "We need to claim Pension Credit and Carer Addition."
+    },
+    {
+      "id": "14",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client attended the appointment with their father and was able to articulate the presenting issue on his behalf.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "Sat Sri Akal, my name is [CLIENT_FORENAME]. I am here with my father [FATHER_NAME]... We need to claim Pension Credit and Carer Addition."
+    },
+    {
+      "id": "15",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "The father, [FATHER_NAME], requires 40 hours of care per week from the client.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "...and I provide 40 hours care a week."
+    },
+    {
+      "id": "16",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "The client greeted the adviser in Punjabi ('Sat Sri Akal'), which may indicate a language preference, but this was not explored further.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "Sat Sri Akal..."
+    },
+    {
+      "id": "17",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "practicalAssistanceRequired",
+      "statementText": "Client has requested assistance with benefit claims.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "We need to claim Pension Credit and Carer Addition."
+    },
+    {
+      "id": "18",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client attended in person and provided a phone number: [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:16",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n### PRESENTING ISSUE\nClient, [CLIENT_FORENAME], attended with their father, [FATHER_NAME], to seek assistance with claiming Pension Credit and the associated Carer Addition for the father. (ID: 1, Seg: 1, 00:02-00:16) Client stated their father, [FATHER_NAME] (DOB [DOB], NINO [NINO]), receives a State Pension of £165 per week. (ID: 2, Seg: 1, 00:02-00:16) The client reports providing 40 hours of care per week for their father. (ID: 3, Seg: 1, 00:02-00:16) They live together at [ADDRESS_LINE_1], Wandsworth [POSTCODE]. (ID: 4, Seg: 1, 00:02-00:16) Potential entitlement to Carer's Allowance for the client, [CLIENT_FORENAME], was noted as a related issue to explore, given they provide 40 hours of care per week. (ID: 5, Seg: 1, 00:02-00:16)\n\n### CLIENT GOALS\nClient stated they want to claim Pension Credit and the Carer Addition for the father, [FATHER_NAME]. (ID: 6, Seg: 1, 00:02-00:16) The immediate priority is to initiate claims for these benefits. (ID: 7, Seg: 1, 00:02-00:16)\n\n### HOUSEHOLD MAKE UP\nClient is [CLIENT_FORENAME]. (ID: 8, Seg: 1, 00:02-00:16) They live with their father, [FATHER_NAME] (DOB [DOB], NINO [NINO]). (ID: 9, Seg: 1, 00:02-00:16) Client stated they provide 40 hours of care per week for their father. (ID: 10, Seg: 1, 00:02-00:16) They reside at [ADDRESS_LINE_1], Wandsworth [POSTCODE]. (ID: 11, Seg: 1, 00:02-00:16)\n\n### INCOME / FINANCES (INCL. BENEFITS)\nThe father, [FATHER_NAME], receives £165 per week in State Pension. (ID: 12, Seg: 1, 00:02-00:16) The presenting issue concerns entitlement to Pension Credit and the Carer Addition. (ID: 13, Seg: 1, 00:02-00:16) Other financial details were not established.\n\n### OPTIONS DISCUSSED\nThis was an initial consultation to gather the presenting issue. No advice has been provided yet.\n\n### DEADLINES / KEY DATES\nNot established during this interview.\n\n### SUPPORT NEEDS / VULNERABILITY\nClient attended the appointment with their father and was able to articulate the presenting issue on his behalf. (ID: 14, Seg: 1, 00:02-00:16) The father requires 40 hours of care per week from the client. (ID: 15, Seg: 1, 00:02-00:16) The client greeted the adviser in Punjabi ('Sat Sri Akal'), which may indicate a language preference, but this was not explored further. (ID: 16, Seg: 1, 00:02-00:16) Client has requested assistance with benefit claims. (ID: 17, Seg: 1, 00:02-00:16) Client attended in person and provided a phone number: [PHONE_NUMBER]. (ID: 18, Seg: 1, 00:02-00:16)\n\n### ACTION TAKEN\nRecorded client's and father's personal details and the presenting issue.\n\n### NEXT STEPS (CLIENT)\nNot established during this interview.\n\n### NEXT STEPS (ADVISER)\nNot established during this interview.\n\n### ONWARD REFERRALS / SIGNPOSTING\nNot established during this interview.\n\n### GAPS AND LIMITATIONS\n- The interview was only an initial check-in; no advice was provided or options discussed.\n- Full financial circumstances for the father ([FATHER_NAME]), including capital, savings, and any other income, were not established.\n- The client's ([CLIENT_FORENAME]'s) own financial, employment, and benefit status was not established.\n- The nature of the father's health conditions and specific care needs were not discussed.\n- Housing tenure, housing costs, and council tax liability were not established.\n- Details of any other household members, debts, or liabilities were not established.\n- Language preference and any associated support needs were not confirmed.\n- Permission to act on the father's behalf or share information was not established."
+}

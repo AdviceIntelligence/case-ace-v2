@@ -1,0 +1,193 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client states they were fired on the spot from their job at [EMPLOYER] on Friday by their manager, [MANAGER_NAME] (att-1). Client reports this happened after they queried £640 of unpaid overtime (att-2).",
+    "relevantBackground": "Client states they worked for [EMPLOYER] for 3 years (att-3). The employer has allegedly refused to pay notice pay or accrued holiday pay following the dismissal (att-4).",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Client has experienced an immediate and total loss of income due to the summary dismissal (att-1). Client also reports the employer is refusing to pay statutory entitlements including notice pay and accrued holiday pay (att-4).",
+    "relatedIssues": "Potential unfair dismissal, breach of contract (notice pay), unlawful deduction from wages (unpaid overtime), and non-payment of holiday pay under the Working Time Regulations 1998.",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview",
+    "immediatePriority": "Not established during this interview",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client's name is [CLIENT_FORENAME] (att-5). NINO is [NINO] (att-6). Address is [ADDRESS_LINE_1], London [POSTCODE] (att-7). Contact number is [PHONE_NUMBER] (att-8).",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client was employed by [EMPLOYER] for 3 years and is now unemployed (att-3, att-1). Rate of pay not established.",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Client states they are owed £640 in unpaid overtime from [EMPLOYER] (att-2).",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Client has been dismissed without notice and states the employer is refusing to pay notice pay or accrued holiday pay, indicating an immediate cessation of all earned income (att-1, att-4).",
+    "financialInfoRequired": "A full financial statement, including details of income, capital, housing costs, and any other debts, is required to assess benefit entitlement and financial hardship."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "This was an initial information-gathering interview only. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Dismissal occurred on 'Friday' (att-1). The specific date was not established."
+    ],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details (att-5, att-6, att-7, att-8).",
+      "Took an initial summary of the presenting employment issue (att-1, att-2, att-3, att-4)."
+    ],
+    "outcomeOfActionTaken": "Initial details of the case have been recorded to facilitate a full advice appointment.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "A full exploration of the dismissal, calculation of monies owed, benefit check, and discussion of options is required."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "This was an initial contact to record the presenting issue; no advice was given.",
+    "Client's specific goals and desired outcomes were not established.",
+    "Full household composition, including partner or dependants, was not established.",
+    "Client's full financial circumstances (income, benefits, savings, housing costs) were not established.",
+    "No documents (e.g., contract of employment, payslips) were seen.",
+    "The specific date of dismissal ('Friday') was not ascertained.",
+    "Deadlines for tribunal claims (e.g., ACAS Early Conciliation) were not discussed.",
+    "Client's support needs or vulnerabilities were not assessed.",
+    "No next steps for the client or adviser were agreed upon.",
+    "The amount of accrued holiday pay owed was not established.",
+    "The client's contractual notice period was not established."
+  ],
+  "attributions": [
+    {
+      "id": "att-1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client states they were fired on the spot from their job at [EMPLOYER] on Friday by their manager, [MANAGER_NAME]",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "I worked for [EMPLOYER] for 3 years. On Friday my manager [MANAGER_NAME] fired me on the spot with no investigation"
+    },
+    {
+      "id": "att-2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client reports this happened after they queried £640 of unpaid overtime",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "fired me on the spot with no investigation after I queried £640 of unpaid overtime."
+    },
+    {
+      "id": "att-3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client states they worked for [EMPLOYER] for 3 years",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "I worked for [EMPLOYER] for 3 years."
+    },
+    {
+      "id": "att-4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The employer has allegedly refused to pay notice pay or accrued holiday pay following the dismissal",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "They refused to pay my notice pay or accrued holiday."
+    },
+    {
+      "id": "att-5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client's name is [CLIENT_FORENAME]",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]."
+    },
+    {
+      "id": "att-6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "NINO is [NINO]",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "NINO is [NINO]."
+    },
+    {
+      "id": "att-7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Address is [ADDRESS_LINE_1], London [POSTCODE]",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "Address [ADDRESS_LINE_1], London [POSTCODE]."
+    },
+    {
+      "id": "att-8",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Contact number is [PHONE_NUMBER]",
+      "segmentId": "seg-1",
+      "timestampRange": "00:00 - 00:13",
+      "transcriptSnippet": "Contact [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### AQS Level 3 Case Note\n\n**PRESENTING ISSUE**\nClient states they were fired on the spot from their job at [EMPLOYER] on Friday by their manager, [MANAGER_NAME] (att-1). Client reports this happened after they queried £640 of unpaid overtime (att-2). Client states they worked for [EMPLOYER] for 3 years (att-3). The employer has allegedly refused to pay notice pay or accrued holiday pay following the dismissal (att-4). The client has experienced an immediate and total loss of income. Related issues include potential unfair dismissal, breach of contract, unlawful deduction from wages, and non-payment of holiday pay.\n\n**CLIENT GOALS**\nNot established during this interview.\n\n**HOUSEHOLD MAKE UP**\nClient's name is [CLIENT_FORENAME] (att-5). NINO is [NINO] (att-6). Address is [ADDRESS_LINE_1], London [POSTCODE] (att-7). Contact number is [PHONE_NUMBER] (att-8). Other household details were not established.\n\n**INCOME / FINANCES (INCL. BENEFITS)**\nClient was employed by [EMPLOYER] for 3 years and is now unemployed (att-3, att-1). Client states they are owed £640 in unpaid overtime from [EMPLOYER] (att-2). The client has been dismissed without notice and states the employer is refusing to pay notice pay or accrued holiday pay, indicating an immediate cessation of all earned income (att-1, att-4). A full financial statement is required.\n\n**OPTIONS DISCUSSED**\nThis was an initial information-gathering interview only. No advice was provided and no options were discussed.\n\n**DEADLINES / KEY DATES**\nDismissal occurred on 'Friday' (att-1). The specific date was not established. No deadlines were discussed with the client.\n\n**SUPPORT NEEDS / VULNERABILITY**\nNot established during this interview.\n\n**ACTION TAKEN**\n- Recorded client's personal details (att-5, att-6, att-7, att-8).\n- Took an initial summary of the presenting employment issue (att-1, att-2, att-3, att-4).\n\n**NEXT STEPS (CLIENT)**\nNot established during this interview.\n\n**NEXT STEPS (ADVISER)**\nNot established during this interview. A full exploration of the dismissal, calculation of monies owed, benefit check, and discussion of options is required in a future session.\n\n**ONWARD REFERRALS / SIGNPOSTING**\nNot established during this interview.\n\n**GAPS AND LIMITATIONS**\nThis was an initial contact to record the presenting issue; no advice was given. Client's specific goals, full household composition, and full financial circumstances were not established. No documents were seen. The specific date of dismissal was not ascertained, and no deadlines were discussed. Client's support needs were not assessed. No next steps were agreed."
+}

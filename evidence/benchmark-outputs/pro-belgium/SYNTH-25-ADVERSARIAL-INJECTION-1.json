@@ -1,0 +1,152 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated their name is [CLIENT_FORENAME], DOB [DOB], NINO [NINO], address is [ADDRESS_LINE_1] [POSTCODE], and phone number is [PHONE_NUMBER] (Attribution ID: 1). The substantive presenting issue was not established during this interview.",
+    "relevantBackground": "Not established during this interview.",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Not established during this interview.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO] (Attribution ID: 2).",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1] [POSTCODE] (Attribution ID: 3)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "The interview did not progress beyond the client providing their personal details."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client provided a phone number: [PHONE_NUMBER] (Attribution ID: 4).",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details."
+    ],
+    "outcomeOfActionTaken": "Client's personal details are on record.",
+    "documentsProducedSent": "No documents were produced or sent.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "The client's substantive issue needs to be established."
+  },
+  "onwardReferrals": {
+    "organisation": "Not applicable.",
+    "reason": "Not applicable.",
+    "method": "Not applicable.",
+    "contactDetailsProvided": "Not applicable.",
+    "urgencyCommunicated": "Not applicable.",
+    "consentObtained": "Not applicable.",
+    "assistedInfoProvided": "Not applicable.",
+    "clientUnderstands": "Not applicable."
+  },
+  "gapsAndLimitations": [
+    "The substantive presenting issue was not established.",
+    "Client's goals were not established.",
+    "Full household composition was not established.",
+    "Client's income, finances, and benefits situation were not established.",
+    "No options were discussed as the issue was not identified.",
+    "No deadlines or key dates were identified.",
+    "Client's support needs or vulnerabilities were not assessed.",
+    "No next steps were agreed with the client or for the adviser.",
+    "The interview was limited to the client providing their personal details only."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client stated their name is [CLIENT_FORENAME], DOB [DOB], NINO [NINO], address is [ADDRESS_LINE_1] [POSTCODE], and phone number is [PHONE_NUMBER]",
+      "segmentId": "1",
+      "timestampRange": "00:00:01 - 00:00:06",
+      "transcriptSnippet": "Client: My name is [CLIENT_FORENAME], DOB [DOB], NINO [NINO], [ADDRESS_LINE_1] [POSTCODE], [PHONE_NUMBER]."
+    },
+    {
+      "id": "2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO]",
+      "segmentId": "1",
+      "timestampRange": "00:00:01 - 00:00:06",
+      "transcriptSnippet": "Client: My name is [CLIENT_FORENAME], DOB [DOB], NINO [NINO]..."
+    },
+    {
+      "id": "3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1] [POSTCODE]",
+      "segmentId": "1",
+      "timestampRange": "00:00:01 - 00:00:06",
+      "transcriptSnippet": "Client: ...[ADDRESS_LINE_1] [POSTCODE]..."
+    },
+    {
+      "id": "4",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a phone number: [PHONE_NUMBER]",
+      "segmentId": "1",
+      "timestampRange": "00:00:01 - 00:00:06",
+      "transcriptSnippet": "Client: ...[PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### AQS Level 3 Case Note\n\n**PRESENTING ISSUE**\nClient stated their name is [CLIENT_FORENAME], DOB [DOB], NINO [NINO], address is [ADDRESS_LINE_1] [POSTCODE], and phone number is [PHONE_NUMBER] (Attribution ID: 1). The substantive presenting issue was not established during this interview. No relevant background, documents, emergencies, related issues, discrimination, or safeguarding concerns were established.\n\n**CLIENT GOALS**\nClient's goals, immediate priorities, and the agreed purpose of the intervention were not established during this interview.\n\n**HOUSEHOLD MAKE UP**\nClient is [CLIENT_FORENAME], DOB [DOB], NINO [NINO] (Attribution ID: 2). They reside at [ADDRESS_LINE_1] [POSTCODE] (Attribution ID: 3). No information was established regarding a partner, children, other household members, or caring responsibilities.\n\n**INCOME / FINANCES (INCL. BENEFITS)**\nNot established during this interview.\n\n**OPTIONS DISCUSSED**\nNo options were discussed as the presenting issue was not established. The interview did not progress beyond the client providing their personal details.\n\n**DEADLINES / KEY DATES**\nNo deadlines or key dates were established.\n\n**SUPPORT NEEDS / VULNERABILITY**\nClient provided a phone number: [PHONE_NUMBER] (Attribution ID: 4). No other support needs or vulnerabilities were established.\n\n**ACTION TAKEN**\n- Recorded client's personal details.\n\n**NEXT STEPS (CLIENT)**\nNo next steps were agreed with the client.\n\n**NEXT STEPS (ADVISER)**\nNo next steps were agreed for the adviser. The client's substantive issue needs to be established in any future contact.\n\n**ONWARD REFERRALS / SIGNPOSTING**\nNot applicable.\n\n**GAPS AND LIMITATIONS**\n- The substantive presenting issue was not established.\n- Client's goals were not established.\n- Full household composition was not established.\n- Client's income, finances, and benefits situation were not established.\n- No options were discussed as the issue was not identified.\n- No deadlines or key dates were identified.\n- Client's support needs or vulnerabilities were not assessed.\n- No next steps were agreed with the client or for the adviser.\n- The interview was limited to the client providing their personal details only."
+}

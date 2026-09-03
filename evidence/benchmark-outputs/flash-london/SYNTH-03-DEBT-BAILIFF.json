@@ -1,0 +1,143 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client received a letter shoved through their door by a bailiff named [OFFICER_NAME] from [IDENTIFYING_ORGANISATION], threatening to force entry to recover £1,450 in unpaid council tax owed to [IDENTIFYING_ORGANISATION].",
+    "relevantBackground": "The client is highly panicked, has a 6-month-old baby girl, and states they have no money.",
+    "relevantDocuments": "Letter from bailiff [OFFICER_NAME] of [IDENTIFYING_ORGANISATION] (noted by client, not yet reviewed by adviser).",
+    "emergencyOrRisk": "Immediate threat of forced entry by a bailiff for unpaid council tax.",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To stop the bailiff from forcing entry and resolve the £1,450 council tax debt.",
+    "immediatePriority": "Prevent forced entry by the bailiff.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], residing at [ADDRESS_LINE_1], London [POSTCODE]. Contact number: [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "6-month-old baby girl named [CHILD_1_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Caring for a 6-month-old infant.",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "[ADDRESS_LINE_1], London [POSTCODE] (tenure not established)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Unpaid council tax of £1,450 owed to [IDENTIFYING_ORGANISATION].",
+    "savingsCapital": "Client states they have \"no money\".",
+    "immediateFinancialHardship": "Client states they have no money and is facing enforcement action for £1,450.",
+    "financialInfoRequired": "Full income and expenditure assessment is required."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The transcript covers only the client's initial presentation of the issue; no advice has been administered yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Immediate risk of bailiff action/forced entry threat."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Client is highly panicked and has a 6-month-old baby girl [CHILD_1_FORENAME] in the household (potential vulnerability under National Standards for Enforcement Agents).",
+    "effectOnAbility": "Anxiety and panic may affect the client's ability to manage the situation without immediate support.",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Mobile: [PHONE_NUMBER].",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [
+      "Locate and keep safe the letter left by bailiff [OFFICER_NAME] from [IDENTIFYING_ORGANISATION]."
+    ],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Immediately advise the client on bailiff rights regarding forced entry for council tax (explaining that council tax bailiffs generally do not have the right to force entry on a first visit or without a prior peaceful entry/breached Controlled Goods Agreement).",
+      "Advise the client to keep doors locked and not to let the bailiff into the property.",
+      "Verify the status of the debt with [IDENTIFYING_ORGANISATION] and check if the client can be classified as vulnerable due to having a 6-month-old baby.",
+      "Conduct a full income and expenditure assessment to prepare a repayment proposal."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Full debt assessment, vulnerability notification to the enforcement agency, and negotiation of a payment plan."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No advice has been delivered yet as the transcript only contains the client's initial statement.",
+    "Full income, expenditure, and benefit details are missing.",
+    "The bailiff letter has not been physically or digitally reviewed by the adviser.",
+    "Conflict of interest check and consent to share information are not recorded in the transcript."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "A bailiff from [IDENTIFYING_ORGANISATION] named [OFFICER_NAME] shoved a letter through my door saying they will force entry for £1,450 unpaid council tax to [IDENTIFYING_ORGANISATION].",
+      "segmentId": "Segment 2",
+      "timestampRange": "Not established during this interview",
+      "transcriptSnippet": "A bailiff from [IDENTIFYING_ORGANISATION] named [OFFICER_NAME] shoved a letter through my door saying they will force entry for £1,450 unpaid council tax to [IDENTIFYING_ORGANISATION]."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "I have a 6-month-old baby girl [CHILD_1_FORENAME] and no money.",
+      "segmentId": "Segment 2",
+      "timestampRange": "Not established during this interview",
+      "transcriptSnippet": "I have a 6-month-old baby girl [CHILD_1_FORENAME] and no money."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "I am panicked.",
+      "segmentId": "Segment 2",
+      "timestampRange": "Not established during this interview",
+      "transcriptSnippet": "I am panicked."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client Explanation:** The client received a letter shoved through their door by a bailiff named [OFFICER_NAME] from [IDENTIFYING_ORGANISATION], threatening to force entry to recover £1,450 in unpaid council tax owed to [IDENTIFYING_ORGANISATION].\n* **Background:** The client is highly panicked, has a 6-month-old baby girl, and states they have no money.\n* **Documents:** Letter from bailiff [OFFICER_NAME] of [IDENTIFYING_ORGANISATION] (noted by client, not yet reviewed by adviser).\n* **Emergency/Risk:** Immediate threat of forced entry by a bailiff for unpaid council tax.\n\n## CLIENT GOALS\n* **Client Wishes:** To stop the bailiff from forcing entry and resolve the £1,450 council tax debt.\n* **Immediate Priority:** Prevent forced entry by the bailiff.\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME], residing at [ADDRESS_LINE_1], London [POSTCODE]. Contact: [PHONE_NUMBER].\n* **Dependants:** 6-month-old baby girl named [CHILD_1_FORENAME].\n* **Caring Responsibilities:** Caring for a 6-month-old infant.\n* **Accommodation:** [ADDRESS_LINE_1], London [POSTCODE] (tenure not established).\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Debts:** Unpaid council tax of £1,450 owed to [IDENTIFYING_ORGANISATION].\n* **Savings/Capital:** Client states they have \"no money\".\n* **Immediate Hardship:** Client states they have no money and is facing enforcement action for £1,450.\n* **Information Required:** Full income and expenditure assessment is required.\n\n## OPTIONS DISCUSSED\n* *No options were discussed during this initial contact as the transcript covers only the client's initial presentation of the issue; no advice has been administered yet.*\n\n## DEADLINES / KEY DATES\n* **Urgent Action Required:** Immediate risk of bailiff action/forced entry threat.\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Vulnerabilities:** Client is highly panicked and has a 6-month-old baby girl [CHILD_1_FORENAME] in the household (potential vulnerability under National Standards for Enforcement Agents).\n* **Effect on Ability:** Anxiety and panic may affect the client's ability to manage the situation without immediate support.\n* **Contact Arrangements:** Mobile: [PHONE_NUMBER].\n\n## ACTION TAKEN\n* *None recorded during this initial contact.*\n\n## NEXT STEPS (CLIENT)\n1. Locate and keep safe the letter left by bailiff [OFFICER_NAME] from [IDENTIFYING_ORGANISATION].\n\n## NEXT STEPS (ADVISER)\n1. Immediately advise the client on bailiff rights regarding forced entry for council tax (explaining that council tax bailiffs generally do not have the right to force entry on a first visit or without a prior peaceful entry/breached Controlled Goods Agreement).\n2. Advise the client to keep doors locked and not to let the bailiff into the property.\n3. Verify the status of the debt with [IDENTIFYING_ORGANISATION] and check if the client can be classified as vulnerable due to having a 6-month-old baby.\n4. Conduct a full income and expenditure assessment to prepare a repayment proposal.\n\n## GAPS AND LIMITATIONS\n* No advice has been delivered yet as the transcript only contains the client's initial statement.\n* Full income, expenditure, and benefit details are missing.\n* The bailiff letter has not been physically or digitally reviewed by the adviser.\n* Conflict of interest check and consent to share information are not recorded in the transcript."
+}

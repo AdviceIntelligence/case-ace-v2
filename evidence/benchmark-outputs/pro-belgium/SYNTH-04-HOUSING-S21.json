@@ -1,0 +1,261 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client states they have received a Form 6A notice to leave their property by 1st November from their landlord, [LANDLORD_NAME] (Attribution ID: 1).",
+    "relevantBackground": "Client reports 'terrible black mould' in the bedroom where their daughter, [CHILD_1_FORENAME], sleeps (Attribution ID: 2). Client also states they never received a Gas Safety Certificate, EPC, or the How to Rent guide when they moved in (Attribution ID: 3).",
+    "relevantDocuments": "Client mentioned receiving a Form 6A notice (Attribution ID: 4). It was not established if this document was seen by the adviser.",
+    "emergencyOrRisk": "The notice to leave creates a risk of homelessness (Attribution ID: 5). The presence of 'terrible black mould' in a child's bedroom presents a potential health risk (Attribution ID: 6).",
+    "relatedIssues": "Housing disrepair (mould) and potential invalidity of the eviction notice due to the stated failure to provide prescribed documents (Gas Safety, EPC, How to Rent guide) (Attribution ID: 7).",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "A potential safeguarding concern exists regarding the health of the client's daughter, [CHILD_1_FORENAME], due to sleeping in a room with 'terrible black mould' (Attribution ID: 8)."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client's name is [CLIENT_FORENAME] (Attribution ID: 9).",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Client has one daughter, [CHILD_1_FORENAME] (Attribution ID: 10).",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "The client's daughter sleeps in the bedroom affected by black mould (Attribution ID: 11).",
+    "currentAccommodation": "Client lives at [ADDRESS_LINE_1], [POSTCODE] (Attribution ID: 12)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial consultation to gather facts. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Client states the leave date on the Form 6A notice is 1st November (Attribution ID: 13)."
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "The eviction notice with a leave date of 1st November indicates urgent attention is required (Attribution ID: 14)."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Client has a dependent child, [CHILD_1_FORENAME], whose health may be at risk due to the housing conditions (black mould) (Attribution ID: 15).",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Client provided a phone number: [PHONE_NUMBER] (Attribution ID: 16). Client attended the interview in person.",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "Client's specific goals and desired outcomes were not established.",
+    "Confirmation that the Form 6A notice was seen by the adviser was not recorded.",
+    "Key tenancy details were not established: start date, tenancy type, rent amount, deposit protection status.",
+    "Client's full financial circumstances, including income, benefits, and debts, were not discussed.",
+    "No advice was provided or options discussed during this initial contact.",
+    "No actions were taken during the interview or agreed for the future.",
+    "Client's specific support needs or capabilities beyond having a dependent child were not assessed.",
+    "Client's consent to share information was not obtained.",
+    "The history of the disrepair issue (e.g., when it was first reported to the landlord and any response) was not established.",
+    "The legal validity of the Form 6A notice was not assessed."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client states they have received a Form 6A notice to leave their property by 1st November from their landlord, [LANDLORD_NAME]",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "I am [CLIENT_FORENAME], living at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]. My landlord [LANDLORD_NAME] gave me a Form 6A notice to leave by 1st November."
+    },
+    {
+      "id": "2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client reports 'terrible black mould' in the bedroom where their daughter, [CHILD_1_FORENAME], sleeps",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My flat has terrible black mould in the bedroom where my daughter [CHILD_1_FORENAME] sleeps."
+    },
+    {
+      "id": "3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client also states they never received a Gas Safety Certificate, EPC, or the How to Rent guide when they moved in",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "I never received an Gas Safety Certificate, EPC, or How to Rent guide when I moved in."
+    },
+    {
+      "id": "4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantDocuments",
+      "statementText": "Client mentioned receiving a Form 6A notice",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My landlord [LANDLORD_NAME] gave me a Form 6A notice to leave by 1st November."
+    },
+    {
+      "id": "5",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "The notice to leave creates a risk of homelessness",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My landlord [LANDLORD_NAME] gave me a Form 6A notice to leave by 1st November."
+    },
+    {
+      "id": "6",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "The presence of 'terrible black mould' in a child's bedroom presents a potential health risk",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My flat has terrible black mould in the bedroom where my daughter [CHILD_1_FORENAME] sleeps."
+    },
+    {
+      "id": "7",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relatedIssues",
+      "statementText": "Housing disrepair (mould) and potential invalidity of the eviction notice due to the stated failure to provide prescribed documents (Gas Safety, EPC, How to Rent guide)",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My flat has terrible black mould... I never received an Gas Safety Certificate, EPC, or How to Rent guide when I moved in."
+    },
+    {
+      "id": "8",
+      "sectionName": "presentingIssue",
+      "fieldKey": "safeguardingConcern",
+      "statementText": "A potential safeguarding concern exists regarding the health of the client's daughter, [CHILD_1_FORENAME], due to sleeping in a room with 'terrible black mould'",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My flat has terrible black mould in the bedroom where my daughter [CHILD_1_FORENAME] sleeps."
+    },
+    {
+      "id": "9",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client's name is [CLIENT_FORENAME]",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "I am [CLIENT_FORENAME]"
+    },
+    {
+      "id": "10",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client has one daughter, [CHILD_1_FORENAME]",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "my daughter [CHILD_1_FORENAME] sleeps"
+    },
+    {
+      "id": "11",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "relevantCircumstances",
+      "statementText": "The client's daughter sleeps in the bedroom affected by black mould",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My flat has terrible black mould in the bedroom where my daughter [CHILD_1_FORENAME] sleeps."
+    },
+    {
+      "id": "12",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client lives at [ADDRESS_LINE_1], [POSTCODE]",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "living at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "13",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "dates",
+      "statementText": "Client states the leave date on the Form 6A notice is 1st November",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "a Form 6A notice to leave by 1st November."
+    },
+    {
+      "id": "14",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "urgentActionRequired",
+      "statementText": "The eviction notice with a leave date of 1st November indicates urgent attention is required",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "a Form 6A notice to leave by 1st November."
+    },
+    {
+      "id": "15",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client has a dependent child, [CHILD_1_FORENAME], whose health may be at risk due to the housing conditions (black mould)",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "My flat has terrible black mould in the bedroom where my daughter [CHILD_1_FORENAME] sleeps."
+    },
+    {
+      "id": "16",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client provided a phone number: [PHONE_NUMBER]",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:17",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## Case Note: [CLIENT_FORENAME] [CLIENT_SURNAME]\n\n### PRESENTING ISSUE\nClient, [CLIENT_FORENAME], has received a Form 6A notice from their landlord, [LANDLORD_NAME], requiring them to vacate their property at [ADDRESS_LINE_1], [POSTCODE] by 1st November. The client reports significant housing disrepair, specifically 'terrible black mould' in the bedroom used by their daughter, [CHILD_1_FORENAME]. The client also states that at the start of the tenancy, they were not provided with a Gas Safety Certificate, an EPC, or the 'How to Rent' guide. This raises a risk of homelessness and a potential health risk to a child, which may constitute a safeguarding concern. The non-provision of prescribed documents may impact the validity of the eviction notice.\n\n### CLIENT GOALS\nClient's specific goals were not established during this initial interview.\n\n### HOUSEHOLD & ACCOMMODATION\n- **Client**: [CLIENT_FORENAME]\n- **Dependants**: One daughter, [CHILD_1_FORENAME].\n- **Accommodation**: Rented flat at [ADDRESS_LINE_1], [POSTCODE].\n- **Circumstances**: The client's daughter sleeps in a room with significant black mould.\n\n### FINANCES\nClient's financial circumstances, including income, benefits, and savings, were not established during this interview.\n\n### OPTIONS & ADVICE\nNo options were discussed or advice given during this fact-finding interview.\n\n### DEADLINES\n- **1st November**: Date client is required to leave the property as per the Form 6A notice.\n\n### SUPPORT NEEDS & VULNERABILITY\n- The client has a dependent child whose health may be at risk due to the housing conditions.\n- Client attended in person and provided a contact number: [PHONE_NUMBER].\n- Other support needs were not established.\n\n### ACTIONS & NEXT STEPS\nNo actions were taken by the adviser, and no next steps were agreed with the client during this brief initial contact.\n\n### GAPS & LIMITATIONS\nThis was an initial consultation to gather basic facts. A full assessment is required, covering: client's goals, tenancy details, financial situation, history of the disrepair issue, and a review of the Form 6A and other tenancy documents. No advice was provided."
+}

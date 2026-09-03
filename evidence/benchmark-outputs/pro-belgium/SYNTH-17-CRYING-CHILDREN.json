@@ -1,0 +1,221 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated that their Universal Credit Local Housing Allowance leaves a £250 monthly shortfall for their rent, and their landlord, [LANDLORD_NAME], is threatening eviction. [ATT-1]",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Client reports being threatened with eviction by their landlord, [LANDLORD_NAME]. [ATT-2]",
+    "relatedIssues": "Rent shortfall/potential arrears due to Universal Credit Local Housing Allowance not covering the full rent amount. [ATT-3]",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview",
+    "immediatePriority": "Not established during this interview",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance Number is [NINO]. [ATT-4]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Client has at least two children, named [CHILD_1_FORENAME] and [CHILD_2_FORENAME], who were present during the consultation. [ATT-5]",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Client stated they live at [ADDRESS_LINE_1], [POSTCODE]. [ATT-6]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Client stated they are in receipt of Universal Credit with a Local Housing Allowance component. [ATT-7]",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Client stated there is a £250 monthly rent shortfall after their Local Housing Allowance is applied. The full rental amount was not established. [ATT-8]",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Client reports a £250 monthly rent shortfall. [ATT-9]",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview did not progress to the stage of discussing options."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Client attended the interview with at least two young children who were audibly distressed. [ATT-10]",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Adviser reassured the client regarding the noise from the children. [ATT-11]",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Client's phone number is [PHONE_NUMBER]. [ATT-12]",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "The interview was very brief and did not progress beyond the initial presentation of the issue.",
+    "Client's goals and desired outcomes were not established.",
+    "A full financial assessment was not conducted (e.g., full rent amount, other income, debts, capital).",
+    "The nature of the eviction threat (e.g., notice served, court date) was not established.",
+    "No options were discussed or advice given.",
+    "No next steps were agreed with the client or for the adviser.",
+    "The full extent of any vulnerabilities was not explored.",
+    "Permission to share data was not obtained."
+  ],
+  "attributions": [
+    {
+      "id": "ATT-1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client stated that their Universal Credit Local Housing Allowance leaves a £250 monthly shortfall for their rent, and their landlord, [LANDLORD_NAME], is threatening eviction.",
+      "segmentId": "1",
+      "timestampRange": "00:04-00:15",
+      "transcriptSnippet": "My Universal Credit Local Housing Allowance leaves a £250 monthly rent shortfall. My landlord [LANDLORD_NAME] is threatening eviction."
+    },
+    {
+      "id": "ATT-2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Client reports being threatened with eviction by their landlord, [LANDLORD_NAME].",
+      "segmentId": "1",
+      "timestampRange": "00:13-00:15",
+      "transcriptSnippet": "My landlord [LANDLORD_NAME] is threatening eviction."
+    },
+    {
+      "id": "ATT-3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relatedIssues",
+      "statementText": "Rent shortfall/potential arrears due to Universal Credit Local Housing Allowance not covering the full rent amount.",
+      "segmentId": "1",
+      "timestampRange": "00:11-00:13",
+      "transcriptSnippet": "My Universal Credit Local Housing Allowance leaves a £250 monthly rent shortfall."
+    },
+    {
+      "id": "ATT-4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance Number is [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:04-00:07",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]."
+    },
+    {
+      "id": "ATT-5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client has at least two children, named [CHILD_1_FORENAME] and [CHILD_2_FORENAME], who were present during the consultation.",
+      "segmentId": "1",
+      "timestampRange": "00:09-00:11",
+      "transcriptSnippet": "Shh [CHILD_1_FORENAME], shh [CHILD_2_FORENAME]!"
+    },
+    {
+      "id": "ATT-6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client stated they live at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:07-00:08",
+      "transcriptSnippet": "Living at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "ATT-7",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsReceived",
+      "statementText": "Client stated they are in receipt of Universal Credit with a Local Housing Allowance component.",
+      "segmentId": "1",
+      "timestampRange": "00:11-00:12",
+      "transcriptSnippet": "My Universal Credit Local Housing Allowance..."
+    },
+    {
+      "id": "ATT-8",
+      "sectionName": "incomeFinances",
+      "fieldKey": "housingCosts",
+      "statementText": "Client stated there is a £250 monthly rent shortfall after their Local Housing Allowance is applied. The full rental amount was not established.",
+      "segmentId": "1",
+      "timestampRange": "00:11-00:13",
+      "transcriptSnippet": "My Universal Credit Local Housing Allowance leaves a £250 monthly rent shortfall."
+    },
+    {
+      "id": "ATT-9",
+      "sectionName": "incomeFinances",
+      "fieldKey": "immediateFinancialHardship",
+      "statementText": "Client reports a £250 monthly rent shortfall.",
+      "segmentId": "1",
+      "timestampRange": "00:12-00:13",
+      "transcriptSnippet": "...leaves a £250 monthly rent shortfall."
+    },
+    {
+      "id": "ATT-10",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client attended the interview with at least two young children who were audibly distressed.",
+      "segmentId": "1",
+      "timestampRange": "00:02-00:04",
+      "transcriptSnippet": "(child screaming) I am sorry!"
+    },
+    {
+      "id": "ATT-11",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "reasonableAdjustments",
+      "statementText": "Adviser reassured the client regarding the noise from the children.",
+      "segmentId": "0",
+      "timestampRange": "00:00-00:02",
+      "transcriptSnippet": "It is okay, don't worry about the kids crying."
+    },
+    {
+      "id": "ATT-12",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client's phone number is [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:08-00:09",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## Case Note\n\n**Client:** [CLIENT_FORENAME]\n**Date:** Not established\n**Adviser:** Benchmark Adviser\n\n### PRESENTING ISSUE\nClient, [CLIENT_FORENAME], presented with a housing issue. Client stated that their Universal Credit Local Housing Allowance leaves a £250 monthly shortfall for their rent, and their landlord, [LANDLORD_NAME], is threatening eviction. [ATT-1] The immediate risk is the threat of eviction. [ATT-2]\n\n### CLIENT & HOUSEHOLD\n- **Client:** [CLIENT_FORENAME], DOB [DOB], NINO [NINO]. [ATT-4]\n- **Address:** [ADDRESS_LINE_1], [POSTCODE]. [ATT-6]\n- **Contact:** [PHONE_NUMBER]. [ATT-12]\n- **Household:** Client has at least two children, [CHILD_1_FORENAME] and [CHILD_2_FORENAME], who were present during the consultation. [ATT-5]\n\n### FINANCES\n- **Benefits:** Client is in receipt of Universal Credit with a Local Housing Allowance component. [ATT-7]\n- **Housing Costs:** Client reports a £250 monthly rent shortfall after their LHA is applied. [ATT-8]\n\n### SUPPORT NEEDS\nClient attended the interview with at least two young children who were audibly distressed. [ATT-10] The adviser reassured the client about the noise. [ATT-11]\n\n### ADVICE & ACTIONS\nThe interview did not progress to the stage of discussing options or agreeing on actions. This was an initial information-gathering exchange only.\n\n### GAPS & LIMITATIONS\nThe interview was very brief. Key missing information includes the client's goals, a full financial picture, the specific nature of the eviction threat (e.g., notice type), and any key dates. No options were discussed or next steps agreed."
+}

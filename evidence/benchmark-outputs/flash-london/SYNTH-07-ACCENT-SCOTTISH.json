@@ -1,0 +1,139 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client ([CLIENT_FORENAME]) received a bill from the council stating they owe £1,800 for a Housing Benefit overpayment from last year. The client disputes this overpayment, stating they notified the council about their new job immediately.",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To challenge or resolve the £1,800 Housing Benefit overpayment bill.",
+    "immediatePriority": "To address the £1,800 overpayment demand from the council.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Name: [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client mentioned starting a 'new job' last year, but specific income details were not established during this interview.",
+    "benefitsReceived": "Housing Benefit (historical/overpaid).",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Alleged Housing Benefit overpayment of £1,800.",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview was an initial contact where the client presented the issue. No advice or options could be discussed without reviewing the overpayment decision letter and establishing the relevant dates."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details, contact information, and initial presenting issue."
+    ],
+    "outcomeOfActionTaken": "Client's details and dispute regarding the £1,800 Housing Benefit overpayment have been logged.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [
+      "Locate and provide the Housing Benefit overpayment letter/bill from the council.",
+      "Locate and provide any proof of notifying the council about the new job (e.g., emails, letters, phone logs, or online portal receipts)."
+    ],
+    "obtain": [
+      "Housing Benefit overpayment decision letter",
+      "Proof of change of circumstances notification"
+    ],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Schedule a follow-up appointment to review the client's overpayment letter and evidence of notification."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Reviewing the overpayment notice, checking the official decision date, and establishing the timeline for a revision/appeal."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Full household makeup not established.",
+    "Current income, employment details, and financial situation not established.",
+    "Specific dates of the overpayment period, the decision letter, and when the job started/was reported are not established.",
+    "No documents (overpayment letter, proof of notification) have been seen by the adviser.",
+    "Client's vulnerability, capability, and support needs not fully assessed.",
+    "No advice has been given yet due to the brevity of the initial contact."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Name: [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER]",
+      "segmentId": "1",
+      "timestampRange": "00:00",
+      "transcriptSnippet": "ma name is [CLIENT_FORENAME]. Born [DOB]. NINO is [NINO]. Ah bide at [ADDRESS_LINE_1], [POSTCODE]. Ye can ring me on [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client ([CLIENT_FORENAME]) received a bill from the council stating they owe £1,800 for a Housing Benefit overpayment from last year. The client disputes this overpayment, stating they notified the council about their new job immediately.",
+      "segmentId": "1",
+      "timestampRange": "00:00",
+      "transcriptSnippet": "The council sent me a big bill sayin ah owe eighteen hundred quid fur Housing Benefit fae last year, but ah telt thaim aboot ma new job straight away!"
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client Explanation:** The client ([CLIENT_FORENAME]) received a bill from the council stating they owe £1,800 for a Housing Benefit overpayment from last year. The client disputes this overpayment, stating they notified the council about their new job immediately.\n* **Relevant Background:** Not established during this interview\n* **Relevant Documents:** Not established during this interview\n* **Emergency/Risk:** Not established during this interview\n* **Related Issues:** Not established during this interview\n* **Discrimination Issue:** Not established during this interview\n* **Safeguarding Concern:** Not established during this interview\n\n## CLIENT GOALS\n* **Client Wishes:** To challenge or resolve the £1,800 Housing Benefit overpayment bill.\n* **Immediate Priority:** To address the £1,800 overpayment demand from the council.\n* **Outcome Achievability Discussion:** Not established during this interview\n* **Agreed Purpose of Intervention:** Not established during this interview\n\n## HOUSEHOLD MAKE UP\n* **Client Details:** Name: [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER]\n* **Partner:** Not established during this interview\n* **Children/Dependants:** Not established during this interview\n* **Other Household Members:** Not established during this interview\n* **Caring Responsibilities:** Not established during this interview\n* **Relevant Circumstances:** Not established during this interview\n* **Current Accommodation:** Not established during this interview\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Employment Income:** Client mentioned starting a 'new job' last year, but specific income details were not established during this interview.\n* **Benefits Received:** Housing Benefit (historical/overpaid).\n* **Benefits Claimed/Pending:** Not established during this interview\n* **Benefit Entitlement Considered:** Not established during this interview\n* **Housing Costs:** Not established during this interview\n* **Other Debts/Liabilities:** Alleged Housing Benefit overpayment of £1,800.\n* **Savings/Capital:** Not established during this interview\n* **Immediate Financial Hardship:** Not established during this interview\n* **Financial Info Required:** Not established during this interview\n\n## OPTIONS DISCUSSED\n* **Research Undertaken:** Not established during this interview\n* **Research Confirmed:** Not established during this interview\n* **Options:** None discussed during this initial contact.\n* **Client Preferred Option:** Not established during this interview\n* **Client Understanding:** Not established during this interview\n* **Partial Advice Reason:** The interview was an initial contact where the client presented the issue. No advice or options could be discussed without reviewing the overpayment decision letter and establishing the relevant dates.\n\n## DEADLINES / KEY DATES\n* **Dates:** Not established during this interview\n* **Applicable Time Limit:** Not established during this interview\n* **Final Date for Action:** Not established during this interview\n* **Client Advised of Deadline:** Not established during this interview\n* **Urgent Action Required:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Client Capability:** Not established during this interview\n* **Vulnerability/Support Needs:** Not established during this interview\n* **Effect on Ability:** Not established during this interview\n* **Reasonable Adjustments:** Not established during this interview\n* **Practical Assistance Required:** Not established during this interview\n* **Client Access:** Not established during this interview\n* **Contact Arrangements:** Phone: [PHONE_NUMBER]\n* **Conflict of Interest:** Not established during this interview\n* **Permission to Share:** Not established during this interview\n\n## ACTION TAKEN\n* **Actions During Intervention:**\n  1. Recorded client's personal details, contact information, and initial presenting issue.\n* **Outcome of Action Taken:** Client's details and dispute regarding the £1,800 Housing Benefit overpayment have been logged.\n* **Documents Produced/Sent:** Not established during this interview\n* **Client Confirmed Understanding:** Not established during this interview\n\n## NEXT STEPS (CLIENT)\n* **Agreed Actions:**\n  1. Locate and provide the Housing Benefit overpayment letter/bill from the council.\n  2. Locate and provide any proof of notifying the council about the new job (e.g., emails, letters, phone logs, or online portal receipts).\n* **Obtain:** Housing Benefit overpayment decision letter, Proof of change of circumstances notification\n* **Contact:** Not established during this interview\n* **Submit:** Not established during this interview\n* **Contingency (No Response):** Not established during this interview\n* **Contingency (Circumstances Change):** Not established during this interview\n* **Seek Advice Before:** Not established during this interview\n* **Invited to Return:** Not established during this interview\n\n## NEXT STEPS (ADVISER)\n* **Adviser Actions:**\n  1. Schedule a follow-up appointment to review the client's overpayment letter and evidence of notification.\n* **Follow-up Contact:** Not established during this interview\n* **Contingency (No Doc Received):** Not established during this interview\n* **Outstanding Issues for Next Contact:** Reviewing the overpayment notice, checking the official decision date, and establishing the timeline for a revision/appeal.\n\n## ONWARD REFERRALS / SIGNPOSTING\n* **Organisation:** Not established during this interview\n* **Reason:** Not established during this interview\n* **Method:** Not established during this interview\n* **Contact Details Provided:** Not established during this interview\n* **Urgency Communicated:** Not established during this interview\n* **Consent Obtained:** Not established during this interview\n* **Assisted Info Provided:** Not established during this interview\n* **Client Understands:** Not established during this interview\n\n## GAPS AND LIMITATIONS\n* Full household makeup not established.\n* Current income, employment details, and financial situation not established.\n* Specific dates of the overpayment period, the decision letter, and when the job started/was reported are not established.\n* No documents (overpayment letter, proof of notification) have been seen by the adviser.\n* Client's vulnerability, capability, and support needs not fully assessed.\n* No advice has been given yet due to the brevity of the initial contact."
+}

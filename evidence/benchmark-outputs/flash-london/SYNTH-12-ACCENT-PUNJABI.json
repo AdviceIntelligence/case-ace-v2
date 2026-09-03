@@ -1,0 +1,202 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client, [CLIENT_FORENAME], attended the session with their father, [FATHER_NAME], to request assistance with claiming Pension Credit and a Carer Addition. The client provides 40 hours of care per week for their father, who currently receives a State Pension of £165 per week.",
+    "relevantBackground": "The father, [FATHER_NAME] (DOB: [DOB], NINO: [NINO]), lives with the client at [ADDRESS_LINE_1], Wandsworth [POSTCODE]. The father's sole established income is a State Pension of £165 per week. The client provides 40 hours of care per week to the father.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To successfully claim Pension Credit and secure the Carer Addition for the household.",
+    "immediatePriority": "To initiate the claims process for Pension Credit and the Carer Addition.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "To assess eligibility and assist with the application process for Pension Credit and Carer Addition."
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME] (Carer)",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Father: [FATHER_NAME] (DOB: [DOB], NINO: [NINO])",
+    "caringResponsibilities": "The client provides 40 hours of care per week to their father, [FATHER_NAME].",
+    "relevantCircumstances": "The father is of State Pension age and receives a State Pension.",
+    "currentAccommodation": "[ADDRESS_LINE_1], Wandsworth [POSTCODE]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Father receives State Pension of £165 per week.",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Pension Credit and Carer Addition.",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Full details of the father's and household's income, savings, and capital are required to calculate Pension Credit entitlement."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [
+      {
+        "optionTitle": "Claiming Pension Credit with Carer Addition",
+        "whatThisInvolves": "Submitting a claim for Pension Credit to the Department for Work and Pensions (DWP) and ensuring the client's caring role (40 hours/week) is declared to trigger the Carer Addition.",
+        "eligibilityGrounds": "The father is of State Pension age, has a low income (£165/week State Pension), and has a resident carer providing over 35 hours of care per week.",
+        "advantages": "Increases weekly household income and potentially unlocks other passported benefits (e.g., Council Tax Reduction, Warm Home Discount).",
+        "disadvantages": "Not established during this interview",
+        "risksConsequences": "Not established during this interview",
+        "costs": "None",
+        "likelyPracticalEffect": "Maximisation of household income and financial stability.",
+        "evidenceRequired": "National Insurance Numbers, proof of State Pension, details of any other income, bank statements/savings details.",
+        "relevantDeadline": "Not established during this interview"
+      }
+    ],
+    "clientPreferredOption": "Claiming Pension Credit with Carer Addition.",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "Not established during this interview"
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Potential language or cultural support needs indicated by the Punjabi greeting 'Sat Sri Akal', though the client spoke English during the intake.",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER]",
+    "conflictOfInterest": "None identified",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded the client's and father's personal details, address, contact number, and National Insurance Number.",
+      "Noted the father's current State Pension income (£165/week) and the client's caring hours (40 hours/week)."
+    ],
+    "outcomeOfActionTaken": "Initial case details and presenting issues have been documented to prepare for an eligibility assessment.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [
+      "Gather and provide full details of all household income, bank accounts, savings, and capital for both the client and the father."
+    ],
+    "obtain": [
+      "Recent bank statements for all accounts held by the father and the client.",
+      "Proof of any other income, private pensions, or benefits received."
+    ],
+    "contact": [
+      "Not established during this interview"
+    ],
+    "submit": [
+      "Not established during this interview"
+    ],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Review the financial information provided by the client to perform a comprehensive benefit entitlement check.",
+      "Confirm whether the father receives a qualifying disability benefit (e.g., Attendance Allowance or PIP) which is a prerequisite for the Carer Addition / Carer's Allowance.",
+      "Assist the client and father with completing and submitting the Pension Credit application form."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Full details of household income, savings, and capital were not established during this interview.",
+    "It was not established whether the father receives a qualifying disability benefit (such as Attendance Allowance or Personal Independence Payment), which is required for the client to qualify for Carer's Allowance or to trigger a Carer Addition on Pension Credit.",
+    "Any relevant deadlines, backdating rules, or time limits were not established or discussed.",
+    "The client's and father's specific support or vulnerability needs were not fully assessed.",
+    "Explicit consent to share or store data was not recorded during this brief intake."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client's name is [CLIENT_FORENAME].",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "my name is [CLIENT_FORENAME]"
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "otherHouseholdMembers",
+      "statementText": "Father's name is [FATHER_NAME], DOB [DOB], NINO [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "I am here with my father [FATHER_NAME], DOB [DOB], NINO [NINO]"
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "They live at [ADDRESS_LINE_1], Wandsworth [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "We live at [ADDRESS_LINE_1], Wandsworth [POSTCODE]"
+    },
+    {
+      "id": "attr_4",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Phone number is [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]"
+    },
+    {
+      "id": "attr_5",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsReceived",
+      "statementText": "Father gets £165 state pension.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "Father gets £165 state pension"
+    },
+    {
+      "id": "attr_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "caringResponsibilities",
+      "statementText": "Client provides 40 hours of care a week.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "I provide 40 hours care a week"
+    },
+    {
+      "id": "attr_7",
+      "sectionName": "clientGoals",
+      "fieldKey": "immediatePriority",
+      "statementText": "We need to claim Pension Credit and Carer Addition.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "We need to claim Pension Credit and Carer Addition"
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client's Explanation:** The client, [CLIENT_FORENAME], attended with their father, [FATHER_NAME], seeking assistance to claim Pension Credit and a Carer Addition.\n* **Background:** The father receives a State Pension of £165 per week. The client provides 40 hours of care per week to their father. They reside together in Wandsworth.\n* **Documents Seen:** Not established during this interview\n* **Emergency / Risk:** Not established during this interview\n* **Related Issues:** Not established during this interview\n* **Discrimination Issues:** Not established during this interview\n* **Safeguarding Concerns:** Not established during this interview\n\n## CLIENT GOALS\n* **Client's Desired Outcome:** To successfully claim Pension Credit and secure the Carer Addition.\n* **Immediate Priority:** Initiate the claims process.\n* **Outcome Discussion:** Not established during this interview\n* **Agreed Purpose of Intervention:** Assess eligibility and assist with the application process.\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME] (Carer)\n* **Partner:** Not established during this interview\n* **Children / Dependants:** Not established during this interview\n* **Other Household Members:** Father: [FATHER_NAME] (DOB: [DOB], NINO: [NINO])\n* **Caring Responsibilities:** Client cares for father 40 hours per week.\n* **Relevant Circumstances:** Father is of State Pension age.\n* **Current Accommodation:** [ADDRESS_LINE_1], Wandsworth [POSTCODE]\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Employment Income:** Not established during this interview\n* **Benefits Received:** Father receives £165/week State Pension.\n* **Benefits Claimed / Pending:** Not established during this interview\n* **Benefit Entitlement Considered:** Pension Credit and Carer Addition.\n* **Housing Costs:** Not established during this interview\n* **Other Debts / Liabilities:** Not established during this interview\n* **Savings / Capital:** Not established during this interview\n* **Immediate Financial Hardship:** Not established during this interview\n* **Financial Info Required:** Full details of household income, savings, and capital.\n\n## OPTIONS DISCUSSED\n* **Option 1: Claiming Pension Credit with Carer Addition**\n  * *What this involves:* Submitting a claim to the DWP and declaring the client's caring role.\n  * *Eligibility grounds:* Father is of pension age with low income; client provides 35+ hours of care.\n  * *Advantages:* Increases household income; unlocks passported benefits.\n  * *Disadvantages / Risks:* Not established during this interview\n  * *Costs:* None\n  * *Likely practical effect:* Maximisation of household income.\n  * *Evidence required:* National Insurance Numbers, proof of State Pension, bank statements.\n* **Client Preferred Option:** Claiming Pension Credit with Carer Addition.\n* **Client Understanding:** Not established during this interview\n\n## DEADLINES / KEY DATES\n* **Key Dates:** None established.\n* **Applicable Time Limit:** Not established during this interview\n* **Final Date for Action:** Not established during this interview\n* **Client Advised of Deadline:** Not established during this interview\n* **Urgent Action Required:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Client Capability:** Not established during this interview\n* **Vulnerability / Support Needs:** Potential language/cultural support (Punjabi greeting 'Sat Sri Akal' used).\n* **Effect on Ability:** Not established during this interview\n* **Reasonable Adjustments:** Not established during this interview\n* **Practical Assistance Required:** Not established during this interview\n* **Client Access:** Not established during this interview\n* **Contact Arrangements:** Phone: [PHONE_NUMBER]\n* **Conflict of Interest:** None identified\n* **Permission to Share:** Not established during this interview\n\n## ACTION TAKEN\n* **Actions During Interview:** Recorded client and father's personal, contact, and basic financial details.\n* **Outcome of Action:** Information gathered to prepare for eligibility assessment.\n* **Documents Produced:** Not established during this interview\n* **Client Confirmed Understanding:** Not established during this interview\n\n## NEXT STEPS (CLIENT)\n1. Gather and provide full details of all household income, bank accounts, savings, and capital for both client and father.\n2. Obtain recent bank statements and proof of any other income or benefits.\n\n## NEXT STEPS (ADVISER)\n1. Review financial information once provided to perform a benefit entitlement check.\n2. Confirm if the father receives a qualifying disability benefit (e.g., Attendance Allowance or PIP) to enable the Carer Addition.\n3. Assist with completing and submitting the Pension Credit application.\n\n## ONWARD REFERRALS / SIGNPOSTING\n* Not established during this interview\n\n## GAPS AND LIMITATIONS\n* Full details of household income, savings, and capital were not established.\n* It was not established whether the father receives a qualifying disability benefit (such as Attendance Allowance or PIP) required for the Carer Addition.\n* Any relevant deadlines or backdating rules were not discussed.\n* Client's capability and specific support needs were not fully assessed.\n* Explicit consent to share or store data was not recorded."
+}

@@ -1,0 +1,163 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated that HMRC has stopped their Child Benefit for their two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME] (Attribution ID: 1). The reason given by HMRC is that the client has no right to reside (Attribution ID: 1).",
+    "relevantBackground": "Client stated they have had full settled status under the EU Settlement Scheme since 2020 (Attribution ID: 4).",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Not established during this interview.",
+    "relatedIssues": "The client's right to reside status being questioned by HMRC could potentially affect other benefits or rights.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "No safeguarding concerns were raised or identified during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not explicitly stated, but implied the client wishes to have their Child Benefit reinstated.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not discussed during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], born [DOB], with National Insurance Number [NINO] (Attribution ID: 2). Client lives at [ADDRESS_LINE_1], [POSTCODE] and their phone number is [PHONE_NUMBER] (Attribution ID: 2).",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Client has two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME] (Attribution ID: 3).",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview, but implied client cares for their two daughters.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE] (Attribution ID: 2)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Client was receiving Child Benefit, which has now been stopped by HMRC (Attribution ID: 1).",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not discussed during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "No research was undertaken during the interview.",
+    "researchConfirmed": "No research was confirmed during the interview.",
+    "options": [],
+    "clientPreferredOption": "Not applicable as no options were discussed.",
+    "clientUnderstoodOptions": "Not applicable as no options were discussed.",
+    "partialAdviceReason": "This was an initial consultation to gather the presenting issue. No advice has been given yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "2020: Client states they were granted settled status (Attribution ID: 4)."
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not applicable as no deadlines were identified or discussed.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client greeted the adviser in Polish ('Dzień dobry'), which may indicate a language preference or support need (Attribution ID: 5). Further exploration is required.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not discussed during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Client provided a phone number: [PHONE_NUMBER] (Attribution ID: 2).",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "No conflict of interest was identified.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser took initial details from the client regarding their presenting issue and personal information."
+    ],
+    "outcomeOfActionTaken": "Initial details of the case recorded.",
+    "documentsProducedSent": "No documents were produced or sent during the interview.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice or actions were agreed upon."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not discussed during this interview.",
+    "contingencyIfCircumstancesChange": "Not discussed during this interview.",
+    "seekAdviceBefore": "Not discussed during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "The entire case requires further exploration. Key areas include: obtaining the HMRC decision letter, establishing deadlines for appeal, confirming the client's right to reside status, understanding the client's full financial and household situation, and exploring any support needs."
+  },
+  "onwardReferrals": {
+    "organisation": "Not applicable.",
+    "reason": "Not applicable.",
+    "method": "Not applicable.",
+    "contactDetailsProvided": "Not applicable.",
+    "urgencyCommunicated": "Not applicable.",
+    "consentObtained": "Not applicable.",
+    "assistedInfoProvided": "Not applicable.",
+    "clientUnderstands": "Not applicable."
+  },
+  "gapsAndLimitations": [
+    "The interview was only an initial check-in; no advice was provided.",
+    "The date of the HMRC decision to stop Child Benefit was not established.",
+    "The deadline for challenging the HMRC decision was not established.",
+    "Details of the HMRC decision letter were not seen or discussed.",
+    "Client's full financial circumstances, including other income, benefits, and expenses, were not established.",
+    "Client's employment status was not established.",
+    "The ages and specific circumstances of the children were not established.",
+    "The client's potential language support needs were noted but not fully explored.",
+    "No client goals, next steps, or options were discussed or agreed upon."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "HMRC stopped Child Benefit for my two daughters [CHILD_1_FORENAME] and [CHILD_2_FORENAME] saying I have no right to reside",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:12",
+      "transcriptSnippet": "HMRC stopped Child Benefit for my two daughters [CHILD_1_FORENAME] and [CHILD_2_FORENAME] saying I have no right to reside, but I have full settled status under EU Settlement Scheme since 2020."
+    },
+    {
+      "id": "2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "my name is [CLIENT_FORENAME]. Born [DOB]. NINO is [NINO]. I live at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:07",
+      "transcriptSnippet": "Dzień dobry, my name is [CLIENT_FORENAME]. Born [DOB]. NINO is [NINO]. I live at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "my two daughters [CHILD_1_FORENAME] and [CHILD_2_FORENAME]",
+      "segmentId": "1",
+      "timestampRange": "00:00:07 - 00:00:09",
+      "transcriptSnippet": "HMRC stopped Child Benefit for my two daughters [CHILD_1_FORENAME] and [CHILD_2_FORENAME]"
+    },
+    {
+      "id": "4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "I have full settled status under EU Settlement Scheme since 2020.",
+      "segmentId": "1",
+      "timestampRange": "00:00:10 - 00:00:12",
+      "transcriptSnippet": "but I have full settled status under EU Settlement Scheme since 2020."
+    },
+    {
+      "id": "5",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client greeted the adviser in Polish ('Dzień dobry').",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:02",
+      "transcriptSnippet": "Client: Dzień dobry"
+    }
+  ],
+  "formattedMarkdown": "### PRESENTING ISSUE\n**Client's Explanation:** Client stated that HMRC has stopped their Child Benefit for their two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME] (Attribution ID: 1). The reason given by HMRC is that the client has no right to reside (Attribution ID: 1).\n**Relevant Background:** Client stated they have had full settled status under the EU Settlement Scheme since 2020 (Attribution ID: 4).\n**Emergency/Risk:** Not established during this interview.\n\n### CLIENT GOALS\n**Client's desired outcome:** Not explicitly stated, but implied the client wishes to have their Child Benefit reinstated.\n\n### HOUSEHOLD MAKE UP\n**Client:** [CLIENT_FORENAME], born [DOB], NINO [NINO], lives at [ADDRESS_LINE_1], [POSTCODE]. Phone: [PHONE_NUMBER] (Attribution ID: 2).\n**Children/Dependants:** Two daughters, [CHILD_1_FORENAME] and [CHILD_2_FORENAME] (Attribution ID: 3).\n\n### INCOME / FINANCES\n**Benefits Received:** Client was receiving Child Benefit, which has now been stopped by HMRC (Attribution ID: 1).\n\n### DEADLINES / KEY DATES\n- **2020:** Client states they were granted settled status (Attribution ID: 4).\n\n### SUPPORT NEEDS / VULNERABILITY\n**Client Capability:** Client greeted the adviser in Polish ('Dzień dobry'), which may indicate a language preference or support need (Attribution ID: 5). Further exploration is required.\n\n### ACTION TAKEN (DURING INTERVIEW)\n- Adviser took initial details from the client regarding their presenting issue and personal information.\n\n### NEXT STEPS (ADVISER)\n**Outstanding Issues for Next Contact:** The entire case requires further exploration. Key areas include: obtaining the HMRC decision letter, establishing deadlines for appeal, confirming the client's right to reside status, understanding the client's full financial and household situation, and exploring any support needs.\n\n### GAPS AND LIMITATIONS\n- The interview was only an initial check-in; no advice was provided.\n- The date of the HMRC decision to stop Child Benefit was not established.\n- The deadline for challenging the HMRC decision was not established.\n- Details of the HMRC decision letter were not seen or discussed.\n- Client's full financial circumstances, including other income, benefits, and expenses, were not established.\n- Client's employment status was not established.\n- The ages and specific circumstances of the children were not established.\n- The client's potential language support needs were noted but not fully explored.\n- No client goals, next steps, or options were discussed or agreed upon."
+}

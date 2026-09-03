@@ -1,0 +1,162 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated they did not receive the £150 Warm Home Discount from their energy supplier, [IDENTIFYING_ORGANISATION], for the current winter period. (ID: 1)",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview",
+    "immediatePriority": "Not established during this interview",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client is Christopher [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance number is [NINO]. (ID: 2)",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Client stated they live at [ADDRESS_LINE_1], Battersea, [POSTCODE]. (ID: 3)"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "This was an initial information-gathering session only. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client spoke softly when providing personal details. (ID: 4)",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Client provided a phone number: [PHONE_NUMBER]. (ID: 5)",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser recorded client's personal details (name, DOB, NINO, address, phone number) and the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Client's initial details and issue have been recorded for a future advice session.",
+    "documentsProducedSent": "No documents were produced or sent during this interview.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "The entirety of the case requires investigation, including eligibility for the Warm Home Discount, correspondence with the supplier, and the client's financial and household circumstances."
+  },
+  "onwardReferrals": {
+    "organisation": "Not applicable.",
+    "reason": "Not applicable.",
+    "method": "Not applicable.",
+    "contactDetailsProvided": "Not applicable.",
+    "urgencyCommunicated": "Not applicable.",
+    "consentObtained": "Not applicable.",
+    "assistedInfoProvided": "Not applicable.",
+    "clientUnderstands": "Not applicable."
+  },
+  "gapsAndLimitations": [
+    "Client's surname was not clearly established.",
+    "The client's specific goals were not explicitly stated.",
+    "Full household composition was not established.",
+    "Client's income, benefits, savings, and financial situation were not discussed.",
+    "Client's eligibility for the Warm Home Discount scheme was not explored.",
+    "Any prior communication between the client and [IDENTIFYING_ORGANISATION] was not discussed.",
+    "No deadlines or key dates were identified.",
+    "A full assessment of client's support needs or vulnerabilities was not conducted.",
+    "Permission to store and share data was not obtained.",
+    "No advice was provided as this was an initial intake interview."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client stated they did not receive the £150 Warm Home Discount from their energy supplier, [IDENTIFYING_ORGANISATION], for the current winter period.",
+      "segmentId": "1",
+      "timestampRange": "00:06-00:11",
+      "transcriptSnippet": "I didn't get my £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] this winter."
+    },
+    {
+      "id": "2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is Christopher [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance number is [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:01-00:04",
+      "transcriptSnippet": "Uh... Christopher... [CLIENT_FORENAME]... DOB [DOB]. NINO is... [NINO]."
+    },
+    {
+      "id": "3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client stated they live at [ADDRESS_LINE_1], Battersea, [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:04-00:06",
+      "transcriptSnippet": "Living at [ADDRESS_LINE_1]... Battersea [POSTCODE]."
+    },
+    {
+      "id": "4",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Client spoke softly when providing personal details.",
+      "segmentId": "1",
+      "timestampRange": "00:01-00:02",
+      "transcriptSnippet": "(mumbles softly)"
+    },
+    {
+      "id": "5",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a phone number: [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:06-00:06",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n### PRESENTING ISSUE\n- **Client's Explanation:** Client stated they did not receive the £150 Warm Home Discount from their energy supplier, [IDENTIFYING_ORGANISATION], for the current winter period. (ID: 1)\n- **Background:** Not established during this interview\n- **Documents Seen:** Not established during this interview\n- **Emergency/Risk:** Not established during this interview\n\n### CLIENT GOALS\n- **Desired Outcome:** Not established during this interview\n- **Immediate Priority:** Not established during this interview\n\n### HOUSEHOLD MAKE UP\n- **Client:** Client is Christopher [CLIENT_FORENAME]. Date of birth is [DOB]. National Insurance number is [NINO]. (ID: 2)\n- **Accommodation:** Client stated they live at [ADDRESS_LINE_1], Battersea, [POSTCODE]. (ID: 3)\n- **Other Members:** Not established during this interview\n\n### INCOME / FINANCES (INCL. BENEFITS)\n- **Employment/Income:** Not established during this interview\n- **Benefits:** Not established during this interview\n- **Housing Costs:** Not established during this interview\n- **Debts:** Not established during this interview\n- **Financial Hardship:** Not established during this interview\n\n### OPTIONS DISCUSSED\n- **Summary:** This was an initial information-gathering session only. No advice was provided.\n\n### DEADLINES / KEY DATES\n- **Dates:** No dates were established during this interview.\n\n### SUPPORT NEEDS / VULNERABILITY\n- **Client Capability:** Client spoke softly when providing personal details. (ID: 4)\n- **Contact:** Client provided a phone number: [PHONE_NUMBER]. (ID: 5)\n\n### ACTION TAKEN (ADVISER)\n- Adviser recorded client's personal details (name, DOB, NINO, address, phone number) and the presenting issue.\n\n### NEXT STEPS (CLIENT)\n- No actions were agreed for the client during this interview.\n\n### NEXT STEPS (ADVISER)\n- No actions were agreed for the adviser during this interview.\n\n### ONWARD REFERRALS / SIGNPOSTING\n- No referrals or signposting were made.\n\n### GAPS AND LIMITATIONS\n- Client's surname was not clearly established.\n- The client's specific goals were not explicitly stated.\n- Full household composition was not established.\n- Client's income, benefits, savings, and financial situation were not discussed.\n- Client's eligibility for the Warm Home Discount scheme was not explored.\n- Any prior communication between the client and [IDENTIFYING_ORGANISATION] was not discussed.\n- No deadlines or key dates were identified.\n- A full assessment of client's support needs or vulnerabilities was not conducted.\n- Permission to store and share data was not obtained.\n- No advice was provided as this was an initial intake interview."
+}

@@ -1,0 +1,138 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Not established during this interview. The intended client was not reached.",
+    "relevantBackground": "Adviser initiated an outbound telephone call to a number believed to belong to a client, Mr Jones. The call recipient stated it was a wrong number and identified themselves as 'Battersea Pizza'. [ATT_1]",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Not established during this interview.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "The intended purpose of the call was to speak with Mr Jones, but contact was not made."
+  },
+  "householdMakeUp": {
+    "client": "Not established during this interview.",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Not established during this interview."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "No research was undertaken as the intended client was not reached.",
+    "researchConfirmed": "Not applicable.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "No advice was given as the intended client was not reached due to a wrong number."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Not established during this interview.",
+    "conflictOfInterest": "No conflict of interest identified.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser made an outbound telephone call to the number on file for Mr Jones. [ATT_2]",
+      "Adviser terminated the call upon being informed it was a wrong number. [ATT_3]"
+    ],
+    "outcomeOfActionTaken": "Contact with the intended client, Mr Jones, was not successful. The call was answered by a third party.",
+    "documentsProducedSent": "No documents were produced or sent.",
+    "clientConfirmedUnderstanding": "Not applicable as the client was not spoken to."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not applicable.",
+    "contingencyIfCircumstancesChange": "Not applicable.",
+    "seekAdviceBefore": "Not applicable.",
+    "invitedToReturn": "Not applicable."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Adviser to check the case file for the correct contact number for Mr Jones and re-attempt contact."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "All issues are outstanding as contact has not yet been made with the client."
+  },
+  "onwardReferrals": {
+    "organisation": "Not applicable.",
+    "reason": "Not applicable.",
+    "method": "Not applicable.",
+    "contactDetailsProvided": "Not applicable.",
+    "urgencyCommunicated": "Not applicable.",
+    "consentObtained": "Not applicable.",
+    "assistedInfoProvided": "Not applicable.",
+    "clientUnderstands": "Not applicable."
+  },
+  "gapsAndLimitations": [
+    "The intended client, Mr Jones, was not reached due to a wrong number being dialled. Consequently, no information regarding the client's presenting issue, circumstances, goals, or any other relevant details could be established during this intervention."
+  ],
+  "attributions": [
+    {
+      "id": "ATT_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The call recipient stated it was a wrong number and identified themselves as 'Battersea Pizza'.",
+      "segmentId": "1",
+      "timestampRange": "00:01-00:03",
+      "transcriptSnippet": "Caller: No, you have the wrong number, this is Battersea Pizza."
+    },
+    {
+      "id": "ATT_2",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser made an outbound telephone call to the number on file for Mr Jones.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:01",
+      "transcriptSnippet": "Adviser: Citizens Advice Wandsworth, is that Mr Jones?"
+    },
+    {
+      "id": "ATT_3",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser terminated the call upon being informed it was a wrong number.",
+      "segmentId": "1",
+      "timestampRange": "00:03-00:04",
+      "transcriptSnippet": "Adviser: My apologies, goodbye."
+    }
+  ],
+  "formattedMarkdown": "## Case Note: Wrong Number\n\n**PRESENTING ISSUE**\nAdviser initiated an outbound telephone call to a number believed to belong to a client, Mr Jones. The call recipient stated it was a wrong number and identified themselves as 'Battersea Pizza'. [ATT_1] No further information was established as the intended client was not reached.\n\n**CLIENT GOALS**\nNot established during this interview.\n\n**HOUSEHOLD MAKE UP**\nNot established during this interview.\n\n**INCOME / FINANCES (INCL. BENEFITS)**\nNot established during this interview.\n\n**OPTIONS DISCUSSED**\nNo options were discussed as the intended client was not reached.\n\n**DEADLINES / KEY DATES**\nNot established during this interview.\n\n**SUPPORT NEEDS / VULNERABILITY**\nNot established during this interview.\n\n**ACTION TAKEN**\n- Adviser made an outbound telephone call to the number on file for Mr Jones. [ATT_2]\n- Adviser terminated the call upon being informed it was a wrong number. [ATT_3]\n\n**NEXT STEPS (CLIENT)**\nNo actions were agreed with the client as they were not spoken to.\n\n**NEXT STEPS (ADVISER)**\n- Adviser to check the case file for the correct contact number for Mr Jones and re-attempt contact.\n\n**ONWARD REFERRALS / SIGNPOSTING**\nNone.\n\n**GAPS AND LIMITATIONS**\nThe intended client, Mr Jones, was not reached due to a wrong number being dialled. Consequently, no information regarding the client's presenting issue, circumstances, goals, or any other relevant details could be established during this intervention."
+}

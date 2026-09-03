@@ -1,0 +1,205 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client states their landlord, [LANDLORD_NAME], is refusing to take action against their upstairs neighbour, [NEIGHBOR_NAME], who plays loud music all night (attr_1).",
+    "relevantBackground": "The noise nuisance is described by the client as 'loud music all night' (attr_2).",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Client reports that their doctor, [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION], has stated their blood pressure is 'dangerously high' (attr_3). Client also reports receiving a warning from their employer, [EMPLOYER], about being late, which may place their employment at risk (attr_4).",
+    "relatedIssues": "Client reports health issues (dangerously high blood pressure) and employment issues (warnings about lateness) which they link to the noise nuisance (attr_5).",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], born [DOB], with National Insurance Number [NINO] (attr_6).",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. Client stated their landlord is [LANDLORD_NAME] (attr_7)."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client is employed by [EMPLOYER] at [IDENTIFYING_ORGANISATION] (attr_8). Details of income were not established.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "No advice was provided as the interview was for initial information gathering only."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Client reports a health vulnerability, stating their doctor, [DOCTOR_NAME], has said their blood pressure is 'dangerously high' (attr_9).",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client provided a contact phone number: [PHONE_NUMBER] (attr_10).",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "Client's specific goals and desired outcomes were not established.",
+    "The nature of the client's tenancy (e.g., social/private, tenancy type, start date) was not established.",
+    "Details of any communication between the client, the landlord ([LANDLORD_NAME]), and the neighbour ([NEIGHBOR_NAME]) were not discussed.",
+    "The existence of any evidence, such as a noise diary or recordings, was not established.",
+    "A full financial assessment, including income, benefits, and debts, was not conducted.",
+    "The full household composition was not established.",
+    "The client's capability to take action independently was not assessed.",
+    "Explicit consent to store or share data was not obtained during this brief interaction.",
+    "No advice was provided as the consultation was limited to initial information gathering.",
+    "The nature of the warning from the employer ([EMPLOYER]) was not detailed."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client states their landlord, [LANDLORD_NAME], is refusing to take action against their upstairs neighbour, [NEIGHBOR_NAME], who plays loud music all night.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... My landlord [LANDLORD_NAME] refuses to deal with my neighbor upstairs [NEIGHBOR_NAME] who plays loud music all night."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The noise nuisance is described by the client as 'loud music all night'.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... who plays loud music all night."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Client reports that their doctor, [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION], has stated their blood pressure is 'dangerously high'.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... My doctor [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION] says my blood pressure is dangerously high."
+    },
+    {
+      "id": "attr_4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Client also reports receiving a warning from their employer, [EMPLOYER], about being late, which may place their employment at risk.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... My employer [EMPLOYER] at [IDENTIFYING_ORGANISATION] warned me about being late."
+    },
+    {
+      "id": "attr_5",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relatedIssues",
+      "statementText": "Client reports health issues (dangerously high blood pressure) and employment issues (warnings about lateness) which they link to the noise nuisance.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... My doctor [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION] says my blood pressure is dangerously high. My employer [EMPLOYER] at [IDENTIFYING_ORGANISATION] warned me about being late."
+    },
+    {
+      "id": "attr_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], born [DOB], with National Insurance Number [NINO].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: I am [CLIENT_FORENAME], born [DOB]. NINO is [NINO]."
+    },
+    {
+      "id": "attr_7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. Client stated their landlord is [LANDLORD_NAME].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... Living at [ADDRESS_LINE_1], [POSTCODE]... My landlord [LANDLORD_NAME]..."
+    },
+    {
+      "id": "attr_8",
+      "sectionName": "incomeFinances",
+      "fieldKey": "employmentIncome",
+      "statementText": "Client is employed by [EMPLOYER] at [IDENTIFYING_ORGANISATION].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... My employer [EMPLOYER] at [IDENTIFYING_ORGANISATION] warned me about being late."
+    },
+    {
+      "id": "attr_9",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client reports a health vulnerability, stating their doctor, [DOCTOR_NAME], has said their blood pressure is 'dangerously high'.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... My doctor [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION] says my blood pressure is dangerously high."
+    },
+    {
+      "id": "attr_10",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a contact phone number: [PHONE_NUMBER].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00-00:00",
+      "transcriptSnippet": "Client: ... Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### Case Note Summary\n\n**Client:** [CLIENT_FORENAME]\n**Date of Birth:** [DOB]\n**NINO:** [NINO]\n**Address:** [ADDRESS_LINE_1], [POSTCODE]\n\n**Presenting Issue:**\nThe client, [CLIENT_FORENAME], reports a noise nuisance issue involving their upstairs neighbour, [NEIGHBOR_NAME], who allegedly plays loud music all night. The client states that their landlord, [LANDLORD_NAME], has refused to address the problem. This situation is causing significant distress, with the client reporting that their doctor, [DOCTOR_NAME], has diagnosed them with 'dangerously high' blood pressure. Furthermore, the client has received a warning from their employer, [EMPLOYER], for being late, which they attribute to the nightly disturbances, putting their employment at risk.\n\n**Client's Goals:**\nNot established during this interview.\n\n**Household & Finances:**\n- The client lives alone (household composition not fully established).\n- They are employed by [EMPLOYER].\n- No further details on finances or benefits were established.\n\n**Vulnerability & Support Needs:**\nThe client has a significant health vulnerability, reporting 'dangerously high' blood pressure. The ongoing noise issue appears to be a primary contributing factor to this health problem and is also impacting their employment.\n\n**Advice & Options:**\nNo advice was provided during this initial information-gathering session.\n\n**Actions & Next Steps:**\nNo actions were taken by the adviser or agreed with the client.\n\n**Gaps and Limitations:**\nThis was a brief initial contact. Key information is missing, including: the client's specific goals, tenancy details, history of communication with the landlord/neighbour, evidence of the nuisance, a full financial picture, and the client's support needs and capabilities. No advice was given."
+}

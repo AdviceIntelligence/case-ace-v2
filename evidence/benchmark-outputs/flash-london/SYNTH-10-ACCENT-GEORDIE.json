@@ -1,0 +1,129 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client's employer, [EMPLOYER], closed down last Friday. The client's manager, [MANAGER_NAME], informed the client that there is no money available to pay for their redundancy or 3 weeks of accrued holiday.",
+    "relevantBackground": "The employer [EMPLOYER] ceased trading/closed down last Friday.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To obtain their redundancy pay and 3 weeks of accrued holiday pay.",
+    "immediatePriority": "To address the non-payment of redundancy and accrued holiday pay following the closure of [EMPLOYER].",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Was employed by [EMPLOYER] until its closure last Friday. Current income status not established.",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The consultation was cut short or limited to an initial intake of facts; no advice or options were discussed during this brief interaction."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Employer closed down last Friday"
+    ],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No options or advice were discussed during this brief initial contact.",
+    "Client's household makeup, full financial situation, and vulnerability status were not established.",
+    "Specific dates (e.g., exact date of closure, length of service) were not established.",
+    "No next steps or actions were agreed during this short exchange."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "PRESENTING ISSUE",
+      "fieldKey": "clientExplained",
+      "statementText": "The client's employer, [EMPLOYER], closed down last Friday. The client's manager, [MANAGER_NAME], informed the client that there is no money available to pay for their redundancy or 3 weeks of accrued holiday.",
+      "segmentId": "transcript_segment_1",
+      "timestampRange": "00:00 - end",
+      "transcriptSnippet": "The firm, [EMPLOYER], closed down last Friday. The gaffer [MANAGER_NAME] says there is no money in the pot for our redundancy or 3 weeks accrued holiday."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "HOUSEHOLD MAKE UP",
+      "fieldKey": "client",
+      "statementText": "[CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER].",
+      "segmentId": "transcript_segment_1",
+      "timestampRange": "00:00 - end",
+      "transcriptSnippet": "Howay man, name is [CLIENT_FORENAME]. Born [DOB]. NINO is [NINO]. Address [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n- **Client's Explanation:** The client's employer, [EMPLOYER], closed down last Friday. The client's manager, [MANAGER_NAME], informed the client that there is no money available to pay for their redundancy or 3 weeks of accrued holiday.\n- **Relevant Background:** The employer [EMPLOYER] ceased trading/closed down last Friday.\n- **Relevant Documents:** Not established during this interview\n- **Emergency or Risk:** Not established during this interview\n- **Related Issues:** Not established during this interview\n- **Discrimination Issue:** Not established during this interview\n- **Safeguarding Concern:** Not established during this interview\n\n## CLIENT GOALS\n- **Client's Desired Outcome:** To obtain their redundancy pay and 3 weeks of accrued holiday pay.\n- **Immediate Priority:** To address the non-payment of redundancy and accrued holiday pay following the closure of [EMPLOYER].\n- **Outcome Achievability Discussion:** Not established during this interview\n- **Agreed Purpose of Intervention:** Not established during this interview\n\n## HOUSEHOLD MAKE UP\n- **Client Details:** [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER].\n- **Partner:** Not established during this interview\n- **Children/Dependants:** Not established during this interview\n- **Other Household Members:** Not established during this interview\n- **Caring Responsibilities:** Not established during this interview\n- **Relevant Circumstances:** Not established during this interview\n- **Current Accommodation:** Not established during this interview\n\n## INCOME / FINANCES (INCL. BENEFITS)\n- **Employment Income:** Was employed by [EMPLOYER] until its closure last Friday. Current income status not established.\n- **Benefits Received:** Not established during this interview\n- **Benefits Claimed/Pending:** Not established during this interview\n- **Benefit Entitlement Considered:** Not established during this interview\n- **Housing Costs:** Not established during this interview\n- **Other Debts/Liabilities:** Not established during this interview\n- **Savings/Capital:** Not established during this interview\n- **Immediate Financial Hardship:** Not established during this interview\n- **Financial Info Required:** Not established during this interview\n\n## OPTIONS DISCUSSED\n- **Research Undertaken:** Not established during this interview\n- **Research Confirmed:** Not established during this interview\n- **Options:** None discussed.\n- **Client Preferred Option:** Not established during this interview\n- **Client Understood Options:** Not established during this interview\n- **Partial Advice Reason:** The consultation was cut short or limited to an initial intake of facts; no advice or options were discussed during this brief interaction.\n\n## DEADLINES / KEY DATES\n- **Dates:** Employer closed down last Friday\n- **Applicable Time Limit:** Not established during this interview\n- **Final Date for Action:** Not established during this interview\n- **Client Advised of Deadline:** Not established during this interview\n- **Urgent Action Required:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n- **Client Capability:** Not established during this interview\n- **Vulnerability/Support Needs:** Not established during this interview\n- **Effect on Ability:** Not established during this interview\n- **Reasonable Adjustments:** Not established during this interview\n- **Practical Assistance Required:** Not established during this interview\n- **Client Access:** Not established during this interview\n- **Contact Arrangements:** Not established during this interview\n- **Conflict of Interest:** Not established during this interview\n- **Permission to Share:** Not established during this interview\n\n## ACTION TAKEN\n- **Actions During Intervention:** None.\n- **Outcome of Action Taken:** Not established during this interview\n- **Documents Produced/Sent:** Not established during this interview\n- **Client Confirmed Understanding:** Not established during this interview\n\n## NEXT STEPS (CLIENT)\n- **Agreed Actions:** None.\n- **Obtain:** None.\n- **Contact:** None.\n- **Submit:** None.\n- **Contingency if No Response:** Not established during this interview\n- **Contingency if Circumstances Change:** Not established during this interview\n- **Seek Advice Before:** Not established during this interview\n- **Invited to Return:** Not established during this interview\n\n## NEXT STEPS (ADVISER)\n- **Adviser Actions:** None.\n- **Follow-up Contact:** Not established during this interview\n- **Contingency if No Doc Received:** Not established during this interview\n- **Outstanding Issues for Next Contact:** Not established during this interview\n\n## ONWARD REFERRALS / SIGNPOSTING\n- **Organisation:** Not established during this interview\n- **Reason:** Not established during this interview\n- **Method:** Not established during this interview\n- **Contact Details Provided:** Not established during this interview\n- **Urgency Communicated:** Not established during this interview\n- **Consent Obtained:** Not established during this interview\n- **Assisted Info Provided:** Not established during this interview\n- **Client Understands:** Not established during this interview\n\n## GAPS AND LIMITATIONS\n- No options or advice were discussed during this brief initial contact.\n- Client's household makeup, full financial situation, and vulnerability status were not established.\n- Specific dates (e.g., exact date of closure, length of service) were not established.\n- No next steps or actions were agreed during this short exchange."
+}

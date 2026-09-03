@@ -1,0 +1,144 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client explained that their Universal Credit Local Housing Allowance (LHA) leaves a £250 monthly rent shortfall, and their landlord [LANDLORD_NAME] is threatening them with eviction.",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "The client is facing a threat of eviction from their landlord [LANDLORD_NAME] due to a £250 monthly rent shortfall.",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview",
+    "immediatePriority": "To address the threat of eviction by landlord [LANDLORD_NAME] and resolve the £250 monthly rent shortfall.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Phone: [PHONE_NUMBER]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Two children present: [CHILD_1_FORENAME] and [CHILD_2_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Caring for two young children ([CHILD_1_FORENAME] and [CHILD_2_FORENAME]).",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Rented property at [ADDRESS_LINE_1], [POSTCODE]."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Universal Credit (including Local Housing Allowance).",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Rent shortfall of £250 per month due to Local Housing Allowance rates.",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Experiencing a £250 monthly shortfall in rent, leading to threatened eviction.",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "The interview was limited to initial intake; no advice on options was delivered during this segment."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Threat of eviction by landlord [LANDLORD_NAME] requires urgent attention."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Client has at least two young children ([CHILD_1_FORENAME] and [CHILD_2_FORENAME]) present, which may impact capability or require support.",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's details, household makeup, and presenting issue regarding rent shortfall and eviction threat."
+    ],
+    "outcomeOfActionTaken": "Initial intake completed.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Review eviction threat details and explore options to address the £250 monthly rent shortfall (e.g., Discretionary Housing Payment, challenging UC decision, negotiating with landlord)."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Full assessment of eviction threat, rent arrears, and income/expenditure."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Full details of the eviction threat (e.g., has a formal notice been served, what type of tenancy).",
+    "Total rent amount and total income/expenditure details.",
+    "Whether there are existing rent arrears beyond the monthly shortfall.",
+    "Client's goals and preferred options.",
+    "Partner details or other household members.",
+    "Any potential discrimination or safeguarding concerns.",
+    "Client's capability and specific support needs.",
+    "Consent to share information."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client explained that their Universal Credit Local Housing Allowance (LHA) leaves a £250 monthly rent shortfall, and their landlord [LANDLORD_NAME] is threatening them with eviction.",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "My Universal Credit Local Housing Allowance leaves a £250 monthly rent shortfall. My landlord [LANDLORD_NAME] is threatening eviction."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "[CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Phone: [PHONE_NUMBER]",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]. Living at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Two children present: [CHILD_1_FORENAME] and [CHILD_2_FORENAME].",
+      "segmentId": "1",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "Shh [CHILD_1_FORENAME], shh [CHILD_2_FORENAME]!"
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client Explanation:** The client explained that their Universal Credit Local Housing Allowance (LHA) leaves a £250 monthly rent shortfall, and their landlord [LANDLORD_NAME] is threatening them with eviction.\n* **Emergency/Risk:** The client is facing an active threat of eviction from landlord [LANDLORD_NAME] due to the rent shortfall.\n* **Background/Documents/Related Issues:** Not established during this interview.\n\n## CLIENT GOALS\n* **Immediate Priority:** To address the threat of eviction by landlord [LANDLORD_NAME] and resolve the £250 monthly rent shortfall.\n* **Other Goals:** Not established during this interview.\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Phone: [PHONE_NUMBER]\n* **Children/Dependants:** Two children present: [CHILD_1_FORENAME] and [CHILD_2_FORENAME].\n* **Current Accommodation:** Rented property at [ADDRESS_LINE_1], [POSTCODE].\n* **Other Details:** Not established during this interview.\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Benefits Received:** Universal Credit (including Local Housing Allowance).\n* **Housing Costs:** Rent shortfall of £250 per month due to Local Housing Allowance rates.\n* **Immediate Financial Hardship:** Experiencing a £250 monthly shortfall in rent, leading to threatened eviction.\n* **Other Financial Details:** Not established during this interview.\n\n## OPTIONS DISCUSSED\n* *No options were discussed during this initial intake segment.*\n\n## DEADLINES / KEY DATES\n* **Urgent Action Required:** Threat of eviction by landlord [LANDLORD_NAME] requires urgent attention.\n* **Other Deadlines:** Not established during this interview.\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Vulnerability/Support Needs:** Client has at least two young children ([CHILD_1_FORENAME] and [CHILD_2_FORENAME]) present, which may impact capability or require support.\n* **Contact Arrangements:** Phone: [PHONE_NUMBER]\n\n## ACTION TAKEN\n* Recorded client's details, household makeup, and presenting issue regarding rent shortfall and eviction threat.\n\n## NEXT STEPS (CLIENT)\n* Not established during this interview.\n\n## NEXT STEPS (ADVISER)\n* Review eviction threat details and explore options to address the £250 monthly rent shortfall (e.g., Discretionary Housing Payment, challenging UC decision, negotiating with landlord).\n\n## GAPS AND LIMITATIONS\n* Full details of the eviction threat (e.g., has a formal notice been served, what type of tenancy).\n* Total rent amount and total income/expenditure details.\n* Whether there are existing rent arrears beyond the monthly shortfall.\n* Client's goals and preferred options.\n* Partner details or other household members.\n* Any potential discrimination or safeguarding concerns.\n* Client's capability and specific support needs.\n* Consent to share information."
+}

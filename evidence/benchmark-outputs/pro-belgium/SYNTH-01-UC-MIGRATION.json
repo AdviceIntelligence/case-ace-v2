@@ -1,0 +1,253 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client has received a migration notice letter from the DWP regarding the move from legacy benefits to Universal Credit (UC). [ATT-1]",
+    "relevantBackground": "Client is currently in receipt of Working Tax Credit and Child Tax Credit for their son, [CHILD_1_FORENAME]. [ATT-2]",
+    "relevantDocuments": "Client reports having a 'migration notice letter from DWP'. Adviser has not seen this document. [ATT-3]",
+    "emergencyOrRisk": "Client is concerned about losing transitional protection if they do not claim UC by the deadline they have stated as 15th October 2026. [ATT-4]",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To successfully claim Universal Credit without losing their entitlement to transitional protection. [ATT-5]",
+    "immediatePriority": "To ensure the claim is made before the deadline of 15th October 2026. [ATT-6]",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO]. [ATT-7]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Client has one son, [CHILD_1_FORENAME]. [ATT-8]",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. Tenure not established. [ATT-9]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client receives Working Tax Credit, which implies they are in employment. However, details of the employer, hours, and earnings were not established. [ATT-10]",
+    "benefitsReceived": "Client stated they are receiving Working Tax Credit and Child Tax Credit. [ATT-11]",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "This is an initial consultation. No advice has been given yet."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "15th October 2026: Deadline for UC claim as stated by the client from their migration notice. [ATT-12]"
+    ],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Client believes the final date for action is 15th October 2026. This needs to be verified by viewing the migration notice. [ATT-13]",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Client stated they are 'terrified' of the process, indicating a high level of anxiety. [ATT-14]",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Client provided a mobile number: [PHONE_NUMBER]. [ATT-15]",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details and outline of the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Adviser has not seen the DWP migration notice to verify the deadline.",
+    "No advice was provided as this was the initial client statement.",
+    "Client's employment status, income, and employer details were not established.",
+    "Client's housing tenure and costs (rent/mortgage) were not established.",
+    "Details of any other household members were not established.",
+    "Client's savings, capital, or any other debts were not established.",
+    "Client's capability to manage a UC claim online was not assessed.",
+    "No consent for data storage or sharing was obtained in this segment.",
+    "No discussion of options, next steps, or referrals took place."
+  ],
+  "attributions": [
+    {
+      "id": "ATT-1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client has received a migration notice letter from the DWP regarding the move from legacy benefits to Universal Credit (UC).",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I received a migration notice letter from DWP."
+    },
+    {
+      "id": "ATT-2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client is currently in receipt of Working Tax Credit and Child Tax Credit for their son, [CHILD_1_FORENAME].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am getting Working Tax Credit and Child Tax Credit for my son [CHILD_1_FORENAME]."
+    },
+    {
+      "id": "ATT-3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantDocuments",
+      "statementText": "Client reports having a 'migration notice letter from DWP'. Adviser has not seen this document.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I received a migration notice letter from DWP."
+    },
+    {
+      "id": "ATT-4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Client is concerned about losing transitional protection if they do not claim UC by the deadline they have stated as 15th October 2026.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am terrified of losing my transitional protection if I do not claim by the deadline of 15th October 2026."
+    },
+    {
+      "id": "ATT-5",
+      "sectionName": "clientGoals",
+      "fieldKey": "clientWouldLike",
+      "statementText": "To successfully claim Universal Credit without losing their entitlement to transitional protection.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am terrified of losing my transitional protection if I do not claim by the deadline..."
+    },
+    {
+      "id": "ATT-6",
+      "sectionName": "clientGoals",
+      "fieldKey": "immediatePriority",
+      "statementText": "To ensure the claim is made before the deadline of 15th October 2026.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "...if I do not claim by the deadline of 15th October 2026."
+    },
+    {
+      "id": "ATT-7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], DOB [DOB], NINO [NINO].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am [CLIENT_FORENAME]...My National Insurance number is [NINO] and my date of birth is [DOB]."
+    },
+    {
+      "id": "ATT-8",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "Client has one son, [CHILD_1_FORENAME].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "...for my son [CHILD_1_FORENAME]."
+    },
+    {
+      "id": "ATT-9",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. Tenure not established.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I live at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "ATT-10",
+      "sectionName": "incomeFinances",
+      "fieldKey": "employmentIncome",
+      "statementText": "Client receives Working Tax Credit, which implies they are in employment. However, details of the employer, hours, and earnings were not established.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am getting Working Tax Credit..."
+    },
+    {
+      "id": "ATT-11",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsReceived",
+      "statementText": "Client stated they are receiving Working Tax Credit and Child Tax Credit.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am getting Working Tax Credit and Child Tax Credit..."
+    },
+    {
+      "id": "ATT-12",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "dates",
+      "statementText": "15th October 2026: Deadline for UC claim as stated by the client from their migration notice.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "...deadline of 15th October 2026."
+    },
+    {
+      "id": "ATT-13",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "finalDateForAction",
+      "statementText": "Client believes the final date for action is 15th October 2026. This needs to be verified by viewing the migration notice.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "...deadline of 15th October 2026."
+    },
+    {
+      "id": "ATT-14",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client stated they are 'terrified' of the process, indicating a high level of anxiety.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "I am terrified of losing my transitional protection..."
+    },
+    {
+      "id": "ATT-15",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client provided a mobile number: [PHONE_NUMBER].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:02-00:17",
+      "transcriptSnippet": "My mobile is [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## Case Note: [CLIENT_FORENAME] [CLIENT_SURNAME]\n\n### PRESENTING ISSUE\nClient, [CLIENT_FORENAME], has received a migration notice from the DWP to move from legacy benefits (Working Tax Credit and Child Tax Credit) to Universal Credit. The client is currently receiving these tax credits for themself and their son, [CHILD_1_FORENAME]. The client brought the migration notice letter but it has not yet been seen by the adviser. The client expressed significant anxiety, stating they are 'terrified' of losing their transitional protection if they fail to claim by the deadline they stated as 15th October 2026.\n\n### CLIENT GOALS\nThe client's goal is to successfully claim Universal Credit and ensure their transitional protection is applied. Their immediate priority is to meet the claim deadline of 15th October 2026.\n\n### HOUSEHOLD & FINANCES\n- **Household:** Client lives with their son, [CHILD_1_FORENAME], at [ADDRESS_LINE_1], [POSTCODE]. Other household members not established.\n- **Income:** Client is in receipt of Working Tax Credit and Child Tax Credit. Employment details are not yet known.\n- **Finances:** Housing costs, savings, and other debts were not established.\n\n### DEADLINES\nThe client has stated a deadline of 15th October 2026 from their migration notice. This needs to be verified by the adviser.\n\n### SUPPORT NEEDS\nThe client expressed a high level of anxiety about the process, stating they are 'terrified'. Further assessment of support needs is required.\n\n### GAPS AND LIMITATIONS\nThis is an initial statement from the client. Key information not yet established includes: verification of the deadline from the migration notice, details of employment and income, housing costs, savings/capital, and client's capability to complete the online claim. No advice has been given."
+}

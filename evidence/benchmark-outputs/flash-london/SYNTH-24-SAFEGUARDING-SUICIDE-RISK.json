@@ -1,0 +1,145 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client stated that bailiffs are scheduled to arrive at their property at 2:00 PM today. They expressed extreme distress, stating they have purchased pills and intend to end their life today if they lose their home.",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Immediate risk of eviction/bailiff action at 2:00 PM today. High risk of suicide; client has stated active intent and possession of means ('bought pills', 'going to end my life today').",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Severe safeguarding concern: active suicidal ideation with immediate intent and access to means."
+  },
+  "clientGoals": {
+    "clientWouldLike": "To prevent the bailiff action and avoid losing their home.",
+    "immediatePriority": "Immediate safeguarding intervention to ensure client safety, followed by urgent action to address the 2:00 PM bailiff visit.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB [DOB], NINO [NINO], Phone: [PHONE_NUMBER]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "[ADDRESS_LINE_1], [POSTCODE]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Subject to bailiff action scheduled for 2:00 PM today (specific debt details not established).",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "No advice could be given as the interview was dominated by an immediate life-threatening safeguarding crisis and threat of suicide."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Bailiff arrival scheduled for 2:00 PM today"
+    ],
+    "applicableTimeLimit": "2:00 PM today",
+    "finalDateForAction": "2:00 PM today",
+    "clientAdvisedOfDeadline": "The client informed the adviser of the deadline.",
+    "urgentActionRequired": "Immediate emergency safeguarding intervention and urgent contact with the bailiffs/court if possible."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Extremely low capability due to acute mental health crisis and active suicidal intent.",
+    "vulnerabilitySupportNeeds": "Active suicidal ideation, severe emotional distress, and imminent risk of homelessness.",
+    "effectOnAbility": "The client is unable to process advice or take independent action due to the severity of the crisis.",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Immediate emergency services contact and safeguarding escalation.",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview (Emergency safeguarding override applies due to imminent risk to life)"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Adviser acknowledged the client's distress and expressed empathy."
+    ],
+    "outcomeOfActionTaken": "Client's contact details, address, and immediate crisis details were recorded.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Immediately escalate the case to the supervisor/safeguarding lead.",
+      "Contact emergency services (999) to report active suicide threat with means.",
+      "Attempt to contact the bailiffs/creditor to request an emergency suspension of action due to extreme vulnerability."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Safeguarding status, client safety, and housing/eviction status."
+  },
+  "onwardReferrals": {
+    "organisation": "Emergency Services (999) / Mental Health Crisis Team",
+    "reason": "Immediate risk to life due to active suicidal intent and possession of means.",
+    "method": "Immediate telephone contact",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Immediate / Life-threatening",
+    "consentObtained": "Not established during this interview (Emergency safeguarding override applied)",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No financial details or income sources established.",
+    "No details on the nature of the debt or the specific bailiff company established.",
+    "No household composition details established beyond the client.",
+    "No formal consent to share information established (emergency override required).",
+    "No options or advice could be discussed due to the immediate life-threatening crisis."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client stated that bailiffs are scheduled to arrive at their property at 2:00 PM today. They expressed extreme distress, stating they have purchased pills and intend to end their life today if they lose their home.",
+      "segmentId": "2",
+      "timestampRange": "0:04 - 0:24",
+      "transcriptSnippet": "The bailiffs are coming at 2pm today. I have bought pills. If I lose this home I am going to end my life today. I have nothing left."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "[CLIENT_FORENAME], DOB [DOB], NINO [NINO], Phone: [PHONE_NUMBER]",
+      "segmentId": "2",
+      "timestampRange": "0:04 - 0:24",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME]. DOB [DOB]. NINO is [NINO]. [ADDRESS_LINE_1], [POSTCODE]. [PHONE_NUMBER]."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "actionTaken",
+      "fieldKey": "actionsDuringIntervention",
+      "statementText": "Adviser acknowledged the client's distress and expressed empathy.",
+      "segmentId": "1",
+      "timestampRange": "0:00 - 0:03",
+      "transcriptSnippet": "I hear how overwhelmed you are feeling."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING\n\n## PRESENTING ISSUE\n* **Client Explanation:** The client stated that bailiffs are scheduled to arrive at their property at 2:00 PM today. They expressed extreme distress, stating they have purchased pills and intend to end their life today if they lose their home.\n* **Emergency/Risk:** Immediate risk of eviction/bailiff action at 2:00 PM today. High risk of suicide; client has stated active intent and possession of means ('bought pills', 'going to end my life today').\n* **Safeguarding Concern:** Severe safeguarding concern: active suicidal ideation with immediate intent and access to means.\n* **Other Fields:** Not established during this interview.\n\n## CLIENT GOALS\n* **Client Wishes:** To prevent the bailiff action and avoid losing their home.\n* **Immediate Priority:** Immediate safeguarding intervention to ensure client safety, followed by urgent action to address the 2:00 PM bailiff visit.\n* **Other Fields:** Not established during this interview.\n\n## HOUSEHOLD MAKE UP\n* **Client Details:** [CLIENT_FORENAME], DOB [DOB], NINO [NINO], Phone: [PHONE_NUMBER]\n* **Current Accommodation:** [ADDRESS_LINE_1], [POSTCODE]\n* **Other Fields:** Not established during this interview.\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Other Debts/Liabilities:** Subject to bailiff action scheduled for 2:00 PM today (specific debt details not established).\n* **Other Fields:** Not established during this interview.\n\n## OPTIONS DISCUSSED\n* **Partial Advice Reason:** No advice could be given as the interview was dominated by an immediate life-threatening safeguarding crisis and threat of suicide.\n* **Other Fields:** Not established during this interview.\n\n## DEADLINES / KEY DATES\n* **Key Dates:** Bailiff arrival scheduled for 2:00 PM today.\n* **Applicable Time Limit:** 2:00 PM today.\n* **Final Date for Action:** 2:00 PM today.\n* **Urgent Action Required:** Immediate emergency safeguarding intervention and urgent contact with the bailiffs/court if possible.\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Client Capability:** Extremely low capability due to acute mental health crisis and active suicidal intent.\n* **Vulnerability Support Needs:** Active suicidal ideation, severe emotional distress, and imminent risk of homelessness.\n* **Effect on Ability:** The client is unable to process advice or take independent action due to the severity of the crisis.\n* **Practical Assistance Required:** Immediate emergency services contact and safeguarding escalation.\n* **Contact Arrangements:** Phone: [PHONE_NUMBER]\n* **Permission to Share:** Not established during this interview (Emergency safeguarding override applies due to imminent risk to life).\n* **Other Fields:** Not established during this interview.\n\n## ACTION TAKEN\n* **Actions During Intervention:** Adviser acknowledged the client's distress and expressed empathy.\n* **Outcome of Action Taken:** Client's contact details, address, and immediate crisis details were recorded.\n* **Other Fields:** Not established during this interview.\n\n## NEXT STEPS (CLIENT)\n* **Agreed Actions:** None established due to crisis.\n* **Other Fields:** Not established during this interview.\n\n## NEXT STEPS (ADVISER)\n* **Adviser Actions:**\n  1. Immediately escalate the case to the supervisor/safeguarding lead.\n  2. Contact emergency services (999) to report active suicide threat with means.\n  3. Attempt to contact the bailiffs/creditor to request an emergency suspension of action due to extreme vulnerability.\n* **Outstanding Issues:** Safeguarding status, client safety, and housing/eviction status.\n* **Other Fields:** Not established during this interview.\n\n## ONWARD REFERRALS / SIGNPOSTING\n* **Organisation:** Emergency Services (999) / Mental Health Crisis Team\n* **Reason:** Immediate risk to life due to active suicidal intent and possession of means.\n* **Method:** Immediate telephone contact\n* **Urgency:** Immediate / Life-threatening\n* **Consent:** Not established during this interview (Emergency safeguarding override applied)\n* **Other Fields:** Not established during this interview.\n\n## GAPS AND LIMITATIONS\n* No financial details or income sources established.\n* No details on the nature of the debt or the specific bailiff company established.\n* No household composition details established beyond the client.\n* No formal consent to share information established (emergency override required).\n* No options or advice could be discussed due to the immediate life-threatening crisis."
+}

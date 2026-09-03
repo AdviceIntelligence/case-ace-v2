@@ -1,0 +1,200 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client 1 stated that [IDENTIFYING_ORGANISATION] is pursuing them for a debt of £12,000. There is a dispute between the two clients regarding liability. Client 2 stated the debt was incurred by Client 1 after they had separated, while Client 1 stated it was from a joint account for a kitchen.",
+    "relevantBackground": "Client 2 stated they had separated from Client 1 before the debt was incurred. Client 1 contradicted this, stating the debt was from a joint account for a shared purpose (a kitchen).",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "Client 1 stated they are being 'chased' for £12,000. The nature of the recovery action and any immediate risk (e.g., court proceedings, bailiff action) was not established.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client 1: [CLIENT_FORENAME], born [DOB]. Client 2: [CLIENT_FORENAME], born [DOB].",
+    "partner": "Client 2 stated they had separated from Client 1. Their current legal relationship status was not established.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "The clients are in dispute with each other over the facts of the presenting issue.",
+    "currentAccommodation": "Client 1 stated they live at [ADDRESS_LINE_1], [POSTCODE]. The tenure of the property was not established."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial information-gathering interview. No advice was given."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Clients were speaking over each other at the beginning of the interview, requiring the adviser to intervene to manage the conversation.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client 2 provided a contact telephone number: [PHONE_NUMBER].",
+    "conflictOfInterest": "A potential conflict of interest was identified as the clients have conflicting accounts of the debt's origin and may have opposing interests. This needs to be fully assessed before substantive advice can be given.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded initial details of the clients and the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "The exact nature of the debt and the account type (sole/joint) was not established.",
+    "No documents related to the debt were seen.",
+    "The stage of the debt recovery process is unknown (e.g., letters, court claim, CCJ).",
+    "The clients' goals and desired outcomes were not established.",
+    "The clients' full household composition, including whether they still live together, was not established.",
+    "The clients' accommodation tenure was not established.",
+    "A full financial assessment (income, expenditure, other debts, capital) was not conducted.",
+    "No advice or options were discussed due to the preliminary nature of the interview and the conflict between clients.",
+    "No deadlines or key dates were identified.",
+    "A full assessment of support needs or vulnerabilities was not conducted.",
+    "Permission to share information was not obtained.",
+    "No actions were agreed upon for the client or adviser."
+  ],
+  "attributions": [
+    {
+      "id": "att_001",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client 1: I am [CLIENT_FORENAME], born [DOB].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:01-00:02",
+      "transcriptSnippet": "Client 1: I am [CLIENT_FORENAME], born [DOB]."
+    },
+    {
+      "id": "att_002",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client 2: And I am [CLIENT_FORENAME], born [DOB].",
+      "segmentId": "seg_2",
+      "timestampRange": "00:02-00:03",
+      "transcriptSnippet": "Client 2: And I am [CLIENT_FORENAME], born [DOB]."
+    },
+    {
+      "id": "att_003",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client 1: We live at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "seg_3",
+      "timestampRange": "00:03-00:04",
+      "transcriptSnippet": "Client 1: We live at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "att_004",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client 2: Our number is [PHONE_NUMBER].",
+      "segmentId": "seg_4",
+      "timestampRange": "00:04-00:05",
+      "transcriptSnippet": "Client 2: Our number is [PHONE_NUMBER]."
+    },
+    {
+      "id": "att_005",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client 1: [IDENTIFYING_ORGANISATION] is chasing us for £12,000!",
+      "segmentId": "seg_5",
+      "timestampRange": "00:05-00:06",
+      "transcriptSnippet": "Client 1: [IDENTIFYING_ORGANISATION] is chasing us for £12,000!"
+    },
+    {
+      "id": "att_006",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client 2: But he took it out after we separated!",
+      "segmentId": "seg_6",
+      "timestampRange": "00:06-00:07",
+      "transcriptSnippet": "Client 2: But he took it out after we separated!"
+    },
+    {
+      "id": "att_007",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client 1: No, it was a joint account for the kitchen!",
+      "segmentId": "seg_7",
+      "timestampRange": "00:07-00:08",
+      "transcriptSnippet": "Client 1: No, it was a joint account for the kitchen!"
+    },
+    {
+      "id": "att_008",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "partner",
+      "statementText": "Client 2: But he took it out after we separated!",
+      "segmentId": "seg_6",
+      "timestampRange": "00:06-00:07",
+      "transcriptSnippet": "Client 2: But he took it out after we separated!"
+    },
+    {
+      "id": "att_009",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientCapability",
+      "statementText": "Adviser: Please, one at a time so I can record accurately.",
+      "segmentId": "seg_0",
+      "timestampRange": "00:00-00:01",
+      "transcriptSnippet": "Adviser: Please, one at a time so I can record accurately."
+    }
+  ],
+  "formattedMarkdown": "### AQS Level 3 Case Note\n\n**PRESENTING ISSUE**\n- **Client's Explanation:** Client 1 stated that [IDENTIFYING_ORGANISATION] is pursuing them for a debt of £12,000. There is a dispute between the two clients regarding liability. Client 2 stated the debt was incurred by Client 1 after they had separated, while Client 1 stated it was from a joint account for a kitchen.\n- **Relevant Background:** Client 2 stated they had separated from Client 1 before the debt was incurred. Client 1 contradicted this, stating the debt was from a joint account for a shared purpose (a kitchen).\n- **Documents Seen:** Not established during this interview.\n- **Emergency/Risk:** Client 1 stated they are being 'chased' for £12,000. The nature of the recovery action and any immediate risk (e.g., court proceedings, bailiff action) was not established.\n\n**CLIENT GOALS**\n- **Desired Outcome:** Not established during this interview.\n- **Immediate Priority:** Not established during this interview.\n\n**HOUSEHOLD MAKE UP**\n- **Client(s):** Client 1: [CLIENT_FORENAME], born [DOB]. Client 2: [CLIENT_FORENAME], born [DOB].\n- **Partner/Ex-Partner:** Client 2 stated they had separated from Client 1. Their current legal relationship status was not established.\n- **Accommodation:** Client 1 stated they live at [ADDRESS_LINE_1], [POSTCODE]. The tenure of the property was not established.\n\n**INCOME / FINANCES**\n- **Summary:** The clients' financial circumstances, including income, benefits, and other liabilities, were not established during this interview.\n\n**OPTIONS DISCUSSED**\n- No options were discussed as this was an initial information-gathering interview.\n\n**DEADLINES / KEY DATES**\n- No deadlines or key dates were established during this interview.\n\n**SUPPORT NEEDS / VULNERABILITY**\n- **Client Capability:** Clients were speaking over each other at the beginning of the interview, requiring the adviser to intervene to manage the conversation.\n- **Contact Arrangements:** Client 2 provided a contact telephone number: [PHONE_NUMBER].\n- **Conflict of Interest:** A potential conflict of interest was identified as the clients have conflicting accounts of the debt's origin and may have opposing interests. This needs to be fully assessed before substantive advice can be given.\n\n**ACTION TAKEN (DURING INTERVIEW)**\n- Recorded initial details of the clients and the presenting issue.\n\n**NEXT STEPS (CLIENT)**\n- No next steps were agreed upon during this interview.\n\n**NEXT STEPS (ADVISER)**\n- No next steps were agreed upon during this interview.\n\n**ONWARD REFERRALS / SIGNPOSTING**\n- No referrals or signposting were made.\n\n**GAPS AND LIMITATIONS**\n- The exact nature of the debt and the account type (sole/joint) was not established.\n- No documents related to the debt were seen.\n- The stage of the debt recovery process is unknown (e.g., letters, court claim, CCJ).\n- The clients' goals and desired outcomes were not established.\n- The clients' full household composition, including whether they still live together, was not established.\n- The clients' accommodation tenure was not established.\n- A full financial assessment (income, expenditure, other debts, capital) was not conducted.\n- No advice or options were discussed due to the preliminary nature of the interview and the conflict between clients.\n- No deadlines or key dates were identified.\n- A full assessment of support needs or vulnerabilities was not conducted.\n- Permission to share information was not obtained.\n- No actions were agreed upon for the client or adviser."
+}

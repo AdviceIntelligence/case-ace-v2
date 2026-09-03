@@ -1,0 +1,208 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated that the DWP has sanctioned their Employment and Support Allowance (ESA) because they missed a Work Capability Assessment (WCA). [ATT_1]",
+    "relevantBackground": "Client explained they missed the WCA because they were in [IDENTIFYING_HOSPITAL] on that day undergoing kidney surgery. [ATT_2]",
+    "relevantDocuments": "Not established during this interview.",
+    "emergencyOrRisk": "The sanction has resulted in a loss of income, which presents an immediate financial risk. [ATT_3]",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], born [DOB]. NINO is [NINO]. Contact number is [PHONE_NUMBER]. [ATT_4]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Client reports having recently undergone kidney surgery at [IDENTIFYING_HOSPITAL]. [ATT_5]",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. [ATT_6]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Client was in receipt of Employment and Support Allowance (ESA), which has now been sanctioned. [ATT_7]",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Client has lost their ESA income due to the sanction. [ATT_8]",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial consultation to gather facts; no advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Client has a significant health issue, having recently had kidney surgery. [ATT_9]",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client provided a phone number: [PHONE_NUMBER]. [ATT_10]",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details and the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Initial facts of the case have been recorded.",
+    "documentsProducedSent": "No documents were produced or sent during this interview.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "Client's specific goals were not established.",
+    "The date of the missed Work Capability Assessment was not established.",
+    "The date of the sanction decision letter was not established.",
+    "The deadline for challenging the decision (e.g., for Mandatory Reconsideration) was not established.",
+    "Details of the client's hospital stay and recovery period were not established.",
+    "Whether the client has documentary evidence of their hospital admission (e.g., discharge summary, appointment letter) was not established.",
+    "The client's full financial circumstances, including other income, savings, capital, debts, and housing costs, were not established.",
+    "The client's full household composition was not established.",
+    "The client's support needs, communication preferences, or need for reasonable adjustments were not fully explored.",
+    "No advice was given or options discussed during this initial fact-finding interview.",
+    "No next steps were agreed with the client or for the adviser."
+  ],
+  "attributions": [
+    {
+      "id": "ATT_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client stated that the DWP has sanctioned their Employment and Support Allowance (ESA) because they missed a Work Capability Assessment (WCA).",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:12",
+      "transcriptSnippet": "DWP sanctioned my ESA because I missed a Work Capability Assessment."
+    },
+    {
+      "id": "ATT_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client explained they missed the WCA because they were in [IDENTIFYING_HOSPITAL] on that day undergoing kidney surgery.",
+      "segmentId": "1",
+      "timestampRange": "00:00:12 - 00:00:15",
+      "transcriptSnippet": "I was in hospital at [IDENTIFYING_HOSPITAL] that day having kidney surgery."
+    },
+    {
+      "id": "ATT_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "The sanction has resulted in a loss of income, which presents an immediate financial risk.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:12",
+      "transcriptSnippet": "DWP sanctioned my ESA because I missed a Work Capability Assessment."
+    },
+    {
+      "id": "ATT_4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], born [DOB]. NINO is [NINO]. Contact number is [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:05",
+      "transcriptSnippet": "I am [CLIENT_FORENAME], born [DOB]. NINO is [NINO]. I live at [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    },
+    {
+      "id": "ATT_5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "relevantCircumstances",
+      "statementText": "Client reports having recently undergone kidney surgery at [IDENTIFYING_HOSPITAL].",
+      "segmentId": "1",
+      "timestampRange": "00:00:12 - 00:00:15",
+      "transcriptSnippet": "I was in hospital at [IDENTIFYING_HOSPITAL] that day having kidney surgery."
+    },
+    {
+      "id": "ATT_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:05",
+      "transcriptSnippet": "I live at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "ATT_7",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsReceived",
+      "statementText": "Client was in receipt of Employment and Support Allowance (ESA), which has now been sanctioned.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:12",
+      "transcriptSnippet": "DWP sanctioned my ESA because I missed a Work Capability Assessment."
+    },
+    {
+      "id": "ATT_8",
+      "sectionName": "incomeFinances",
+      "fieldKey": "immediateFinancialHardship",
+      "statementText": "Client has lost their ESA income due to the sanction.",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:12",
+      "transcriptSnippet": "DWP sanctioned my ESA..."
+    },
+    {
+      "id": "ATT_9",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client has a significant health issue, having recently had kidney surgery.",
+      "segmentId": "1",
+      "timestampRange": "00:00:12 - 00:00:15",
+      "transcriptSnippet": "I was in hospital at [IDENTIFYING_HOSPITAL] that day having kidney surgery."
+    },
+    {
+      "id": "ATT_10",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a phone number: [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:05",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n### PRESENTING ISSUE\nClient stated that the DWP has sanctioned their Employment and Support Allowance (ESA) because they missed a Work Capability Assessment (WCA). [ATT_1] The client explained they missed the WCA because they were in [IDENTIFYING_HOSPITAL] on that day undergoing kidney surgery. [ATT_2] The sanction has resulted in a loss of income, which presents an immediate financial risk. [ATT_3]\n\n### CLIENT GOALS\nClient's goals were not established during this interview.\n\n### HOUSEHOLD MAKE UP\nThe client is [CLIENT_FORENAME], born [DOB], with NINO [NINO]. [ATT_4] They reside at [ADDRESS_LINE_1], [POSTCODE]. [ATT_6] The client reports having recently undergone kidney surgery. [ATT_5]\n\n### INCOME / FINANCES (INCL. BENEFITS)\nThe client was in receipt of Employment and Support Allowance (ESA), which has now been sanctioned, leading to an immediate loss of income. [ATT_7] [ATT_8] Other financial details were not established.\n\n### OPTIONS DISCUSSED\nNo options were discussed as this was an initial fact-finding interview.\n\n### DEADLINES / KEY DATES\nNo key dates or deadlines were established during this interview.\n\n### SUPPORT NEEDS / VULNERABILITY\nThe client has a significant health issue, having recently had kidney surgery. [ATT_9] A contact phone number was provided: [PHONE_NUMBER]. [ATT_10]\n\n### ACTION TAKEN\n- Recorded client's personal details and the presenting issue.\n\n### NEXT STEPS (CLIENT)\nNo next steps were agreed with the client.\n\n### NEXT STEPS (ADVISER)\nNo next steps were agreed for the adviser.\n\n### ONWARD REFERRALS / SIGNPOSTING\nNo onward referrals or signposting were made.\n\n### GAPS AND LIMITATIONS\n- Client's specific goals were not established.\n- The date of the missed Work Capability Assessment was not established.\n- The date of the sanction decision letter was not established.\n- The deadline for challenging the decision (e.g., for Mandatory Reconsideration) was not established.\n- Details of the client's hospital stay and recovery period were not established.\n- Whether the client has documentary evidence of their hospital admission (e.g., discharge summary, appointment letter) was not established.\n- The client's full financial circumstances, including other income, savings, capital, debts, and housing costs, were not established.\n- The client's full household composition was not established.\n- The client's support needs, communication preferences, or need for reasonable adjustments were not fully explored.\n- No advice was given or options discussed during this initial fact-finding interview.\n- No next steps were agreed with the client or for the adviser."
+}

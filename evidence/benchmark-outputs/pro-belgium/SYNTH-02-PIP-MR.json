@@ -1,0 +1,217 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated they have received a decision letter from the DWP, dated 18/08/2026, which refuses their claim for Personal Independence Payment (PIP). [ATT-1]",
+    "relevantBackground": "Client reported that their GP, [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION], has written a supporting letter. [ATT-2] The letter allegedly confirms the client cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres. [ATT-3]",
+    "relevantDocuments": "Client mentioned a DWP decision letter dated 18/08/2026 and a supporting letter from their GP. These documents were not seen by the adviser during this interview. [ATT-4]",
+    "emergencyOrRisk": "Not established during this interview.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client's name is [CLIENT_FORENAME]. [ATT-5] National Insurance Number is [NINO]. [ATT-6]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client stated they live at [ADDRESS_LINE_1], London [POSTCODE]. [ATT-7]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Client's claim for PIP has been refused by the DWP. [ATT-8]",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Not established during this interview.",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial information-gathering interview. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "DWP decision letter is dated 18/08/2026. [ATT-9]"
+    ],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Client reports that their GP letter states they cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres. [ATT-10]",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client provided a phone number: [PHONE_NUMBER]. [ATT-11]",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details and the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview.",
+    "documentsProducedSent": "Not established during this interview.",
+    "clientConfirmedUnderstanding": "Not established during this interview."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "The interview was very brief and served only for initial information gathering.",
+    "Client's specific goals regarding the PIP refusal were not established.",
+    "The reasons for the DWP's decision to refuse PIP were not explored as the letter was not seen.",
+    "The deadline for requesting a Mandatory Reconsideration was not established or advised upon.",
+    "Client's full household, financial circumstances, and employment status were not established.",
+    "The full nature and impact of the client's health conditions were not explored beyond the mention of a GP letter.",
+    "No options for challenging the decision were discussed.",
+    "No actions were agreed upon for either the client or the adviser.",
+    "Client's consent to store data or for onward referrals was not discussed."
+  ],
+  "attributions": [
+    {
+      "id": "ATT-1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client stated they have received a decision letter from the DWP, dated 18/08/2026, which refuses their claim for Personal Independence Payment (PIP).",
+      "segmentId": "1",
+      "timestampRange": "00:00:04 - 00:00:12",
+      "transcriptSnippet": "I got a decision letter from DWP refusing my PIP claim dated 18/08/2026."
+    },
+    {
+      "id": "ATT-2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "Client reported that their GP, [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION], has written a supporting letter.",
+      "segmentId": "1",
+      "timestampRange": "00:00:12 - 00:00:16",
+      "transcriptSnippet": "My GP [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION] wrote a supporting letter..."
+    },
+    {
+      "id": "ATT-3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The letter allegedly confirms the client cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres.",
+      "segmentId": "1",
+      "timestampRange": "00:00:16 - 00:00:22",
+      "transcriptSnippet": "...confirming I cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres."
+    },
+    {
+      "id": "ATT-4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantDocuments",
+      "statementText": "Client mentioned a DWP decision letter dated 18/08/2026 and a supporting letter from their GP. These documents were not seen by the adviser during this interview.",
+      "segmentId": "1",
+      "timestampRange": "00:00:09 - 00:00:16",
+      "transcriptSnippet": "I got a decision letter from DWP refusing my PIP claim dated 18/08/2026. My GP [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION] wrote a supporting letter..."
+    },
+    {
+      "id": "ATT-5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client's name is [CLIENT_FORENAME].",
+      "segmentId": "1",
+      "timestampRange": "00:00:02 - 00:00:04",
+      "transcriptSnippet": "Hello, my name is [CLIENT_FORENAME]."
+    },
+    {
+      "id": "ATT-6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "National Insurance Number is [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:00:04 - 00:00:05",
+      "transcriptSnippet": "My NINO is [NINO]."
+    },
+    {
+      "id": "ATT-7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client stated they live at [ADDRESS_LINE_1], London [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:08",
+      "transcriptSnippet": "I live at [ADDRESS_LINE_1], London [POSTCODE]."
+    },
+    {
+      "id": "ATT-8",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsClaimedPending",
+      "statementText": "Client's claim for PIP has been refused by the DWP.",
+      "segmentId": "1",
+      "timestampRange": "00:00:09 - 00:00:12",
+      "transcriptSnippet": "I got a decision letter from DWP refusing my PIP claim..."
+    },
+    {
+      "id": "ATT-9",
+      "sectionName": "deadlinesKeyDates",
+      "fieldKey": "dates",
+      "statementText": "DWP decision letter is dated 18/08/2026.",
+      "segmentId": "1",
+      "timestampRange": "00:00:09 - 00:00:12",
+      "transcriptSnippet": "...decision letter from DWP refusing my PIP claim dated 18/08/2026."
+    },
+    {
+      "id": "ATT-10",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "vulnerabilitySupportNeeds",
+      "statementText": "Client reports that their GP letter states they cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres.",
+      "segmentId": "1",
+      "timestampRange": "00:00:16 - 00:00:22",
+      "transcriptSnippet": "...confirming I cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres."
+    },
+    {
+      "id": "ATT-11",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a phone number: [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:08 - 00:00:09",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### Case Note Summary\n\n**Client:** [CLIENT_FORENAME]\n**Date:** As per session metadata\n**Adviser:** Benchmark Adviser\n\n**Presenting Issue:**\nClient, [CLIENT_FORENAME], presented with a decision letter from the DWP dated 18/08/2026, refusing their claim for Personal Independence Payment (PIP). [ATT-1] The client mentioned having a supporting letter from their GP, [DOCTOR_NAME], which reportedly states they cannot prepare meals or walk more than 20 metres due to severe flare-ups. [ATT-3] These documents were not reviewed during the interview. [ATT-4]\n\n**Household & Finances:**\nClient resides at [ADDRESS_LINE_1], London [POSTCODE]. [ATT-7] No further details regarding household composition, income, or finances were established during this brief initial contact.\n\n**Key Dates:**\n- DWP PIP refusal decision letter dated 18/08/2026. [ATT-9]\n\n**Support Needs:**\nClient's GP letter suggests significant mobility and daily living limitations. [ATT-10] No other support needs were established.\n\n**Actions & Next Steps:**\nThis was an initial information-gathering session. The adviser recorded the client's details and the presenting issue. No advice was given, and no further actions were agreed upon for the client or adviser.\n\n**Gaps and Limitations:**\nThis was a preliminary interview. Key information is missing, including the reasons for the PIP refusal, the deadline for a Mandatory Reconsideration, the client's full financial and household situation, and their specific goals. No options were discussed."
+}

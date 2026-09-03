@@ -1,0 +1,183 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client stated they have approximately £18,000 in debt, comprising catalogue debts, [IDENTIFYING_ORGANISATION], and store cards. [ATT_1]",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview",
+    "immediatePriority": "Not established during this interview",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], born [DOB]. [ATT_2] National Insurance Number is [NINO]. [ATT_3]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Client stated they live at [ADDRESS_LINE_1], [POSTCODE]. [ATT_4] Tenure was not established."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client stated they earn £1,200 a month after tax. [ATT_5] Employment status was not established.",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Client stated they have approximately £18,000 in catalogue debts, [IDENTIFYING_ORGANISATION], and store cards. [ATT_1]",
+    "savingsCapital": "Client stated they have no car and no savings. [ATT_6]",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "This was an initial information-gathering interview. No advice was provided."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Client provided a contact phone number: [PHONE_NUMBER]. [ATT_7]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details and a summary of their financial situation."
+    ],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Client's goals and what they wish to achieve were not established.",
+    "A full breakdown of the £18,000 debt (creditors, amounts, status) was not obtained.",
+    "Client's full household composition was not established.",
+    "Client's employment status (e.g., employed, self-employed) and employer details were not established.",
+    "A full income and expenditure statement was not completed.",
+    "Benefit entitlement was not checked or discussed.",
+    "Housing costs and tenure type were not established.",
+    "Whether any creditors are taking enforcement action was not established.",
+    "Any relevant deadlines or key dates were not identified.",
+    "Client's support needs or vulnerabilities were not explored.",
+    "No advice or options were discussed as this was an initial contact.",
+    "No next steps were agreed with the client or for the adviser.",
+    "Permission to share data was not obtained."
+  ],
+  "attributions": [
+    {
+      "id": "ATT_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client stated they have approximately £18,000 in debt, comprising catalogue debts, [IDENTIFYING_ORGANISATION], and store cards.",
+      "segmentId": "1",
+      "timestampRange": "00:00:06 - 00:00:11",
+      "transcriptSnippet": "I have got about eighteen grand in catalogue debts, [IDENTIFYING_ORGANISATION], and store cards."
+    },
+    {
+      "id": "ATT_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], born [DOB].",
+      "segmentId": "1",
+      "timestampRange": "00:00:01 - 00:00:03",
+      "transcriptSnippet": "Alright mate, I am [CLIENT_FORENAME]. Born [DOB]."
+    },
+    {
+      "id": "ATT_3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "National Insurance Number is [NINO].",
+      "segmentId": "1",
+      "timestampRange": "00:00:03 - 00:00:04",
+      "transcriptSnippet": "NINO is [NINO]."
+    },
+    {
+      "id": "ATT_4",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client stated they live at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "1",
+      "timestampRange": "00:00:04 - 00:00:05",
+      "transcriptSnippet": "Living at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "ATT_5",
+      "sectionName": "incomeFinances",
+      "fieldKey": "employmentIncome",
+      "statementText": "Client stated they earn £1,200 a month after tax.",
+      "segmentId": "1",
+      "timestampRange": "00:00:13 - 00:00:15",
+      "transcriptSnippet": "and only earn £1,200 a month after tax."
+    },
+    {
+      "id": "ATT_6",
+      "sectionName": "incomeFinances",
+      "fieldKey": "savingsCapital",
+      "statementText": "Client stated they have no car and no savings.",
+      "segmentId": "1",
+      "timestampRange": "00:00:11 - 00:00:13",
+      "transcriptSnippet": "I have got no car, no savings,"
+    },
+    {
+      "id": "ATT_7",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a contact phone number: [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:00:05 - 00:00:06",
+      "transcriptSnippet": "Call me on [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n**Client:** [CLIENT_FORENAME]\n**Date of Birth:** [DOB]\n**NINO:** [NINO]\n\n### Presenting Issue\nClient presented with approximately £18,000 of consumer debt, which they stated consists of catalogue debts, debt to [IDENTIFYING_ORGANISATION], and store cards. [ATT_1]\n\n### Household & Finances\n- **Address:** [ADDRESS_LINE_1], [POSTCODE]. [ATT_4]\n- **Income:** Client reports a net monthly income of £1,200. [ATT_5]\n- **Assets:** Client states they have no car and no savings. [ATT_6]\n- **Household:** Client's full household composition was not established.\n\n### Key Information (As Stated by Client)\n- **Total Debt:** ~£18,000\n- **Net Monthly Income:** £1,200\n- **Key Assets:** None reported.\n\n### Gaps and Limitations\nThis was a brief initial contact focused on gathering basic information. Key gaps include: a detailed breakdown of debts and creditors, a full income and expenditure assessment, client's goals, housing tenure and costs, benefit entitlement, and any potential vulnerabilities. No advice was provided, and no actions were agreed upon."
+}

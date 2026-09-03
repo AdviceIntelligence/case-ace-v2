@@ -1,0 +1,128 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client's electricity prepayment meter from [IDENTIFYING_ORGANISATION] ran out yesterday. The client has a £720 debt on the meter. The client's husband, [HUSBAND_NAME], has chronic obstructive pulmonary disease (COPD) and requires an electric nebuliser.",
+    "relevantBackground": "The household is currently without electricity, which is urgently required to power a medical nebuliser for the client's husband.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "High risk: The household has been without electricity since yesterday, and the client's husband relies on an electric nebuliser for chronic obstructive pulmonary disease (COPD).",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To resolve the lack of electricity supply and address the £720 debt on the prepayment meter.",
+    "immediatePriority": "To restore the electricity supply immediately to enable the use of the husband's electric nebuliser.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], DOB [DOB], Address: [ADDRESS_LINE_1], [POSTCODE], Phone: [PHONE_NUMBER].",
+    "partner": "[HUSBAND_NAME]",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Husband [HUSBAND_NAME] has chronic obstructive pulmonary disease (COPD) and uses an electric nebuliser.",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "£720 debt on the electricity prepayment meter.",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Prepayment meter ran out of credit yesterday, leaving the household without electricity.",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "No advice was given during this brief initial contact as the session ended after the client presented their situation."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "Electricity ran out: Yesterday"
+    ],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Immediate action is required to restore electricity due to the husband's medical reliance on an electric nebuliser."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Husband [HUSBAND_NAME] has chronic obstructive pulmonary disease (COPD) and relies on an electric nebuliser.",
+    "effectOnAbility": "The lack of electricity directly impacts the ability to run essential medical equipment, posing an immediate health risk.",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone: [PHONE_NUMBER]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No advice was given during this brief initial contact.",
+    "Income, benefits, and housing details were not established.",
+    "Options, next steps, and referrals were not discussed or established during this interview."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "My electricity prepayment meter from [IDENTIFYING_ORGANISATION] ran out yesterday. My husband [HUSBAND_NAME] has chronic obstructive pulmonary disease and uses an electric nebuliser. We have £720 debt on the meter.",
+      "segmentId": "1",
+      "timestampRange": "00:04 - 00:25",
+      "transcriptSnippet": "My electricity prepayment meter from [IDENTIFYING_ORGANISATION] ran out yesterday. My husband [HUSBAND_NAME] has chronic obstructive pulmonary disease and uses an electric nebuliser. We have £720 debt on the meter."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client: Hello, I am [CLIENT_FORENAME]. DOB [DOB]. Address [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER].",
+      "segmentId": "1",
+      "timestampRange": "00:04 - 00:15",
+      "transcriptSnippet": "Hello, I am [CLIENT_FORENAME]. DOB [DOB]. Address [ADDRESS_LINE_1], [POSTCODE]. Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "# CASE NOTE: EMERGENCY UTILITY DISCONNECTION\n\n## PRESENTING ISSUE\n* **Client Situation:** The client's electricity prepayment meter from [IDENTIFYING_ORGANISATION] ran out yesterday. There is an outstanding debt of £720 on the meter.\n* **Vulnerability/Urgency:** The client's husband, [HUSBAND_NAME], has chronic obstructive pulmonary disease (COPD) and relies on an electric nebuliser which cannot be used due to the power outage.\n\n## HOUSEHOLD MAKE UP\n* **Client:** [CLIENT_FORENAME] (DOB: [DOB])\n* **Partner:** [HUSBAND_NAME] (suffers from COPD)\n* **Address:** [ADDRESS_LINE_1], [POSTCODE]\n* **Contact:** [PHONE_NUMBER]\n\n## INCOME / FINANCES\n* **Debts:** £720 debt on the electricity prepayment meter.\n* **Other Financial Details:** Not established during this interview.\n\n## GAPS AND LIMITATIONS\n* No advice was given during this brief initial contact.\n* Income, benefits, and housing details were not established.\n* Options, next steps, and referrals were not discussed or established during this interview."
+}

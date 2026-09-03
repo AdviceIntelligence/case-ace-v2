@@ -1,0 +1,197 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client states that [IDENTIFYING_ORGANISATION] is threatening court action regarding water arrears amounting to £850. [ATTRIBUTION: 1]",
+    "relevantBackground": "Not established during this interview.",
+    "relevantDocuments": "Not established during this interview. No documents were seen.",
+    "emergencyOrRisk": "Client reports a threat of court action. The immediacy and nature of this threat were not established. [ATTRIBUTION: 2]",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "No safeguarding concerns were identified during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Client would like to know if they are eligible for the WaterHelp scheme. [ATTRIBUTION: 3]",
+    "immediatePriority": "To understand eligibility for the WaterHelp scheme to address the arrears. [ATTRIBUTION: 4]",
+    "outcomeAchievableDiscussion": "Not established during this interview. No discussion took place regarding the achievability of the client's goal.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client is [CLIENT_FORENAME], born [DOB]. NINO is [NINO]. [ATTRIBUTION: 5]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. Tenure type not established. [ATTRIBUTION: 6]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview.",
+    "benefitsReceived": "Not established during this interview.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Client reports water arrears of £850 to [IDENTIFYING_ORGANISATION]. Other debts not established. [ATTRIBUTION: 7]",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "No research was undertaken during this interview.",
+    "researchConfirmed": "No research was confirmed during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview as no options were provided.",
+    "partialAdviceReason": "This was an initial contact to record the presenting issue. No advice was given."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview as no deadlines were identified or advice given.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Client contacted via telephone. [ATTRIBUTION: 8]",
+    "contactArrangements": "Client's phone number is [PHONE_NUMBER]. [ATTRIBUTION: 9]",
+    "conflictOfInterest": "No conflict of interest was identified.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details and the presenting issue."
+    ],
+    "outcomeOfActionTaken": "The client's issue has been logged for a future advice session.",
+    "documentsProducedSent": "No documents were produced or sent during this interview.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not applicable.",
+    "outstandingIssuesNextContact": "The entire case requires exploration. Key areas for next contact include: full income/expenditure, household composition, health/vulnerabilities, details of the debt and court threat, and eligibility for WaterHelp and other support."
+  },
+  "onwardReferrals": {
+    "organisation": "Not applicable.",
+    "reason": "Not applicable.",
+    "method": "Not applicable.",
+    "contactDetailsProvided": "Not applicable.",
+    "urgencyCommunicated": "Not applicable.",
+    "consentObtained": "Not applicable.",
+    "assistedInfoProvided": "Not applicable.",
+    "clientUnderstands": "Not applicable."
+  },
+  "gapsAndLimitations": [
+    "This was an initial contact only; no advice was provided.",
+    "Client's full financial circumstances (income, benefits, expenditure, other debts, capital) were not established.",
+    "Client's household composition was not established.",
+    "Client's health, disabilities, or any vulnerabilities were not established.",
+    "The specific details of the water debt (e.g., period of arrears, payment history) were not established.",
+    "No documents (e.g., letters from [IDENTIFYING_ORGANISATION], court papers) were seen or discussed.",
+    "The exact nature and timescale of the threatened court action were not established.",
+    "Eligibility for the WaterHelp scheme or any other options were not explored or discussed.",
+    "No next steps were agreed with the client or adviser."
+  ],
+  "attributions": [
+    {
+      "id": "1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client states that [IDENTIFYING_ORGANISATION] is threatening court action regarding water arrears amounting to £850.",
+      "segmentId": "0",
+      "timestampRange": "00:00:06 - 00:00:11",
+      "transcriptSnippet": "[IDENTIFYING_ORGANISATION] is threatening court action for £850 water arrears."
+    },
+    {
+      "id": "2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "emergencyOrRisk",
+      "statementText": "Client reports a threat of court action. The immediacy and nature of this threat were not established.",
+      "segmentId": "0",
+      "timestampRange": "00:00:06 - 00:00:11",
+      "transcriptSnippet": "[IDENTIFYING_ORGANISATION] is threatening court action for £850 water arrears."
+    },
+    {
+      "id": "3",
+      "sectionName": "clientGoals",
+      "fieldKey": "clientWouldLike",
+      "statementText": "Client would like to know if they are eligible for the WaterHelp scheme.",
+      "segmentId": "0",
+      "timestampRange": "00:00:11 - 00:00:13",
+      "transcriptSnippet": "Can I get on the WaterHelp scheme?"
+    },
+    {
+      "id": "4",
+      "sectionName": "clientGoals",
+      "fieldKey": "immediatePriority",
+      "statementText": "To understand eligibility for the WaterHelp scheme to address the arrears.",
+      "segmentId": "0",
+      "timestampRange": "00:00:11 - 00:00:13",
+      "transcriptSnippet": "Can I get on the WaterHelp scheme?"
+    },
+    {
+      "id": "5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client is [CLIENT_FORENAME], born [DOB]. NINO is [NINO].",
+      "segmentId": "0",
+      "timestampRange": "00:00:01 - 00:00:04",
+      "transcriptSnippet": "My name is [CLIENT_FORENAME], born [DOB]. NINO is [NINO]."
+    },
+    {
+      "id": "6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. Tenure type not established.",
+      "segmentId": "0",
+      "timestampRange": "00:00:04 - 00:00:05",
+      "transcriptSnippet": "[ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "7",
+      "sectionName": "incomeFinances",
+      "fieldKey": "otherDebtsLiabilities",
+      "statementText": "Client reports water arrears of £850 to [IDENTIFYING_ORGANISATION]. Other debts not established.",
+      "segmentId": "0",
+      "timestampRange": "00:00:06 - 00:00:11",
+      "transcriptSnippet": "[IDENTIFYING_ORGANISATION] is threatening court action for £850 water arrears."
+    },
+    {
+      "id": "8",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "clientAccess",
+      "statementText": "Client contacted via telephone.",
+      "segmentId": "0",
+      "timestampRange": "00:00:00 - 00:00:13",
+      "transcriptSnippet": "Recording started. Client: My name is [CLIENT_FORENAME]..."
+    },
+    {
+      "id": "9",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client's phone number is [PHONE_NUMBER].",
+      "segmentId": "0",
+      "timestampRange": "00:00:05 - 00:00:06",
+      "transcriptSnippet": "Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "### PRESENTING ISSUE\n**Client's explanation of the issue:** Client states that [IDENTIFYING_ORGANISATION] is threatening court action regarding water arrears amounting to £850. [ATTRIBUTION: 1]\n\n**Emergency/Risk:** Client reports a threat of court action. The immediacy and nature of this threat were not established. [ATTRIBUTION: 2]\n\n### CLIENT GOALS\n**What the client would like to achieve:** Client would like to know if they are eligible for the WaterHelp scheme. [ATTRIBUTION: 3]\n\n**Immediate priority:** To understand eligibility for the WaterHelp scheme to address the arrears. [ATTRIBUTION: 4]\n\n### HOUSEHOLD MAKE UP\n**Client:** Client is [CLIENT_FORENAME], born [DOB]. NINO is [NINO]. [ATTRIBUTION: 5]\n\n**Current Accommodation:** Client resides at [ADDRESS_LINE_1], [POSTCODE]. Tenure type not established. [ATTRIBUTION: 6]\n\n### INCOME / FINANCES (INCL. BENEFITS)\n**Other Debts/Liabilities:** Client reports water arrears of £850 to [IDENTIFYING_ORGANISATION]. Other debts not established. [ATTRIBUTION: 7]\n\n### SUPPORT NEEDS / VULNERABILITY\n**Client Access:** Client contacted via telephone. [ATTRIBUTION: 8]\n\n**Contact Arrangements:** Client's phone number is [PHONE_NUMBER]. [ATTRIBUTION: 9]\n\n### GAPS AND LIMITATIONS\n- This was an initial contact only; no advice was provided.\n- Client's full financial circumstances (income, benefits, expenditure, other debts, capital) were not established.\n- Client's household composition was not established.\n- Client's health, disabilities, or any vulnerabilities were not established.\n- The specific details of the water debt (e.g., period of arrears, payment history) were not established.\n- No documents (e.g., letters from [IDENTIFYING_ORGANISATION], court papers) were seen or discussed.\n- The exact nature and timescale of the threatened court action were not established.\n- Eligibility for the WaterHelp scheme or any other options were not explored or discussed.\n- No next steps were agreed with the client or adviser."
+}

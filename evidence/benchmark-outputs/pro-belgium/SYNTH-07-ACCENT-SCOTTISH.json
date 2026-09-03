@@ -1,0 +1,225 @@
+{
+  "presentingIssue": {
+    "clientExplained": "Client states they have received a bill from the council for a Housing Benefit overpayment of £1800 from the previous year. [att_1] Client asserts they informed the council about their new job 'straight away'. [att_2]",
+    "relevantBackground": "The alleged overpayment relates to a period last year, following the client starting a new job. [att_3]",
+    "relevantDocuments": "Client mentioned a 'big bill' from the council regarding the overpayment. [att_4] Document not seen by adviser.",
+    "emergencyOrRisk": "Not established during this interview.",
+    "relatedIssues": "Not established during this interview.",
+    "discriminationIssue": "Not established during this interview.",
+    "safeguardingConcern": "Not established during this interview."
+  },
+  "clientGoals": {
+    "clientWouldLike": "Not established during this interview.",
+    "immediatePriority": "Not established during this interview.",
+    "outcomeAchievableDiscussion": "Not established during this interview.",
+    "agreedPurposeOfIntervention": "Not established during this interview."
+  },
+  "householdMakeUp": {
+    "client": "Client's name is [CLIENT_FORENAME]. [att_5] Date of birth is [DOB]. [att_6] National Insurance Number is [NINO]. [att_7]",
+    "partner": "Not established during this interview.",
+    "childrenDependants": "Not established during this interview.",
+    "otherHouseholdMembers": "Not established during this interview.",
+    "caringResponsibilities": "Not established during this interview.",
+    "relevantCircumstances": "Not established during this interview.",
+    "currentAccommodation": "Client resides at [ADDRESS_LINE_1], [POSTCODE]. [att_8]"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Client stated they started a 'new job' last year. [att_9] Further details such as employer, salary, and start date were not established.",
+    "benefitsReceived": "Client was in receipt of Housing Benefit last year. [att_10] Current benefit situation not established.",
+    "benefitsClaimedPending": "Not established during this interview.",
+    "benefitEntitlementConsidered": "Not established during this interview.",
+    "housingCosts": "Not established during this interview.",
+    "otherDebtsLiabilities": "Client reports a debt of £1800 to the council for a Housing Benefit overpayment. [att_11]",
+    "savingsCapital": "Not established during this interview.",
+    "immediateFinancialHardship": "Not established during this interview.",
+    "financialInfoRequired": "Not established during this interview."
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview.",
+    "researchConfirmed": "Not established during this interview.",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview.",
+    "clientUnderstoodOptions": "Not established during this interview.",
+    "partialAdviceReason": "This was an initial consultation to establish the presenting issue. No advice was given."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview.",
+    "finalDateForAction": "Not established during this interview.",
+    "clientAdvisedOfDeadline": "Not established during this interview.",
+    "urgentActionRequired": "Not established during this interview."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview.",
+    "vulnerabilitySupportNeeds": "Not established during this interview.",
+    "effectOnAbility": "Not established during this interview.",
+    "reasonableAdjustments": "Not established during this interview.",
+    "practicalAssistanceRequired": "Not established during this interview.",
+    "clientAccess": "Not established during this interview.",
+    "contactArrangements": "Client provided a contact phone number: [PHONE_NUMBER]. [att_12]",
+    "conflictOfInterest": "Not established during this interview.",
+    "permissionToShare": "Not established during this interview."
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details and an outline of the presenting issue."
+    ],
+    "outcomeOfActionTaken": "Initial information gathered to inform further advice.",
+    "documentsProducedSent": "No documents were produced or sent during the interview.",
+    "clientConfirmedUnderstanding": "Not applicable as no advice was given."
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview.",
+    "contingencyIfCircumstancesChange": "Not established during this interview.",
+    "seekAdviceBefore": "Not established during this interview.",
+    "invitedToReturn": "Not established during this interview."
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview.",
+      "time": "Not established during this interview.",
+      "channel": "Not established during this interview.",
+      "purpose": "Not established during this interview."
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview.",
+    "outstandingIssuesNextContact": "Not established during this interview."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview.",
+    "reason": "Not established during this interview.",
+    "method": "Not established during this interview.",
+    "contactDetailsProvided": "Not established during this interview.",
+    "urgencyCommunicated": "Not established during this interview.",
+    "consentObtained": "Not established during this interview.",
+    "assistedInfoProvided": "Not established during this interview.",
+    "clientUnderstands": "Not established during this interview."
+  },
+  "gapsAndLimitations": [
+    "Client's surname was not provided.",
+    "Client's specific goals for the consultation were not established.",
+    "Full household composition was not established.",
+    "Details of the client's 'new job' (employer, start date, salary) were not established.",
+    "Details of how and when the client informed the council about their change in circumstances were not established.",
+    "The date of the council's overpayment decision letter/bill was not established.",
+    "Any deadlines associated with the overpayment (e.g., for appeal or payment) were not established.",
+    "Client's full financial circumstances (income, expenditure, capital) were not established.",
+    "Any potential vulnerabilities or support needs were not explored.",
+    "No advice was given or options discussed as this was an initial information-gathering session."
+  ],
+  "attributions": [
+    {
+      "id": "att_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client states they have received a bill from the council for a Housing Benefit overpayment of £1800 from the previous year.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:05 - 00:00:13",
+      "transcriptSnippet": "The council sent me a big bill sayin ah owe eighteen hundred quid fur Housing Benefit fae last year"
+    },
+    {
+      "id": "att_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "Client asserts they informed the council about their new job 'straight away'.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:13 - 00:00:16",
+      "transcriptSnippet": "but ah telt thaim aboot ma new job straight away!"
+    },
+    {
+      "id": "att_3",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The alleged overpayment relates to a period last year, following the client starting a new job.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:11 - 00:00:16",
+      "transcriptSnippet": "Housing Benefit fae last year, but ah telt thaim aboot ma new job straight away!"
+    },
+    {
+      "id": "att_4",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantDocuments",
+      "statementText": "Client mentioned a 'big bill' from the council regarding the overpayment.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:09 - 00:00:11",
+      "transcriptSnippet": "The council sent me a big bill"
+    },
+    {
+      "id": "att_5",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Client's name is [CLIENT_FORENAME].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:03 - 00:00:05",
+      "transcriptSnippet": "ma name is [CLIENT_FORENAME]."
+    },
+    {
+      "id": "att_6",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Date of birth is [DOB].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:05 - 00:00:06",
+      "transcriptSnippet": "Born [DOB]."
+    },
+    {
+      "id": "att_7",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "National Insurance Number is [NINO].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:06 - 00:00:07",
+      "transcriptSnippet": "NINO is [NINO]."
+    },
+    {
+      "id": "att_8",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "currentAccommodation",
+      "statementText": "Client resides at [ADDRESS_LINE_1], [POSTCODE].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:07 - 00:00:08",
+      "transcriptSnippet": "Ah bide at [ADDRESS_LINE_1], [POSTCODE]."
+    },
+    {
+      "id": "att_9",
+      "sectionName": "incomeFinances",
+      "fieldKey": "employmentIncome",
+      "statementText": "Client stated they started a 'new job' last year.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:13 - 00:00:16",
+      "transcriptSnippet": "ah telt thaim aboot ma new job straight away!"
+    },
+    {
+      "id": "att_10",
+      "sectionName": "incomeFinances",
+      "fieldKey": "benefitsReceived",
+      "statementText": "Client was in receipt of Housing Benefit last year.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:11 - 00:00:13",
+      "transcriptSnippet": "Housing Benefit fae last year"
+    },
+    {
+      "id": "att_11",
+      "sectionName": "incomeFinances",
+      "fieldKey": "otherDebtsLiabilities",
+      "statementText": "Client reports a debt of £1800 to the council for a Housing Benefit overpayment.",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:09 - 00:00:13",
+      "transcriptSnippet": "ah owe eighteen hundred quid fur Housing Benefit"
+    },
+    {
+      "id": "att_12",
+      "sectionName": "supportNeedsVulnerability",
+      "fieldKey": "contactArrangements",
+      "statementText": "Client provided a contact phone number: [PHONE_NUMBER].",
+      "segmentId": "seg_1",
+      "timestampRange": "00:00:08 - 00:00:09",
+      "transcriptSnippet": "Ye can ring me on [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "## AQS Level 3 Case Note\n\n### PRESENTING ISSUE\n*   **Client's Explanation:** Client states they have received a bill from the council for a Housing Benefit overpayment of £1800 from the previous year. [att_1] Client asserts they informed the council about their new job 'straight away'. [att_2]\n*   **Relevant Background:** The alleged overpayment relates to a period last year, following the client starting a new job. [att_3]\n*   **Relevant Documents:** Client mentioned a 'big bill' from the council regarding the overpayment. [att_4] Document not seen by adviser.\n*   **Emergency or Risk:** Not established during this interview.\n*   **Related Issues:** Not established during this interview.\n*   **Discrimination Issue:** Not established during this interview.\n*   **Safeguarding Concern:** Not established during this interview.\n\n### CLIENT GOALS\n*   **What Client Would Like:** Not established during this interview.\n*   **Immediate Priority:** Not established during this interview.\n*   **Discussion on Achievable Outcomes:** Not established during this interview.\n*   **Agreed Purpose of Intervention:** Not established during this interview.\n\n### HOUSEHOLD MAKE UP\n*   **Client:** Client's name is [CLIENT_FORENAME]. [att_5] Date of birth is [DOB]. [att_6] National Insurance Number is [NINO]. [att_7]\n*   **Partner:** Not established during this interview.\n*   **Children/Dependants:** Not established during this interview.\n*   **Other Household Members:** Not established during this interview.\n*   **Caring Responsibilities:** Not established during this interview.\n*   **Relevant Circumstances:** Not established during this interview.\n*   **Current Accommodation:** Client resides at [ADDRESS_LINE_1], [POSTCODE]. [att_8]\n\n### INCOME / FINANCES (INCL. BENEFITS)\n*   **Employment Income:** Client stated they started a 'new job' last year. [att_9] Further details such as employer, salary, and start date were not established.\n*   **Benefits Received:** Client was in receipt of Housing Benefit last year. [att_10] Current benefit situation not established.\n*   **Benefits Claimed/Pending:** Not established during this interview.\n*   **Benefit Entitlement Considered:** Not established during this interview.\n*   **Housing Costs:** Not established during this interview.\n*   **Other Debts/Liabilities:** Client reports a debt of £1800 to the council for a Housing Benefit overpayment. [att_11]\n*   **Savings/Capital:** Not established during this interview.\n*   **Immediate Financial Hardship:** Not established during this interview.\n*   **Financial Information Required:** Not established during this interview.\n\n### OPTIONS DISCUSSED\n*   **Research Undertaken:** Not established during this interview.\n*   **Research Confirmed:** Not established during this interview.\n*   **Options:** No options were discussed.\n*   **Client's Preferred Option:** Not established during this interview.\n*   **Client's Understanding of Options:** Not established during this interview.\n*   **Reason for Partial Advice:** This was an initial consultation to establish the presenting issue. No advice was given.\n\n### DEADLINES / KEY DATES\n*   **Dates:** No dates were established.\n*   **Applicable Time Limit:** Not established during this interview.\n*   **Final Date for Action:** Not established during this interview.\n*   **Client Advised of Deadline:** Not established during this interview.\n*   **Urgent Action Required:** Not established during this interview.\n\n### SUPPORT NEEDS / VULNERABILITY\n*   **Client Capability:** Not established during this interview.\n*   **Vulnerability/Support Needs:** Not established during this interview.\n*   **Effect on Ability:** Not established during this interview.\n*   **Reasonable Adjustments:** Not established during this interview.\n*   **Practical Assistance Required:** Not established during this interview.\n*   **Client Access:** Not established during this interview.\n*   **Contact Arrangements:** Client provided a contact phone number: [PHONE_NUMBER]. [att_12]\n*   **Conflict of Interest:** Not established during this interview.\n*   **Permission to Share Data:** Not established during this interview.\n\n### ACTION TAKEN\n*   **Actions During Intervention:** Recorded client's personal details and an outline of the presenting issue.\n*   **Outcome of Action Taken:** Initial information gathered to inform further advice.\n*   **Documents Produced/Sent:** No documents were produced or sent during the interview.\n*   **Client Confirmed Understanding:** Not applicable as no advice was given.\n\n### NEXT STEPS (CLIENT)\n*   No next steps were agreed for the client.\n\n### NEXT STEPS (ADVISER)\n*   No next steps were agreed for the adviser.\n\n### ONWARD REFERRALS / SIGNPOSTING\n*   No onward referrals or signposting were made.\n\n### GAPS AND LIMITATIONS\n*   Client's surname was not provided.\n*   Client's specific goals for the consultation were not established.\n*   Full household composition was not established.\n*   Details of the client's 'new job' (employer, start date, salary) were not established.\n*   Details of how and when the client informed the council about their change in circumstances were not established.\n*   The date of the council's overpayment decision letter/bill was not established.\n*   Any deadlines associated with the overpayment (e.g., for appeal or payment) were not established.\n*   Client's full financial circumstances (income, expenditure, capital) were not established.\n*   Any potential vulnerabilities or support needs were not explored.\n*   No advice was given or options discussed as this was an initial information-gathering session."
+}

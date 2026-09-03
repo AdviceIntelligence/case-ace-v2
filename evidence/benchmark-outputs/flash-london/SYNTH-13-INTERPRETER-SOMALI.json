@@ -1,0 +1,154 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client's interpreter explained that the client's private landlord has given her 7 days to leave her accommodation, and she has nowhere to go.",
+    "relevantBackground": "The client resides at [ADDRESS_LINE_1], Battersea [POSTCODE] with her four children.",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "The client is at immediate risk of homelessness as she has been given 7 days to leave by her private landlord and has nowhere to go.",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "The client wants to secure safe accommodation for herself and her four children.",
+    "immediatePriority": "To address the 7-day notice to leave and prevent immediate homelessness.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Mrs [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], Battersea [POSTCODE], Phone: [PHONE_NUMBER]. She does not speak English.",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME].",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Caring for her four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME].",
+    "relevantCircumstances": "The client cannot speak English and requires translation support.",
+    "currentAccommodation": "Private rented accommodation at [ADDRESS_LINE_1], Battersea [POSTCODE]."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "No advice was given during this brief intake session; only the client's details and presenting issue were recorded."
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "7 days from the date of the landlord's notice to leave (exact date of notice not established)"
+    ],
+    "applicableTimeLimit": "7 days to leave the property.",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Yes, the client faces immediate homelessness within 7 days."
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "The client cannot speak English and requires an interpreter for all communications.",
+    "vulnerabilitySupportNeeds": "Language barrier; risk of homelessness with four dependent children.",
+    "effectOnAbility": "Limits her ability to understand her tenancy rights, communicate with her landlord, or navigate housing services independently.",
+    "reasonableAdjustments": "Provision of a professional interpreter for all future advice sessions and communications.",
+    "practicalAssistanceRequired": "Full casework support, translation, and assistance with local authority housing services.",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Telephone: [PHONE_NUMBER]",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details, household composition, and presenting housing crisis via an interpreter."
+    ],
+    "outcomeOfActionTaken": "Client's immediate crisis and contact details have been logged for urgent adviser review.",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [
+      "Not established during this interview"
+    ],
+    "obtain": [
+      "Not established during this interview"
+    ],
+    "contact": [
+      "Not established during this interview"
+    ],
+    "submit": [
+      "Not established during this interview"
+    ],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Review the validity of the 7-day notice to leave given by the private landlord.",
+      "Assess local authority homelessness duties and prepare an urgent housing assistance request.",
+      "Arrange an urgent follow-up appointment with an interpreter to obtain full details of the tenancy and financial situation."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Establish the exact date the notice was served, obtain a copy of the notice, and assess the client's financial and benefit situation."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "The exact date the 7-day notice was given or when it expires is not established.",
+    "The written notice or tenancy agreement has not been seen or verified.",
+    "The client's financial situation, income, and benefit entitlement are completely unestablished.",
+    "Whether there is a partner or other household members is not established.",
+    "No advice was given or options discussed during this brief initial intake segment.",
+    "Client's explicit consent to share information was not recorded in this segment."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "client",
+      "statementText": "Mrs [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], Battersea [POSTCODE], Phone: [PHONE_NUMBER]. She does not speak English.",
+      "segmentId": "transcript_0",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "Interpreter: I am translating for Mrs [CLIENT_FORENAME]. Her DOB is [DOB], NINO is [NINO]. Address is [ADDRESS_LINE_1], Battersea [POSTCODE]. Telephone [PHONE_NUMBER]... She cannot speak English"
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client's private landlord has given her 7 days to leave her accommodation, and she has nowhere to go.",
+      "segmentId": "transcript_0",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "The private landlord has given her 7 days to leave... and has nowhere to go."
+    },
+    {
+      "id": "attr_3",
+      "sectionName": "householdMakeUp",
+      "fieldKey": "childrenDependants",
+      "statementText": "She has four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME].",
+      "segmentId": "transcript_0",
+      "timestampRange": "00:00-00:25",
+      "transcriptSnippet": "She has four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME]."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING: Mrs [CLIENT_FORENAME]\n\n## PRESENTING ISSUE\n* **Client Explanation:** The client's interpreter explained that her private landlord has given her 7 days to leave her accommodation, and she has nowhere to go.\n* **Relevant Background:** The client lives at [ADDRESS_LINE_1], Battersea [POSTCODE] with her four children.\n* **Relevant Documents:** Not established during this interview.\n* **Emergency or Risk:** Immediate risk of homelessness; the client has been given 7 days to leave and has nowhere to go.\n* **Related Issues:** Not established during this interview.\n* **Discrimination Issue:** Not established during this interview.\n* **Safeguarding Concern:** Not established during this interview.\n\n## CLIENT GOALS\n* **Client Desires:** To secure safe, alternative accommodation for herself and her four children.\n* **Immediate Priority:** To address the 7-day notice to leave and prevent immediate homelessness.\n* **Outcome Discussion:** Not established during this interview.\n* **Agreed Purpose of Intervention:** Not established during this interview.\n\n## HOUSEHOLD MAKE UP\n* **Client:** Mrs [CLIENT_FORENAME], DOB: [DOB], NINO: [NINO], Address: [ADDRESS_LINE_1], Battersea [POSTCODE], Phone: [PHONE_NUMBER]. Does not speak English.\n* **Partner:** Not established during this interview.\n* **Children/Dependants:** Four children: [CHILD_1_FORENAME], [CHILD_2_FORENAME], [CHILD_3_FORENAME], and [CHILD_4_FORENAME].\n* **Other Household Members:** Not established during this interview.\n* **Caring Responsibilities:** Caring for her four children.\n* **Relevant Circumstances:** Language barrier (requires interpreter).\n* **Current Accommodation:** Private rented accommodation.\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Employment Income:** Not established during this interview.\n* **Benefits Received:** Not established during this interview.\n* **Benefits Claimed/Pending:** Not established during this interview.\n* **Benefit Entitlement Considered:** Not established during this interview.\n* **Housing Costs:** Not established during this interview.\n* **Other Debts/Liabilities:** Not established during this interview.\n* **Savings/Capital:** Not established during this interview.\n* **Immediate Financial Hardship:** Not established during this interview.\n* **Financial Info Required:** Not established during this interview.\n\n## OPTIONS DISCUSSED\n* **Research Undertaken:** Not established during this interview.\n* **Research Confirmed:** Not established during this interview.\n* **Options:** None discussed during this brief intake session.\n* **Client Preferred Option:** Not established during this interview.\n* **Client Understood Options:** Not established during this interview.\n* **Partial Advice Reason:** No advice was given during this brief intake session; only the client's details and presenting issue were recorded.\n\n## DEADLINES / KEY DATES\n* **Dates:** 7 days from the date of the landlord's notice to leave (exact date of notice not established).\n* **Applicable Time Limit:** 7 days to leave the property.\n* **Final Date for Action:** Not established during this interview.\n* **Client Advised of Deadline:** Not established during this interview.\n* **Urgent Action Required:** Yes, the client faces immediate homelessness within 7 days.\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Client Capability:** The client cannot speak English and requires translation support.\n* **Vulnerability/Support Needs:** Language barrier; risk of homelessness with four dependent children.\n* **Effect on Ability:** Limits her ability to understand her tenancy rights, communicate with her landlord, or navigate housing services independently.\n* **Reasonable Adjustments:** Provision of a professional interpreter for all future advice sessions and communications.\n* **Practical Assistance Required:** Full casework support, translation, and assistance with local authority housing services.\n* **Client Access:** Not established during this interview.\n* **Contact Arrangements:** Telephone: [PHONE_NUMBER].\n* **Conflict of Interest:** Not established during this interview.\n* **Permission to Share:** Not established during this interview.\n\n## ACTION TAKEN\n* **Actions During Intervention:** Recorded client's personal details, household composition, and presenting housing crisis via an interpreter.\n* **Outcome of Action Taken:** Client's immediate crisis and contact details have been logged for urgent adviser review.\n* **Documents Produced/Sent:** Not established during this interview.\n* **Client Confirmed Understanding:** Not established during this interview.\n\n## NEXT STEPS (CLIENT)\n* **Agreed Actions:** Not established during this interview.\n* **Obtain:** Not established during this interview.\n* **Contact:** Not established during this interview.\n* **Submit:** Not established during this interview.\n* **Contingency (No Response):** Not established during this interview.\n* **Contingency (Circumstances Change):** Not established during this interview.\n* **Seek Advice Before:** Not established during this interview.\n* **Invited to Return:** Not established during this interview.\n\n## NEXT STEPS (ADVISER)\n* **Adviser Actions:**\n  1. Review the validity of the 7-day notice to leave given by the private landlord.\n  2. Assess local authority homelessness duties and prepare an urgent housing assistance request.\n  3. Arrange an urgent follow-up appointment with an interpreter to obtain full details of the tenancy and financial situation.\n* **Follow-Up Contact:** Not established during this interview.\n* **Contingency (No Doc Received):** Not established during this interview.\n* **Outstanding Issues:** Establish the exact date the notice was served, obtain a copy of the notice, and assess the client's financial and benefit situation.\n\n## ONWARD REFERRALS / SIGNPOSTING\n* **Organisation:** Not established during this interview.\n* **Reason:** Not established during this interview.\n* **Method:** Not established during this interview.\n* **Contact Details Provided:** Not established during this interview.\n* **Urgency Communicated:** Not established during this interview.\n* **Consent Obtained:** Not established during this interview.\n* **Assisted Info Provided:** Not established during this interview.\n* **Client Understands:** Not established during this interview.\n\n## GAPS AND LIMITATIONS\n* The exact date the 7-day notice was given or when it expires is not established.\n* The written notice or tenancy agreement has not been seen or verified.\n* The client's financial situation, income, and benefit entitlement are completely unestablished.\n* Whether there is a partner or other household members is not established.\n* No advice was given or options discussed during this brief initial intake segment.\n* Client's explicit consent to share information was not recorded in this segment."
+}

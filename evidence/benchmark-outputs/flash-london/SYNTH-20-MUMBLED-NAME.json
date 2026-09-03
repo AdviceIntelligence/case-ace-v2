@@ -1,0 +1,140 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client, Christopher [CLIENT_FORENAME], states that he did not receive his £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] this winter.",
+    "relevantBackground": "Not established during this interview",
+    "relevantDocuments": "Not established during this interview",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To receive the £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] for this winter.",
+    "immediatePriority": "To resolve the missing £150 Warm Home Discount.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "Christopher [CLIENT_FORENAME], DOB [DOB], NINO [NINO], residing at [ADDRESS_LINE_1], Battersea [POSTCODE], Phone [PHONE_NUMBER].",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Residing at [ADDRESS_LINE_1], Battersea [POSTCODE]."
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "Not established during this interview",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "No advice was given during this brief introductory exchange."
+  },
+  "deadlinesKeyDates": {
+    "dates": [],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Client spoke softly and mumbled, indicating potential communication support needs or low confidence, but this was not fully explored.",
+    "vulnerabilitySupportNeeds": "Not established during this interview",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Phone number provided: [PHONE_NUMBER].",
+    "conflictOfInterest": "None identified.",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [
+      "Recorded client's personal details, contact information, and presenting issue."
+    ],
+    "outcomeOfActionTaken": "Client details and core issue recorded.",
+    "documentsProducedSent": "None",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [
+      "Not established during this interview"
+    ],
+    "obtain": [
+      "Not established during this interview"
+    ],
+    "contact": [
+      "Not established during this interview"
+    ],
+    "submit": [
+      "Not established during this interview"
+    ],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [
+      "Review client's eligibility for the Warm Home Discount and contact [IDENTIFYING_ORGANISATION] or the Warm Home Discount helpline if appropriate once full details are established."
+    ],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Establish full household income, benefits received, and energy supplier details to assess Warm Home Discount eligibility."
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "Household makeup and tenancy details are not established.",
+    "Income, benefits, and financial situation are not established.",
+    "Energy supplier details (other than the mention of [IDENTIFYING_ORGANISATION]) and specific tariff details are not established.",
+    "Whether the client meets the core group or broader group criteria for the Warm Home Discount is not established.",
+    "No advice has been given yet due to the brevity of the initial contact."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "PRESENTING ISSUE",
+      "fieldKey": "clientExplained",
+      "statementText": "I didn't get my £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] this winter.",
+      "segmentId": "S1",
+      "timestampRange": "00:00-00:20",
+      "transcriptSnippet": "I didn't get my £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] this winter."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "HOUSEHOLD MAKE UP",
+      "fieldKey": "client",
+      "statementText": "Christopher [CLIENT_FORENAME], DOB [DOB], NINO [NINO], living at [ADDRESS_LINE_1], Battersea [POSTCODE], Phone [PHONE_NUMBER]",
+      "segmentId": "S1",
+      "timestampRange": "00:00-00:20",
+      "transcriptSnippet": "Christopher... [CLIENT_FORENAME]... DOB [DOB]. NINO is... [NINO]. Living at [ADDRESS_LINE_1]... Battersea [POSTCODE]. Phone [PHONE_NUMBER]."
+    }
+  ],
+  "formattedMarkdown": "# Case Note: Warm Home Discount Query\n\n## PRESENTING ISSUE\n* **Client Statement:** The client, Christopher [CLIENT_FORENAME], states that he did not receive his £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] this winter.\n* **Background:** Not established during this interview\n* **Documents:** Not established during this interview\n* **Emergency/Risk:** Not established during this interview\n\n## CLIENT GOALS\n* **Goal:** To receive the £150 Warm Home Discount from [IDENTIFYING_ORGANISATION] for this winter.\n* **Immediate Priority:** To resolve the missing £150 Warm Home Discount.\n\n## HOUSEHOLD MAKE UP\n* **Client Details:** Christopher [CLIENT_FORENAME], DOB [DOB], NINO [NINO], residing at [ADDRESS_LINE_1], Battersea [POSTCODE], Phone [PHONE_NUMBER].\n* **Other Household Members:** Not established during this interview\n* **Accommodation:** Residing at [ADDRESS_LINE_1], Battersea [POSTCODE].\n\n## INCOME / FINANCES (INCL. BENEFITS)\n* **Income & Benefits:** Not established during this interview\n* **Financial Hardship:** Not established during this interview\n\n## OPTIONS DISCUSSED\n* **Options:** No options or advice discussed during this brief introductory exchange.\n\n## DEADLINES / KEY DATES\n* **Deadlines:** Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n* **Vulnerability:** Client spoke softly and mumbled, indicating potential communication support needs or low confidence, but this was not fully explored.\n* **Contact Arrangements:** Phone number provided: [PHONE_NUMBER].\n\n## ACTION TAKEN\n* **Actions:** Recorded client's personal details, contact information, and presenting issue.\n\n## NEXT STEPS (CLIENT)\n* **Actions:** Not established during this interview\n\n## NEXT STEPS (ADVISER)\n* **Actions:** Review client's eligibility for the Warm Home Discount and contact [IDENTIFYING_ORGANISATION] or the Warm Home Discount helpline if appropriate once full details are established.\n* **Outstanding Issues:** Establish full household income, benefits received, and energy supplier details to assess Warm Home Discount eligibility.\n\n## ONWARD REFERRALS / SIGNPOSTING\n* **Referrals:** Not established during this interview\n\n## GAPS AND LIMITATIONS\n* Household makeup and tenancy details are not established.\n* Income, benefits, and financial situation are not established.\n* Energy supplier details (other than the mention of [IDENTIFYING_ORGANISATION]) and specific tariff details are not established.\n* Whether the client meets the core group or broader group criteria for the Warm Home Discount is not established.\n* No advice has been given yet due to the brevity of the initial contact."
+}

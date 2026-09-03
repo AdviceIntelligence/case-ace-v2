@@ -1,0 +1,129 @@
+{
+  "presentingIssue": {
+    "clientExplained": "The client received a decision letter from the DWP dated 18/08/2026 refusing their Personal Independence Payment (PIP) claim.",
+    "relevantBackground": "The client has severe flare-ups affecting their ability to prepare meals and cannot walk more than 20 metres, as confirmed by their GP.",
+    "relevantDocuments": "Decision letter from DWP dated 18/08/2026 refusing PIP claim; supporting letter from GP [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION].",
+    "emergencyOrRisk": "Not established during this interview",
+    "relatedIssues": "Not established during this interview",
+    "discriminationIssue": "Not established during this interview",
+    "safeguardingConcern": "Not established during this interview"
+  },
+  "clientGoals": {
+    "clientWouldLike": "To address the refusal of their PIP claim.",
+    "immediatePriority": "To address the PIP refusal decision dated 18/08/2026.",
+    "outcomeAchievableDiscussion": "Not established during this interview",
+    "agreedPurposeOfIntervention": "Not established during this interview"
+  },
+  "householdMakeUp": {
+    "client": "[CLIENT_FORENAME], NINO: [NINO], Address: [ADDRESS_LINE_1], London [POSTCODE], Phone: [PHONE_NUMBER]",
+    "partner": "Not established during this interview",
+    "childrenDependants": "Not established during this interview",
+    "otherHouseholdMembers": "Not established during this interview",
+    "caringResponsibilities": "Not established during this interview",
+    "relevantCircumstances": "Not established during this interview",
+    "currentAccommodation": "Not established during this interview"
+  },
+  "incomeFinances": {
+    "employmentIncome": "Not established during this interview",
+    "benefitsReceived": "Not established during this interview",
+    "benefitsClaimedPending": "PIP claim refused on 18/08/2026.",
+    "benefitEntitlementConsidered": "Not established during this interview",
+    "housingCosts": "Not established during this interview",
+    "otherDebtsLiabilities": "Not established during this interview",
+    "savingsCapital": "Not established during this interview",
+    "immediateFinancialHardship": "Not established during this interview",
+    "financialInfoRequired": "Not established during this interview"
+  },
+  "optionsDiscussed": {
+    "researchUndertaken": "Not established during this interview",
+    "researchConfirmed": "Not established during this interview",
+    "options": [],
+    "clientPreferredOption": "Not established during this interview",
+    "clientUnderstoodOptions": "Not established during this interview",
+    "partialAdviceReason": "Not established during this interview"
+  },
+  "deadlinesKeyDates": {
+    "dates": [
+      "18/08/2026"
+    ],
+    "applicableTimeLimit": "Not established during this interview",
+    "finalDateForAction": "Not established during this interview",
+    "clientAdvisedOfDeadline": "Not established during this interview",
+    "urgentActionRequired": "Not established during this interview"
+  },
+  "supportNeedsVulnerability": {
+    "clientCapability": "Not established during this interview",
+    "vulnerabilitySupportNeeds": "Client has severe flare-ups and mobility limitations (cannot walk more than 20 metres).",
+    "effectOnAbility": "Not established during this interview",
+    "reasonableAdjustments": "Not established during this interview",
+    "practicalAssistanceRequired": "Not established during this interview",
+    "clientAccess": "Not established during this interview",
+    "contactArrangements": "Not established during this interview",
+    "conflictOfInterest": "Not established during this interview",
+    "permissionToShare": "Not established during this interview"
+  },
+  "actionTaken": {
+    "actionsDuringIntervention": [],
+    "outcomeOfActionTaken": "Not established during this interview",
+    "documentsProducedSent": "Not established during this interview",
+    "clientConfirmedUnderstanding": "Not established during this interview"
+  },
+  "nextStepsClient": {
+    "agreedActions": [],
+    "obtain": [],
+    "contact": [],
+    "submit": [],
+    "contingencyIfNoResponse": "Not established during this interview",
+    "contingencyIfCircumstancesChange": "Not established during this interview",
+    "seekAdviceBefore": "Not established during this interview",
+    "invitedToReturn": "Not established during this interview"
+  },
+  "nextStepsAdviser": {
+    "adviserActions": [],
+    "followUpContact": {
+      "date": "Not established during this interview",
+      "time": "Not established during this interview",
+      "channel": "Not established during this interview",
+      "purpose": "Not established during this interview"
+    },
+    "contingencyIfNoDocReceived": "Not established during this interview",
+    "outstandingIssuesNextContact": "Not established during this interview"
+  },
+  "onwardReferrals": {
+    "organisation": "Not established during this interview",
+    "reason": "Not established during this interview",
+    "method": "Not established during this interview",
+    "contactDetailsProvided": "Not established during this interview",
+    "urgencyCommunicated": "Not established during this interview",
+    "consentObtained": "Not established during this interview",
+    "assistedInfoProvided": "Not established during this interview",
+    "clientUnderstands": "Not established during this interview"
+  },
+  "gapsAndLimitations": [
+    "No advice was given during this brief introductory exchange.",
+    "Client's goals, preferred options, and next steps were not established.",
+    "Full financial details, household makeup, and support needs were not explored.",
+    "Deadlines for challenging the decision were not discussed during this interview."
+  ],
+  "attributions": [
+    {
+      "id": "attr_1",
+      "sectionName": "presentingIssue",
+      "fieldKey": "clientExplained",
+      "statementText": "The client received a decision letter from the DWP dated 18/08/2026 refusing their Personal Independence Payment (PIP) claim.",
+      "segmentId": "client_speech_1",
+      "timestampRange": "00:03-00:25",
+      "transcriptSnippet": "I got a decision letter from DWP refusing my PIP claim dated 18/08/2026."
+    },
+    {
+      "id": "attr_2",
+      "sectionName": "presentingIssue",
+      "fieldKey": "relevantBackground",
+      "statementText": "The client has severe flare-ups affecting their ability to prepare meals and cannot walk more than 20 metres, as confirmed by their GP.",
+      "segmentId": "client_speech_1",
+      "timestampRange": "00:03-00:25",
+      "transcriptSnippet": "My GP [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION] wrote a supporting letter confirming I cannot prepare meals due to severe flare-ups and cannot walk more than 20 metres."
+    }
+  ],
+  "formattedMarkdown": "# CASE RECORDING - CITIZENS ADVICE\n\n## PRESENTING ISSUE\n- **Client Explanation**: The client received a decision letter from the DWP dated 18/08/2026 refusing their Personal Independence Payment (PIP) claim.\n- **Relevant Background**: The client has severe flare-ups affecting their ability to prepare meals and cannot walk more than 20 metres, as confirmed by their GP.\n- **Relevant Documents**: Decision letter from DWP dated 18/08/2026 refusing PIP claim; supporting letter from GP [DOCTOR_NAME] at [IDENTIFYING_ORGANISATION].\n- **Emergency / Risk**: Not established during this interview\n- **Related Issues**: Not established during this interview\n- **Discrimination Issue**: Not established during this interview\n- **Safeguarding Concern**: Not established during this interview\n\n## CLIENT GOALS\n- **Client Wishes**: To address the refusal of their PIP claim.\n- **Immediate Priority**: To address the PIP refusal decision dated 18/08/2026.\n- **Outcome Achievability Discussion**: Not established during this interview\n- **Agreed Purpose of Intervention**: Not established during this interview\n\n## HOUSEHOLD MAKE UP\n- **Client**: [CLIENT_FORENAME], NINO: [NINO], Address: [ADDRESS_LINE_1], London [POSTCODE], Phone: [PHONE_NUMBER]\n- **Partner**: Not established during this interview\n- **Children / Dependants**: Not established during this interview\n- **Other Household Members**: Not established during this interview\n- **Caring Responsibilities**: Not established during this interview\n- **Relevant Circumstances**: Not established during this interview\n- **Current Accommodation**: Not established during this interview\n\n## INCOME / FINANCES (INCL. BENEFITS)\n- **Employment Income**: Not established during this interview\n- **Benefits Received**: Not established during this interview\n- **Benefits Claimed / Pending**: PIP claim refused on 18/08/2026.\n- **Benefit Entitlement Considered**: Not established during this interview\n- **Housing Costs**: Not established during this interview\n- **Other Debts / Liabilities**: Not established during this interview\n- **Savings / Capital**: Not established during this interview\n- **Immediate Financial Hardship**: Not established during this interview\n- **Financial Info Required**: Not established during this interview\n\n## OPTIONS DISCUSSED\n- **Research Undertaken**: Not established during this interview\n- **Research Confirmed**: Not established during this interview\n- **Options**: None discussed during this interview.\n- **Client Preferred Option**: Not established during this interview\n- **Client Understood Options**: Not established during this interview\n- **Partial Advice Reason**: Not established during this interview\n\n## DEADLINES / KEY DATES\n- **Key Dates**: 18/08/2026 (DWP PIP decision letter date)\n- **Applicable Time Limit**: Not established during this interview\n- **Final Date for Action**: Not established during this interview\n- **Client Advised of Deadline**: Not established during this interview\n- **Urgent Action Required**: Not established during this interview\n\n## SUPPORT NEEDS / VULNERABILITY\n- **Client Capability**: Not established during this interview\n- **Vulnerability / Support Needs**: Client has severe flare-ups and mobility limitations (cannot walk more than 20 metres).\n- **Effect on Ability**: Not established during this interview\n- **Reasonable Adjustments**: Not established during this interview\n- **Practical Assistance Required**: Not established during this interview\n- **Client Access**: Not established during this interview\n- **Contact Arrangements**: Not established during this interview\n- **Conflict of Interest**: Not established during this interview\n- **Permission to Share**: Not established during this interview\n\n## ACTION TAKEN\n- **Actions During Intervention**: None.\n- **Outcome of Action Taken**: Not established during this interview\n- **Documents Produced / Sent**: Not established during this interview\n- **Client Confirmed Understanding**: Not established during this interview\n\n## NEXT STEPS (CLIENT)\n- **Agreed Actions**: None.\n- **Obtain**: Not established during this interview\n- **Contact**: Not established during this interview\n- **Submit**: Not established during this interview\n- **Contingency (No Response)**: Not established during this interview\n- **Contingency (Circumstances Change)**: Not established during this interview\n- **Seek Advice Before**: Not established during this interview\n- **Invited to Return**: Not established during this interview\n\n## NEXT STEPS (ADVISER)\n- **Adviser Actions**: None.\n- **Follow-up Contact**: Not established during this interview\n- **Contingency (No Doc Received)**: Not established during this interview\n- **Outstanding Issues**: Not established during this interview\n\n## ONWARD REFERRALS / SIGNPOSTING\n- **Organisation**: Not established during this interview\n- **Reason**: Not established during this interview\n- **Method**: Not established during this interview\n- **Contact Details Provided**: Not established during this interview\n- **Urgency Communicated**: Not established during this interview\n- **Consent Obtained**: Not established during this interview\n- **Assisted Info Provided**: Not established during this interview\n- **Client Understands**: Not established during this interview\n\n## GAPS AND LIMITATIONS\n- No advice was given during this brief introductory exchange.\n- Client's goals, preferred options, and next steps were not established.\n- Full financial details, household makeup, and support needs were not explored.\n- Deadlines for challenging the decision were not discussed during this interview."
+}
