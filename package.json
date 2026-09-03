@@ -1,0 +1,32 @@
+{
+  "name": "case-ace-v2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Privacy-preserving, AI-assisted case note drafting tool for Citizens Advice Wandsworth",
+  "workspaces": [
+    "client",
+    "backend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=client && npm run build --workspace=backend",
+    "test": "NODE_ENV=test node --experimental-strip-types scripts/run-tests.mjs",
+    "test:csp": "vitest run test/csp.test.ts",
+    "test:deps": "vitest run test/dependencies.test.ts",
+    "test:env": "vitest run test/environments.test.ts",
+    "audit:deps": "node scripts/audit-dependencies.mjs",
+    "generate:sbom": "node scripts/generate-sbom.mjs",
+    "dev:client": "npm run dev --workspace=client",
+    "lint:storage": "node scripts/lint-storage-guard.mjs",
+    "docs:convert": "node scripts/convert-docs.mjs",
+    "typecheck": "tsc --noEmit -p client/tsconfig.json && tsc --noEmit -p backend/tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.4",
+    "docx": "^9.7.1",
+    "markdown-it": "^15.0.1",
+    "pdfkit": "^0.20.2",
+    "typescript": "5.7.3",
+    "vitest": "3.0.5"
+  }
+}
