@@ -96,6 +96,7 @@ flowchart TD
 | DPIA-04  | Adviser Automation Bias / Errors     | High (16)     | Interactive Friction Gate & 10% QA   | Low (4)  |
 | DPIA-05  | Accidental Stale Clipboard Residue   | Med (9)       | Auto-clipboard wipe on session exit  | Low (2)  |
 | DPIA-06  | ASR Disparity on Accents / Speech    | Med (12)      | Dual-pass ASR, manual audio scrubber | Low (4)  |
+| DPIA-07  | TLS Termination Outside the UK (CDN)  | Med (9)       | Pseudonymised payloads only, TLS 1.3  | Low (4)  |
 +----------------------------------------------------------------------------------------------------+
 ```
 
@@ -125,6 +126,60 @@ flowchart TD
   2. Data residency pinned strictly to the UK (`europe-west2` London).
   3. Client text is tokenised with abstract surrogates before transmission.
 * **Residual Risk**: ACCEPTED (Low).
+
+#### 4. TLS Termination Outside the United Kingdom (DPIA-07)
+
+* **Threat**: The claim made elsewhere in this assessment that processing is pinned to the
+  United Kingdom does not hold for the network edge. Both `caseace.adviceintelligence.tech`
+  and `api.caseace.adviceintelligence.tech` are served by Firebase Hosting, which is a global
+  anycast content delivery network. TLS terminates at whichever Google edge location is
+  closest to the adviser, which for advisers working in London will in practice be a London
+  point of presence but is neither guaranteed nor contractually pinned. Traffic is decrypted
+  and re-encrypted at that edge before being forwarded to the Cloud Run service.
+
+* **Why this route was chosen**: Cloud Run domain mappings are not available in
+  `europe-west2`. The alternatives were Firebase Hosting, which is free and immediate, or an
+  external Application Load Balancer. A *global* external load balancer would terminate at
+  the same global edge and so would not improve the position; only a **regional** external
+  load balancer in `europe-west2` would keep termination inside the United Kingdom, at
+  additional cost and configuration complexity.
+
+* **What actually crosses the edge**:
+  1. Static application assets, which contain no client data.
+  2. Adviser authentication exchanges and session tokens. This is staff personal data, and
+     a compromised edge would be an authentication risk rather than a client data risk.
+  3. Requests to mint short-lived, downscoped cloud credentials.
+  4. Monitoring events, which are constrained by schema to carry no client identifiers and
+     no free text.
+  5. **The tokenised transcript and the drafted case note.** Direct identifiers have been
+     replaced with abstract surrogates before transmission, but the substance of the client's
+     circumstances remains. This is pseudonymised personal data under UK GDPR, not anonymous
+     data, and it is the material exposure on this path.
+
+* **What does not cross the edge**: raw audio and redacted audio are never sent to the
+  backend at all. The browser calls Google Cloud Speech-to-Text directly using an ephemeral
+  downscoped credential, against the region-pinned `europe-west2` endpoint. The single most
+  sensitive artefact in the system therefore does not traverse the content delivery network.
+
+* **Compensating Controls**:
+  1. TLS 1.3 in transit on both legs, adviser to edge and edge to origin.
+  2. Direct identifiers are tokenised in the browser before any payload leaves the device,
+     so the edge never sees a client name, National Insurance number, address or date of birth.
+  3. Compute, Speech-to-Text and the token map itself remain in `europe-west2` or on the
+     adviser's device.
+  4. Google Cloud is contracted under the organisation's existing data processing terms,
+     including standard transfer safeguards, and edge nodes do not retain request bodies.
+
+* **Residual Risk**: ACCEPTED (Low). Accepted knowingly on the basis that no direct
+  identifier and no audio traverses the edge, and that the practical routing for Wandsworth
+  advisers is a London point of presence. This acceptance is time limited: it should be
+  revisited before any expansion beyond the pilot, at which point migrating the API to a
+  regional external Application Load Balancer in `europe-west2` should be costed and, if
+  proportionate, implemented.
+
+* **Correction to earlier wording**: any statement in this or associated documents that all
+  Case Ace processing terminates within the United Kingdom should be read as qualified by
+  this entry. Compute and model inference are region pinned; network termination is not.
 
 ---
 

@@ -10,6 +10,7 @@
 
 import { Router, type Request, type Response } from 'express';
 import { geminiCaseNoteGenerator } from '../services/geminiCaseNoteGenerator.ts';
+import { config } from '../config/index.ts';
 
 export const caseNoteRouter = Router();
 
@@ -35,6 +36,23 @@ caseNoteRouter.post('/generate', async (req: Request, res: Response): Promise<vo
     }
 
     const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
+
+    // The generator falls back to a deterministic template engine when no model credential
+    // is configured. That fallback exists for local and test runs, where it is useful.
+    // In the pilot it would be actively dangerous: the adviser would be handed a
+    // template-assembled note that no model ever produced, presented identically to a real
+    // draft, and would sign it off as an accurate record of the consultation. If the model
+    // is not configured in the pilot, this endpoint must fail visibly instead.
+    if (config.env === 'pilot' && (!apiKey || useOfflineFallback === true)) {
+      res.status(503).json({
+        error:
+          'Case note drafting is unavailable: no language model credential is configured for ' +
+          'this environment. The offline template engine must never produce a case note that ' +
+          'an adviser could mistake for a model-drafted record.',
+        code: 'MODEL_NOT_CONFIGURED',
+      });
+      return;
+    }
 
     const result = await geminiCaseNoteGenerator.generateCaseNote({
       tokenisedTranscript,
