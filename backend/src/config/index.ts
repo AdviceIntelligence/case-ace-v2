@@ -26,6 +26,13 @@ const defaultGroupRoleMap: Record<string, UserRole> = {
 
 const jwtSecret = process.env.JWT_SECRET || 'caw-case-ace-london-jwt-dev-secret-minimum-32-chars-long!';
 
+/**
+ * Deliberate override of the pilot TOTP prohibition, for use only while the Entra ID
+ * tenant is not yet available. Documented in docs/authentication-and-authorisation.md s3.2.
+ * MUST be unset before real client consultations are processed in the pilot environment.
+ */
+const allowTotpInPilot = process.env.ALLOW_TOTP_IN_PILOT === 'true';
+
 const configs: Record<EnvironmentName, BackendConfig> = {
   local: {
     env: 'local',
@@ -79,6 +86,7 @@ const configs: Record<EnvironmentName, BackendConfig> = {
     env: 'pilot',
     port: parseInt(process.env.PORT || '8080', 10),
     gcpRegion: 'europe-west2',
+    gcpProjectId: process.env.GCP_PROJECT_ID || 'case-ace-v2',
     corsOrigins: [
       'https://caseace.adviceintelligence.tech',
       'https://api.caseace.adviceintelligence.tech',
@@ -95,9 +103,10 @@ const configs: Record<EnvironmentName, BackendConfig> = {
     ],
     isSyntheticOnly: false,
     auth: {
-      activeProvider: 'entra_id',
-      enableEntraId: true,
-      enableTotp: false, // TOTP strictly disabled in pilot
+      activeProvider: allowTotpInPilot ? 'totp' : 'entra_id',
+      enableEntraId: !allowTotpInPilot,
+      enableTotp: allowTotpInPilot, // TOTP disabled in pilot unless ALLOW_TOTP_IN_PILOT=true
+      allowTotpInPilot,
       jwtSecret: process.env.JWT_SECRET || jwtSecret,
       accessTokenTtlSeconds: 900,
       refreshTokenTtlSeconds: 28800,

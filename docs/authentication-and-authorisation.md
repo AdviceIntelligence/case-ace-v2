@@ -63,8 +63,15 @@ export interface AuthProvider {
   * 5 consecutive failed authentication attempts trigger an automatic **15-minute temporary lockout** (`ACCOUNT_LOCKED`).
   * Resets upon successful authentication.
 * **Pilot Environment Prohibition**:
-  * `TotpProvider` is **strictly forbidden in the `pilot` environment**.
-  * Any attempt to initialize `TotpProvider` under `APP_ENV=pilot` causes the backend to fail closed immediately at boot.
+  * `TotpProvider` is **forbidden by default in the `pilot` environment**.
+  * Any attempt to initialize `TotpProvider` under `APP_ENV=pilot` causes the backend to fail closed immediately at boot, **unless** the interim override below is deliberately set.
+
+* **Interim Override: `ALLOW_TOTP_IN_PILOT`** (added 3 September 2026):
+  * Setting `ALLOW_TOTP_IN_PILOT=true` permits `TotpProvider` under `APP_ENV=pilot`, and switches `activeProvider` to `totp`.
+  * It exists for one purpose: to allow the pilot infrastructure to be deployed and exercised **before the CAW Entra ID tenant is available**. It is not a supported operating configuration.
+  * The backend emits a `[SECURITY OVERRIDE]` warning at boot naming the environment and the consequence.
+  * **Residual risk while set**: adviser identity is not verified against a managed directory, TOTP enrolment is not gated by tenant membership, and group-to-role mapping (`grp-caw-advisers` and siblings) does not apply, so role assignment falls back to local credential records.
+  * **Control**: `ALLOW_TOTP_IN_PILOT` must be unset, and `enableEntraId` restored to `true`, before any real client consultation is processed in the pilot environment. This is a gating item for the pilot readiness review and must be recorded in the DPIA as an accepted interim risk while it remains set.
 
 ---
 
@@ -84,7 +91,10 @@ export function createAuthProvider(config: AuthConfig, environmentName: string):
     throw new Error('Security Configuration Error: No authentication provider is enabled.');
   }
   if (environmentName === 'pilot' && config.enableTotp) {
-    throw new Error('Security Policy Violation: Fallback TOTP is strictly forbidden in pilot.');
+    if (!config.allowTotpInPilot) {
+      throw new Error('Security Policy Violation: Fallback TOTP is strictly forbidden in pilot.');
+    }
+    console.warn('[SECURITY OVERRIDE] TOTP active in pilot; directory-backed identity is not in force.');
   }
   return config.enableEntraId ? new EntraIdProvider(config) : new TotpProvider(config);
 }

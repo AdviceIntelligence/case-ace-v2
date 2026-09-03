@@ -36,6 +36,12 @@ export interface AuthConfig {
   activeProvider: 'entra_id' | 'totp';
   enableEntraId: boolean;
   enableTotp: boolean;
+  /**
+   * Deliberate, environment-gated override of the pilot TOTP prohibition.
+   * Set only via ALLOW_TOTP_IN_PILOT=true. See docs/authentication-and-authorisation.md s3.2.
+   * Must be false before real client consultations are processed.
+   */
+  allowTotpInPilot?: boolean;
   jwtSecret: string;
   accessTokenTtlSeconds: number;
   refreshTokenTtlSeconds: number;
