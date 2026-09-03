@@ -44,9 +44,12 @@ export class IdleTimeoutManager {
     this.timerId = setTimeout(() => {
       this.handleTimeout();
     }, this.timeoutMs);
-    if (this.timerId && typeof (this.timerId as any).unref === 'function') {
-      (this.timerId as any).unref();
-    }
+    // Deliberately NOT unref'd. unref() is a no-op in the browser, which is this class's
+    // only real runtime, but under Node it tells the event loop that this timer need not
+    // keep the process alive. In the test runner that timer is the only live handle, so
+    // Node exited cleanly mid-await and the remaining suites never ran while `npm test`
+    // still reported success. A mandatory security timeout should also never be marked as
+    // optional work.
   };
 
   private handleTimeout(): void {
