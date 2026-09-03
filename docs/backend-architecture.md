@@ -4,15 +4,38 @@
 
 Every endpoint in a backend processing special category data is an attack surface, an audit liability, and a potential vector for exfiltration. The Case Ace v2.0 backend is architected as the absolute smallest service capable of supporting the system's privacy guarantees.
 
-### The 5 Permitted Endpoints
+### The 6 Permitted Endpoints
 
 | # | Endpoint Group | HTTP Routes | Purpose & Scope | Data Handled |
 | :--- | :--- | :--- | :--- | :--- |
 | **1** | **Authentication** | `POST /api/v1/auth/token`<br>`POST /api/v1/auth/login`<br>`GET /api/v1/auth/callback`<br>`POST /api/v1/auth/refresh`<br>`GET /api/v1/auth/session`<br>`POST /api/v1/auth/logout` | Token exchange, OIDC PKCE callbacks, session verification, and stateless logout. | Staff credentials / OIDC auth codes only. Zero client data. |
-| **2** | **Credential Issuance** | `POST /api/v1/credentials/issue` | Mints ephemeral, downscoped GCP credentials for direct client-to-cloud calls (Speech-to-Text v2 & Vertex AI Gemini). | Returns short-lived token (300s TTL) scoped to `europe-west2`. Zero client data. |
+| **2** | **Credential Issuance** | `POST /api/v1/credentials/issue` | Mints ephemeral, single-purpose GCP credentials for direct client-to-cloud calls (Speech-to-Text v2 & Vertex AI Gemini). | Returns a short-lived token (300s TTL, 900s maximum) for a service account holding exactly one role. Zero client data. |
+| **6** | **Case Note Drafting** | `POST /api/v1/casenote/generate` | Stateless drafting from a tokenised transcript via Vertex AI on `europe-west2`. Stores nothing. | Tokenised text only. Rejects any payload carrying `tokenMap`, raw PII or audio. |
 | **3** | **Monitoring** | `POST /api/v1/monitoring/events`<br>`GET /api/v1/monitoring/aggregate` | Ingests non-sensitive operational telemetry (latencies, token counts, error status). Serves aggregate counts to supervisors/auditors. | Rejects any payload containing PII or session keys (`audio`, `transcript`, `note`, `tokenMap`). |
 | **4** | **Configuration** | `GET /api/v1/config` | Serves non-sensitive runtime config (environment, region, models, auth type, session timeout). | Public runtime parameters only. |
 | **5** | **Health Check** | `GET /health`<br>`GET /api/v1/health` | Liveness and readiness probe for Cloud Run and load balancers. | Returns `{ status: 'healthy', region: 'europe-west2' }`. |
+
+> [!IMPORTANT]
+> **Correction to the credential model.** Earlier revisions described endpoint 2 as issuing
+> "downscoped STS credentials" produced with a Credential Access Boundary. Google offers
+> Credential Access Boundaries for **Cloud Storage only**; no other service supports them,
+> so a boundary-scoped token for Speech-to-Text or Vertex AI cannot be created. The
+> architecture rested on a capability that does not exist, and the implementation returned a
+> random string formatted to look like a token, which authenticated nothing at all.
+>
+> The same objective is now met by separating identities rather than constraining one token.
+> Each purpose has its own service account holding a single role: `case-ace-stt-sa` with
+> `roles/speech.client`, and `case-ace-vertex-sa` with `roles/aiplatform.user`. The runtime
+> service account holds **no API roles at all**; it may only mint tokens for those two
+> accounts, through IAM Credentials `generateAccessToken`.
+>
+> **Residual risk, stated plainly.** The token handed to the browser is a full access token
+> for a least-privilege service account, not a resource-scoped one. Within its short lifetime
+> an attacker holding it could call that one API at CAW's expense. It could not read storage,
+> reach another project, or touch any other service. The compensating controls are the short
+> lifetime, the single role, the audit record written on every issuance, and the CSP
+> `connect-src` allowlist. This is a real reduction against the boundary model that was
+> described but never available, and it is recorded here rather than left implied.
 
 ### Zero Session Data Guarantee
 

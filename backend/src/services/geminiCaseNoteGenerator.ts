@@ -17,12 +17,37 @@ import {
   CANONICAL_MASTER_SYSTEM_INSTRUCTION,
   buildCaseNoteGenerationPrompt,
 } from '../prompts/caseRecordingMasterPrompt.ts';
+import { getPurposeAccessToken } from './credentialIssuer.ts';
+import { config } from '../config/index.ts';
+
+/**
+ * Model and region.
+ *
+ * Vertex AI on europe-west2, not the global Gemini Developer API. The Developer API offers
+ * no regional control at all (its terms state data may be cached in any country where
+ * Google has facilities) and authenticates with a long-lived API key. Vertex AI regional
+ * endpoints carry a residency commitment covering machine learning processing as well as
+ * storage, run under the enterprise data processing terms, and authenticate as the attached
+ * service account with no key material anywhere.
+ *
+ * gemini-3.5-flash is the newest model available in europe-west2. Pro-class models are not
+ * offered in London at all. The choice was made on measured evidence rather than assumption:
+ * see evidence/model-benchmark.md, where across all 33 synthetic scenarios this model
+ * produced valid output every time, fabricated no client identifiers, invented no surrogate
+ * tokens, flagged both safeguarding disclosures, resisted both prompt injections, and ran at
+ * roughly twice the speed of gemini-2.5-pro in Belgium.
+ */
+export const VERTEX_MODEL = 'gemini-3.5-flash';
+export const VERTEX_REGION = 'europe-west2';
 
 export interface GenerateCaseNoteOptions {
   tokenisedTranscript: string;
   adviserName?: string;
   intakeRoute?: string;
-  apiKey?: string;
+  /**
+   * Local and test only. In the pilot this is refused at the route, because a template
+   * assembled note is indistinguishable to an adviser from a model drafted one.
+   */
   useOfflineFallback?: boolean;
 }
 
@@ -55,7 +80,7 @@ export class GeminiCaseNoteGenerator {
    * Generates an AQS Level 3 case note from a tokenised transcript.
    */
   public async generateCaseNote(options: GenerateCaseNoteOptions): Promise<CaseNoteGenerationResponse> {
-    const { tokenisedTranscript, adviserName = 'Adviser', intakeRoute = 'In-Person Consultation', apiKey, useOfflineFallback } = options;
+    const { tokenisedTranscript, adviserName = 'Adviser', intakeRoute = 'In-Person Consultation', useOfflineFallback } = options;
 
     if (!tokenisedTranscript || tokenisedTranscript.trim().length === 0) {
       throw new Error('Cannot generate case note from empty transcript.');
@@ -64,62 +89,100 @@ export class GeminiCaseNoteGenerator {
     // Step 1: Prompt Injection Defense - Sanitize untrusted transcript
     this.detectPromptInjection(tokenisedTranscript);
 
-    // If API key is not present or offline fallback requested, run deterministic synthesis
-    if (!apiKey || useOfflineFallback) {
-      return this.generateDeterministicCaseNote(tokenisedTranscript, adviserName, intakeRoute);
-    }
-
-    try {
-      const prompt = buildCaseNoteGenerationPrompt(tokenisedTranscript, adviserName, intakeRoute);
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`;
-
-      const apiResponse = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: CANONICAL_MASTER_SYSTEM_INSTRUCTION }],
-          },
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.1,
-            responseMimeType: 'application/json',
-          },
-        }),
-      });
-
-      if (!apiResponse.ok) {
-        throw new Error(`Google GenAI API responded with status ${apiResponse.status}`);
+    // The deterministic template engine exists so local and test runs need no cloud
+    // credential. It must never run in the pilot: its output is indistinguishable from a
+    // model drafted note, and an adviser would sign it into a client record as an accurate
+    // account of a consultation that it never read.
+    if (useOfflineFallback) {
+      if (config.env === 'pilot') {
+        throw new Error(
+          '[CaseNote] Refusing to use the offline template engine in the pilot environment. ' +
+            'A template assembled note must never reach an adviser as though a model had ' +
+            'drafted it from the transcript.'
+        );
       }
-
-      const responseJson: any = await apiResponse.json();
-      const responseText = responseJson?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      const parsed = JSON.parse(responseText);
-
-      // Validate output schema
-      this.validateStructuredOutput(parsed);
-
-      const formattedMarkdown = parsed.formattedMarkdown || this.renderCanonicalMarkdown(parsed);
-
-      return {
-        structuredCaseNote: parsed,
-        formattedMarkdown,
-        attributions: parsed.attributions || [],
-        gapsAndLimitations: parsed.gapsAndLimitations || [],
-        gaps: parsed.gapsAndLimitations || [],
-        promptVersion: PROMPT_VERSION,
-        modelDetails: {
-          name: MODEL_IDENTIFIER,
-          region: 'europe-west2',
-          temperature: 0.1,
-        },
-        markdownCaseNote: formattedMarkdown,
-        isTokenised: true,
-      };
-    } catch (err) {
-      console.warn('[GeminiCaseNoteGenerator] Live Vertex AI invocation failed or skipped, using deterministic synthesis:', err);
       return this.generateDeterministicCaseNote(tokenisedTranscript, adviserName, intakeRoute);
     }
+
+    // From here, any failure propagates. It previously fell through to the template engine
+    // on ANY error, so a transient API failure mid-consultation would silently hand the
+    // adviser a fabricated note. A visible failure is recoverable; a silent substitution is
+    // not, because nobody knows it happened.
+    const prompt = buildCaseNoteGenerationPrompt(tokenisedTranscript, adviserName, intakeRoute);
+    // Impersonate the Vertex-only service account rather than calling as the runtime
+    // identity. The runtime identity holds no API roles at all, so a compromise of this
+    // service yields the ability to mint two narrowly scoped tokens and nothing else.
+    const accessToken = await getPurposeAccessToken('vertex-ai');
+    const url =
+      `https://${VERTEX_REGION}-aiplatform.googleapis.com/v1/projects/${config.gcpProjectId}` +
+      `/locations/${VERTEX_REGION}/publishers/google/models/${VERTEX_MODEL}:generateContent`;
+
+    const apiResponse = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: CANONICAL_MASTER_SYSTEM_INSTRUCTION }] },
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.1,
+          responseMimeType: 'application/json',
+          maxOutputTokens: 8192,
+        },
+      }),
+      signal: AbortSignal.timeout(120_000),
+    });
+
+    if (!apiResponse.ok) {
+      const detail = (await apiResponse.text()).slice(0, 500);
+      throw new Error(
+        `Vertex AI (${VERTEX_MODEL} @ ${VERTEX_REGION}) responded with status ${apiResponse.status}: ${detail}`
+      );
+    }
+
+    const responseJson: any = await apiResponse.json();
+    const finishReason = responseJson?.candidates?.[0]?.finishReason;
+    const responseText = responseJson?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+    // A truncated response yields a partial note that still looks complete to a reader.
+    if (finishReason && finishReason !== 'STOP') {
+      throw new Error(
+        `Vertex AI stopped early (finishReason: ${finishReason}). The case note may be ` +
+          'incomplete and must not be presented for sign-off.'
+      );
+    }
+    if (!responseText.trim()) {
+      throw new Error('Vertex AI returned an empty response.');
+    }
+
+    let parsed: any;
+    try {
+      parsed = JSON.parse(responseText);
+    } catch {
+      throw new Error('Vertex AI response was not valid JSON and cannot be rendered as a case note.');
+    }
+
+    this.validateStructuredOutput(parsed);
+
+    const formattedMarkdown = parsed.formattedMarkdown || this.renderCanonicalMarkdown(parsed);
+
+    return {
+      structuredCaseNote: parsed,
+      formattedMarkdown,
+      attributions: parsed.attributions || [],
+      gapsAndLimitations: parsed.gapsAndLimitations || [],
+      gaps: parsed.gapsAndLimitations || [],
+      promptVersion: PROMPT_VERSION,
+      modelDetails: {
+        name: MODEL_IDENTIFIER,
+        region: VERTEX_REGION,
+        temperature: 0.1,
+      },
+      markdownCaseNote: formattedMarkdown,
+      isTokenised: true,
+    };
   }
 
   /**

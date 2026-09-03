@@ -418,7 +418,7 @@ async function run() {
     }
   });
 
-  await test('issues short-lived (<= 15m), single-purpose credentials scoped strictly to europe-west2', () => {
+  await test('issues short-lived (<= 15m), single-purpose credentials scoped strictly to europe-west2', async () => {
     const adviserUser = {
       id: 'usr_adviser_101',
       email: 'adviser@caw.org.uk',
@@ -430,29 +430,67 @@ async function run() {
       expiresAt: Math.floor(Date.now() / 1000) + 900,
     };
 
-    const sttCred = CredentialIssuerService.issueCredential(adviserUser, 'speech-to-text', 300);
-    assert.strictEqual(sttCred.purpose, 'speech-to-text');
-    assert.strictEqual(sttCred.region, 'europe-west2');
-    assert.strictEqual(sttCred.endpoint, 'https://europe-west2-speech.googleapis.com');
-    assert(sttCred.ttlSeconds <= 900);
-    assert(sttCred.ttlSeconds >= 60);
-    assert.strictEqual(sttCred.issuedToUser, 'usr_adviser_101');
-    assert(new Date(sttCred.expiresAt).getTime() > Date.now());
+    // Token minting is stubbed so this exercises authorisation, purpose validation, TTL
+    // bounds and the issued shape without depending on a live Google Cloud identity. The
+    // impersonation call itself is covered separately below.
+    const mintCalls = [];
+    const restoreMinter = CredentialIssuerService.setTokenMinterForTesting(async (sa, ttl) => {
+      mintCalls.push({ sa, ttl });
+      return { accessToken: `stub_token_${mintCalls.length}` };
+    });
 
-    const vertexCred = CredentialIssuerService.issueCredential(adviserUser, 'vertex-ai', 300);
-    assert.strictEqual(vertexCred.purpose, 'vertex-ai');
-    assert.strictEqual(vertexCred.region, 'europe-west2');
-    assert.strictEqual(vertexCred.endpoint, 'https://europe-west2-aiplatform.googleapis.com');
-    assert(vertexCred.ttlSeconds <= 900);
+    try {
+      const sttCred = await CredentialIssuerService.issueCredential(adviserUser, 'speech-to-text', 300);
+      assert.strictEqual(sttCred.purpose, 'speech-to-text');
+      assert.strictEqual(sttCred.region, 'europe-west2');
+      assert.strictEqual(sttCred.endpoint, 'https://europe-west2-speech.googleapis.com');
+      assert.strictEqual(sttCred.provider, 'gcp-impersonated-service-account');
+      assert(sttCred.ttlSeconds <= 900);
+      assert(sttCred.ttlSeconds >= 60);
+      assert.strictEqual(sttCred.issuedToUser, 'usr_adviser_101');
+      assert(new Date(sttCred.expiresAt).getTime() > Date.now());
 
-    const adminUser = { ...adviserUser, id: 'usr_admin_1', role: 'administrator' };
-    assert.throws(
-      () => CredentialIssuerService.issueCredential(adminUser, 'speech-to-text'),
-      /Role 'administrator' is not permitted to request cloud credentials/
-    );
+      const vertexCred = await CredentialIssuerService.issueCredential(adviserUser, 'vertex-ai', 300);
+      assert.strictEqual(vertexCred.purpose, 'vertex-ai');
+      assert.strictEqual(vertexCred.region, 'europe-west2');
+      assert.strictEqual(vertexCred.endpoint, 'https://europe-west2-aiplatform.googleapis.com');
+      assert(vertexCred.ttlSeconds <= 900);
+
+      // Each purpose must impersonate its own single-role service account. If both
+      // purposes ever resolved to the same identity, "single-purpose" would be a claim
+      // rather than a control.
+      assert.strictEqual(mintCalls.length, 2);
+      assert(mintCalls[0].sa.includes('stt'), `speech-to-text used ${mintCalls[0].sa}`);
+      assert(mintCalls[1].sa.includes('vertex'), `vertex-ai used ${mintCalls[1].sa}`);
+      assert.notStrictEqual(mintCalls[0].sa, mintCalls[1].sa);
+      assert.strictEqual(mintCalls[0].ttl, 300);
+
+      // TTL is clamped, not trusted.
+      const clamped = await CredentialIssuerService.issueCredential(adviserUser, 'speech-to-text', 86400);
+      assert.strictEqual(clamped.ttlSeconds, 900);
+
+      const adminUser = { ...adviserUser, id: 'usr_admin_1', role: 'administrator' };
+      await assert.rejects(
+        () => CredentialIssuerService.issueCredential(adminUser, 'speech-to-text'),
+        /Role 'administrator' is not permitted to request cloud credentials/
+      );
+
+      // A minting failure must surface, never degrade to something token-shaped. The
+      // previous implementation returned a random string that authenticated nothing.
+      const restoreFailing = CredentialIssuerService.setTokenMinterForTesting(async () => {
+        throw new Error('generateAccessToken failed: HTTP 403');
+      });
+      await assert.rejects(
+        () => CredentialIssuerService.issueCredential(adviserUser, 'speech-to-text'),
+        /generateAccessToken failed/
+      );
+      restoreFailing();
+    } finally {
+      restoreMinter();
+    }
   });
 
-  await test('audits credential issuance while NEVER logging the credential token itself', () => {
+  await test('audits credential issuance while NEVER logging the credential token itself', async () => {
     clearCapturedLogs();
     const adviserUser = {
       id: 'usr_adv_audit_test',
@@ -465,7 +503,15 @@ async function run() {
       expiresAt: Math.floor(Date.now() / 1000) + 900,
     };
 
-    const cred = CredentialIssuerService.issueCredential(adviserUser, 'speech-to-text', 300);
+    const restore = CredentialIssuerService.setTokenMinterForTesting(async () => ({
+      accessToken: 'ya29.stub-secret-token-that-must-never-appear-in-a-log',
+    }));
+    let cred;
+    try {
+      cred = await CredentialIssuerService.issueCredential(adviserUser, 'speech-to-text', 300);
+    } finally {
+      restore();
+    }
     const logs = getCapturedLogs();
 
     const issuanceLog = logs.find((l) => l.event === 'CREDENTIAL_ISSUED');
@@ -531,11 +577,37 @@ async function run() {
     assert.strictEqual(typeof lastLog.durationMs, 'number');
   });
 
-  await test('backend architecture documentation records the 5 permitted endpoints and zero-data rule', () => {
-    assert(backendDocContent.includes('The 5 Permitted Endpoints'));
+  await test('backend architecture documentation records every permitted endpoint and the zero-data rule', () => {
+    // The count is derived from the code rather than written into the assertion, so the
+    // document and the mounted routers cannot drift apart silently. Adding an endpoint
+    // without documenting it fails here.
+    const serverSource = fs.readFileSync(path.join(rootDir, 'backend/src/server.ts'), 'utf8');
+    const mountedGroups = new Set(
+      [...serverSource.matchAll(/app\.use\(\s*['"`](\/[a-zA-Z0-9/_-]*)['"`]/g)].map((m) =>
+        m[1].replace(/^\/api\/v1/, '')
+      )
+    );
+    assert(
+      backendDocContent.includes(`The ${mountedGroups.size} Permitted Endpoints`),
+      `backend-architecture.md must be headed "The ${mountedGroups.size} Permitted Endpoints" to match the ${mountedGroups.size} mounted groups`
+    );
+    for (const group of mountedGroups) {
+      assert(
+        backendDocContent.includes(group === '/health' ? '/health' : `/api/v1${group}`),
+        `backend-architecture.md does not document the ${group} endpoint group`
+      );
+    }
     assert(backendDocContent.includes('Zero Session Data Guarantee'));
-    assert(backendDocContent.includes('Single-Purpose Downscoping'));
     assert(backendDocContent.includes('privacyLogger'));
+    // The credential model must not be described as a downscoped Credential Access
+    // Boundary. Those are Cloud Storage only, so that description was never achievable.
+    assert(
+      !/downscoped STS credential(?!s" produced)/i.test(backendDocContent) ||
+        backendDocContent.includes('Correction to the credential model'),
+      'backend-architecture.md still describes downscoped STS credentials without the correction'
+    );
+    assert(backendDocContent.includes('case-ace-stt-sa'));
+    assert(backendDocContent.includes('case-ace-vertex-sa'));
   });
 
   // 7. Volatile Memory Discipline & Storage Guards Tests (Phase 5)

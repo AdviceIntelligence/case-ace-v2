@@ -26,7 +26,10 @@ the single source of truth and any document that disagrees with it is wrong.
 | Backend Cloud Run service | `case-ace-api` |
 | Firebase Hosting site: SPA | `case-ace-app` → `caseace.adviceintelligence.tech` |
 | Firebase Hosting site: API front door | `case-ace-api` → `api.caseace.adviceintelligence.tech` |
-| Runtime service account | `case-ace-api-sa@case-ace-v2.iam.gserviceaccount.com` |
+| Runtime service account (holds no API roles) | `case-ace-api-sa@case-ace-v2.iam.gserviceaccount.com` |
+| Speech-to-Text identity (`roles/speech.client` only) | `case-ace-stt-sa@case-ace-v2.iam.gserviceaccount.com` |
+| Vertex AI identity (`roles/aiplatform.user` only) | `case-ace-vertex-sa@case-ace-v2.iam.gserviceaccount.com` |
+| Drafting model | `gemini-3.5-flash` on Vertex AI, `europe-west2` |
 | Container image repository | `europe-west2-docker.pkg.dev/case-ace-v2/case-ace` |
 | Cloud Build source staging bucket | `gs://case-ace-v2-build-staging` (europe-west2) |
 | JWT signing secret (Secret Manager) | `case-ace-jwt-secret` |

@@ -35,21 +35,20 @@ caseNoteRouter.post('/generate', async (req: Request, res: Response): Promise<vo
       return;
     }
 
-    const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
-
-    // The generator falls back to a deterministic template engine when no model credential
-    // is configured. That fallback exists for local and test runs, where it is useful.
-    // In the pilot it would be actively dangerous: the adviser would be handed a
-    // template-assembled note that no model ever produced, presented identically to a real
-    // draft, and would sign it off as an accurate record of the consultation. If the model
-    // is not configured in the pilot, this endpoint must fail visibly instead.
-    if (config.env === 'pilot' && (!apiKey || useOfflineFallback === true)) {
-      res.status(503).json({
+    // Drafting runs against Vertex AI on europe-west2 as the attached service account.
+    // There is no API key: the identity comes from the runtime, so there is nothing to
+    // configure per environment and nothing to leak.
+    //
+    // The deterministic template engine remains available for local and test work only.
+    // In the pilot it is refused, because a template assembled note is indistinguishable to
+    // an adviser from a model drafted one and would be signed off as an accurate record of
+    // a consultation nothing ever read.
+    if (config.env === 'pilot' && useOfflineFallback === true) {
+      res.status(400).json({
         error:
-          'Case note drafting is unavailable: no language model credential is configured for ' +
-          'this environment. The offline template engine must never produce a case note that ' +
-          'an adviser could mistake for a model-drafted record.',
-        code: 'MODEL_NOT_CONFIGURED',
+          'The offline template engine cannot be used in the pilot environment. A case note ' +
+          'presented to an adviser must have been drafted from the transcript.',
+        code: 'OFFLINE_FALLBACK_REFUSED',
       });
       return;
     }
@@ -58,8 +57,7 @@ caseNoteRouter.post('/generate', async (req: Request, res: Response): Promise<vo
       tokenisedTranscript,
       adviserName: adviserName || 'Adviser',
       intakeRoute: intakeRoute || 'In-Person Consultation',
-      apiKey,
-      useOfflineFallback: useOfflineFallback === true || !apiKey,
+      useOfflineFallback: useOfflineFallback === true || config.env !== 'pilot',
     });
 
     res.status(200).json({

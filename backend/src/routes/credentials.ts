@@ -16,7 +16,7 @@ export function createCredentialsRouter(authProvider: AuthProvider) {
     '/issue',
     requireAuth,
     requireRole('adviser', 'supervisor'),
-    (req: AuthenticatedRequest, res: Response) => {
+    async (req: AuthenticatedRequest, res: Response) => {
       try {
         const { purpose, ttlSeconds } = req.body || {};
 
@@ -27,7 +27,7 @@ export function createCredentialsRouter(authProvider: AuthProvider) {
           return;
         }
 
-        const credential = CredentialIssuerService.issueCredential(
+        const credential = await CredentialIssuerService.issueCredential(
           req.user!,
           purpose as CredentialPurpose,
           typeof ttlSeconds === 'number' ? ttlSeconds : undefined

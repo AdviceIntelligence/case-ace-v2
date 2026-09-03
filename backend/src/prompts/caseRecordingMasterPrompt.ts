@@ -13,7 +13,10 @@
  */
 
 export const PROMPT_VERSION = 'v2.4.0';
-export const MODEL_IDENTIFIER = 'gemini-1.5-pro (europe-west2)';
+// gemini-1.5-pro is retired and was never available in europe-west2. gemini-3.5-flash is
+// the newest model Vertex AI offers in London; no Pro class model is offered there at all.
+// Selected on measured evidence, see evidence/model-benchmark.md.
+export const MODEL_IDENTIFIER = 'gemini-3.5-flash (europe-west2)';
 
 export const CANONICAL_MASTER_SYSTEM_INSTRUCTION = `You are Case Ace v2.0, an expert Citizens Advice caseworker assistant.
 Your sole function is to generate an Advice Quality Standard (AQS) Level 3 case note from a consultation transcript.
