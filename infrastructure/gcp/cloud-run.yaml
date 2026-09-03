@@ -1,0 +1,36 @@
+# Google Cloud Run Service Specification for Case Ace v2.0 Backend
+# Pinning: europe-west2 (London, United Kingdom)
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: case-ace-backend
+  namespace: caw-case-ace-pilot-london
+  labels:
+    cloud.google.com/location: europe-west2
+    app: case-ace-backend
+    tier: api
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/ingress: internal-and-cloud-load-balancing
+    spec:
+      serviceAccountName: case-ace-backend-sa@caw-case-ace-pilot-london.iam.gserviceaccount.com
+      containers:
+        - image: europe-west2-docker.pkg.dev/caw-case-ace-pilot-london/case-ace-artifacts/backend:2.0.0
+          env:
+            - name: APP_ENV
+              value: pilot
+            - name: PORT
+              value: "8080"
+            - name: GCP_REGION
+              value: europe-west2
+            - name: GCP_PROJECT_ID
+              value: caw-case-ace-pilot-london
+          resources:
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"

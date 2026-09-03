@@ -1,0 +1,14 @@
+{
+  "description": "Synthetic advice consultation fixture for automated pipeline testing (Zero real client data)",
+  "metadata": {
+    "isSynthetic": true,
+    "adviceTopic": "Universal Credit Housing Element Disallowance",
+    "fictionalClient": "Client-Alpha-99",
+    "createdFor": "ISO 27001 / ISO 27701 Automated Pipeline Validation"
+  },
+  "syntheticPass1Transcript": "Adviser: Good morning, this is Citizens Advice Wandsworth. How can I help you today? Client: Hello, my name is John Smith and I live at 12 Acacia Avenue, London SW18. I received a decision letter from DWP stopping my housing element on Universal Credit.",
+  "expectedRedactionTokens": [
+    { "token": "[CLIENT_NAME_1]", "original": "John Smith" },
+    { "token": "[ADDRESS_1]", "original": "12 Acacia Avenue, London SW18" }
+  ]
+}

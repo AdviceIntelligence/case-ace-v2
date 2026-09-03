@@ -1,0 +1,101 @@
+[
+  {
+    "id": "case-01-structured-core",
+    "description": "Full set of structured UK statutory and administrative identifiers",
+    "transcript": "My name is Jane Doe and my National Insurance number is QQ 12 34 56 C. I live at Flat 4, 12 Elm Grove, London SW11 2AB. You can reach me on mobile 07700 900123 or landline 020 7924 1234, and my email is jane.doe@example.co.uk. My date of birth is 14/08/1982 and my NHS number is 485 777 3456. My bank sort code is 20-40-71 and account number is 87654321. My Universal Credit claim reference is UC-98765432 and my UTR number is 1234567890.",
+    "expectedStructured": [
+      { "category": "national_insurance", "match": "QQ 12 34 56 C" },
+      { "category": "street_address", "match": "Flat 4, 12 Elm Grove" },
+      { "category": "uk_postcode", "match": "SW11 2AB" },
+      { "category": "phone_number", "match": "07700 900123" },
+      { "category": "phone_number", "match": "020 7924 1234" },
+      { "category": "email_address", "match": "jane.doe@example.co.uk" },
+      { "category": "date_of_birth", "match": "14/08/1982" },
+      { "category": "nhs_number", "match": "485 777 3456" },
+      { "category": "bank_sort_code", "match": "20-40-71" },
+      { "category": "bank_account_number", "match": "87654321" },
+      { "category": "benefit_reference", "match": "UC-98765432" },
+      { "category": "hmrc_reference", "match": "1234567890" }
+    ],
+    "expectedUnstructured": [
+      { "category": "client_name", "match": "Jane Doe" }
+    ],
+    "expectedSpecialCategory": []
+  },
+  {
+    "id": "case-02-legal-immigration-court",
+    "description": "Court numbers, Home Office refs, Passport, and Immigration special category",
+    "transcript": "I am Mohammed Al-Mansoor. My UK passport number is 123456789 and my Home Office reference is HO/9876543/21. We have an ongoing possession hearing in Wandsworth County Court with case number EA/2023/0001. I am currently an asylum seeker with no recourse to public funds (NRPF) and living at 124 Lavender Hill.",
+    "expectedStructured": [
+      { "category": "passport_number", "match": "123456789" },
+      { "category": "home_office_reference", "match": "HO/9876543/21" },
+      { "category": "court_case_number", "match": "EA/2023/0001" },
+      { "category": "street_address", "match": "124 Lavender Hill" }
+    ],
+    "expectedUnstructured": [
+      { "category": "client_name", "match": "Mohammed Al-Mansoor" }
+    ],
+    "expectedSpecialCategory": [
+      { "category": "special_category_immigration", "match": "asylum seeker" },
+      { "category": "special_category_immigration", "match": "no recourse to public funds" }
+    ]
+  },
+  {
+    "id": "case-03-safeguarding-domestic-abuse-third-parties",
+    "description": "Ex-partner abuse, children names, refuge, MARAC, health diagnoses",
+    "transcript": "I am fleeing domestic violence from my ex-partner David Smith. I moved with my daughter Lily and my son Tommy to Solace Women's Aid Refuge on Doddington Estate. There is a non-molestation order and a MARAC referral in place. My landlord Mr Henderson threatened illegal eviction. My social worker Rachel Adams at Wandsworth Borough Council is assisting with Section 17 child in need support. I have a medical diagnosis of post-traumatic stress disorder and severe depression from St George's Hospital.",
+    "expectedStructured": [
+      { "category": "street_address", "match": "Doddington Estate" }
+    ],
+    "expectedUnstructured": [
+      { "category": "ex_partner_name", "match": "David Smith" },
+      { "category": "child_name", "match": "Lily" },
+      { "category": "child_name", "match": "Tommy" },
+      { "category": "identifying_refuge", "match": "Solace Women's Aid Refuge" },
+      { "category": "landlord_name", "match": "Mr Henderson" },
+      { "category": "support_worker_name", "match": "Rachel Adams" },
+      { "category": "identifying_organisation", "match": "Wandsworth Borough Council" },
+      { "category": "identifying_hospital", "match": "St George's Hospital" }
+    ],
+    "expectedSpecialCategory": [
+      { "category": "special_category_domestic_abuse", "match": "fleeing domestic violence" },
+      { "category": "special_category_domestic_abuse", "match": "non-molestation order" },
+      { "category": "special_category_domestic_abuse", "match": "MARAC referral" },
+      { "category": "special_category_child_protection", "match": "Section 17 child in need" },
+      { "category": "special_category_mental_health", "match": "post-traumatic stress disorder" },
+      { "category": "special_category_mental_health", "match": "severe depression" }
+    ]
+  },
+  {
+    "id": "case-04-spoken-phonetic-numbers-and-dob",
+    "description": "Spoken dates of birth, spoken phone numbers, and spoken National Insurance",
+    "transcript": "My date of birth is fourteenth of August nineteen eighty two. My phone number is oh seven seven zero zero nine zero zero four five six. My national insurance is QQ one two three four five six A. I am registered at Lavender Hill Group Practice and my children attend Honeywell Junior School. My line manager Steve at Tesco Express reduced my hours.",
+    "expectedStructured": [
+      { "category": "date_of_birth", "match": "fourteenth of August nineteen eighty two" },
+      { "category": "phone_number", "match": "07700900456" },
+      { "category": "national_insurance", "match": "QQ 123456 A" }
+    ],
+    "expectedUnstructured": [
+      { "category": "identifying_medical_practice", "match": "Lavender Hill Group Practice" },
+      { "category": "identifying_school", "match": "Honeywell Junior School" },
+      { "category": "employer_name", "match": "Steve" }
+    ],
+    "expectedSpecialCategory": []
+  },
+  {
+    "id": "case-05-clinical-diagnoses-criminal-justice-unions",
+    "description": "Substantive clinical diagnoses (schizophrenia, sectioned) and criminal justice involvement",
+    "transcript": "The client has a diagnosis of paranoid schizophrenia and was sectioned under the Mental Health Act in March. The client is currently on probation order following release from HMP Wandsworth. They are a Unison member and work as Head of HR at Wandsworth Council.",
+    "expectedStructured": [],
+    "expectedUnstructured": [
+      { "category": "distinctive_occupation", "match": "Head of HR at Wandsworth Council" }
+    ],
+    "expectedSpecialCategory": [
+      { "category": "special_category_mental_health", "match": "paranoid schizophrenia" },
+      { "category": "special_category_mental_health", "match": "sectioned under the Mental Health Act" },
+      { "category": "special_category_criminal_justice", "match": "probation order" },
+      { "category": "special_category_criminal_justice", "match": "HMP Wandsworth" },
+      { "category": "special_category_trade_union", "match": "Unison member" }
+    ]
+  }
+]
