@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'test';
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert';
+import { spawnSync } from 'node:child_process';
 import { createAuthProvider, EntraIdProvider, TotpProvider } from '../backend/src/auth/index.ts';
 import { config } from '../backend/src/config/index.ts';
 import { volatileSessionStore } from '../client/src/state/volatileStore.ts';
@@ -189,6 +190,35 @@ async function run() {
       () => createAuthProvider({ ...config.auth, enableEntraId: false, enableTotp: false }),
       /Security Configuration Error/
     );
+  });
+
+  await test('Pilot refuses to start unless a real JWT signing secret is supplied', () => {
+    // Adviser session tokens authorise access to client consultations. The repository
+    // contains a development fallback key so that local and test runs need no configuration;
+    // if the pilot ever fell back to it, anyone who could read the repository could mint a
+    // valid adviser session. Config is evaluated once at module load, so each case is
+    // checked in a fresh process.
+    const loadPilotConfig = (env) =>
+      spawnSync(
+        process.execPath,
+        ['--experimental-strip-types', '-e', "import('./backend/src/config/index.ts').then(() => process.exit(0), () => process.exit(3))"],
+        { cwd: rootDir, env: { ...process.env, APP_ENV: 'pilot', ...env }, encoding: 'utf8' }
+      ).status;
+
+    const DEVELOPMENT_KEY = 'caw-case-ace-london-jwt-dev-secret-minimum-32-chars-long!';
+
+    assert.strictEqual(loadPilotConfig({ JWT_SECRET: '' }), 3, 'pilot started with no JWT_SECRET');
+    assert.strictEqual(loadPilotConfig({ JWT_SECRET: DEVELOPMENT_KEY }), 3, 'pilot started on the committed development key');
+    assert.strictEqual(loadPilotConfig({ JWT_SECRET: 'tooshort' }), 3, 'pilot started with a JWT_SECRET below the minimum length');
+    assert.strictEqual(
+      loadPilotConfig({ JWT_SECRET: 'a-genuinely-long-random-pilot-secret-value-1234567890' }),
+      0,
+      'pilot refused to start with a valid JWT_SECRET'
+    );
+
+    // Local and test environments must remain runnable without any secret configured.
+    assert.strictEqual(config.env, 'local');
+    assert(config.auth.jwtSecret.length >= 32);
   });
 
   await test('TotpProvider: authenticates valid credentials and rejects invalid/locked accounts', async () => {
