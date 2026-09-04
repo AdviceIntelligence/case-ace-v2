@@ -22,7 +22,7 @@
 import { volatileSessionStore, VolatileSessionStore, type SessionState, type DetectedIdentifier } from '../state/volatileStore.ts';
 import { audioRedactionEngine, type RedactionSpan, type MergedRedactionInterval } from '../audio/audioRedactionEngine.ts';
 import { identifierEngine } from './identifierEngine.ts';
-import { localAsrEngine } from '../asr/localAsrEngine.ts';
+import { ukCloudTranscriber } from '../asr/ukCloudTranscriber.ts';
 import { logSecurityEvent } from '../monitoring/eventLogger.ts';
 
 export interface VerificationProgressEvent {
@@ -162,10 +162,10 @@ export class RedactionVerificationManager {
           lowConfidenceWords: asrRes.lowConfidenceWords || [],
         };
       } else {
-        const asrResult = await localAsrEngine.transcribeAudio(
-          redactionResult.redactedArrayBuffer,
-          durationSec,
-          session.speakerMap
+        const float32Audio = redactionResult.redactedFloat32Audio || new Float32Array(redactionResult.redactedArrayBuffer);
+        const asrResult = await ukCloudTranscriber.transcribe(
+          float32Audio,
+          session.metadata?.audioSampleRate || 16000
         );
         verificationTranscript = asrResult.fullTranscript;
         mockAsrResult = asrResult;

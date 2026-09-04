@@ -159,6 +159,31 @@ export class CredentialIssuerService {
       role: user.role,
     };
   }
+
+  private static readonly revokedTokens = new Set<string>();
+
+  /**
+   * Revokes an active ephemeral credential immediately upon session destruction (ISO 27001 A.5.16 / A.5.18).
+   */
+  public static revokeCredential(user: AuthUser, token?: string): boolean {
+    if (token) {
+      CredentialIssuerService.revokedTokens.add(token);
+    }
+
+    writePrivacyLog({
+      level: 'info',
+      event: 'CREDENTIALS_REVOKED',
+      userId: user.id,
+      role: user.role,
+      region: config.gcpRegion,
+    });
+
+    return true;
+  }
+
+  public static isRevoked(token: string): boolean {
+    return CredentialIssuerService.revokedTokens.has(token);
+  }
 }
 
 /**

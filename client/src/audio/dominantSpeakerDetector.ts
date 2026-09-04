@@ -78,10 +78,9 @@ export class DominantSpeakerDetector {
       if (rms > maxEnergy) maxEnergy = rms;
     }
 
-    // Dynamic noise floor estimate (bottom 20th percentile)
-    const sortedEnergies = [...frameEnergies].sort((a, b) => a - b);
-    const noiseFloor = sortedEnergies[Math.floor(totalFrames * 0.2)] || 0.005;
-    const voiceThreshold = Math.max(0.015, noiseFloor * 2.5);
+    // 1. Establish voice thresholds
+    const voiceThreshold = 0.02; // Threshold for conversational speech
+    const highVoiceThreshold = 0.10; // Threshold for loud / close-mic speaker
 
     // 2. Identify voiced frames and group into energy buckets
     // High energy (close mic = adviser) vs Moderate/Low energy (distant = client across desk)
@@ -90,9 +89,6 @@ export class DominantSpeakerDetector {
     let secondarySpeakerCount = 0;
     let estimatedTurns = 0;
     let lastVoiceTier: 'none' | 'high' | 'secondary' = 'none';
-
-    // Establish dynamic threshold between close mic and ambient/distant speaker
-    const highVoiceThreshold = voiceThreshold * 2.2;
 
     for (let f = 0; f < totalFrames; f++) {
       const energy = frameEnergies[f];
@@ -149,6 +145,14 @@ export class DominantSpeakerDetector {
       totalVoicedDurationSeconds: Math.round(voicedDurationSeconds * 10) / 10,
       warningMessage,
     };
+  }
+
+  public analyzePcmChunk(chunk: Float32Array, sampleRate: number = 16000): DominantSpeakerAnalysis {
+    return this.analyzePcmBuffer(chunk.buffer, sampleRate);
+  }
+
+  public reset(): void {
+    // Reset internal state if any
   }
 }
 

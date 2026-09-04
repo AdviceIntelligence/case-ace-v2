@@ -43,14 +43,19 @@ const MAX_CHUNK_ATTEMPTS = 3;
 export interface TranscriptionProgress {
   type: 'PROGRESS';
   chunkIndex: number;
+  currentChunk?: number;
   totalChunks: number;
   percentage: number;
+  progressPercent?: number;
+  message?: string;
   processedSeconds: number;
   totalSeconds: number;
   elapsedMs: number;
   estimatedRemainingMs: number;
   currentSegmentPreview: string;
 }
+
+export type TranscribeProgress = TranscriptionProgress;
 
 export interface TranscriptionResult {
   segments: AsrSegment[];
@@ -70,7 +75,10 @@ export interface TranscriptionResult {
    * at review. Stated here so the interface and the documentation cannot drift from it.
    */
   speakerAttribution: 'per_chunk_unresolved';
+  hardwareBackend?: 'webgpu' | 'wasm';
+  routeSpeakerSource?: 'webex_channel_split' | 'inferred_acoustic_diarisation';
 }
+
 
 export class TranscriptionFailedError extends Error {
   public readonly chunkIndex: number;
@@ -351,3 +359,5 @@ function encodeBase64(buffer: ArrayBuffer): string {
 }
 
 export const ukCloudTranscriber = new UkCloudTranscriber();
+export type UkCloudTranscriberError = TranscriptionFailedError;
+

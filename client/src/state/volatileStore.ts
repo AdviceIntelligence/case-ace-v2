@@ -17,7 +17,7 @@ import type { ConsentRecord, ImportProvenance } from '../consent/consentManager.
 import type { SpeakerChannelMap } from '../audio/audioNormalizer.ts';
 import type { MergedRedactionInterval } from '../audio/audioRedactionEngine.ts';
 
-export type { MergedRedactionInterval };
+export type { MergedRedactionInterval, SpeakerChannelMap };
 
 export type SessionStage =
   | 'unauthenticated'
@@ -57,16 +57,24 @@ export interface AsrSegment {
   hasLowConfidenceWords: boolean;
 }
 
-export interface LocalAsrResult {
+export interface TranscriptResult {
   segments: AsrSegment[];
   fullTranscript: string;
   totalWords: number;
   lowConfidenceWordsCount: number;
   lowConfidenceWords: AsrWord[];
   executionDurationMs: number;
-  hardwareBackend: 'webgpu' | 'wasm';
-  routeSpeakerSource: 'webex_channel_split' | 'inferred_acoustic_diarisation';
+  hardwareBackend?: 'webgpu' | 'wasm';
+  routeSpeakerSource?: 'webex_channel_split' | 'inferred_acoustic_diarisation';
+  provider?: 'google_stt_v2';
+  region?: string;
+  dataLoggingEnabled?: false;
+  chunkCount?: number;
+  speakerAttribution?: 'per_chunk_unresolved';
 }
+
+
+export type LocalAsrResult = TranscriptResult;
 
 export interface CloudAsrWord {
   word: string;
@@ -219,6 +227,8 @@ export interface SessionState {
   speakerMap: SpeakerChannelMap | null;
   rawAudioBuffer: ArrayBuffer | null;
   redactedAudioBuffer: ArrayBuffer | null;
+  transcript: TranscriptResult | null;
+  draftTranscript: string | null;
   localAsrResult: LocalAsrResult | null;
   localDraftTranscript: string | null;
   cloudAccurateTranscript: string | null;
@@ -458,6 +468,8 @@ export class VolatileSessionStore {
       speakerMap: null,
       rawAudioBuffer: null,
       redactedAudioBuffer: null,
+      transcript: null,
+      draftTranscript: null,
       localAsrResult: null,
       localDraftTranscript: null,
       cloudAccurateTranscript: null,
@@ -601,6 +613,10 @@ export class VolatileSessionStore {
     this.notify();
   }
 
+  public setRawAudioBuffer(buffer: ArrayBuffer, sampleRate?: number, durationSeconds?: number): void {
+    this.setRawAudio(buffer, durationSeconds, sampleRate);
+  }
+
   /**
    * Release and zero raw audio buffer as soon as local redaction has extracted what it needs.
    */
@@ -626,6 +642,10 @@ export class VolatileSessionStore {
     this.notify();
   }
 
+  public setRedactedAudioBuffer(buffer: ArrayBuffer): void {
+    this.setRedactedAudio(buffer);
+  }
+
   /**
    * Release and zero redacted audio buffer once Cloud Speech-to-Text v2 transmission completes.
    */
@@ -640,22 +660,34 @@ export class VolatileSessionStore {
     }
   }
 
-  // --- Local ASR (Pass One) Accessors and Memory Hygiene ---
+  // --- Transcript Accessors and Memory Hygiene ---
 
-  public getLocalAsrResult(): Readonly<LocalAsrResult> | null {
-    return this.state?.localAsrResult ?? null;
+  public getTranscript(): Readonly<TranscriptResult> | null {
+    return this.state?.transcript ?? this.state?.localAsrResult ?? null;
   }
 
-  public setLocalAsrResult(result: LocalAsrResult): void {
-    if (!this.state) throw new Error('Cannot store local ASR result on uninitialised session.');
+  public getLocalAsrResult(): Readonly<LocalAsrResult> | null {
+    return this.getTranscript();
+  }
+
+  public setTranscript(result: TranscriptResult): void {
+    if (!this.state) throw new Error('Cannot store transcript on uninitialised session.');
+    this.state.transcript = { ...result };
+    this.state.draftTranscript = result.fullTranscript;
     this.state.localAsrResult = { ...result };
     this.state.localDraftTranscript = result.fullTranscript;
     this.state.metadata.updatedAt = Date.now();
     this.notify();
   }
 
-  public clearLocalAsr(): void {
+  public setLocalAsrResult(result: LocalAsrResult): void {
+    this.setTranscript(result);
+  }
+
+  public clearTranscript(): void {
     if (this.state) {
+      this.state.transcript = null;
+      this.state.draftTranscript = null;
       this.state.localAsrResult = null;
       this.state.localDraftTranscript = null;
       this.state.metadata.updatedAt = Date.now();
@@ -663,13 +695,22 @@ export class VolatileSessionStore {
     }
   }
 
+  public clearLocalAsr(): void {
+    this.clearTranscript();
+  }
+
   // --- Transcript and Entity Accessors ---
 
-  public setLocalDraftTranscript(transcript: string): void {
-    if (!this.state) throw new Error('Cannot set local transcript on uninitialised session.');
+  public setDraftTranscript(transcript: string): void {
+    if (!this.state) throw new Error('Cannot set transcript on uninitialised session.');
+    this.state.draftTranscript = transcript;
     this.state.localDraftTranscript = transcript;
     this.state.metadata.updatedAt = Date.now();
     this.notify();
+  }
+
+  public setLocalDraftTranscript(transcript: string): void {
+    this.setDraftTranscript(transcript);
   }
 
   public setCloudAccurateTranscript(transcript: string): void {

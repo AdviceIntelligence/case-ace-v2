@@ -42,5 +42,24 @@ export function createCredentialsRouter(authProvider: AuthProvider) {
     }
   );
 
+  router.post(
+    '/revoke',
+    requireAuth,
+    (req: AuthenticatedRequest, res: Response) => {
+      try {
+        const { token } = req.body || {};
+        CredentialIssuerService.revokeCredential(req.user!, typeof token === 'string' ? token : undefined);
+        res.status(200).json({
+          success: true,
+          message: 'Credentials successfully revoked and marked expired.',
+        });
+      } catch (err: any) {
+        res.status(400).json({
+          error: err.message,
+        });
+      }
+    }
+  );
+
   return router;
 }

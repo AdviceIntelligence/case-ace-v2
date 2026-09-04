@@ -17,12 +17,12 @@
 This Data Protection Impact Assessment (DPIA) evaluates the deployment of **Case Ace v2.0** across Citizens Advice Wandsworth bureaux and outreach locations. Case Ace v2.0 is an assistive, in-browser software application designed to support qualified generalist advisers and caseworkers in recording and drafting structured consultation notes conforming to the **Advice Quality Standard (AQS Level 3 - Advice and Casework)**.
 
 ### Key Architectural Evolution (v2.0 vs April 2026 Baseline)
-Version 1.0 relied on centralized server-side audio ingestion and intermediate cloud transcription. In response to preliminary privacy reviews and strict data minimisation principles, **Version 2.0 has been re-architected from first principles**:
+Version 1.0 relied on centralized server-side audio ingestion and persistent intermediate storage. In response to preliminary privacy reviews and strict data minimisation principles, **Version 2.0 has been re-architected from first principles**:
 1. **Volatile-Only In-Memory Architecture (Constraint C1/C4)**: Audio data exists solely as transient floating-point numbers in browser RAM. No audio files or transcripts are ever written to browser disk storage (`localStorage`, `sessionStorage`, `IndexedDB`).
-2. **Local-First Identifier Detection & Redaction (Constraint C3)**: Multi-layer Named Entity Recognition (NER) identifies personal identifiers directly inside the adviser's local browser sandbox.
-3. **Verified Acoustic Redaction (Constraint C2/C8)**: No unredacted audio leaves the local device. Audio segments containing names, addresses, phone numbers, or dates of birth are acoustically muted and verified before any cloud speech recognition occurs.
-4. **Surrogate Tokenisation (Constraint C5/C6)**: Text sent to the Cloud Large Language Model (Google Cloud Vertex AI in `europe-west2` London) contains zero direct client identifiers. Identifiers are substituted with abstract tokens (e.g. `[CLIENT_NAME_1]`, `[NINO_1]`), and re-identified locally in the browser upon return.
-5. **Deterministic Single-Function Destruction (Constraint C7)**: A single canonical `destroySession()` function wipes all audio buffers, token maps, and worker snapshots upon any session exit path.
+2. **Sovereign UK Cloud Speech-to-Text v2 (London `europe-west2`)**: Audio transcription executes over HTTPS directly to Cloud STT v2 in London with `enableDataLogging: false`. Audio is chunked in RAM into segments under 55 seconds to eliminate cloud disk staging (no Cloud Storage buckets). Nothing is written to disk at either end.
+3. **Surrogate Tokenisation & LLM Privacy Isolation (Constraint C5/C6)**: The model that writes the case note never sees the client's name. Multi-layer NER detects direct identifiers and substitutes them with abstract surrogate tokens (e.g. `[CLIENT_NAME_1]`, `[NINO_1]`). Only anonymised surrogate tokens reach Vertex AI Gemini in London. Re-identification occurs locally in the browser upon return.
+4. **Mandatory Adviser Review Gate**: The adviser inspects and confirms all detected identifiers and low-confidence audio regions before generative case note synthesis.
+5. **Deterministic Single-Function Destruction (Constraint C7)**: A single canonical `destroySession()` function wipes all audio buffers, token maps, and volatile session state upon any session exit path.
 
 ---
 
@@ -31,29 +31,26 @@ Version 1.0 relied on centralized server-side audio ingestion and intermediate c
 ```mermaid
 flowchart TD
     A["Client Consents to Audio Recording (Tiered Consent)"] --> B["Audio Captured into Browser Volatile RAM (C1)"]
-    B --> C["Local Whisper WASM Pass 1 Draft Transcript (C3)"]
-    C --> D["Multi-Layer NER Detects Identifiers (C3)"]
-    D --> E["Adviser Review Gate (Phase 9) - Manual Verification"]
-    E --> F["Acoustic Verification Pass (Phase 10) - Asserts 0 Survivors (C8)"]
-    F -->|Fail| Z["Abort Egress & Alert Adviser"]
-    F -->|Pass| G["Verified Redacted WAV to Google Cloud STT v2 (C2)"]
-    G --> H["Surrogate Tokenised Transcript to Vertex AI Gemini 1.5 (C5)"]
-    H --> I["Structured Draft Note Returned to Browser"]
-    I --> J["In-Browser Reverse Detokenisation (C6)"]
-    J --> K["Adviser Review, Gap Acknowledgment & Sign-Off (Phase 14)"]
-    K --> L["Adviser Pastes Signed Note into Casebook CRM"]
-    L --> M["destroySession() Executes: All RAM Buffers Zeroed (C7)"]
+    B --> C["RAM Audio Chunking (<55s quiet-point tiling)"]
+    C --> D["Cloud STT v2 (europe-west2, enableDataLogging: false)"]
+    D --> E["Multi-Layer NER Detects Identifiers (C3)"]
+    E --> F["Adviser Review Gate - Verify Hidden Details & Low Confidence"]
+    F --> G["Surrogate Tokenised Transcript to Vertex AI Gemini (C5)"]
+    G --> H["Structured Draft Note Returned to Browser"]
+    H --> I["In-Browser Reverse Detokenisation (C6)"]
+    I --> J["Adviser Review, Gap Acknowledgment & Sign-Off"]
+    J --> K["Adviser Copies Signed Note into Casebook CRM"]
+    K --> L["destroySession() Executes: All RAM Buffers Zeroed (C7)"]
 ```
 
 ### Data Flows & Systematic Steps
-1. **Intake & Consent**: Before recording begins, the client is informed of the audio recording purpose, the in-browser redaction process, and their absolute right to decline or withdraw consent at any time without prejudice to their advice service.
-2. **Consultation Ingestion**: Audio is streamed via microphone, Cisco Webex Telephony (SRTP stream decrypted locally), or file import directly into a `Float32Array` buffer in browser RAM.
-3. **Local ASR & Redaction**: A local WebAssembly instance of Whisper transcribes the audio locally. Layers 1–3 NER identify all direct identifiers and special category disclosures.
-4. **Adviser Gate & Acoustic Muting**: The adviser visually checks highlighted entities on screen. The underlying audio buffer is acoustically zeroed across all confirmed entity timestamps.
-5. **Fail-Closed Verification**: A secondary local ASR pass transcribes the muted audio. If any identifier sound survives, cloud egress is blocked immediately.
-6. **Cloud Drafting**: The verified redacted audio is transcribed via Google Cloud STT v2 (London), and the surrogate-tokenised text is structured into an AQS Level 3 note via Vertex AI Gemini 1.5 (London).
-7. **Detokenisation & Professional Sign-Off**: The structured note is detokenised locally. The adviser reviews the note, acknowledges information gaps, verifies statutory deadlines, and confirms professional responsibility.
-8. **Destruction**: The adviser copies the note into Casebook CRM. Calling `destroySession()` zeroes all RAM buffers (`Uint8Array.fill(0)`), terminates web workers, and wipes clipboard history.
+1. **Intake & Consent**: Before recording begins, the client is informed of the audio recording purpose, the sovereign UK cloud transcription process, and their absolute right to decline or withdraw consent at any time without prejudice to their advice service.
+2. **Consultation Ingestion**: Audio is captured via microphone or file import directly into a `Float32Array` buffer in browser RAM.
+3. **Sovereign UK Cloud Transcription**: Audio is sliced in RAM at natural acoustic pauses into chunks under 55 seconds and transcribed via Cloud STT v2 in `europe-west2` London with `enableDataLogging: false`. No audio is staged to disk or Cloud Storage.
+4. **Identifier Detection & Adviser Review Gate**: Multi-layer NER detects names, contact details, and identifiers. The adviser reviews and confirms all redaction boundaries and low-confidence regions.
+5. **Surrogate Tokenisation & Note Drafting**: Client identifiers are replaced with abstract surrogate tokens. The tokenised transcript is structured into an AQS Level 3 case note via Vertex AI Gemini 1.5 in London (`europe-west2`). The LLM never sees client names or identifiers.
+6. **Detokenisation & Professional Sign-Off**: The structured note is restored with client details locally. The adviser reviews the note, acknowledges information gaps, verifies statutory deadlines, and confirms professional responsibility.
+7. **Destruction**: The adviser copies the note into Casebook CRM. Calling `destroySession()` zeroes all RAM buffers (`Uint8Array.fill(0)`), clears all session memory, and wipes clipboard history.
 
 ---
 

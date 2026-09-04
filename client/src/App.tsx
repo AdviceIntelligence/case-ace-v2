@@ -44,10 +44,8 @@ import type { DominantSpeakerAnalysis } from './audio/dominantSpeakerDetector.ts
 import { LoginView } from './components/LoginView.tsx';
 import { LogoutModal } from './components/LogoutModal.tsx';
 import { ConsentGateModal } from './components/ConsentGateModal.tsx';
-import { HardwareBenchmarkBanner } from './components/HardwareBenchmarkBanner.tsx';
-import { LocalAsrProgressModal } from './components/LocalAsrProgressModal.tsx';
-import { localAsrEngine } from './asr/localAsrEngine.ts';
-import type { WorkerAsrProgress } from './workers/localAsrWorker.ts';
+import { TranscriptProgressModal } from './components/TranscriptProgressModal.tsx';
+import { ukCloudTranscriber, type TranscribeProgress } from './asr/ukCloudTranscriber.ts';
 import { IdentifierReviewPanel } from './components/IdentifierReviewPanel.tsx';
 import { identifierEngine } from './redaction/identifierEngine.ts';
 import { RedactionReviewGateModal } from './components/RedactionReviewGateModal.tsx';
@@ -72,10 +70,9 @@ export const App: React.FC = () => {
   // Phase 13 Case Note Generation State
   const [isGeneratingCaseNote, setIsGeneratingCaseNote] = useState(false);
 
-  // Phase 7 Local ASR State
+  // Cloud STT v2 Transcription State
   const [isAsrRunning, setIsAsrRunning] = useState(false);
-  const [asrProgress, setAsrProgress] = useState<WorkerAsrProgress | null>(null);
-  const [asrHardwareBackend, setAsrHardwareBackend] = useState<'webgpu' | 'wasm'>('wasm');
+  const [asrProgress, setAsrProgress] = useState<TranscribeProgress | null>(null);
 
   // Phase 9 Redaction Review Gate State
   const [isRedactionGateOpen, setIsRedactionGateOpen] = useState(false);
@@ -239,24 +236,28 @@ export const App: React.FC = () => {
     setAsrProgress(null);
 
     try {
-      const benchmark = await localAsrEngine.assessHardwareCapabilities();
-      setAsrHardwareBackend(benchmark.recommendedBackend);
+      const float32Pcm = new Float32Array(rawAudio);
+      const sampleRate = currentSession.metadata.audioSampleRate || 16000;
 
-      await localAsrEngine.transcribeAudio(
-        rawAudio,
-        currentSession.metadata.audioDurationSeconds || 0,
-        currentSession.speakerMap,
-        (progress) => {
-          setAsrProgress(progress);
+      const transcriptResult = await ukCloudTranscriber.transcribe(
+        float32Pcm,
+        sampleRate,
+        {
+          authToken: volatileAuthStore.getAccessToken() || undefined,
+          onProgress: (progress) => {
+            setAsrProgress(progress);
+          },
         }
       );
 
+      volatileSessionStore.setTranscript(transcriptResult);
+
       // Phase 8 & 9: Automatically run 3-Layer Identifier Detection & open Redaction Review Gate
       const updatedSession = volatileSessionStore.getState();
-      if (updatedSession?.localDraftTranscript) {
+      if (updatedSession?.draftTranscript) {
         const detectionResult = identifierEngine.detectIdentifiers(
-          updatedSession.localDraftTranscript,
-          updatedSession.localAsrResult
+          updatedSession.draftTranscript,
+          updatedSession.transcript
         );
         volatileSessionStore.setDetectedIdentifiers(detectionResult.identifiers);
         volatileSessionStore.setTokenMap(detectionResult.tokenMap);
@@ -265,7 +266,7 @@ export const App: React.FC = () => {
         setIsRedactionGateOpen(true);
       }
     } catch (err: any) {
-      setMediaError(err?.message || 'Pass One speech recognition encountered an error.');
+      setMediaError(err?.message || 'Speech recognition encountered an error.');
     } finally {
       setIsAsrRunning(false);
     }
@@ -273,8 +274,8 @@ export const App: React.FC = () => {
 
   const handleRunIdentifierDetection = () => {
     const current = volatileSessionStore.getState();
-    if (!current || !current.localDraftTranscript) return;
-    const res = identifierEngine.detectIdentifiers(current.localDraftTranscript, current.localAsrResult);
+    if (!current || !current.draftTranscript) return;
+    const res = identifierEngine.detectIdentifiers(current.draftTranscript, current.transcript);
     volatileSessionStore.setDetectedIdentifiers(res.identifiers);
     volatileSessionStore.setTokenMap(res.tokenMap);
     volatileSessionStore.setTokenisedTranscript(res.tokenisedTranscript);
@@ -284,10 +285,15 @@ export const App: React.FC = () => {
 
   const handleStopLive = async () => {
     if (!liveCaptureRef.current || !activeConsentRecord) return;
-    const result = liveCaptureRef.current.stop();
-    audioNormalizer.normalizeLiveCapture(result, activeConsentRecord);
-    setCaptureState('stopped');
-    await runPassOneAsr();
+    try {
+      const result = liveCaptureRef.current.stop();
+      audioNormalizer.normalizeLiveCapture(result, activeConsentRecord);
+      setCaptureState('stopped');
+      await runPassOneAsr();
+    } catch (err: any) {
+      setMediaError(`Failed while finishing audio capture: ${err?.message || err}`);
+      setCaptureState('idle');
+    }
   };
 
   // --- Webex Stream Handlers ---
@@ -443,8 +449,16 @@ export const App: React.FC = () => {
     <div
       translate="no"
       className="notranslate"
+      spellCheck={false}
+      autoCapitalize="off"
+      {...({
+        'data-gramm': 'false',
+        autoComplete: 'off',
+        autoCorrect: 'off',
+      } as any)}
       style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#F8FAFC' }}
     >
+      {/* Anti-leak attributes: spellCheck={false} autoComplete="off" autoCorrect="off" autoCapitalize="off" data-gramm="false" translate="no" */}
       {/* Sticky Persistent Recording Indicator (Phase 6.2) */}
       {isRecordingActive && (
         <aside
@@ -767,15 +781,11 @@ export const App: React.FC = () => {
       <main style={{ flex: 1, padding: '2rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
         {activeTab === 'consultation' && isAdviserOrSupervisor && (
           <div>
-            {/* Pre-session Hardware Benchmark (Phase 7) */}
-            <HardwareBenchmarkBanner />
-
-            {/* Local ASR Progress Modal (Phase 7) */}
-            <LocalAsrProgressModal
+            {/* Sovereign Transcription Progress Modal */}
+            <TranscriptProgressModal
               isOpen={isAsrRunning}
               progress={asrProgress}
-              hardwareBackend={asrHardwareBackend}
-              lowConfidenceCount={session?.localAsrResult?.lowConfidenceWordsCount}
+              lowConfidenceCount={session?.transcript?.lowConfidenceWordsCount ?? session?.localAsrResult?.lowConfidenceWordsCount}
             />
 
             {/* Dominant Speaker Warning Banner (Phase 6.2) */}
@@ -820,10 +830,10 @@ export const App: React.FC = () => {
             >
               <div>
                 <h2 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#004B87', margin: '0 0 0.25rem 0' }}>
-                  Volatile Memory Mode (Constraint C1)
+                  Nothing is saved. Closing this tab erases everything.
                 </h2>
                 <p style={{ margin: 0, fontSize: '0.875rem', color: '#1E293B' }}>
-                  All session data exists solely in volatile RAM. Storage APIs are blocked. Closing browser destroys session.
+                  All session data exists solely in volatile RAM. Storage APIs are blocked. The AI model that drafts the case note never sees client identifiers.
                 </p>
               </div>
 
@@ -874,56 +884,44 @@ export const App: React.FC = () => {
                 <h3 style={{ fontSize: '1.125rem', color: '#1E293B', marginBottom: '1rem' }}>
                   Select Advice Intake Route
                 </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                  {/* Route 1: Live In Person */}
-                  <div
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+                  {/* Route 1: Live room recording */}
+                  <button
+                    type="button"
                     id="route-live-in-person"
+                    aria-label="Start live room recording consultation"
                     style={{
                       backgroundColor: '#FFFFFF',
                       padding: '1.5rem',
                       borderRadius: '8px',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid #CBD5E1',
                       cursor: 'pointer',
+                      textAlign: 'left',
                       transition: 'border-color 0.15s, box-shadow 0.15s',
                     }}
                     onClick={() => handleRouteSelection('live_in_person')}
                   >
                     <Mic size={32} color="#004B87" aria-hidden="true" />
-                    <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87' }}>Live In-Person Interview</h4>
-                    <p style={{ color: '#64748B', fontSize: '0.875rem', margin: 0, lineHeight: 1.5 }}>
-                      Record face-to-face consultation via microphone with mandatory in-person consent gating and dominant speaker detection.
+                    <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87', fontSize: '1.125rem', fontWeight: 600 }}>
+                      Live Room Recording
+                    </h4>
+                    <p style={{ color: '#475569', fontSize: '0.875rem', margin: 0, lineHeight: 1.5 }}>
+                      Record face-to-face consultation in the advice room with client consent and real-time audio capture.
                     </p>
-                  </div>
+                  </button>
 
-                  {/* Route 2: Webex Telephony */}
-                  <div
-                    id="route-webex-telephony"
-                    style={{
-                      backgroundColor: '#FFFFFF',
-                      padding: '1.5rem',
-                      borderRadius: '8px',
-                      border: '1px solid #E2E8F0',
-                      cursor: 'pointer',
-                      transition: 'border-color 0.15s, box-shadow 0.15s',
-                    }}
-                    onClick={() => handleRouteSelection('webex_telephony')}
-                  >
-                    <PhoneCall size={32} color="#004B87" aria-hidden="true" />
-                    <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87' }}>Telephone Call (Cisco Webex)</h4>
-                    <p style={{ color: '#64748B', fontSize: '0.875rem', margin: 0, lineHeight: 1.5 }}>
-                      Dial-out or receive client call via Webex Calling. Telephony consent gate unlocks recording; withdrawal keeps call active.
-                    </p>
-                  </div>
-
-                  {/* Route 3: File Import */}
-                  <div
+                  {/* Route 2: Import audio recording */}
+                  <button
+                    type="button"
                     id="route-file-import"
+                    aria-label="Import audio recording from dictaphone or device"
                     style={{
                       backgroundColor: '#FFFFFF',
                       padding: '1.5rem',
                       borderRadius: '8px',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid #CBD5E1',
                       cursor: 'pointer',
+                      textAlign: 'left',
                       transition: 'border-color 0.15s, box-shadow 0.15s',
                       display: 'flex',
                       flexDirection: 'column',
@@ -933,21 +931,44 @@ export const App: React.FC = () => {
                   >
                     <div>
                       <Upload size={32} color="#004B87" aria-hidden="true" />
-                      <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87' }}>
-                        {isProcessingMedia ? 'Extracting Audio Track...' : 'Import Recorded Consultation'}
+                      <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87', fontSize: '1.125rem', fontWeight: 600 }}>
+                        {isProcessingMedia ? 'Extracting Audio Track...' : 'Import Audio Recording'}
                       </h4>
-                      <p style={{ color: '#64748B', fontSize: '0.8125rem', margin: '0 0 0.75rem 0', lineHeight: 1.5 }}>
-                        Import externally captured audio or video interviews with mandatory consent and provenance attestation.
+                      <p style={{ color: '#475569', fontSize: '0.8125rem', margin: '0 0 0.75rem 0', lineHeight: 1.5 }}>
+                        Import an audio recording from an approved Citizens Advice dictaphone or device with consent attestation.
                       </p>
                     </div>
 
                     <div style={{ backgroundColor: '#F8FAFC', padding: '0.625rem', borderRadius: '4px', border: '1px solid #E2E8F0', fontSize: '0.75rem', color: '#475569' }}>
-                      <div style={{ fontWeight: 600, color: '#004B87', marginBottom: '0.25rem' }}>Limits & Formats:</div>
-                      <div>• Max Size: <strong>500 MB</strong> | Max Duration: <strong>90 mins</strong></div>
-                      <div>• Audio: <strong>WAV, MP3, M4A, AAC, FLAC, OGG</strong></div>
-                      <div>• Video: <strong>MP4, MOV, WebM</strong> (Audio extracted, video frames discarded)</div>
+                      <div style={{ fontWeight: 600, color: '#004B87', marginBottom: '0.25rem' }}>Supported Formats:</div>
+                      <div>• Audio: <strong>WAV, MP3, M4A, AAC, FLAC, OGG</strong> (Max 500 MB)</div>
                     </div>
-                  </div>
+                  </button>
+
+                  {/* Route 3: Cisco Webex telephone stream */}
+                  <button
+                    type="button"
+                    id="route-webex-telephony"
+                    aria-label="Connect to active Cisco Webex telephone call"
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      padding: '1.5rem',
+                      borderRadius: '8px',
+                      border: '1px solid #CBD5E1',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      transition: 'border-color 0.15s, box-shadow 0.15s',
+                    }}
+                    onClick={() => handleRouteSelection('webex_telephony')}
+                  >
+                    <PhoneCall size={32} color="#004B87" aria-hidden="true" />
+                    <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87', fontSize: '1.125rem', fontWeight: 600 }}>
+                      Cisco Webex Call
+                    </h4>
+                    <p style={{ color: '#475569', fontSize: '0.875rem', margin: 0, lineHeight: 1.5 }}>
+                      Connect to an active dual-channel telephony session via Cisco Webex SDK with affirmative consent.
+                    </p>
+                  </button>
                 </div>
 
                 {/* Hidden File Input for Attested Import */}
@@ -1208,7 +1229,7 @@ export const App: React.FC = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#334155' }}>Acoustic Segmentation Status:</span>
                           <span style={{ fontSize: '0.6875rem', padding: '0.125rem 0.375rem', borderRadius: '4px', backgroundColor: session.localAsrResult.hardwareBackend === 'webgpu' ? '#DCFCE7' : '#FEF3C7', color: session.localAsrResult.hardwareBackend === 'webgpu' ? '#166534' : '#92400E', fontWeight: 600 }}>
-                            {session.localAsrResult.hardwareBackend.toUpperCase()} ({session.localAsrResult.executionDurationMs}ms)
+                            {(session.localAsrResult.hardwareBackend || 'cloud').toUpperCase()} ({session.localAsrResult.executionDurationMs}ms)
                           </span>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', fontSize: '0.75rem', color: '#475569' }}>

@@ -74,27 +74,35 @@ export class AudioNormalizer {
    */
   public normalizeWebexCapture(
     input: {
-      pcmBuffer: ArrayBuffer;
+      pcmBuffer?: ArrayBuffer;
+      monoDownmixBuffer?: ArrayBuffer;
       durationSeconds: number;
       sampleRate: number;
-      channelMapping: { isDualChannel: true; adviserChannel: 0; clientChannel: 1 };
+      channelMapping?: { isDualChannel: true; adviserChannel: 0; clientChannel: 1 };
+      speakerMap?: SpeakerChannelMap;
     },
     consent: ConsentRecord
   ): NormalizedAudioSession {
     this.validateConsent(consent, 'webex_telephony');
-    this.validatePcmBuffer(input.pcmBuffer);
+    const pcm = input.monoDownmixBuffer || input.pcmBuffer;
+    if (!pcm) {
+      throw new Error('Audio normalisation failed: PCM buffer is empty or missing.');
+    }
+    this.validatePcmBuffer(pcm);
+
+    const speakerMap: SpeakerChannelMap = input.speakerMap || {
+      isDualChannel: true,
+      adviserChannel: 0,
+      clientChannel: 1,
+      sourceType: 'split_telephony',
+    };
 
     const session: NormalizedAudioSession = {
-      pcmBuffer: input.pcmBuffer,
+      pcmBuffer: pcm,
       durationSeconds: Math.round(input.durationSeconds * 10) / 10,
       sampleRate: AudioNormalizer.REQUIRED_SAMPLE_RATE,
       format: AudioNormalizer.FORMAT_SPEC,
-      speakerMap: {
-        isDualChannel: true,
-        adviserChannel: 0,
-        clientChannel: 1,
-        sourceType: 'split_telephony',
-      },
+      speakerMap,
       consentRecord: consent,
       intakeRoute: 'webex_telephony',
     };
@@ -152,6 +160,9 @@ export class AudioNormalizer {
   }
 
   private commitToVolatileStore(session: NormalizedAudioSession): void {
+    if (!volatileSessionStore.hasActiveSession()) {
+      volatileSessionStore.initSession({ route: session.intakeRoute, adviserId: session.consentRecord.adviserId });
+    }
     volatileSessionStore.setRawAudio(session.pcmBuffer, session.durationSeconds, session.sampleRate);
     volatileSessionStore.setConsentRecord(session.consentRecord);
     volatileSessionStore.setSpeakerMap(session.speakerMap);

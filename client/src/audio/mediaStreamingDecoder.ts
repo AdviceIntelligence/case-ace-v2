@@ -53,7 +53,7 @@ export class MediaStreamingDecoder {
    * Performs instant pre-flight validation against file size limits and container magic bytes.
    * Notice: Zero file name requirement. Validation operates solely on byte size and header sniff.
    */
-  public validatePreFlight(params: { size: number; headerBytes?: Uint8Array }): { valid: boolean; error?: string; sniff?: SniffResult } {
+  public validatePreFlight(params: { size: number; name?: string; headerBytes?: Uint8Array }): { valid: boolean; error?: string; sniff?: SniffResult } {
     if (params.size > this.config.maxFileSizeBytes) {
       const maxMb = Math.round(this.config.maxFileSizeBytes / (1024 * 1024));
       const actualMb = (params.size / (1024 * 1024)).toFixed(1);
@@ -61,6 +61,17 @@ export class MediaStreamingDecoder {
         valid: false,
         error: `File exceeds maximum allowed size of ${maxMb} MB (Actual: ${actualMb} MB). Large recordings must be trimmed or compressed before import.`,
       };
+    }
+
+    if (params.name) {
+      const ext = params.name.split('.').pop()?.toLowerCase();
+      const allowedExts = ['wav', 'mp3', 'm4a', 'aac', 'flac', 'ogg', 'mp4', 'mov', 'webm', 'wma'];
+      if (ext && !allowedExts.includes(ext)) {
+        return {
+          valid: false,
+          error: `Unsupported file format '.${ext}'. Permitted formats: WAV, MP3, M4A, AAC, FLAC, OGG, MP4, MOV, WebM.`,
+        };
+      }
     }
 
     if (params.headerBytes && params.headerBytes.length >= 12) {

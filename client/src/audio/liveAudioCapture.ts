@@ -228,6 +228,27 @@ export class LiveAudioCapture {
     }
   }
 
+  public evaluatePressureForBytes(bytes: number, durationSeconds: number): { level: MemoryPressureLevel; currentMb: number; message: string | null } {
+    const elapsedMinutes = Math.floor(durationSeconds / 60);
+    const currentMb = Math.round((bytes / (1024 * 1024)) * 100) / 100;
+    let level: MemoryPressureLevel = 'normal';
+    let message: string | null = null;
+
+    if (elapsedMinutes >= this.maxDurationMinutes) {
+      level = 'limit_exceeded';
+      message = `Maximum consultation duration limit (${this.maxDurationMinutes} minutes) reached. Recording must be concluded.`;
+    } else if (elapsedMinutes >= 60) {
+      level = 'high_pressure';
+      message = `High memory pressure: Consultation has exceeded 60 minutes (${elapsedMinutes}m / ${currentMb}MB). Consider completing advice interview before reaching 90m limit.`;
+    } else if (elapsedMinutes >= 45) {
+      level = 'moderate';
+      message = `Extended interview duration (${elapsedMinutes}m exceeds 45 minutes). Volatile memory consumption: ${currentMb}MB.`;
+    }
+
+    this.options.onMemoryPressure?.(level, currentMb, message);
+    return { level, currentMb, message };
+  }
+
   private checkMemoryPressure(elapsedMinutes: number): void {
     const currentMb = this.getMemoryConsumptionMb();
     let level: MemoryPressureLevel = 'normal';
@@ -238,10 +259,10 @@ export class LiveAudioCapture {
       message = `Maximum consultation duration limit (${this.maxDurationMinutes} minutes) reached. Recording must be concluded.`;
     } else if (elapsedMinutes >= 60) {
       level = 'high_pressure';
-      message = `High memory pressure (${elapsedMinutes}m / ${currentMb}MB). Consider completing advice interview before reaching 90m limit.`;
+      message = `High memory pressure: Consultation has exceeded 60 minutes (${elapsedMinutes}m / ${currentMb}MB). Consider completing advice interview before reaching 90m limit.`;
     } else if (elapsedMinutes >= 45) {
       level = 'moderate';
-      message = `Extended interview duration (${elapsedMinutes}m). Volatile memory consumption: ${currentMb}MB.`;
+      message = `Extended interview duration (${elapsedMinutes}m exceeds 45 minutes). Volatile memory consumption: ${currentMb}MB.`;
     }
 
     this.options.onMemoryPressure?.(level, currentMb, message);

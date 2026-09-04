@@ -41,9 +41,11 @@ import { SYNTHETIC_CORPUS } from '../test/corpus/syntheticAdviceCorpus.ts';
 import { testingEngine } from '../test/testingEngine.ts';
 import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
 import { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } from '../client/src/workers/workerSandbox.ts';
-import { planTranscriptionChunks, sliceChunk, MAX_CHUNK_SECONDS } from '../client/src/asr/audioChunker.ts';
+import { planTranscriptionChunks, sliceChunk, MAX_CHUNK_SECONDS, chunkAudioBuffer } from '../client/src/asr/audioChunker.ts';
 import { UkCloudTranscriber, TranscriptionFailedError } from '../client/src/asr/ukCloudTranscriber.ts';
 import { ENVIRONMENTS } from '../client/src/config/environments.ts';
+import { logSecurityEvent, getTelemetryBuffer, clearTelemetryBuffer } from '../client/src/monitoring/eventLogger.ts';
+
 
 const rootDir = process.cwd();
 console.log('Running Case Ace v2.0 Test Suite...\n');
@@ -792,12 +794,10 @@ async function run() {
     }
   });
 
-  // Behavioural, not textual: actually evaluate each worker entry module against a global that
-  // looks like a browser main thread, and assert the page keeps its network APIs.
   await test('Importing a worker entry on the main thread leaves the page able to call its API', () => {
     const workerEntries = [
       'client/src/workers/mediaDecoderWorker.ts',
-      'client/src/workers/localAsrWorker.ts',
+      'client/src/workers/recoveryWorker.ts',
     ];
 
     for (const entry of workerEntries) {
@@ -1756,7 +1756,6 @@ async function run() {
     assert.strictEqual(assessment.criteriaScores.statutoryRightsIdentified, true);
   });
 
-
   // 12. Suite 12: Transcription stage
   console.log('\nSuite 12: UK Cloud Transcription (chunking, stitching, failure discipline)');
 
@@ -1961,6 +1960,116 @@ async function run() {
     assert.strictEqual(result.fullTranscript, '');
     assert.strictEqual(result.totalWords, 0);
     assert.strictEqual(result.segments.length, 0);
+  });
+
+  await test('chunkAudioBuffer accurately tiles contiguous Float32 PCM without sample loss or overlaps', () => {
+    const sampleRate = 16000;
+    // Create 120 seconds of audio data
+    const totalSeconds = 120;
+    const totalSamples = sampleRate * totalSeconds;
+    const pcmData = new Float32Array(totalSamples);
+
+    // Fill with test signal and inject quiet points around 48s and 98s
+    for (let i = 0; i < totalSamples; i++) {
+      const sec = i / sampleRate;
+      if ((sec >= 48 && sec <= 50) || (sec >= 96 && sec <= 98)) {
+        pcmData[i] = 0.0001 * Math.sin(2 * Math.PI * 440 * sec);
+      } else {
+        pcmData[i] = 0.5 * Math.sin(2 * Math.PI * 440 * sec);
+      }
+    }
+
+    const chunks = chunkAudioBuffer(pcmData, sampleRate, {
+      targetMaxDurationSec: 55,
+      minSearchDurationSec: 45,
+    });
+
+    assert(chunks.length >= 3, `Expected at least 3 chunks for 120s audio, got ${chunks.length}`);
+
+    // Invariant 1: First chunk starts at 0
+    assert.strictEqual(chunks[0].startSample, 0);
+    assert.strictEqual(chunks[0].startSec, 0);
+
+    // Invariant 2: Sample-accurate contiguous tiling with zero gap and zero overlap
+    for (let i = 0; i < chunks.length - 1; i++) {
+      assert.strictEqual(
+        chunks[i].endSample,
+        chunks[i + 1].startSample,
+        `Chunk ${i} end sample must equal chunk ${i + 1} start sample`
+      );
+      assert.strictEqual(
+        chunks[i].pcmData.length,
+        chunks[i].endSample - chunks[i].startSample,
+        `Chunk ${i} pcmData length must equal sample span`
+      );
+      assert(chunks[i].durationSec <= 55, `Chunk ${i} duration (${chunks[i].durationSec}s) must be <= 55s`);
+    }
+
+    // Invariant 3: Last chunk ends at totalSamples
+    const lastChunk = chunks[chunks.length - 1];
+    assert.strictEqual(lastChunk.endSample, totalSamples);
+    assert.strictEqual(lastChunk.endSec, totalSeconds);
+
+    // Invariant 4: Sum of all chunk sample lengths equals total original samples
+    const summedSamples = chunks.reduce((acc, c) => acc + c.pcmData.length, 0);
+    assert.strictEqual(summedSamples, totalSamples, 'All audio samples must be preserved exactly');
+  });
+
+  await test('logSecurityEvent normalizes event types and generates payloads strictly compliant with validateLogPayload', () => {
+    clearTelemetryBuffer();
+
+    logSecurityEvent({
+      type: 'case_note_generated',
+      userId: 'usr_adviser_42',
+      role: 'adviser',
+      sessionId: 'sess_pilot_101',
+      details: {
+        totalWords: 420,
+        noteWords: 180,
+        stageDurationMs: 2500,
+        totalSessionDurationMs: 145000,
+        audioDurationSeconds: 600,
+        promptVersion: '1.2.0',
+        modelDetails: 'gemini-1.5-pro-preview',
+      },
+    });
+
+    const buffer = getTelemetryBuffer();
+    assert.strictEqual(buffer.length, 1);
+    const event = buffer[0];
+
+    // Assert normalized uppercase snake_case event type
+    assert.strictEqual(event.eventType, 'CASE_NOTE_DRAFT_COMPLETED');
+    assert.strictEqual(event.pseudonymousUserId, 'usr_adviser_42');
+    assert.strictEqual(event.pseudonymousSessionId, 'sess_pilot_101');
+
+    // Assert schema validation passes cleanly without schema violation errors
+    const validated = validateLogPayload(event);
+    assert.strictEqual(validated.eventType, 'CASE_NOTE_DRAFT_COMPLETED');
+    assert.strictEqual(validated.wordCounts?.transcriptWords, 420);
+    assert.strictEqual(validated.wordCounts?.noteWords, 180);
+    assert.strictEqual(validated.stageDurationMs, 2500);
+  });
+
+  await test('CredentialIssuerService revokes credentials and records CREDENTIALS_REVOKED privacy audit', () => {
+    clearCapturedLogs();
+    const testUser = {
+      id: 'usr_adv_test_revoke',
+      email: 'adviser.revoke@cawandsworth.org.uk',
+      role: 'adviser',
+      name: 'Test Adviser Revoke',
+    };
+
+    const token = 'sts_ephemeral_token_xyz_123';
+    assert.strictEqual(CredentialIssuerService.isRevoked(token), false);
+
+    const revoked = CredentialIssuerService.revokeCredential(testUser, token);
+    assert.strictEqual(revoked, true);
+    assert.strictEqual(CredentialIssuerService.isRevoked(token), true);
+
+    const logs = getCapturedLogs();
+    const revokeLog = logs.find((l) => l.event === 'CREDENTIALS_REVOKED' && l.userId === testUser.id);
+    assert(revokeLog, 'CREDENTIALS_REVOKED log must be written to privacy logger');
   });
 
   console.log(`Results: ${passed} passed, ${failed} failed.`);

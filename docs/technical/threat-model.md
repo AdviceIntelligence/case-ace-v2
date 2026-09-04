@@ -13,20 +13,19 @@
 ## 1. System Scope & Threat Modeling Architecture
 
 Case Ace v2.0 processes highly confidential consultation audio and Special Category personal data. This Threat Model evaluates potential vulnerabilities across all six STRIDE categories across five distinct trust domains:
-1. **TD1: Local User Browser Sandbox** (Microphone, WebRTC SRTP, Local Whisper WASM, React UI).
+1. **TD1: Local User Browser Sandbox** (Microphone, React UI, Volatile RAM Buffer, Multi-Layer NER Engine, Review Gate).
 2. **TD2: Browser Memory & OS Boundary** (JavaScript Heap, OS Swap / Hibernation, Clipboard).
-3. **TD3: Network Transit Boundary** (TLS 1.3 Transport, Webex Cloud, Google Cloud APIs).
-4. **TD4: London Sovereign Cloud Sub-Processors** (Google Cloud STT v2 & Vertex AI Gemini 1.5 in `europe-west2`).
+3. **TD3: Network Transit Boundary** (TLS 1.3 Transport to sovereign Google Cloud London APIs).
+4. **TD4: London Sovereign Cloud Sub-Processors** (Google Cloud STT v2 & Vertex AI Gemini in `europe-west2` with `enableDataLogging: false`).
 5. **TD5: Backend API & Telemetry Store** (Express Server, SQLite Audit Log Store).
 
 ```mermaid
 flowchart TD
     subgraph TD1["TD1: Local Adviser Browser Sandbox"]
-        MIC["Microphone / Webex Stream"] --> RAM["Volatile RAM Buffer"]
-        RAM --> WASM["Local Whisper WASM (Pass 1)"]
-        WASM --> NER["Multi-Layer NER Engine"]
-        NER --> GATE["Phase 9 Review Gate"]
-        GATE --> MUTE["Phase 10 Acoustic Muting"]
+        MIC["Microphone / File Import"] --> RAM["Volatile RAM Buffer (<55s chunks)"]
+        RAM --> STT["Google Cloud STT v2 (London, europe-west2)"]
+        STT --> NER["Multi-Layer NER Engine"]
+        NER --> GATE["Adviser Review Gate (Check Hidden Details)"]
     end
 
     subgraph TD2["TD2: OS / Memory Boundary"]
@@ -35,8 +34,8 @@ flowchart TD
     end
 
     subgraph TD3["TD3: Network Transit (TLS 1.3)"]
-        MUTE -->|Redacted WAV| STT["Google Cloud STT v2 (London)"]
-        GATE -->|Surrogate Tokens| LLM["Vertex AI Gemini 1.5 (London)"]
+        RAM -->|Chunked WAV in RAM| STT
+        GATE -->|Surrogate Tokens Only| LLM["Vertex AI Gemini 1.5 (London)"]
     end
 
     subgraph TD5["TD5: Backend & Telemetry"]

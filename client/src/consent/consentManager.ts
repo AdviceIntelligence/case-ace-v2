@@ -116,13 +116,13 @@ export class ConsentManager {
     switch (route) {
       case 'live_in_person':
         return {
-          title: 'Face-to-Face Consultation Consent Gate',
+          title: 'Live In-Person / Face-to-Face Consultation Consent Gate',
           adviserInstructions:
             'Before starting recording, explain the following points to the client in terms they understand:',
           clientInformationPoints: [
             'This consultation is being recorded using an AI assistant solely to produce an accurate case note for your file.',
-            'The recording is processed in temporary computer memory and is permanently destroyed when this advice session ends.',
-            'Your raw voice recording never leaves this computer.',
+            'The recording is processed in temporary computer memory and is permanently destroyed at the end of the session.',
+            'Your raw audio never leaves this computer.',
             'You may decline to be recorded, or withdraw consent at any time during the interview, without any effect whatsoever on the advice you receive.',
           ],
           affirmationStatement:
@@ -131,9 +131,9 @@ export class ConsentManager {
 
       case 'webex_telephony':
         return {
-          title: 'Telephone Call (Webex) Consent Gate',
+          title: 'Cisco Webex / Telephone Call Consent Gate',
           adviserInstructions:
-            'At the start of the telephone call, inform the client before initiating recording. The record button remains disabled until confirmed:',
+            'At the start of the call, inform the client before initiating recording. The record button remains disabled until confirmed:',
           clientInformationPoints: [
             'Advise the client that you wish to record the call to draft their case note.',
             'Inform them that the audio is held only in temporary workstation memory and destroyed when the session ends.',
@@ -155,9 +155,59 @@ export class ConsentManager {
             'Understand that original recordings on your local device remain your professional responsibility under CAW SOP-REC-01.',
           ],
           affirmationStatement:
-            'I professionally attest that valid client consent was affirmatively obtained at the time of the original consultation, and all provenance attributes selected below are accurate.',
+            'I provide this formal professional attestation that valid client consent was affirmatively obtained at the time of the original consultation, and all provenance attributes selected below are accurate.',
         };
     }
+  }
+
+  /**
+   * Creates an in-memory consent record and strictly prevents client PII.
+   */
+  public createConsentRecord(params: {
+    route: IntakeRoute;
+    adviserId: string;
+    originalAppointmentDate?: string;
+    importConsentMeans?: string;
+    sourceEquipment?: SourceEquipment;
+    partyCoverage?: CapturePartyCoverage;
+    [key: string]: unknown;
+  }): ConsentRecord {
+    for (const key of Object.keys(params)) {
+      const lower = key.toLowerCase();
+      if (ConsentManager.FORBIDDEN_CLIENT_PII_KEYS.includes(lower)) {
+        throw new ConsentPrivacyViolationError(
+          `[PRIVACY INVARIANT VIOLATION] Consent record contains forbidden client identifier key: '${key}'. Client PII belongs in Casebook, never in Case Ace.`
+        );
+      }
+    }
+
+    if (!params.adviserId || params.adviserId.trim() === '') {
+      throw new Error('[ConsentGate] Adviser ID is mandatory.');
+    }
+
+    if (params.route === 'file_import') {
+      if (!params.originalAppointmentDate) {
+        throw new Error('Original appointment date is required for file import.');
+      }
+      if (!params.importConsentMeans) {
+        throw new Error('Means of consent is required for file import.');
+      }
+    }
+
+    const consentId = `cst_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    const consentedAt = new Date().toISOString();
+
+    const record: ConsentRecord = {
+      consentId,
+      consentedAt,
+      route: params.route,
+      adviserId: params.adviserId,
+      confirmedByAdviser: true,
+      originalAppointmentDate: params.originalAppointmentDate,
+      importConsentMeans: params.importConsentMeans as ConsentAttestationMeans,
+    };
+
+    return record;
   }
 
   /**

@@ -42,9 +42,14 @@ export interface AudioChunk {
   startSeconds: number;
   endSeconds: number;
   durationSeconds: number;
+  chunkIndex?: number;
+  startSec?: number;
+  endSec?: number;
+  durationSec?: number;
+  pcmData?: Float32Array | Int16Array;
 }
 
-function rmsOver(pcm: Float32Array, start: number, length: number): number {
+function rmsOver(pcm: Float32Array | Int16Array, start: number, length: number): number {
   const end = Math.min(pcm.length, start + length);
   if (end <= start) return 0;
   let sumSquares = 0;
@@ -59,7 +64,7 @@ function rmsOver(pcm: Float32Array, start: number, length: number): number {
  * Returns searchEnd when the range is too small to search, which still yields a valid chunk.
  */
 export function findQuietestCutPoint(
-  pcm: Float32Array,
+  pcm: Float32Array | Int16Array,
   searchStart: number,
   searchEnd: number,
   sampleRate: number,
@@ -143,4 +148,27 @@ export function planTranscriptionChunks(
 /** Copies one planned chunk out of the recording, ready for encoding. */
 export function sliceChunk(pcm: Float32Array, chunk: AudioChunk): Float32Array {
   return pcm.slice(chunk.startSample, chunk.endSample);
+}
+
+/**
+ * Splits in-memory audio into chunks with attached pcmData (convenience helper).
+ */
+export function chunkAudioBuffer(
+  pcm: Float32Array,
+  sampleRate: number,
+  options: { targetMaxDurationSec?: number; minSearchDurationSec?: number } = {}
+): AudioChunk[] {
+  const planned = planTranscriptionChunks(pcm, sampleRate, {
+    maxChunkSeconds: options.targetMaxDurationSec,
+    minChunkSeconds: options.minSearchDurationSec,
+  });
+
+  return planned.map((chunk) => ({
+    ...chunk,
+    chunkIndex: chunk.index,
+    startSec: chunk.startSeconds,
+    endSec: chunk.endSeconds,
+    durationSec: chunk.durationSeconds,
+    pcmData: sliceChunk(pcm, chunk),
+  }));
 }

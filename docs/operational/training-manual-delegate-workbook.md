@@ -27,10 +27,10 @@ flowchart LR
 
 ### Course Learning Objectives
 By the end of this 3.5-hour workshop, delegates will be able to:
-1. Explain the **privacy-preserving architecture** of Case Ace (local Whisper transcription, in-memory WASM redaction, Google Cloud Vertex AI synthesis, and volatile RAM destruction) to clients in plain English.
-2. Understand that **Microsoft Entra ID is strictly limited to the login screen**, with all AI note drafting running securely on **Google Cloud Platform (gCloud) in London (`europe-west2`)**.
-3. Obtain, record, and respect **informed client consent** across Face-to-Face, Webex, and Outreach intake routes.
-4. Master the **Phase 9 Redaction Gate** by identifying missed personal identifiers and removing false positives.
+1. Explain the **privacy-preserving architecture** of Case Ace (sovereign London speech-to-text with no data logging, in-memory surrogate tokenisation, Google Cloud Vertex AI note drafting in London, and volatile RAM destruction) to clients in plain English.
+2. Understand that **Microsoft Entra ID is strictly limited to the login screen**, with all AI note drafting running securely on **Google Cloud Platform in London (`europe-west2`)**.
+3. Obtain, record, and respect **informed client consent** across Face-to-Face and Outreach intake routes.
+4. Master the **Adviser Review Gate** ("Check hidden details") by verifying detected personal identifiers and checking low-confidence audio spans.
 5. Overcome **automation bias** and rigorously critique AI-generated drafts against the **Advice Quality Standard (AQS Level 3)**.
 6. Identify and resolve **Unverified Information Gaps** using the interactive audio cross-referencing tool.
 7. Execute the mandatory **5-minute physical deletion protocol** for external recording devices.
@@ -70,8 +70,8 @@ Case Ace v2.0 was engineered specifically to eliminate cloud privacy risks:
 | CASE ACE v2.0 PRIVACY FIREWALL                                                                     |
 +----------------------------------------------------------------------------------------------------+
 | 1. AUDIO RECORDING    --> Captured strictly in volatile laptop RAM (No disk save)                  |
-| 2. LOCAL TRANSCRIPTION--> Whisper.cpp runs locally in browser (Zero cloud audio transfer)          |
-| 3. WASM REDACTION     --> Names, NINOs, addresses converted to tokens [NAME_1], [NINO_1] in RAM    |
+| 2. SOVEREIGN STT v2   --> London (europe-west2) STT with enableDataLogging: false & in-memory chunk|
+| 3. IN-MEMORY TOKENS   --> Names, NINOs, addresses converted to tokens [NAME_1], [NINO_1] in RAM    |
 | 4. ENCRYPTED NOTE GEN --> Only de-identified text sent to Google Cloud Vertex AI (europe-west2)   |
 | 5. ZERO MS TRAVERSAL  --> Microsoft Entra ID is for SSO login only; no case data touches Microsoft|
 | 6. SESSION WIPE       --> destroySession() zeroes RAM, frees memory, and clears clipboard          |

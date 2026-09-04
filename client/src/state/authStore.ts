@@ -44,6 +44,14 @@ class VolatileAuthStore {
     return { ...this.state };
   }
 
+  public getAccessToken(): string | null {
+    return this.state.accessToken;
+  }
+
+  public getRefreshToken(): string | null {
+    return this.state.refreshToken;
+  }
+
   public subscribe(listener: AuthListener): () => void {
     this.listeners.add(listener);
     listener(this.getState());

@@ -81,22 +81,24 @@ To ensure Case Ace v2.0 advances equality and prevents adverse service delivery 
 
 ```mermaid
 flowchart TD
-    A["Diverse Speech Input (Impairment / Accent / Interpreter)"] --> B["Dual-Pass Hybrid ASR Engine (Whisper WASM + Chirp 2)"]
-    B --> C["Acoustic Confidence Highlighting (Amber Flagging)"]
-    C --> D["Integrated Audio Scrubber (5s Variable Speed Replay)"]
-    D --> E["Phase 9 Review Gate (Mandatory Human Grounding)"]
+    A["Diverse Speech Input (Impairment / Accent / Interpreter)"] --> B["Cloud STT v2 with Advice Sector Phrase Adaptation"]
+    C["Acoustic Confidence Highlighting ('Unclear audio' / 'Worth a listen')"]
+    B --> C
+    C --> D["Integrated Audio Scrubber (Variable Speed Replay)"]
+    D --> E["Adviser Review Gate (Mandatory Human Grounding)"]
     E --> F["Reasonable Adjustment Exemption (Seamless Fallback to Manual)"]
     F --> G["Quarterly Disparity Auditing (10% Sample Disaggregated by Profile)"]
 ```
 
-### 1. Dual-Pass Hybrid ASR Engine (Phase 8 & 10)
-* Instead of relying on a single speech recognition model, Case Ace combines:
-  - **Local Whisper WASM (`whisper-base-en-v3`)**: Exceptionally robust to multi-lingual accents and non-standard syntax.
-  - **Google Cloud Speech-to-Text v2 (`chirp_2` / `latest_long`)**: State-of-the-art foundation acoustic model trained on diverse global speech datasets.
-* This hybrid architecture reduces the error disparity between standard RP and international accents from 9.2 percentage points down to 1.7 percentage points.
+### 1. Sovereign Cloud Speech-to-Text v2 with Phrase Adaptation
+* Case Ace utilizes **Google Cloud Speech-to-Text v2 (`chirp_2` / `latest_long` in `europe-west2` London)** with domain phrase set adaptation:
+  - Pinned sovereign UK deployment in London with `enableDataLogging: false`.
+  - Tuned with a comprehensive Advice Sector phrase adaptation set (covering UK benefits, tribunal terminology, DWP abbreviations, housing law, and immigration terms).
+  - State-of-the-art foundation acoustic model trained on diverse global and regional UK speech datasets.
+* This architecture minimizes the error disparity between standard RP and diverse regional/international accents.
 
-### 2. Acoustic Confidence Highlighting
-* Words with an acoustic confidence score below $0.80$ are visually flagged with an amber underline in both the transcript and the draft note.
+### 2. Acoustic Confidence Highlighting ("Unclear audio" / "Worth a listen")
+* Words with an acoustic confidence score below $0.70$ are visually flagged in the review gate.
 * This directs the adviser’s immediate focus to phonetic edge cases without requiring them to read every line with equal suspicion.
 
 ### 3. Integrated Audio Scrubber Toolbar

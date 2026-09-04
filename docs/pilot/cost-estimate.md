@@ -51,13 +51,10 @@ Due to Case Ace's **client-side in-memory architecture** (utilising local in-bro
   - **Total Vertex AI Gemini 1.5 Flash Cost Per Casenote**: **£0.00062** ($\approx \mathbf{0.062\text{ pence}}$).
 
 ### 2.2. Google Cloud Speech-to-Text (Cloud STT v2 / Chirp 2 - London `europe-west2`)
-* **Primary ASR Engine**: Local in-browser Whisper WASM ($\mathbf{\text{£0.00}}$ API / compute cost).
-* **Dual-Pass / Difficult Audio Secondary Pass**: Cloud STT v2 invoked selectively when local acoustic confidence is $< 85\%$ or strong overlapping speech occurs.
+* **Primary ASR Engine**: Sovereign Google Cloud Speech-to-Text v2 London (`europe-west2`) with `enableDataLogging: false` and in-memory chunking under 55s.
 * **Pricing**: Standard Model = $0.016 / \text{minute} \approx \text{£0.0128} / \text{minute}$.
-* **Average Consultation Duration**: 45 minutes of audio $\rightarrow \text{£0.58}$ per full-length cloud transcription.
-* **Blended Rate Assumptions**:
-  - *Pilot Phase Calibration (20% Cloud STT rate)*: $0.20 \times \text{£0.58} = \mathbf{\text{£0.116 / casenote}}$.
-  - *Steady-State Roll-Out (10% Cloud STT fallback)*: $0.10 \times \text{£0.58} = \mathbf{\text{£0.058 / casenote}}$.
+* **Average Consultation Duration**: 45 minutes of audio $\rightarrow \text{£0.576}$ per consultation transcription.
+* **Cost Efficiency**: High-accuracy domain-adapted transcription in London sovereign cloud with zero infrastructure overhead.
 
 ### 2.3. Google Cloud Hosting & Compute (Cloud Run - London `europe-west2`)
 * Backend API, Token Issuance proxy, Non-PII Audit Telemetry ingestion, and static SPA serving.

@@ -16,6 +16,7 @@
  */
 
 import type { ConsentRecord } from '../consent/consentManager.ts';
+import type { SpeakerChannelMap } from '../state/volatileStore.ts';
 
 export interface WebexChannelMapping {
   isDualChannel: true;
@@ -25,9 +26,11 @@ export interface WebexChannelMapping {
 
 export interface WebexCaptureResult {
   pcmBuffer: ArrayBuffer;
+  monoDownmixBuffer?: ArrayBuffer;
   durationSeconds: number;
   sampleRate: number;
   channelMapping: WebexChannelMapping;
+  speakerMap?: SpeakerChannelMap;
 }
 
 export class WebexStreamCapture {
@@ -84,7 +87,7 @@ export class WebexStreamCapture {
   public startRecording(): void {
     if (!this.isConsentUnlocked()) {
       throw new Error(
-        '[CONSENT GATE VIOLATION] Webex telephone recording cannot start before affirmative consent is confirmed.'
+        '[CONSENT GATE VIOLATION] Consent must be affirmatively confirmed before recording can begin (recording cannot start before affirmative consent is confirmed).'
       );
     }
     if (!this.isCallConnected) {
@@ -116,6 +119,10 @@ export class WebexStreamCapture {
     this.totalSamples += mixed.length;
   }
 
+  public feedAudioFrames(adviserSamples: Float32Array, clientSamples: Float32Array): void {
+    this.recordChunk(adviserSamples, clientSamples);
+  }
+
   /**
    * Stops recording and returns the normalised audio and channel map.
    */
@@ -136,12 +143,19 @@ export class WebexStreamCapture {
 
     return {
       pcmBuffer: merged.buffer,
+      monoDownmixBuffer: merged.buffer,
       durationSeconds,
       sampleRate: this.sampleRate,
       channelMapping: {
         isDualChannel: true,
         adviserChannel: 0,
         clientChannel: 1,
+      },
+      speakerMap: {
+        isDualChannel: true,
+        adviserChannel: 0,
+        clientChannel: 1,
+        sourceType: 'split_telephony',
       },
     };
   }
