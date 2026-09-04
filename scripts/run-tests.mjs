@@ -38,6 +38,8 @@ import { validateLogPayload, LogSchemaValidationError } from '../backend/src/log
 import { auditLogStore, AuditLogStore } from '../backend/src/logging/logStore.ts';
 import { SYNTHETIC_CORPUS } from '../test/corpus/syntheticAdviceCorpus.ts';
 import { testingEngine } from '../test/testingEngine.ts';
+import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
+import { ENVIRONMENTS } from '../client/src/config/environments.ts';
 
 const rootDir = process.cwd();
 console.log('Running Case Ace v2.0 Test Suite...\n');
@@ -63,42 +65,136 @@ async function run() {
   const htmlContent = fs.readFileSync(path.join(rootDir, 'client/index.html'), 'utf8');
   const viteConfigContent = fs.readFileSync(path.join(rootDir, 'client/vite.config.ts'), 'utf8');
   const nginxConfigContent = fs.readFileSync(path.join(rootDir, 'infrastructure/docker/nginx.conf'), 'utf8');
+  const firebaseConfig = JSON.parse(fs.readFileSync(path.join(rootDir, 'firebase.json'), 'utf8'));
   const cspDocContent = fs.readFileSync(path.join(rootDir, 'docs/csp.md'), 'utf8');
 
-  await test('enforces default-src none across client, vite, and nginx', () => {
-    assert(htmlContent.includes("default-src 'none'"));
-    assert(viteConfigContent.includes("default-src 'none'"));
+  const ENV_NAMES = Object.keys(ENVIRONMENTS);
+  const ALL_POLICIES = ENV_NAMES.flatMap((name) => [
+    { label: `${name} header`, policy: cspHeader(name) },
+    { label: `${name} meta`, policy: cspMeta(name) },
+  ]);
+
+  const connectSrcOf = (policy) => {
+    const match = /connect-src ([^;]*)/.exec(policy);
+    assert(match, `No connect-src directive in: ${policy}`);
+    return match[1].trim().split(/\s+/);
+  };
+
+  await test('enforces default-src none in every generated policy and in nginx', () => {
+    for (const { label, policy } of ALL_POLICIES) {
+      assert(policy.includes("default-src 'none'"), `${label} lacks default-src 'none'`);
+    }
     assert(nginxConfigContent.includes("default-src 'none'"));
   });
 
   await test('strictly forbids unsafe-inline across all directives', () => {
+    for (const { label, policy } of ALL_POLICIES) {
+      assert(!policy.includes("'unsafe-inline'"), `${label} permits unsafe-inline`);
+    }
     assert(!htmlContent.includes("'unsafe-inline'"));
-    assert(!viteConfigContent.includes("'unsafe-inline'"));
     assert(!nginxConfigContent.includes("'unsafe-inline'"));
   });
 
   await test('strictly forbids general unsafe-eval', () => {
-    assert(!/script-src[^;]*'unsafe-eval'/.test(htmlContent));
-    assert(!/script-src[^;]*'unsafe-eval'/.test(viteConfigContent));
-    assert(!/script-src[^;]*'unsafe-eval'/.test(nginxConfigContent));
+    for (const { label, policy } of ALL_POLICIES) {
+      assert(!/script-src[^;]*(^|[^-])'unsafe-eval'/.test(policy), `${label} permits unsafe-eval`);
+    }
+    assert(!/script-src[^;]*(^|[^-])'unsafe-eval'/.test(nginxConfigContent));
   });
 
   await test('scopes wasm-unsafe-eval for in-browser local ASR/NER and justifies in docs', () => {
-    assert(htmlContent.includes("'wasm-unsafe-eval'"));
+    for (const { label, policy } of ALL_POLICIES) {
+      assert(policy.includes("'wasm-unsafe-eval'"), `${label} lacks wasm-unsafe-eval`);
+    }
     assert(cspDocContent.includes("'wasm-unsafe-eval'"));
   });
 
-  await test('blocks framing and form submission (frame-ancestors none, form-action none)', () => {
-    assert(htmlContent.includes("frame-ancestors 'none'"));
-    assert(htmlContent.includes("form-action 'none'"));
-    assert(htmlContent.includes("object-src 'none'"));
+  await test('blocks framing, form submission and plugins', () => {
+    for (const { label, policy } of ALL_POLICIES) {
+      assert(policy.includes("form-action 'none'"), `${label} lacks form-action 'none'`);
+      assert(policy.includes("object-src 'none'"), `${label} lacks object-src 'none'`);
+      assert(policy.includes("base-uri 'self'"), `${label} lacks base-uri 'self'`);
+    }
+    for (const name of ENV_NAMES) {
+      assert(cspHeader(name).includes("frame-ancestors 'none'"), `${name} header lacks frame-ancestors`);
+      // frame-ancestors is ignored when delivered in a meta tag; emitting it only produces a
+      // console warning that trains readers to ignore CSP warnings.
+      assert(!cspMeta(name).includes('frame-ancestors'), `${name} meta should omit frame-ancestors`);
+    }
     assert(nginxConfigContent.includes("frame-ancestors 'none'"));
   });
 
   await test('restricts connect-src without wildcards', () => {
-    assert(!htmlContent.includes('connect-src *'));
-    assert(!viteConfigContent.includes('connect-src *'));
+    for (const { label, policy } of ALL_POLICIES) {
+      assert(!connectSrcOf(policy).includes('*'), `${label} has a wildcard connect-src`);
+      assert(!policy.includes('connect-src *'), `${label} has a wildcard connect-src`);
+    }
     assert(!nginxConfigContent.includes('connect-src *'));
+  });
+
+  // The pilot SPA is served from caseace.adviceintelligence.tech and calls
+  // api.caseace.adviceintelligence.tech. A policy that omits the API origin blocks every
+  // backend call before it leaves the page, including login, while the site still loads
+  // normally. That is what shipped, because index.html carried a hand-written localhost
+  // policy alongside a correct HTTP header, and a browser enforces the intersection.
+  await test('every environment may reach its own configured API origin', () => {
+    for (const name of ENV_NAMES) {
+      const origin = new URL(ENVIRONMENTS[name].apiBaseUrl).origin;
+      for (const policy of [cspHeader(name), cspMeta(name)]) {
+        assert(
+          connectSrcOf(policy).includes(origin),
+          `${name}: connect-src does not permit its own apiBaseUrl origin ${origin}`,
+        );
+      }
+    }
+  });
+
+  await test('no deployed environment permits a localhost connection', () => {
+    for (const name of ENV_NAMES.filter((n) => n !== 'local')) {
+      for (const policy of [cspHeader(name), cspMeta(name)]) {
+        assert(!/localhost|127\.0\.0\.1/.test(policy), `${name} policy permits localhost: ${policy}`);
+      }
+    }
+  });
+
+  await test('index.html defers its policy to the build rather than hard-coding one', () => {
+    assert(
+      htmlContent.includes(CSP_PLACEHOLDER),
+      'index.html must contain the CSP placeholder so the build can inject the right policy',
+    );
+    assert(!/localhost/.test(htmlContent), 'index.html must not hard-code a localhost origin');
+    assert(
+      !/content="default-src/.test(htmlContent),
+      'index.html must not hard-code a Content Security Policy',
+    );
+  });
+
+  await test('vite config derives its policy rather than restating one', () => {
+    assert(viteConfigContent.includes('cspHeader('), 'vite.config.ts should call cspHeader()');
+    assert(
+      !/content-security-policy'?\s*:\s*"default-src/i.test(viteConfigContent),
+      'vite.config.ts must not restate a literal policy',
+    );
+  });
+
+  await test('the Firebase Hosting header matches the generated pilot policy exactly', () => {
+    const appTarget = firebaseConfig.hosting.find((h) => h.target === 'app');
+    assert(appTarget, 'firebase.json has no "app" hosting target');
+    const headers = appTarget.headers.flatMap((entry) => entry.headers);
+    const csp = headers.find((h) => h.key === 'Content-Security-Policy');
+    assert(csp, 'firebase.json sets no Content-Security-Policy header');
+    assert.strictEqual(
+      csp.value,
+      cspHeader('pilot'),
+      'firebase.json CSP has drifted from client/src/config/csp.ts',
+    );
+  });
+
+  await test('the nginx image serves the generated pilot policy', () => {
+    assert(
+      nginxConfigContent.includes(cspHeader('pilot')),
+      'infrastructure/docker/nginx.conf CSP has drifted from client/src/config/csp.ts',
+    );
   });
 
   // 2. Dependency Supply Chain Tests

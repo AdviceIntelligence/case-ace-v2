@@ -1,61 +1,101 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
+import { ENVIRONMENTS, type EnvironmentName } from '../client/src/config/environments.ts';
 
+/**
+ * The policy is generated from environments.ts, so these tests assert the generated strings
+ * rather than searching configuration files for substrings. The defect that motivated the
+ * rewrite was invisible to a substring search: index.html and the Firebase Hosting header
+ * each contained a valid-looking policy, but the browser enforces every policy it is given,
+ * and the intersection of the two forbade the SPA from calling its own API.
+ */
 describe('Content Security Policy Enforcement & Hardening', () => {
   const rootDir = process.cwd();
-  const htmlPath = path.join(rootDir, 'client/index.html');
-  const viteConfigPath = path.join(rootDir, 'client/vite.config.ts');
-  const nginxConfigPath = path.join(rootDir, 'infrastructure/docker/nginx.conf');
-  const cspDocPath = path.join(rootDir, 'docs/csp.md');
+  const read = (p: string) => fs.readFileSync(path.join(rootDir, p), 'utf8');
 
-  const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-  const viteConfigContent = fs.readFileSync(viteConfigPath, 'utf8');
-  const nginxConfigContent = fs.readFileSync(nginxConfigPath, 'utf8');
-  const cspDocContent = fs.readFileSync(cspDocPath, 'utf8');
+  const htmlContent = read('client/index.html');
+  const viteConfigContent = read('client/vite.config.ts');
+  const nginxConfigContent = read('infrastructure/docker/nginx.conf');
+  const cspDocContent = read('docs/csp.md');
+  const firebaseConfig = JSON.parse(read('firebase.json'));
 
-  it('enforces default-src none in all configurations', () => {
-    expect(htmlContent).toContain("default-src 'none'");
-    expect(viteConfigContent).toContain("default-src 'none'");
-    expect(nginxConfigContent).toContain("default-src 'none'");
+  const envNames = Object.keys(ENVIRONMENTS) as EnvironmentName[];
+  const policies = envNames.flatMap((name) => [
+    [`${name} header`, cspHeader(name)] as const,
+    [`${name} meta`, cspMeta(name)] as const,
+  ]);
+
+  const connectSrc = (policy: string): string[] => {
+    const match = /connect-src ([^;]*)/.exec(policy);
+    expect(match, `no connect-src in ${policy}`).not.toBeNull();
+    return match![1].trim().split(/\s+/);
+  };
+
+  it.each(policies)('%s denies everything by default', (_label, policy) => {
+    expect(policy).toContain("default-src 'none'");
+    expect(policy).toContain("object-src 'none'");
+    expect(policy).toContain("form-action 'none'");
+    expect(policy).toContain("base-uri 'self'");
   });
 
-  it('strictly forbids unsafe-inline across all directives', () => {
-    expect(htmlContent).not.toContain("'unsafe-inline'");
-    expect(viteConfigContent).not.toContain("'unsafe-inline'");
-    expect(nginxConfigContent).not.toContain("'unsafe-inline'");
+  it.each(policies)('%s forbids unsafe-inline and general unsafe-eval', (_label, policy) => {
+    expect(policy).not.toContain("'unsafe-inline'");
+    expect(policy).not.toMatch(/script-src[^;]*(^|[^-])'unsafe-eval'/);
+    expect(policy).toContain("'wasm-unsafe-eval'");
   });
 
-  it('strictly forbids general unsafe-eval', () => {
-    // Only 'wasm-unsafe-eval' is permitted and justified for local WASM runtime
-    expect(htmlContent).not.toMatch(/script-src[^;]*'unsafe-eval'/);
-    expect(viteConfigContent).not.toMatch(/script-src[^;]*'unsafe-eval'/);
-    expect(nginxConfigContent).not.toMatch(/script-src[^;]*'unsafe-eval'/);
+  it.each(policies)('%s has no wildcard connect-src', (_label, policy) => {
+    expect(connectSrc(policy)).not.toContain('*');
   });
 
-  it('allows wasm-unsafe-eval for in-browser local ASR/NER and justifies it in docs', () => {
-    expect(htmlContent).toContain("'wasm-unsafe-eval'");
+  it('justifies wasm-unsafe-eval in the CSP documentation', () => {
     expect(cspDocContent).toContain("'wasm-unsafe-eval'");
   });
 
-  it('blocks framing and form submission (frame-ancestors none, form-action none)', () => {
-    expect(htmlContent).toContain("frame-ancestors 'none'");
-    expect(htmlContent).toContain("form-action 'none'");
-    expect(htmlContent).toContain("object-src 'none'");
-    expect(nginxConfigContent).toContain("frame-ancestors 'none'");
+  it.each(envNames)('%s blocks framing in the header and omits it from the meta tag', (name) => {
+    expect(cspHeader(name)).toContain("frame-ancestors 'none'");
+    expect(cspMeta(name)).not.toContain('frame-ancestors');
   });
 
-  it('restricts connect-src without wildcards', () => {
-    expect(htmlContent).not.toContain('connect-src *');
-    expect(viteConfigContent).not.toContain('connect-src *');
-    expect(nginxConfigContent).not.toContain('connect-src *');
+  it.each(envNames)('%s may reach its own configured API origin', (name) => {
+    const origin = new URL(ENVIRONMENTS[name].apiBaseUrl).origin;
+    expect(connectSrc(cspHeader(name))).toContain(origin);
+    expect(connectSrc(cspMeta(name))).toContain(origin);
+  });
+
+  it.each(envNames.filter((n) => n !== 'local'))('%s permits no localhost origin', (name) => {
+    expect(cspHeader(name)).not.toMatch(/localhost|127\.0\.0\.1/);
+    expect(cspMeta(name)).not.toMatch(/localhost|127\.0\.0\.1/);
+  });
+
+  it('leaves index.html without a hard-coded policy', () => {
+    expect(htmlContent).toContain(CSP_PLACEHOLDER);
+    expect(htmlContent).not.toMatch(/localhost/);
+    expect(htmlContent).not.toMatch(/content="default-src/);
+  });
+
+  it('has the vite config derive its policy rather than restate one', () => {
+    expect(viteConfigContent).toContain('cspHeader(');
+    expect(viteConfigContent).not.toMatch(/content-security-policy'?\s*:\s*"default-src/i);
+  });
+
+  it('keeps the Firebase Hosting header identical to the generated pilot policy', () => {
+    const appTarget = firebaseConfig.hosting.find((h: any) => h.target === 'app');
+    const header = appTarget.headers
+      .flatMap((entry: any) => entry.headers)
+      .find((h: any) => h.key === 'Content-Security-Policy');
+    expect(header?.value).toBe(cspHeader('pilot'));
+  });
+
+  it('keeps the nginx image serving the generated pilot policy', () => {
+    expect(nginxConfigContent).toContain(cspHeader('pilot'));
   });
 
   it('forbids third-party font CDNs and external analytics', () => {
-    const forbiddenDomains = ['fonts.googleapis.com', 'fonts.gstatic.com', 'google-analytics.com', 'sentry.io'];
-    for (const domain of forbiddenDomains) {
-      expect(htmlContent).not.toContain(domain);
-      expect(viteConfigContent).not.toContain(domain);
+    for (const domain of ['fonts.googleapis.com', 'fonts.gstatic.com', 'google-analytics.com', 'sentry.io']) {
+      for (const [, policy] of policies) expect(policy).not.toContain(domain);
       expect(nginxConfigContent).not.toContain(domain);
     }
   });

@@ -55,3 +55,41 @@ X-Frame-Options: DENY
 Referrer-Policy: no-referrer
 Permissions-Policy: camera=(), geolocation=(), payment=(), usb=(), display-capture=(), microphone=(self)
 ```
+
+---
+
+## 5. Where the Policy Comes From
+
+The policy is generated, not hand-written. `client/src/config/csp.ts` composes it from the
+`cspConnectAllowlist` in `client/src/config/environments.ts`, so the origins the application
+believes it may contact and the origins the browser permits are the same list.
+
+| Delivery point | Source | Notes |
+| :--- | :--- | :--- |
+| `<meta http-equiv>` in `index.html` | `cspMeta(env)`, injected at build time by the `case-ace-csp` Vite plugin in place of the `__CSP_POLICY__` placeholder | Omits `frame-ancestors`, which a meta-delivered policy cannot express |
+| Vite dev and preview servers | `cspHeader(env)` | Same policy the deployed site receives |
+| Firebase Hosting (`firebase.json`) | Literal copy of `cspHeader('pilot')` | A test asserts byte equality; the build fails if they drift |
+| Container image (`infrastructure/docker/nginx.conf`) | Literal copy of `cspHeader('pilot')` | Same drift test |
+
+### 5.1 Why a second policy is dangerous
+
+A browser given more than one CSP enforces **all** of them, and the effective permission for
+each directive is the **intersection**. This is the failure that reached the deployed pilot:
+`index.html` carried a hand-written policy whose `connect-src` still named
+`http://localhost:8080`, while the Firebase Hosting header correctly named
+`https://api.caseace.adviceintelligence.tech`. The intersection was `'self'` alone. The site
+loaded and rendered normally, and every call to the backend, login included, was refused
+before it left the page.
+
+Two properties follow, and both are enforced by tests in `scripts/run-tests.mjs` (Suite 1)
+and `test/csp.test.ts`:
+
+* Every environment's `connect-src` must contain the origin of its own `apiBaseUrl`.
+* No environment other than `local` may name a `localhost` or `127.0.0.1` origin.
+
+### 5.2 Build-time environment is mandatory
+
+`vite build` refuses to run unless `VITE_APP_ENV` names a known environment. A build that
+falls back to `local` produces a bundle that points at `http://localhost:8080` behind a
+localhost CSP. It deploys cleanly, serves without error, and cannot reach the backend, which
+is the most expensive class of failure to diagnose from the outside.

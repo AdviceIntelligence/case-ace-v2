@@ -201,9 +201,10 @@ application, not by Cloud Run IAM.
 ### Step 3: Build and deploy the SPA
 
 ```bash
-# VITE_APP_ENV must be set. The environment resolver in client/src/config/environments.ts
-# fails closed to 'local', so a build without it produces an SPA that points at
-# http://localhost:8080 and silently does nothing useful in production.
+# VITE_APP_ENV must be set. `vite build` now refuses to run without it, because a build that
+# fell back to 'local' produced an SPA pointing at http://localhost:8080 behind a localhost
+# Content Security Policy: it deployed cleanly, served without error, and could not reach the
+# backend. The environment also selects the CSP baked into index.html (see docs/csp.md §5).
 VITE_APP_ENV=pilot npm run build
 
 firebase deploy --only hosting --project case-ace-v2
@@ -257,6 +258,18 @@ curl -s -I https://caseace.adviceintelligence.tech | \
 
 # Expected: HTTP/2 200, a CSP beginning default-src 'none', and an HSTS header.
 # "Site Not Found" means the custom domain is not yet connected to the case-ace-app site.
+
+# 2b. Effective Content Security Policy
+#
+# The browser enforces EVERY policy it is given and takes the intersection of them. The page
+# receives two: the Firebase Hosting header and the <meta http-equiv> tag inside index.html.
+# Both must name the API origin, or login fails with the site looking entirely healthy.
+curl -s https://caseace.adviceintelligence.tech | grep -o 'connect-src [^;]*'
+curl -sI https://caseace.adviceintelligence.tech | grep -io 'connect-src [^;]*'
+#
+# Expected: both list https://api.caseace.adviceintelligence.tech and neither mentions
+# localhost. If the meta tag still says http://localhost:8080, the SPA was built without
+# VITE_APP_ENV=pilot or from a revision predating the generated-CSP change.
 
 # 3. Ephemeral credential minting (requires a valid adviser session token)
 curl -s -X POST https://api.caseace.adviceintelligence.tech/api/v1/credentials/issue \
