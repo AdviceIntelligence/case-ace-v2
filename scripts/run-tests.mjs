@@ -41,6 +41,8 @@ import { SYNTHETIC_CORPUS } from '../test/corpus/syntheticAdviceCorpus.ts';
 import { testingEngine } from '../test/testingEngine.ts';
 import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
 import { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } from '../client/src/workers/workerSandbox.ts';
+import { planTranscriptionChunks, sliceChunk, MAX_CHUNK_SECONDS } from '../client/src/asr/audioChunker.ts';
+import { UkCloudTranscriber, TranscriptionFailedError } from '../client/src/asr/ukCloudTranscriber.ts';
 import { ENVIRONMENTS } from '../client/src/config/environments.ts';
 
 const rootDir = process.cwd();
@@ -1752,6 +1754,213 @@ async function run() {
     assert.strictEqual(assessment.criteriaScores.clearAdviceSummary, true);
     assert.strictEqual(assessment.criteriaScores.actionPlanAndDeadlines, true);
     assert.strictEqual(assessment.criteriaScores.statutoryRightsIdentified, true);
+  });
+
+
+  // 12. Suite 12: Transcription stage
+  console.log('\nSuite 12: UK Cloud Transcription (chunking, stitching, failure discipline)');
+
+  const SR = 16000;
+
+  /** Builds a recording of alternating loud speech and quiet gaps, in seconds. */
+  const buildAudio = (spans) => {
+    const total = spans.reduce((sum, s) => sum + s.seconds, 0);
+    const pcm = new Float32Array(Math.round(total * SR));
+    let cursor = 0;
+    for (const span of spans) {
+      const samples = Math.round(span.seconds * SR);
+      for (let i = 0; i < samples; i++) {
+        // Deterministic tone rather than random, so a failure is reproducible.
+        pcm[cursor + i] = span.loud ? Math.sin(i / 8) * 0.6 : 0;
+      }
+      cursor += samples;
+    }
+    return pcm;
+  };
+
+  await test('Chunks tile the recording exactly and never exceed the sync recognize limit', () => {
+    const pcm = buildAudio([{ seconds: 300, loud: true }]);
+    const chunks = planTranscriptionChunks(pcm, SR);
+
+    assert(chunks.length > 1, 'A five minute recording must be split');
+    assert.strictEqual(chunks[0].startSample, 0);
+    assert.strictEqual(chunks[chunks.length - 1].endSample, pcm.length);
+
+    for (let i = 0; i < chunks.length; i++) {
+      assert(
+        chunks[i].durationSeconds <= MAX_CHUNK_SECONDS + 1e-6,
+        `Chunk ${i} is ${chunks[i].durationSeconds}s, over the ${MAX_CHUNK_SECONDS}s limit`,
+      );
+      assert(chunks[i].endSample > chunks[i].startSample, `Chunk ${i} is empty`);
+      if (i > 0) {
+        assert.strictEqual(
+          chunks[i].startSample,
+          chunks[i - 1].endSample,
+          `Chunk ${i} does not begin where chunk ${i - 1} ended: audio is lost or duplicated`,
+        );
+      }
+    }
+
+    const covered = chunks.reduce((sum, c) => sum + (c.endSample - c.startSample), 0);
+    assert.strictEqual(covered, pcm.length, 'Chunks do not cover the whole recording');
+  });
+
+  await test('Chunk boundaries land in silence rather than mid-speech', () => {
+    // Speech, then a clear gap, then more speech. The cut must fall inside the gap.
+    const pcm = buildAudio([
+      { seconds: 40, loud: true },
+      { seconds: 4, loud: false },
+      { seconds: 40, loud: true },
+    ]);
+    const chunks = planTranscriptionChunks(pcm, SR);
+    assert.strictEqual(chunks.length, 2, `Expected 2 chunks, got ${chunks.length}`);
+
+    const cut = chunks[0].endSeconds;
+    assert(
+      cut >= 40 && cut <= 44,
+      `Cut at ${cut}s fell outside the 40s to 44s silence, so it interrupted speech`,
+    );
+  });
+
+  await test('Word timings are shifted into consultation time, not left relative to the chunk', async () => {
+    const pcm = buildAudio([
+      { seconds: 40, loud: true },
+      { seconds: 4, loud: false },
+      { seconds: 40, loud: true },
+    ]);
+
+    const seen = [];
+    const transcriber = new UkCloudTranscriber();
+    const result = await transcriber.transcribe(pcm, SR, {
+      recognizeChunk: async (wav, chunk) => {
+        seen.push(chunk.index);
+        assert(wav.byteLength > 44, 'Chunk was not encoded as WAV');
+        return {
+          results: [
+            {
+              alternatives: [
+                {
+                  transcript: 'rent arrears letter',
+                  words: [
+                    { word: 'rent', startOffset: '1.0s', endOffset: '1.4s', confidence: 0.95 },
+                    { word: 'arrears', startOffset: '1.4s', endOffset: '2.0s', confidence: 0.93 },
+                    { word: 'letter', startOffset: '2.0s', endOffset: '2.4s', confidence: 0.55 },
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+      },
+    });
+
+    assert.deepStrictEqual(seen, [0, 1], 'Both chunks should be transcribed, in order');
+    assert.strictEqual(result.segments.length, 2);
+
+    // First chunk starts at 0, so its first word stays at 1.0s.
+    assert.strictEqual(result.segments[0].words[0].start, 1);
+    // Second chunk starts around 42s, so the same word must land there, not back at 1.0s.
+    const secondStart = result.segments[1].words[0].start;
+    assert(
+      secondStart > 40,
+      `Second chunk's first word is at ${secondStart}s: the chunk offset was not applied`,
+    );
+    assert.strictEqual(
+      Math.round((secondStart - result.segments[1].start) * 10) / 10,
+      1,
+      'Offset word timing does not match the chunk start',
+    );
+
+    assert.strictEqual(result.totalWords, 6);
+    assert.strictEqual(result.lowConfidenceWordsCount, 2, 'Both 0.55 words should be flagged');
+    assert.strictEqual(result.provider, 'google_stt_v2');
+    assert.strictEqual(result.dataLoggingEnabled, false);
+    assert.strictEqual(result.region, 'europe-west2');
+  });
+
+  await test('Transcript contains only what the recogniser returned, never invented tokens', async () => {
+    // The stage this replaced fabricated words named token_1_1, token_1_2 and so on, from
+    // speech energy alone, while reporting high confidence. Nothing may reach the redaction
+    // review that the transcription service did not receive.
+    const pcm = buildAudio([{ seconds: 90, loud: true }]);
+    const spoken = ['universal', 'credit', 'sanction'];
+
+    const transcriber = new UkCloudTranscriber();
+    const result = await transcriber.transcribe(pcm, SR, {
+      recognizeChunk: async () => ({
+        results: [
+          {
+            alternatives: [
+              {
+                transcript: spoken.join(' '),
+                words: spoken.map((word, i) => ({
+                  word,
+                  startOffset: `${i}s`,
+                  endOffset: `${i + 1}s`,
+                  confidence: 0.9,
+                })),
+              },
+            ],
+          },
+        ],
+      }),
+    });
+
+    const produced = result.segments.flatMap((s) => s.words.map((w) => w.word));
+    for (const word of produced) {
+      assert(
+        spoken.includes(word),
+        `Transcript contains "${word}", which the recogniser never returned`,
+      );
+      assert(
+        !/^token_\d+_\d+$/.test(word),
+        `Transcript contains a fabricated placeholder token: ${word}`,
+      );
+    }
+    assert.strictEqual(produced.length % spoken.length, 0);
+  });
+
+  await test('A chunk that cannot be transcribed fails the consultation instead of leaving a gap', async () => {
+    const pcm = buildAudio([{ seconds: 130, loud: true }]);
+    let attempts = 0;
+
+    const transcriber = new UkCloudTranscriber();
+    await assert.rejects(
+      () =>
+        transcriber.transcribe(pcm, SR, {
+          recognizeChunk: async (_wav, chunk) => {
+            if (chunk.index === 1) {
+              attempts++;
+              throw new Error('simulated upstream failure');
+            }
+            return { results: [] };
+          },
+        }),
+      (err) => {
+        assert(err instanceof TranscriptionFailedError, `Wrong error type: ${err.name}`);
+        assert.strictEqual(err.chunkIndex, 1);
+        assert(
+          /has not been transcribed/.test(err.message),
+          'The error must say the consultation was not transcribed',
+        );
+        return true;
+      },
+      'A failed chunk must abort the whole transcription',
+    );
+
+    assert.strictEqual(attempts, 3, `Expected 3 attempts before giving up, got ${attempts}`);
+  });
+
+  await test('Silence produces an empty transcript rather than fabricated speech', async () => {
+    const pcm = buildAudio([{ seconds: 20, loud: false }]);
+    const transcriber = new UkCloudTranscriber();
+    const result = await transcriber.transcribe(pcm, SR, {
+      recognizeChunk: async () => ({ results: [] }),
+    });
+
+    assert.strictEqual(result.fullTranscript, '');
+    assert.strictEqual(result.totalWords, 0);
+    assert.strictEqual(result.segments.length, 0);
   });
 
   console.log(`Results: ${passed} passed, ${failed} failed.`);
