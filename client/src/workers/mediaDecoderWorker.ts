@@ -17,27 +17,15 @@
  * 5. Zero File Name Invariant: Operates purely on raw byte buffers without file names.
  */
 
-// Disable all network APIs inside the worker global context
-if (typeof self !== 'undefined') {
-  try {
-    delete (self as any).fetch;
-    delete (self as any).XMLHttpRequest;
-    delete (self as any).WebSocket;
-    delete (self as any).EventSource;
-  } catch {
-    // If delete is prohibited on properties, replace with throwing functions
-    (self as any).fetch = () => Promise.reject(new Error('[Worker Sandbox] Network access prohibited.'));
-    (self as any).XMLHttpRequest = function () {
-      throw new Error('[Worker Sandbox] Network access prohibited.');
-    };
-    (self as any).WebSocket = function () {
-      throw new Error('[Worker Sandbox] Network access prohibited.');
-    };
-    (self as any).EventSource = function () {
-      throw new Error('[Worker Sandbox] Network access prohibited.');
-    };
-  }
-}
+import { installWorkerNetworkSandbox, isWorkerScope } from './workerSandbox.ts';
+
+// Disable all network APIs inside the worker global context.
+//
+// This module is imported for its value exports by audio/mediaStreamingDecoder.ts, so it is
+// also evaluated on the main thread. The guard therefore has to distinguish a Worker global
+// from a window; `typeof self !== 'undefined'` does not, because self === window in a page.
+// See workerSandbox.ts.
+installWorkerNetworkSandbox();
 
 export type SupportedMediaFormat =
   | 'audio/wav'
@@ -270,8 +258,8 @@ export async function handleDecoderMessage(
   }
 }
 
-// Attach listener if running in actual Web Worker thread
-if (typeof self !== 'undefined' && typeof (self as any).postMessage === 'function' && typeof window === 'undefined') {
+// Attach listener if running in an actual Web Worker thread
+if (isWorkerScope() && typeof (self as any).postMessage === 'function') {
   self.onmessage = async (e: MessageEvent) => {
     await handleDecoderMessage(e.data, (msg, transfer) => {
       if (transfer) {

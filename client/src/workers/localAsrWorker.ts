@@ -15,21 +15,13 @@
 
 import type { AsrWord, AsrSegment, LocalAsrResult } from '../state/volatileStore.ts';
 import type { SpeakerChannelMap } from '../audio/audioNormalizer.ts';
+import { installWorkerNetworkSandbox, isWorkerScope } from './workerSandbox.ts';
 
-// 1. Sandbox worker: Disable network exfiltration APIs inside worker context
-try {
-  // @ts-ignore
-  if (typeof self !== 'undefined') {
-    // @ts-ignore
-    delete (self as any).fetch;
-    // @ts-ignore
-    delete (self as any).XMLHttpRequest;
-    // @ts-ignore
-    delete (self as any).WebSocket;
-    // @ts-ignore
-    delete (self as any).EventSource;
-  }
-} catch {}
+// 1. Sandbox worker: Disable network exfiltration APIs inside worker context.
+// This is a no-op unless the module is being evaluated inside a real Worker global scope.
+// See workerSandbox.ts: the previous `typeof self !== 'undefined'` guard is also true in a
+// browser window, where self === window.
+installWorkerNetworkSandbox();
 
 export interface WorkerAsrRequest {
   type: 'TRANSCRIBE';
@@ -309,7 +301,9 @@ async function processAsrInference(
 }
 
 // 2. Web Worker Message Handler
-if (typeof self !== 'undefined') {
+// Guarded on the real Worker scope. `typeof self !== 'undefined'` is true in a window too,
+// where this would install a message handler on the page itself.
+if (isWorkerScope()) {
   self.onmessage = async (e: MessageEvent<WorkerAsrRequest>) => {
     const data = e.data;
     if (data.type === 'TRANSCRIBE') {

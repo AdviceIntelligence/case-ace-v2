@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert';
 import { spawnSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
 import { createAuthProvider, EntraIdProvider, TotpProvider } from '../backend/src/auth/index.ts';
 import { config } from '../backend/src/config/index.ts';
 import { volatileSessionStore } from '../client/src/state/volatileStore.ts';
@@ -39,6 +40,7 @@ import { auditLogStore, AuditLogStore } from '../backend/src/logging/logStore.ts
 import { SYNTHETIC_CORPUS } from '../test/corpus/syntheticAdviceCorpus.ts';
 import { testingEngine } from '../test/testingEngine.ts';
 import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
+import { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } from '../client/src/workers/workerSandbox.ts';
 import { ENVIRONMENTS } from '../client/src/config/environments.ts';
 
 const rootDir = process.cwd();
@@ -741,6 +743,103 @@ async function run() {
     for (const testCode of testCases) {
       const match = PROHIBITED_PATTERNS.some((p) => p.pattern.test(testCode));
       assert(match, `Linter pattern failed to detect synthetic violation: ${testCode}`);
+    }
+  });
+
+  // The worker sandbox strips fetch, XMLHttpRequest, WebSocket and EventSource so that a
+  // worker holding raw audio cannot transmit it. Both worker entry modules used to do this at
+  // module top level behind `typeof self !== 'undefined'`, which is also true in a window,
+  // where self === window. mediaDecoderWorker.ts is imported for its value exports by
+  // audio/mediaStreamingDecoder.ts, so the deployed SPA deleted window.fetch from its own page
+  // during start-up and every backend call died with "fetch is not defined".
+  await test('Worker sandbox strips every network API inside a Worker scope', () => {
+    class FakeWorkerGlobalScope {}
+    const workerScope = Object.create(FakeWorkerGlobalScope.prototype);
+    workerScope.WorkerGlobalScope = FakeWorkerGlobalScope;
+    for (const name of NETWORK_GLOBALS) workerScope[name] = () => 'reachable';
+
+    assert.strictEqual(isWorkerScope(workerScope), true, 'Worker scope not recognised');
+    assert.strictEqual(installWorkerNetworkSandbox(workerScope), true, 'Sandbox did not apply');
+
+    for (const name of NETWORK_GLOBALS) {
+      const left = workerScope[name];
+      if (typeof left === 'undefined') continue;
+      assert.throws(
+        () => left(),
+        /Network access via .* is prohibited/,
+        `${name} survived the worker sandbox in a usable form`,
+      );
+    }
+  });
+
+  await test('Worker sandbox never disarms a window, in any scope shape', () => {
+    const windowShapes = [
+      { label: 'window self-reference', scope: (() => { const w = { document: {} }; w.window = w; return w; })() },
+      { label: 'document only', scope: { document: {} } },
+      { label: 'plain object (Node, tests)', scope: {} },
+    ];
+
+    for (const { label, scope } of windowShapes) {
+      for (const name of NETWORK_GLOBALS) scope[name] = () => 'reachable';
+      assert.strictEqual(isWorkerScope(scope), false, `${label} was mistaken for a Worker scope`);
+      assert.strictEqual(installWorkerNetworkSandbox(scope), false, `${label} was sandboxed`);
+      for (const name of NETWORK_GLOBALS) {
+        assert.strictEqual(typeof scope[name], 'function', `${label}: ${name} was removed`);
+        assert.strictEqual(scope[name](), 'reachable', `${label}: ${name} was replaced`);
+      }
+    }
+  });
+
+  // Behavioural, not textual: actually evaluate each worker entry module against a global that
+  // looks like a browser main thread, and assert the page keeps its network APIs.
+  await test('Importing a worker entry on the main thread leaves the page able to call its API', () => {
+    const workerEntries = [
+      'client/src/workers/mediaDecoderWorker.ts',
+      'client/src/workers/localAsrWorker.ts',
+    ];
+
+    for (const entry of workerEntries) {
+      const moduleUrl = pathToFileURL(path.join(rootDir, entry)).href;
+      const child = spawnSync(
+        process.execPath,
+        [
+          '--experimental-strip-types',
+          '--no-warnings',
+          '--input-type=module',
+          '-e',
+          `
+            globalThis.self = globalThis;
+            globalThis.window = globalThis;
+            globalThis.document = {};
+            // Node has fetch, but not XMLHttpRequest or EventSource. Stand them up so the
+            // simulated page carries the same globals a browser main thread would.
+            for (const name of ['XMLHttpRequest', 'WebSocket', 'EventSource']) {
+              if (typeof globalThis[name] !== 'function') globalThis[name] = function () {};
+            }
+            if (typeof globalThis.fetch !== 'function') { console.log('PRECONDITION_FAILED'); process.exit(0); }
+            await import(${JSON.stringify(moduleUrl)});
+            console.log([
+              typeof globalThis.fetch,
+              typeof globalThis.XMLHttpRequest,
+              typeof globalThis.WebSocket,
+              typeof globalThis.onmessage,
+            ].join(','));
+          `,
+        ],
+        { encoding: 'utf8', cwd: rootDir },
+      );
+
+      assert.strictEqual(child.status, 0, `${entry} failed to import: ${child.stderr}`);
+      const [fetchType, xhrType, wsType, onmessageType] = child.stdout.trim().split(',');
+      assert.notStrictEqual(fetchType, 'PRECONDITION_FAILED', 'Test host has no global fetch');
+      assert.strictEqual(fetchType, 'function', `${entry} deleted fetch from the main thread`);
+      assert.strictEqual(xhrType, 'function', `${entry} deleted XMLHttpRequest from the main thread`);
+      assert.strictEqual(wsType, 'function', `${entry} deleted WebSocket from the main thread`);
+      assert.notStrictEqual(
+        onmessageType,
+        'function',
+        `${entry} installed a worker message handler on the page`,
+      );
     }
   });
 

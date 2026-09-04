@@ -236,16 +236,56 @@ describe('Phase 6B: Media Import & Sandboxed Decoding Pipeline', () => {
   });
 
   describe('6B.3 Sandboxed Decoder Worker Isolation', () => {
-    it('ensures mediaDecoderWorker code contains explicit network primitive neutering', async () => {
+    // Behaviour, not text. The previous version of this test asserted that the worker file
+    // contained the literal string `delete (self as any).fetch`, which it did, at module top
+    // level behind a guard that is also true in a window. The assertion passed while the
+    // deployed SPA was deleting window.fetch from its own page.
+    it('neuters every network primitive inside a Worker scope', async () => {
+      const { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } = await import(
+        '../../client/src/workers/workerSandbox.ts'
+      );
+
+      class FakeWorkerGlobalScope {}
+      const workerScope: any = Object.create(FakeWorkerGlobalScope.prototype);
+      workerScope.WorkerGlobalScope = FakeWorkerGlobalScope;
+      for (const name of NETWORK_GLOBALS) workerScope[name] = () => 'reachable';
+
+      expect(isWorkerScope(workerScope)).toBe(true);
+      expect(installWorkerNetworkSandbox(workerScope)).toBe(true);
+
+      for (const name of NETWORK_GLOBALS) {
+        if (typeof workerScope[name] === 'undefined') continue;
+        expect(() => workerScope[name]()).toThrow(/Network access via .* is prohibited/);
+      }
+    });
+
+    it('leaves a browser main thread with its network primitives intact', async () => {
+      const { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } = await import(
+        '../../client/src/workers/workerSandbox.ts'
+      );
+
+      const windowScope: any = { document: {} };
+      windowScope.window = windowScope;
+      for (const name of NETWORK_GLOBALS) windowScope[name] = () => 'reachable';
+
+      expect(isWorkerScope(windowScope)).toBe(false);
+      expect(installWorkerNetworkSandbox(windowScope)).toBe(false);
+      for (const name of NETWORK_GLOBALS) expect(windowScope[name]()).toBe('reachable');
+    });
+
+    it('has both worker entries route their sandbox through workerSandbox.ts', async () => {
       const fs = await import('fs');
       const path = await import('path');
-      const workerCodePath = path.resolve(__dirname, '../../client/src/workers/mediaDecoderWorker.ts');
-      const content = fs.readFileSync(workerCodePath, 'utf8');
-
-      expect(content).toContain('delete (self as any).fetch');
-      expect(content).toContain('delete (self as any).XMLHttpRequest');
-      expect(content).toContain('delete (self as any).WebSocket');
-      expect(content).toContain('delete (self as any).EventSource');
+      for (const entry of ['mediaDecoderWorker.ts', 'localAsrWorker.ts']) {
+        const content = fs.readFileSync(
+          path.resolve(__dirname, '../../client/src/workers/', entry),
+          'utf8',
+        );
+        expect(content).toContain('installWorkerNetworkSandbox()');
+        // No entry may still delete a network global directly: that is the code path that
+        // could not tell a Worker global from a window.
+        expect(content).not.toMatch(/^\s*delete \(self as any\)/m);
+      }
     });
 
     it('ensures mediaStreamingDecoder invokes worker and discards file name', async () => {
