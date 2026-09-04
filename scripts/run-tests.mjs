@@ -30,6 +30,7 @@ import { LiveAudioCapture } from '../client/src/audio/liveAudioCapture.ts';
 import { webexStreamCapture } from '../client/src/audio/webexStreamCapture.ts';
 import { audioNormalizer } from '../client/src/audio/audioNormalizer.ts';
 import { identifierEngine } from '../client/src/redaction/identifierEngine.ts';
+import { matchLayer1StructuredIdentifiers } from '../client/src/redaction/layer1StructuredMatcher.ts';
 import { tokenisationEngine } from '../client/src/tokenisation/tokenisationEngine.ts';
 import { destroySession, assertSessionDestroyed, markDetokenisedContentCopied, isDetokenisedClipboardPresent } from '../client/src/state/sessionDestruction.ts';
 import { sessionRecoveryManager } from '../client/src/state/sessionRecoveryManager.ts';
@@ -993,6 +994,53 @@ async function run() {
   });
 
   // 8. Phase 6: Consent Gate, Intake Routes & Audio Normalisation
+  await test('Layer 1 detects identifiers as they are actually dictated, not only as written', () => {
+    // Every string below is verbatim output from Cloud Speech-to-Text on a real recorded
+    // consultation, or a close variant of it. Before these were handled, a spoken National
+    // Insurance number and a spoken date of birth passed through detection untouched and
+    // were transmitted to the cloud in the clear. See evidence/e2e-audio-findings.md.
+    const MUST_DETECT = [
+      // The exact transcription from the recording: letters separated, no space before the suffix
+      ['z x 48  62  19d', 'national_insurance'],
+      // Fully spelled out, which is how it is read when the line is poor
+      ['it is z x four eight six two one nine d', 'national_insurance'],
+      // The letter Z named phonetically
+      ['zed x 48 62 19 d', 'national_insurance'],
+      // Written form must keep working
+      ['My number is ZX 48 62 19 D', 'national_insurance'],
+      // Month spoken as an ordinal, ordinary British dictation
+      ['Doris Mae Campbell  14th of the second 1945', 'date_of_birth'],
+      ['born on the fourteenth of the second, 1945', 'date_of_birth'],
+      ['14 February 1945', 'date_of_birth'],
+    ];
+
+    for (const [text, category] of MUST_DETECT) {
+      const hits = matchLayer1StructuredIdentifiers(text).filter((h) => h.category === category);
+      assert(hits.length > 0, `Layer 1 missed ${category} in: "${text}"`);
+    }
+
+    // The Home Office reference pattern used a case-insensitive "HO" prefix with no
+    // requirement for digits, so it classified ordinary English as an immigration
+    // reference. Six of ten structured matches in one real consultation were words like
+    // these. That mutes ordinary speech and trains advisers to click through the review
+    // gate, which is worse than having no gate while still carrying its assurance.
+    for (const word of ['honestly', 'hospital', 'household', 'homeless', 'hopeless']) {
+      const hits = matchLayer1StructuredIdentifiers(`She said ${word} to me yesterday.`);
+      assert.deepStrictEqual(
+        hits.filter((h) => h.category === 'home_office_reference'),
+        [],
+        `"${word}" was classified as a Home Office reference`
+      );
+    }
+
+    // A genuine reference must still be caught.
+    const real = matchLayer1StructuredIdentifiers('Her Home Office reference is HO1234567890.');
+    assert(
+      real.some((h) => h.category === 'home_office_reference'),
+      'a genuine Home Office reference is no longer detected'
+    );
+  });
+
   console.log('\nSuite 8: Consent Gate, Intake Routes & Audio Normalisation');
   const consentDocContent = fs.readFileSync(path.join(rootDir, 'docs/consent-and-intake.md'), 'utf8');
 

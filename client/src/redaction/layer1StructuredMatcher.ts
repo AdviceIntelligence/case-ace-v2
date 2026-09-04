@@ -75,7 +75,12 @@ export function matchLayer1StructuredIdentifiers(transcript: string): RawCandida
 
   // 1. NATIONAL INSURANCE NUMBER (NINO)
   // Standard UK NINO + Synthetic test prefixes (QQ etc.)
-  const ninoRegex = /\b([A-Z]{2}\s*\d{2}\s*\d{2}\s*\d{2}\s*[A-D]?)\b/gi;
+  // The two leading letters may be separated. When a National Insurance number is dictated
+  // onto a form, transcription commonly renders the prefix as two separate letters:
+  // "z x 48  62  19d" is the verbatim output from a real recorded consultation. The previous
+  // pattern required [A-Z]{2} adjacent, so a dictated NINO was never detected, never muted,
+  // and reached cloud transcription in the clear. See evidence/e2e-audio-findings.md.
+  const ninoRegex = /\b([A-Z]\s*[A-Z]\s*\d{2}\s*\d{2}\s*\d{2}\s*[A-D]?)\b/gi;
   let match: RegExpExecArray | null;
   while ((match = ninoRegex.exec(transcript)) !== null) {
     const raw = match[1];
@@ -86,7 +91,9 @@ export function matchLayer1StructuredIdentifiers(transcript: string): RawCandida
   }
 
   // Spoken NINO (e.g. "QQ one two three four five six A")
-  const spokenNinoRegex = /\b([A-Za-z]{2}\s+(?:(?:(?:oh|zero|nought|nil|one|two|three|four|five|six|seven|eight|nine)\s*){6}|(?:\d\s*){6})\s*[A-Da-d]?)\b/gi;
+  // The letter pair may arrive separated ("z x") or phonetically named ("zed x"), because
+  // that is how a dictated prefix is transcribed. Requiring two adjacent letters missed both.
+  const spokenNinoRegex = /\b((?:zed|[A-Za-z])\s*(?:zed|[A-Za-z])\s+(?:(?:(?:oh|zero|nought|nil|one|two|three|four|five|six|seven|eight|nine)\s*){6}|(?:\d\s*){6})\s*[A-Da-d]?)\b/gi;
   while ((match = spokenNinoRegex.exec(transcript)) !== null) {
     const wordMap: Record<string, string> = {
       zero: '0', oh: '0', nought: '0', nil: '0',
@@ -190,6 +197,14 @@ export function matchLayer1StructuredIdentifiers(transcript: string): RawCandida
   // Home Office References (HO/, CID, UAN, BRP, GWF, or A1234567)
   const homeOfficeRegex = /\b((?:HO|CID|UAN|BRP|GWF)[-\s/:]?[0-9A-Z]{6,16}|[A-Z]\d{7})\b/gi;
   while ((match = homeOfficeRegex.exec(transcript)) !== null) {
+    // A Home Office reference always carries digits. Without this check the case-insensitive
+    // "HO" prefix matched the opening of ordinary English words: "honestly", "hospital" and
+    // "household" were all classified as immigration references in a single real
+    // consultation, six false positives out of ten structured matches. That mutes ordinary
+    // speech and fills the adviser review gate with nonsense, which teaches people to click
+    // through a safety control while it still carries assurance in the DPIA.
+    if (!/\d{2}/.test(match[0])) continue;
+
     const surrounding = transcript.slice(Math.max(0, match.index - 30), Math.min(transcript.length, match.index + 30)).toLowerCase();
     if (surrounding.includes('home office') || surrounding.includes('immigration') || surrounding.includes('visa') || surrounding.includes('brp') || surrounding.includes('asylum') || match[0].toUpperCase().startsWith('HO') || match[0].toUpperCase().startsWith('UAN') || match[0].toUpperCase().startsWith('CID')) {
       addCandidate('home_office_reference', match[0], match.index, match.index + match[0].length, 1.0, 'HO_REF');
@@ -228,6 +243,25 @@ export function matchLayer1StructuredIdentifiers(transcript: string): RawCandida
   // Spoken dates of birth: "fourteenth of August nineteen eighty-two"
   const spokenDobRegex = /\b((?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth|twenty-first|twenty-second|twenty-third|twenty-fourth|twenty-fifth|twenty-sixth|twenty-seventh|twenty-eighth|twenty-ninth|thirtieth|thirty-first|\d{1,2}(?:st|nd|rd|th)?)\s+(?:of\s+)?(?:january|february|march|april|may|june|july|august|september|october|november|december)\s+(?:nineteen|twenty|\d{2})\s*(?:\d{2,4}|eighty|seventy|sixty|fifty|forty|thirty|twenty|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)?)\b/gi;
   while ((match = spokenDobRegex.exec(transcript)) !== null) {
+    addCandidate('date_of_birth', match[0], match.index, match.index + match[0].length, 1.0, 'DOB');
+  }
+
+  // Month spoken as an ordinal rather than a name: "14th of the second, 1945".
+  // This is ordinary British dictation and it defeated every pattern above, because they all
+  // require a month name. In a real recorded consultation the client's date of birth reached
+  // cloud transcription in the clear for exactly this reason.
+  const ORDINAL_MONTHS = 'first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth';
+  const ordinalMonthDobRegex = new RegExp(
+    String.raw`\b((?:\d{1,2}(?:st|nd|rd|th)?|` +
+      String.raw`first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|` +
+      String.raw`thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth|` +
+      String.raw`twenty-first|twenty-second|twenty-third|twenty-fourth|twenty-fifth|twenty-sixth|` +
+      String.raw`twenty-seventh|twenty-eighth|twenty-ninth|thirtieth|thirty-first)` +
+      String.raw`\s+of\s+the\s+(?:${ORDINAL_MONTHS}|\d{1,2})\s*,?\s+` +
+      String.raw`(?:19\d{2}|20\d{2}|nineteen\s+\w+(?:[-\s]\w+)?))\b`,
+    'gi'
+  );
+  while ((match = ordinalMonthDobRegex.exec(transcript)) !== null) {
     addCandidate('date_of_birth', match[0], match.index, match.index + match[0].length, 1.0, 'DOB');
   }
 
