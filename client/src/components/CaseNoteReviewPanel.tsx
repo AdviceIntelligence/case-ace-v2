@@ -72,8 +72,7 @@ export const CaseNoteReviewPanel: React.FC<CaseNoteReviewPanelProps> = ({
   // Working transcript content
   const transcriptText =
     session.detokenisedWorkingTranscript ||
-    session.cloudAccurateTranscript ||
-    session.localDraftTranscript ||
+    session.transcript?.fullTranscript ||
     '';
 
   const transcriptPaneRef = useRef<HTMLDivElement>(null);

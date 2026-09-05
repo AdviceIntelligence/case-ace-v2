@@ -69,48 +69,7 @@ export class AudioNormalizer {
     return session;
   }
 
-  /**
-   * Normalises Cisco Webex telephone stream capture.
-   */
-  public normalizeWebexCapture(
-    input: {
-      pcmBuffer?: ArrayBuffer;
-      monoDownmixBuffer?: ArrayBuffer;
-      durationSeconds: number;
-      sampleRate: number;
-      channelMapping?: { isDualChannel: true; adviserChannel: 0; clientChannel: 1 };
-      speakerMap?: SpeakerChannelMap;
-    },
-    consent: ConsentRecord
-  ): NormalizedAudioSession {
-    this.validateConsent(consent, 'webex_telephony');
-    const pcm = input.monoDownmixBuffer || input.pcmBuffer;
-    if (!pcm) {
-      throw new Error('Audio normalisation failed: PCM buffer is empty or missing.');
-    }
-    this.validatePcmBuffer(pcm);
 
-    const speakerMap: SpeakerChannelMap = input.speakerMap || {
-      isDualChannel: true,
-      adviserChannel: 0,
-      clientChannel: 1,
-      sourceType: 'split_telephony',
-    };
-
-    const session: NormalizedAudioSession = {
-      pcmBuffer: pcm,
-      durationSeconds: Math.round(input.durationSeconds * 10) / 10,
-      sampleRate: AudioNormalizer.REQUIRED_SAMPLE_RATE,
-      format: AudioNormalizer.FORMAT_SPEC,
-      speakerMap,
-      consentRecord: consent,
-      intakeRoute: 'webex_telephony',
-    };
-
-    this.commitToVolatileStore(session);
-    this.sendIntakeTelemetry('webex_telephony', session.durationSeconds * 1000);
-    return session;
-  }
 
   /**
    * Normalises imported audio file decoding.

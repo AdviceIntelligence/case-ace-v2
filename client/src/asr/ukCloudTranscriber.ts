@@ -30,7 +30,6 @@
 
 import { audioRedactionEngine } from '../audio/audioRedactionEngine.ts';
 import { buildCloudSttPhraseSet } from './adviceSectorPhraseSet.ts';
-import { CloudAsrEngine, CloudSttApiError } from './cloudAsrEngine.ts';
 import { planTranscriptionChunks, sliceChunk, type AudioChunk } from './audioChunker.ts';
 import { environment } from '../config/environments.ts';
 import type { AsrSegment, AsrWord } from '../state/volatileStore.ts';
@@ -75,10 +74,62 @@ export interface TranscriptionResult {
    * at review. Stated here so the interface and the documentation cannot drift from it.
    */
   speakerAttribution: 'per_chunk_unresolved';
-  hardwareBackend?: 'webgpu' | 'wasm';
-  routeSpeakerSource?: 'webex_channel_split' | 'inferred_acoustic_diarisation';
 }
 
+export class CloudSttApiError extends Error {
+  public readonly status: number;
+  public readonly isRetryable: boolean;
+
+  constructor(message: string, status: number = 500, isRetryable: boolean = false) {
+    super(message);
+    this.name = 'CloudSttApiError';
+    this.status = status;
+    this.isRetryable = isRetryable;
+  }
+}
+
+interface EphemeralCredential {
+  purpose: 'speech-to-text';
+  provider: string;
+  region: string;
+  projectId: string;
+  endpoint: string;
+  accessToken: string;
+  expiresAt: string;
+  ttlSeconds: number;
+  issuedToUser: string;
+  role: string;
+}
+
+async function obtainEphemeralCredential(authToken?: string): Promise<EphemeralCredential> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (authToken) {
+    headers['Authorization'] = `Bearer ${authToken}`;
+  }
+
+  const response = await fetch(`${environment.apiBaseUrl}/api/v1/credentials/issue`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      purpose: 'speech-to-text',
+      ttlSeconds: 300,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}) as any);
+    throw new CloudSttApiError(
+      `Credential issuance failed with ${response.status}: ${body?.error || response.statusText}`,
+      response.status,
+      response.status >= 500 || response.status === 429,
+    );
+  }
+
+  const data = await response.json();
+  return data.credential;
+}
 
 export class TranscriptionFailedError extends Error {
   public readonly chunkIndex: number;
@@ -122,11 +173,7 @@ function parseGoogleDuration(value: unknown): number {
 }
 
 export class UkCloudTranscriber {
-  private readonly credentialSource: CloudAsrEngine;
-
-  constructor(credentialSource: CloudAsrEngine = new CloudAsrEngine()) {
-    this.credentialSource = credentialSource;
-  }
+  constructor() {}
 
   /**
    * Transcribes a whole consultation. Throws rather than returning a partial transcript.
@@ -303,7 +350,7 @@ export class UkCloudTranscriber {
    * the consultation, so a 40 minute session mints one token rather than forty.
    */
   private async createGoogleRecognizer(authToken?: string): Promise<RecognizeChunkFn> {
-    const creds = await this.credentialSource.obtainEphemeralCredential(authToken);
+    const creds = await obtainEphemeralCredential(authToken);
     const phraseSet = buildCloudSttPhraseSet();
     const url =
       `${creds.endpoint}/v2/projects/${creds.projectId}/locations/${environment.gcpRegion}` +

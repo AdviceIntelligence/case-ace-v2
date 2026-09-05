@@ -19,7 +19,6 @@ export type PermittedClientEventType =
   | 'AUDIO_RECORDING_STARTED'
   | 'AUDIO_RECORDING_STOPPED'
   | 'FILE_IMPORTED'
-  | 'WEBEX_CALL_EVENT'
   | 'PASS1_LOCAL_ASR_COMPLETED'
   | 'IDENTIFIERS_DETECTED'
   | 'REDACTION_GATE_ENTERED'
@@ -57,7 +56,6 @@ const EVENT_TYPE_NORMALIZATION: Record<string, PermittedClientEventType> = {
   audio_recording_started: 'AUDIO_RECORDING_STARTED',
   audio_recording_stopped: 'AUDIO_RECORDING_STOPPED',
   file_imported: 'FILE_IMPORTED',
-  webex_call_event: 'WEBEX_CALL_EVENT',
   pass1_local_asr_completed: 'PASS1_LOCAL_ASR_COMPLETED',
   identifiers_detected: 'IDENTIFIERS_DETECTED',
   redaction_gate_entered: 'REDACTION_GATE_ENTERED',

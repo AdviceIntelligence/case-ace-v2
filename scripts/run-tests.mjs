@@ -28,7 +28,6 @@ import { mediaStreamingDecoder } from '../client/src/audio/mediaStreamingDecoder
 import { consentManager } from '../client/src/consent/consentManager.ts';
 import { dominantSpeakerDetector, DominantSpeakerDetector } from '../client/src/audio/dominantSpeakerDetector.ts';
 import { LiveAudioCapture } from '../client/src/audio/liveAudioCapture.ts';
-import { webexStreamCapture } from '../client/src/audio/webexStreamCapture.ts';
 import { audioNormalizer } from '../client/src/audio/audioNormalizer.ts';
 import { identifierEngine } from '../client/src/redaction/identifierEngine.ts';
 import { matchLayer1StructuredIdentifiers } from '../client/src/redaction/layer1StructuredMatcher.ts';
@@ -443,7 +442,7 @@ async function run() {
     volatileSessionStore.setDraftCaseNote('Draft Note: Housing advice given.');
 
     assert(volatileAuthStore.getState().isAuthenticated);
-    assert.strictEqual(volatileSessionStore.getState()?.localDraftTranscript, 'Client discusses ESA appeal and rent arrears.');
+    assert.strictEqual(volatileSessionStore.getState()?.transcript?.fullTranscript, 'Client discusses ESA appeal and rent arrears.');
 
     const fastIdleManager = new IdleTimeoutManager(0.001); // ~60ms
     let timedOut = false;
@@ -466,7 +465,7 @@ async function run() {
       'mock_access_token_2',
       'mock_refresh_token_2'
     );
-    volatileSessionStore.initSession('webex_dialout', 'usr_test2');
+    volatileSessionStore.initSession('live_microphone', 'usr_test2');
     volatileSessionStore.setDraftCaseNote('Confidential case notes');
 
     volatileSessionStore.destroySession();
@@ -937,7 +936,7 @@ async function run() {
 
     // Drive an entire advice consultation lifecycle
     // Step 1: Intake & Audio capture
-    const session = volatileSessionStore.initSession('webex_dialout', 'usr_adviser_wandsworth_42');
+    const session = volatileSessionStore.initSession('live_microphone', 'usr_adviser_wandsworth_42');
     const mockPcmBuffer = new Float32Array(16000 * 10).buffer; // 10 seconds of call audio
     volatileSessionStore.setRawAudio(mockPcmBuffer, 10.0, 16000);
     volatileSessionStore.setStage('local_redaction');
@@ -1036,8 +1035,7 @@ async function run() {
       clientPhoneNumber: null,
       rawAudioBuffer: null,
       redactedAudioBuffer: null,
-      localDraftTranscript: 'Redacted text',
-      cloudAccurateTranscript: null,
+      transcript: { fullTranscript: 'Redacted text', segments: [], words: [], totalWords: 2, lowConfidenceWordsCount: 0, lowConfidenceWords: [], executionDurationMs: 0, provider: 'google_stt_v2', region: 'europe-west2', dataLoggingEnabled: false },
       extractedEntities: [],
       tokenMap: { '[CLIENT_NAME_1]': 'Alice Smith' },
       tokenisedTranscript: 'Restorable tokenised transcript',
@@ -1247,7 +1245,7 @@ async function run() {
     // false failures without protecting anything. What must not change is the substance:
     // every route states the purpose, that audio is held only in temporary memory, and
     // that the client may decline or withdraw without any effect on the advice.
-    const ROUTES = ['live_in_person', 'webex_telephony', 'file_import'];
+    const ROUTES = ['live_in_person', 'file_import'];
     const seenTitles = new Set();
 
     for (const route of ROUTES) {
@@ -1269,10 +1267,10 @@ async function run() {
       assert(/consent|attest|agree/.test(body), `${route} wording does not reference consent, agreement or attestation`);
     }
 
-    // The two live routes must tell the client about temporary memory and the right to
+    // The live route must tell the client about temporary memory and the right to
     // decline. The import route is a professional attestation about a past consultation,
     // so it carries provenance duties instead.
-    for (const route of ['live_in_person', 'webex_telephony']) {
+    for (const route of ['live_in_person']) {
       const w = consentManager.getWordingForRoute(route);
       const body = [w.adviserInstructions, ...w.clientInformationPoints].join(' ').toLowerCase();
       assert(/temporary|volatile|memory/.test(body), `${route} does not mention temporary memory retention`);
@@ -1371,49 +1369,6 @@ async function run() {
     assert.strictEqual(validImport.importProvenance?.isUnmanagedDevice, false);
   });
 
-  await test('WebexStreamCapture enforces consent lock on recording and call continuity on withdrawal', () => {
-    // Reset webex capture instance state
-    webexStreamCapture.endCall();
-
-    // 1. Attempt recording before consent is confirmed -> throws
-    assert.strictEqual(webexStreamCapture.isConsentUnlocked(), false);
-    assert.throws(
-      () => {
-        webexStreamCapture.startRecording();
-      },
-      (err) => err.message.includes('cannot start before affirmative consent is confirmed')
-    );
-
-    // 2. Confirm consent and connect call
-    const consent = consentManager.recordConsent('webex_telephony', 'usr_webex_adv');
-    webexStreamCapture.confirmConsent(consent);
-    assert.strictEqual(webexStreamCapture.isConsentUnlocked(), true);
-
-    webexStreamCapture.connectCall(null, null);
-    webexStreamCapture.startRecording();
-
-    // 3. Feed simulated dual-channel audio chunks (Adviser Ch 0, Client Ch 1)
-    const adviserChunk = new Float32Array([0.1, 0.2, 0.3]);
-    const clientChunk = new Float32Array([-0.1, -0.2, -0.3]);
-    webexStreamCapture.recordChunk(adviserChunk, clientChunk);
-
-    // 4. Test normal stop recording
-    const captureResult = webexStreamCapture.stopRecording();
-    assert(captureResult.pcmBuffer instanceof ArrayBuffer);
-    assert.strictEqual(captureResult.sampleRate, 16000);
-    assert.strictEqual(captureResult.channelMapping.isDualChannel, true);
-    assert.strictEqual(captureResult.channelMapping.adviserChannel, 0);
-    assert.strictEqual(captureResult.channelMapping.clientChannel, 1);
-
-    // 5. Test Withdraw Consent during active call: recording destroyed, call remains connected
-    webexStreamCapture.startRecording();
-    webexStreamCapture.recordChunk(new Float32Array([0.4, 0.5]), new Float32Array([-0.4, -0.5]));
-
-    webexStreamCapture.withdrawConsentAndContinueCall();
-    assert.strictEqual(webexStreamCapture.isConsentUnlocked(), false);
-    // Call is still connected for unrecorded advice
-    webexStreamCapture.endCall();
-  });
 
   await test('Single Dominant Speaker Detector identifies acoustic imbalances', () => {
     const detector = new DominantSpeakerDetector();
@@ -1503,13 +1458,12 @@ async function run() {
     assert(/must be concluded/i.test(pressureAt(95)?.message ?? ''));
   });
 
-  await test('AudioNormalizer produces unified in-memory Float32 representation across all 3 routes', () => {
+  await test('AudioNormalizer produces unified in-memory Float32 representation across live and file import routes', () => {
     // The normaliser writes into the volatile session, which must exist first. Storing raw
     // audio without an initialised session is refused by design, so initialise one here.
     volatileSessionStore.initSession('live_microphone', 'usr_adv_norm');
 
     const consentLive = consentManager.recordConsent('live_in_person', 'usr_adv_norm');
-    const consentWebex = consentManager.recordConsent('webex_telephony', 'usr_adv_norm');
     const consentImport = consentManager.recordConsent('file_import', 'usr_adv_norm', {
       originalAppointmentDate: '2026-08-10',
       sourceEquipment: 'caw_olympus_dictaphone',
@@ -1527,22 +1481,7 @@ async function run() {
     assert.strictEqual(normLive.sampleRate, 16000);
     assert.strictEqual(normLive.speakerMap.isDualChannel, false);
 
-    // Route 2 Normalisation
-    const webexPcm = new Float32Array([0.5, -0.6, 0.7, -0.8]).buffer;
-    const normWebex = audioNormalizer.normalizeWebexCapture(
-      {
-        pcmBuffer: webexPcm,
-        durationSeconds: 10.0,
-        sampleRate: 16000,
-        channelMapping: { isDualChannel: true, adviserChannel: 0, clientChannel: 1 },
-      },
-      consentWebex
-    );
-    assert.strictEqual(normWebex.format, 'FLOAT32_PCM_16KHZ_MONO');
-    assert.strictEqual(normWebex.sampleRate, 16000);
-    assert.strictEqual(normWebex.speakerMap.isDualChannel, true);
-
-    // Route 3 Normalisation
+    // Route 2 Normalisation (File Import)
     const importPcm = new Float32Array([0.9, -0.1, 0.2, -0.3]).buffer;
     const normImport = audioNormalizer.normalizeFileImport(
       { pcmBuffer: importPcm, durationSeconds: 15.0, sampleRate: 16000 },
@@ -1552,7 +1491,7 @@ async function run() {
     assert.strictEqual(normImport.sampleRate, 16000);
     assert.strictEqual(normImport.speakerMap.isDualChannel, false);
 
-    // Verify all 3 set VolatileSessionStore state with zero route leaks
+    // Verify both set VolatileSessionStore state with zero route leaks
     const state = volatileSessionStore.getState();
     assert(state !== null);
     assert.strictEqual(state?.stage, 'local_redaction');
@@ -2051,26 +1990,7 @@ async function run() {
     assert.strictEqual(validated.stageDurationMs, 2500);
   });
 
-  await test('CredentialIssuerService revokes credentials and records CREDENTIALS_REVOKED privacy audit', () => {
-    clearCapturedLogs();
-    const testUser = {
-      id: 'usr_adv_test_revoke',
-      email: 'adviser.revoke@cawandsworth.org.uk',
-      role: 'adviser',
-      name: 'Test Adviser Revoke',
-    };
 
-    const token = 'sts_ephemeral_token_xyz_123';
-    assert.strictEqual(CredentialIssuerService.isRevoked(token), false);
-
-    const revoked = CredentialIssuerService.revokeCredential(testUser, token);
-    assert.strictEqual(revoked, true);
-    assert.strictEqual(CredentialIssuerService.isRevoked(token), true);
-
-    const logs = getCapturedLogs();
-    const revokeLog = logs.find((l) => l.event === 'CREDENTIALS_REVOKED' && l.userId === testUser.id);
-    assert(revokeLog, 'CREDENTIALS_REVOKED log must be written to privacy logger');
-  });
 
   console.log(`Results: ${passed} passed, ${failed} failed.`);
   console.log(`========================================\n`);

@@ -122,7 +122,7 @@ export const RedactionReviewGateModal: React.FC<RedactionReviewGateModalProps> =
   const handleAddManualTextRedaction = () => {
     if (!manualText.trim()) return;
 
-    const transcript = session.localDraftTranscript || '';
+    const transcript = session.transcript?.fullTranscript || '';
     const startPos = transcript.indexOf(manualText);
     const endPos = startPos !== -1 ? startPos + manualText.length : 0;
 
@@ -287,32 +287,6 @@ export const RedactionReviewGateModal: React.FC<RedactionReviewGateModalProps> =
 
         {/* Tab Content Body */}
         <div className="flex-1 p-6 overflow-y-auto space-y-6">
-
-          {/* Phase 10 Surviving Identifiers Alert Banner */}
-          {session.survivingIdentifiers && session.survivingIdentifiers.length > 0 && (
-            <div className="bg-rose-950/80 border-2 border-rose-600 rounded-lg p-4 text-rose-200 text-xs shadow-lg animate-pulse">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xl">🛑</span>
-                <h3 className="font-bold text-rose-300 text-sm uppercase tracking-wider">
-                  Phase 10 Verification Failed: Surviving Identifiers Detected (C8)
-                </h3>
-              </div>
-              <p className="mb-2">
-                The local verification speech recognition pass detected <strong>{session.survivingIdentifiers.length} identifier(s)</strong> in the redacted audio.
-                Cloud STT transmission is strictly blocked. Please review the surviving tokens below, expand the time ranges or add manual redactions, and re-authorise.
-              </p>
-              <div className="bg-slate-950 p-2.5 rounded border border-rose-800 space-y-1">
-                {session.survivingIdentifiers.map((s, idx) => (
-                  <div key={idx} className="flex items-center justify-between font-mono text-[11px] text-rose-300">
-                    <span>"{s.text}" ({s.category})</span>
-                    <span className="text-amber-400">
-                      {s.audioTimeRange ? `${s.audioTimeRange.startSec.toFixed(2)}s - ${s.audioTimeRange.endSec.toFixed(2)}s` : 'Text Span'}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* TAB 1: LOW CONFIDENCE REGIONS */}
           {activeTab === 'low_confidence' && (

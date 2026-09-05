@@ -149,7 +149,6 @@ const configs: Record<EnvironmentName, BackendConfig> = {
       'https://caseace.adviceintelligence.tech',
       'https://europe-west2-speech.googleapis.com',
       'https://europe-west2-aiplatform.googleapis.com',
-      'https://webexapis.com',
     ],
     isSyntheticOnly: false,
     auth: {

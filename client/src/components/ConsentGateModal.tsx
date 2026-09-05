@@ -460,9 +460,7 @@ export const ConsentGateModal: React.FC<ConsentGateModalProps> = ({
             }}
           >
             <CheckSquare size={16} aria-hidden="true" />
-            {route === 'webex_telephony'
-              ? 'Unlock Webex Recording'
-              : route === 'file_import'
+            {route === 'file_import'
               ? 'Attest Consent & Select File'
               : 'Confirm & Proceed'}
           </button>

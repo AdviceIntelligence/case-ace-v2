@@ -17,7 +17,6 @@ export interface EnvironmentConfig {
   maxAudioDurationMinutes: number;
   features: {
     liveMicrophone: boolean;
-    webexDialOut: boolean;
     fileImport: boolean;
   };
 }
@@ -34,7 +33,6 @@ const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
     maxAudioDurationMinutes: 120,
     features: {
       liveMicrophone: true,
-      webexDialOut: false, // Simulated in local
       fileImport: true,
     },
   },
@@ -49,7 +47,6 @@ const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
     maxAudioDurationMinutes: 120,
     features: {
       liveMicrophone: true,
-      webexDialOut: true,
       fileImport: true,
     },
   },
@@ -65,12 +62,10 @@ const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
       'https://caseace.adviceintelligence.tech',
       'https://europe-west2-speech.googleapis.com',
       'https://europe-west2-aiplatform.googleapis.com',
-      'https://webexapis.com',
     ],
     maxAudioDurationMinutes: 120,
     features: {
       liveMicrophone: true,
-      webexDialOut: true,
       fileImport: true,
     },
   },

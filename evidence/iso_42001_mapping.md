@@ -36,7 +36,7 @@
   1. **Automation Bias**: Advisers blindly trusting AI-generated drafts.  
      *Control*: Deliberate UI friction in Phase 14 review interface. Mandatory individual confirmation of low-confidence statements, un-ticked gap acknowledgements, and explicit statutory responsibility confirmation before copy/export.
   2. **Harmful Hallucination / Omission**: Fabricating debt figures, benefit deadlines, or advice given.  
-     *Control*: Zero-temperature deterministic prompt structure, few-shot grounding in AQS Level 3 standards, explicit gap detection flagging missing documents/facts, and dual-pass verification.
+     *Control*: Zero-temperature deterministic prompt structure, few-shot grounding in AQS Level 3 standards, explicit gap detection flagging missing documents/facts, and human-in-the-loop adviser sign-off.
   3. **Demographic & Dialect Bias**: Poor ASR/NER performance on regional accents or non-native English speakers.  
      *Control*: 33-scenario synthetic corpus representing Geordie, Glaswegian, Cockney, Welsh, multicultural accents, and speech impairments. Redaction recall verified at $\ge 92.3\%$ and AQS compliance at 100%.
   4. **Data Exfiltration & Surveillance**: Third-party LLM training on client disclosures.  

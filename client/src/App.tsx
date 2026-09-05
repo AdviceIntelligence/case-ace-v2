@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Shield,
   Mic,
-  PhoneCall,
   Upload,
   FileText,
   CheckCircle2,
@@ -14,10 +13,8 @@ import {
   Pause,
   Square,
   AlertTriangle,
-  Radio,
   HardDrive,
   Info,
-  Cloud,
 } from 'lucide-react';
 import { environment } from './config/environments.ts';
 import { volatileAuthStore, type AuthUser } from './state/authStore.ts';
@@ -38,7 +35,6 @@ import {
   type CaptureState,
   type MemoryPressureLevel,
 } from './audio/liveAudioCapture.ts';
-import { webexStreamCapture } from './audio/webexStreamCapture.ts';
 import { audioNormalizer } from './audio/audioNormalizer.ts';
 import type { DominantSpeakerAnalysis } from './audio/dominantSpeakerDetector.ts';
 import { LoginView } from './components/LoginView.tsx';
@@ -49,13 +45,9 @@ import { ukCloudTranscriber, type TranscribeProgress } from './asr/ukCloudTransc
 import { IdentifierReviewPanel } from './components/IdentifierReviewPanel.tsx';
 import { identifierEngine } from './redaction/identifierEngine.ts';
 import { RedactionReviewGateModal } from './components/RedactionReviewGateModal.tsx';
-import { AudioRedactionVerificationModal } from './components/AudioRedactionVerificationModal.tsx';
-import { CloudSttModal } from './components/CloudSttModal.tsx';
-import { CloudSttFailureModal } from './components/CloudSttFailureModal.tsx';
 import { TranscriptReviewPanel } from './components/TranscriptReviewPanel.tsx';
 import { CaseNoteReviewPanel } from './components/CaseNoteReviewPanel.tsx';
 import { caseNoteEngine } from './casenote/caseNoteEngine.ts';
-import { tokenisationEngine } from './tokenisation/tokenisationEngine.ts';
 import { destroySession } from './state/sessionDestruction.ts';
 
 export const App: React.FC = () => {
@@ -70,20 +62,12 @@ export const App: React.FC = () => {
   // Phase 13 Case Note Generation State
   const [isGeneratingCaseNote, setIsGeneratingCaseNote] = useState(false);
 
-  // Cloud STT v2 Transcription State
+  // Cloud STT v2 Transcription State (UK Sovereign europe-west2)
   const [isAsrRunning, setIsAsrRunning] = useState(false);
   const [asrProgress, setAsrProgress] = useState<TranscribeProgress | null>(null);
 
   // Phase 9 Redaction Review Gate State
   const [isRedactionGateOpen, setIsRedactionGateOpen] = useState(false);
-
-  // Phase 10 Audio Redaction Verification Modal State
-  const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
-
-  // Phase 11 Cloud Speech-to-Text v2 Modal States
-  const [isCloudSttModalOpen, setIsCloudSttModalOpen] = useState(false);
-  const [isCloudSttFailureModalOpen, setIsCloudSttFailureModalOpen] = useState(false);
-  const [cloudSttError, setCloudSttError] = useState<string | null>(null);
 
   // Phase 6 State
   const [selectedRoute, setSelectedRoute] = useState<IntakeRoute | null>(null);
@@ -99,10 +83,6 @@ export const App: React.FC = () => {
     message: string | null;
   }>({ level: 'normal', currentMb: 0, message: null });
   const [dominantSpeakerWarning, setDominantSpeakerWarning] = useState<string | null>(null);
-
-  // Webex State
-  const [isWebexCallActive, setIsWebexCallActive] = useState(false);
-  const [isWebexRecording, setIsWebexRecording] = useState(false);
 
   const liveCaptureRef = useRef<LiveAudioCapture | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -183,10 +163,6 @@ export const App: React.FC = () => {
 
     if (record.route === 'live_in_person') {
       startLiveRecording(record);
-    } else if (record.route === 'webex_telephony') {
-      webexStreamCapture.confirmConsent(record);
-      webexStreamCapture.connectCall(null, null);
-      setIsWebexCallActive(true);
     } else if (record.route === 'file_import') {
       // Trigger file selector once attestation is complete
       fileInputRef.current?.click();
@@ -225,9 +201,9 @@ export const App: React.FC = () => {
     liveCaptureRef.current?.resume();
   };
 
-  // --- Pass One Local ASR Runner ---
+  // --- Sovereign Cloud Transcription Runner (europe-west2) ---
 
-  const runPassOneAsr = async () => {
+  const runTranscription = async () => {
     const rawAudio = volatileSessionStore.getRawAudio();
     const currentSession = volatileSessionStore.getState();
     if (!rawAudio || !currentSession) return;
@@ -254,9 +230,9 @@ export const App: React.FC = () => {
 
       // Phase 8 & 9: Automatically run 3-Layer Identifier Detection & open Redaction Review Gate
       const updatedSession = volatileSessionStore.getState();
-      if (updatedSession?.draftTranscript) {
+      if (updatedSession?.transcript?.fullTranscript) {
         const detectionResult = identifierEngine.detectIdentifiers(
-          updatedSession.draftTranscript,
+          updatedSession.transcript.fullTranscript,
           updatedSession.transcript
         );
         volatileSessionStore.setDetectedIdentifiers(detectionResult.identifiers);
@@ -274,8 +250,8 @@ export const App: React.FC = () => {
 
   const handleRunIdentifierDetection = () => {
     const current = volatileSessionStore.getState();
-    if (!current || !current.draftTranscript) return;
-    const res = identifierEngine.detectIdentifiers(current.draftTranscript, current.transcript);
+    if (!current || !current.transcript?.fullTranscript) return;
+    const res = identifierEngine.detectIdentifiers(current.transcript.fullTranscript, current.transcript);
     volatileSessionStore.setDetectedIdentifiers(res.identifiers);
     volatileSessionStore.setTokenMap(res.tokenMap);
     volatileSessionStore.setTokenisedTranscript(res.tokenisedTranscript);
@@ -289,30 +265,11 @@ export const App: React.FC = () => {
       const result = liveCaptureRef.current.stop();
       audioNormalizer.normalizeLiveCapture(result, activeConsentRecord);
       setCaptureState('stopped');
-      await runPassOneAsr();
+      await runTranscription();
     } catch (err: any) {
       setMediaError(`Failed while finishing audio capture: ${err?.message || err}`);
       setCaptureState('idle');
     }
-  };
-
-  // --- Webex Stream Handlers ---
-
-  const handleStartWebexRecording = () => {
-    if (!webexStreamCapture.isConsentUnlocked()) {
-      setMediaError('Consent must be affirmatively confirmed before recording can begin.');
-      return;
-    }
-    webexStreamCapture.startRecording();
-    setIsWebexRecording(true);
-  };
-
-  const handleStopWebexRecording = async () => {
-    if (!activeConsentRecord) return;
-    const result = webexStreamCapture.stopRecording();
-    audioNormalizer.normalizeWebexCapture(result, activeConsentRecord);
-    setIsWebexRecording(false);
-    await runPassOneAsr();
   };
 
   // --- File Import Handler (Phase 6B) ---
@@ -362,7 +319,7 @@ export const App: React.FC = () => {
       );
 
       setFileImportNotice('File contents loaded into volatile memory. File name discarded for client confidentiality.');
-      await runPassOneAsr();
+      await runTranscription();
     } catch (err: any) {
       setMediaError(err.message || 'Failed to decode media file.');
     } finally {
@@ -380,12 +337,7 @@ export const App: React.FC = () => {
       liveCaptureRef.current = null;
     }
 
-    const currentRoute = activeConsentRecord?.route;
-    consentManager.withdrawConsent(currentRoute, () => {
-      // On Webex: Stop recording and wipe memory, but keep telephone call alive
-      webexStreamCapture.withdrawConsentAndContinueCall();
-      setIsWebexRecording(false);
-    });
+    consentManager.withdrawConsent();
 
     setActiveConsentRecord(null);
     setCaptureState('idle');
@@ -419,7 +371,6 @@ export const App: React.FC = () => {
     const tokenisedTranscript =
       session.tokenisedWorkingTranscript ||
       session.tokenisedTranscript ||
-      session.localDraftTranscript ||
       '';
 
     if (!tokenisedTranscript.trim()) {
@@ -443,7 +394,7 @@ export const App: React.FC = () => {
     }
   };
 
-  const isRecordingActive = captureState === 'recording' || isWebexRecording;
+  const isRecordingActive = captureState === 'recording' || captureState === 'paused';
 
   return (
     <div
@@ -458,7 +409,6 @@ export const App: React.FC = () => {
       } as any)}
       style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#F8FAFC' }}
     >
-      {/* Anti-leak attributes: spellCheck={false} autoComplete="off" autoCorrect="off" autoCapitalize="off" data-gramm="false" translate="no" */}
       {/* Sticky Persistent Recording Indicator (Phase 6.2) */}
       {isRecordingActive && (
         <aside
@@ -581,28 +531,6 @@ export const App: React.FC = () => {
                 }}
               >
                 <Square size={14} /> Finish Recording
-              </button>
-            )}
-
-            {isWebexRecording && (
-              <button
-                type="button"
-                onClick={handleStopWebexRecording}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.375rem',
-                  backgroundColor: '#2563EB',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  padding: '0.375rem 0.75rem',
-                  borderRadius: '6px',
-                  fontSize: '0.8125rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                }}
-              >
-                <Square size={14} /> Stop Webex Recording
               </button>
             )}
 
@@ -785,7 +713,7 @@ export const App: React.FC = () => {
             <TranscriptProgressModal
               isOpen={isAsrRunning}
               progress={asrProgress}
-              lowConfidenceCount={session?.transcript?.lowConfidenceWordsCount ?? session?.localAsrResult?.lowConfidenceWordsCount}
+              lowConfidenceCount={session?.transcript?.lowConfidenceWordsCount}
             />
 
             {/* Dominant Speaker Warning Banner (Phase 6.2) */}
@@ -837,7 +765,7 @@ export const App: React.FC = () => {
                 </p>
               </div>
 
-              {(session || isRecordingActive || isWebexCallActive) && (
+              {(session || isRecordingActive) && (
                 <button
                   type="button"
                   id="withdraw-consent-button-main"
@@ -879,7 +807,7 @@ export const App: React.FC = () => {
             )}
 
             {/* Stage: Route Intake Selection */}
-            {!session && !isWebexCallActive && captureState === 'idle' && (
+            {!session && captureState === 'idle' && (
               <div>
                 <h3 style={{ fontSize: '1.125rem', color: '#1E293B', marginBottom: '1rem' }}>
                   Select Advice Intake Route
@@ -944,31 +872,6 @@ export const App: React.FC = () => {
                       <div>• Audio: <strong>WAV, MP3, M4A, AAC, FLAC, OGG</strong> (Max 500 MB)</div>
                     </div>
                   </button>
-
-                  {/* Route 3: Cisco Webex telephone stream */}
-                  <button
-                    type="button"
-                    id="route-webex-telephony"
-                    aria-label="Connect to active Cisco Webex telephone call"
-                    style={{
-                      backgroundColor: '#FFFFFF',
-                      padding: '1.5rem',
-                      borderRadius: '8px',
-                      border: '1px solid #CBD5E1',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      transition: 'border-color 0.15s, box-shadow 0.15s',
-                    }}
-                    onClick={() => handleRouteSelection('webex_telephony')}
-                  >
-                    <PhoneCall size={32} color="#004B87" aria-hidden="true" />
-                    <h4 style={{ margin: '1rem 0 0.5rem 0', color: '#004B87', fontSize: '1.125rem', fontWeight: 600 }}>
-                      Cisco Webex Call
-                    </h4>
-                    <p style={{ color: '#475569', fontSize: '0.875rem', margin: 0, lineHeight: 1.5 }}>
-                      Connect to an active dual-channel telephony session via Cisco Webex SDK with affirmative consent.
-                    </p>
-                  </button>
                 </div>
 
                 {/* Hidden File Input for Attested Import */}
@@ -980,100 +883,6 @@ export const App: React.FC = () => {
                   onChange={handleFileImport}
                   disabled={isProcessingMedia}
                 />
-              </div>
-            )}
-
-            {/* Webex Telephony Active Console */}
-            {isWebexCallActive && (
-              <div
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  padding: '1.5rem',
-                  borderRadius: '8px',
-                  border: '1px solid #E2E8F0',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <Radio size={24} color="#16A34A" />
-                    <div>
-                      <h3 style={{ margin: 0, fontSize: '1.125rem', color: '#004B87' }}>
-                        Webex Telephony Call Active
-                      </h3>
-                      <span style={{ fontSize: '0.8125rem', color: '#64748B' }}>
-                        Connected • Channel 0: Adviser Mic | Channel 1: Remote Client Audio
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', gap: '0.75rem' }}>
-                    {!isWebexRecording ? (
-                      <button
-                        type="button"
-                        id="webex-start-recording-button"
-                        onClick={handleStartWebexRecording}
-                        disabled={!webexStreamCapture.isConsentUnlocked()}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.375rem',
-                          backgroundColor: webexStreamCapture.isConsentUnlocked() ? '#DC2626' : '#94A3B8',
-                          color: '#FFFFFF',
-                          border: 'none',
-                          padding: '0.5rem 1rem',
-                          borderRadius: '6px',
-                          fontWeight: 600,
-                          fontSize: '0.875rem',
-                          cursor: webexStreamCapture.isConsentUnlocked() ? 'pointer' : 'not-allowed',
-                        }}
-                      >
-                        <Radio size={16} /> Start Recording Call
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={handleStopWebexRecording}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.375rem',
-                          backgroundColor: '#2563EB',
-                          color: '#FFFFFF',
-                          border: 'none',
-                          padding: '0.5rem 1rem',
-                          borderRadius: '6px',
-                          fontWeight: 600,
-                          fontSize: '0.875rem',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        <Square size={16} /> Finish Recording Call
-                      </button>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        webexStreamCapture.endCall();
-                        setIsWebexCallActive(false);
-                        setIsWebexRecording(false);
-                      }}
-                      style={{
-                        padding: '0.5rem 1rem',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
-                        backgroundColor: '#FFFFFF',
-                        color: '#64748B',
-                        fontSize: '0.875rem',
-                        fontWeight: 600,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      End Telephone Call
-                    </button>
-                  </div>
-                </div>
               </div>
             )}
 
@@ -1139,11 +948,11 @@ export const App: React.FC = () => {
                 )}
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                  {/* Left Column: Pass One Local ASR & Redaction Controls */}
+                  {/* Left Column: UK Sovereign Cloud STT Status */}
                   <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                       <div>
-                        <h3 style={{ margin: 0, fontSize: '1rem', color: '#004B87' }}>Pass One: Local Acoustic Analysis</h3>
+                        <h3 style={{ margin: 0, fontSize: '1rem', color: '#004B87' }}>UK Sovereign Transcription (europe-west2)</h3>
                         <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
                           Route: {session.consentRecord?.route || 'in-memory'} • 16kHz Float32 PCM
                         </span>
@@ -1153,110 +962,40 @@ export const App: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Transcript Header & Privacy Invariant Banner */}
-                    {session.cloudAccurateTranscript ? (
-                      <div
-                        style={{
-                          backgroundColor: session.isFallbackToLocalTranscript ? '#FFFBEB' : '#EFF6FF',
-                          border: `1px solid ${session.isFallbackToLocalTranscript ? '#FDE68A' : '#BFDBFE'}`,
-                          borderRadius: '6px',
-                          padding: '0.75rem',
-                          marginBottom: '1rem',
-                          fontSize: '0.8125rem',
-                          color: session.isFallbackToLocalTranscript ? '#92400E' : '#1E40AF',
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                          <span style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                            <Shield size={14} />
-                            {session.isFallbackToLocalTranscript
-                              ? 'Pass 1 Local Transcript (Fallback Mode - Review Needed)'
-                              : 'Pass 2 Cloud Working Transcript (High Accuracy • Diarised)'}
-                          </span>
-                          <span style={{ fontSize: '0.6875rem', backgroundColor: session.isFallbackToLocalTranscript ? '#FEF3C7' : '#DBEAFE', padding: '0.125rem 0.375rem', borderRadius: '4px', fontWeight: 600 }}>
-                            {session.isFallbackToLocalTranscript ? 'LOCAL FALLBACK' : 'EUROPE-WEST2'}
-                          </span>
-                        </div>
-                        {session.isFallbackToLocalTranscript
-                          ? 'This transcript was retained after Cloud STT error. Extra care is required when verifying dates, welfare rates, and names in the case note.'
-                          : 'Generated via Google Cloud Speech-to-Text v2 from verified redacted audio with Advice Sector phrase adaptation.'}
-                      </div>
-                    ) : (
-                      <div
-                        style={{
-                          backgroundColor: '#FEF3C7',
-                          border: '1px solid #FCD34D',
-                          borderRadius: '6px',
-                          padding: '0.75rem',
-                          marginBottom: '1rem',
-                          fontSize: '0.8125rem',
-                          color: '#92400E',
-                        }}
-                      >
-                        <div style={{ fontWeight: 700, marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <Shield size={14} /> Internal Redaction Pass Only
-                        </div>
-                        This transcript exists solely to locate identifiers for local acoustic redaction. It is never displayed as the working case note and never leaves this workstation.
-                      </div>
-                    )}
-
                     {/* Speech Recognition Results Summary */}
-                    {session.cloudAsrResult ? (
+                    {session.transcript ? (
                       <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '6px', padding: '0.75rem', marginBottom: '1rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#334155' }}>Cloud STT v2 Output:</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#334155' }}>Transcription Status:</span>
                           <span style={{ fontSize: '0.6875rem', padding: '0.125rem 0.375rem', borderRadius: '4px', backgroundColor: '#DCFCE7', color: '#166534', fontWeight: 600 }}>
-                            en-GB • {(session.cloudAsrResult.avgConfidence * 100).toFixed(1)}% Confidence
+                            europe-west2 • {session.transcript.executionDurationMs}ms
                           </span>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', fontSize: '0.75rem', color: '#475569' }}>
                           <div style={{ backgroundColor: '#FFFFFF', padding: '0.375rem', borderRadius: '4px', border: '1px solid #CBD5E1' }}>
-                            <div style={{ fontWeight: 700, color: '#0F172A' }}>{session.cloudAsrResult.totalWords}</div>
+                            <div style={{ fontWeight: 700, color: '#0F172A' }}>{session.transcript.totalWords}</div>
                             <div style={{ fontSize: '0.6875rem' }}>Words</div>
                           </div>
                           <div style={{ backgroundColor: '#FFFFFF', padding: '0.375rem', borderRadius: '4px', border: '1px solid #CBD5E1' }}>
-                            <div style={{ fontWeight: 700, color: '#0F172A' }}>{session.cloudAsrResult.segments.length}</div>
-                            <div style={{ fontSize: '0.6875rem' }}>Speaker Turns</div>
-                          </div>
-                          <div style={{ backgroundColor: '#FFFFFF', padding: '0.375rem', borderRadius: '4px', border: '1px solid #CBD5E1' }}>
-                            <div style={{ fontWeight: 700, color: '#166534' }}>v{session.cloudAsrResult.phraseSetVersion}</div>
-                            <div style={{ fontSize: '0.6875rem' }}>Phrase Set</div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : session.localAsrResult ? (
-                      <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '6px', padding: '0.75rem', marginBottom: '1rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#334155' }}>Acoustic Segmentation Status:</span>
-                          <span style={{ fontSize: '0.6875rem', padding: '0.125rem 0.375rem', borderRadius: '4px', backgroundColor: session.localAsrResult.hardwareBackend === 'webgpu' ? '#DCFCE7' : '#FEF3C7', color: session.localAsrResult.hardwareBackend === 'webgpu' ? '#166534' : '#92400E', fontWeight: 600 }}>
-                            {(session.localAsrResult.hardwareBackend || 'cloud').toUpperCase()} ({session.localAsrResult.executionDurationMs}ms)
-                          </span>
-                        </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', fontSize: '0.75rem', color: '#475569' }}>
-                          <div style={{ backgroundColor: '#FFFFFF', padding: '0.375rem', borderRadius: '4px', border: '1px solid #CBD5E1' }}>
-                            <div style={{ fontWeight: 700, color: '#0F172A' }}>{session.localAsrResult.totalWords}</div>
-                            <div style={{ fontSize: '0.6875rem' }}>Words</div>
-                          </div>
-                          <div style={{ backgroundColor: '#FFFFFF', padding: '0.375rem', borderRadius: '4px', border: '1px solid #CBD5E1' }}>
-                            <div style={{ fontWeight: 700, color: '#0F172A' }}>{session.localAsrResult.segments.length}</div>
+                            <div style={{ fontWeight: 700, color: '#0F172A' }}>{session.transcript.segments.length}</div>
                             <div style={{ fontSize: '0.6875rem' }}>Turns/Segments</div>
                           </div>
                           <div style={{ backgroundColor: '#FFFFFF', padding: '0.375rem', borderRadius: '4px', border: '1px solid #CBD5E1' }}>
-                            <div style={{ fontWeight: 700, color: session.localAsrResult.lowConfidenceWordsCount > 0 ? '#B45309' : '#166534' }}>
-                              {session.localAsrResult.lowConfidenceWordsCount}
+                            <div style={{ fontWeight: 700, color: session.transcript.lowConfidenceWordsCount > 0 ? '#B45309' : '#166534' }}>
+                              {session.transcript.lowConfidenceWordsCount}
                             </div>
                             <div style={{ fontSize: '0.6875rem' }}>Low Conf (&lt;0.70)</div>
                           </div>
                         </div>
-                        {session.localAsrResult.lowConfidenceWordsCount > 0 && (
+                        {session.transcript.lowConfidenceWordsCount > 0 && (
                           <div style={{ marginTop: '0.5rem', fontSize: '0.6875rem', color: '#92400E', backgroundColor: '#FFFBEB', padding: '0.375rem', borderRadius: '4px', border: '1px solid #FDE68A' }}>
-                            ⚠️ {session.localAsrResult.lowConfidenceWordsCount} mumbled/low-confidence tokens escalated to Phase 9 Redaction Gate.
+                            ⚠️ {session.transcript.lowConfidenceWordsCount} mumbled/low-confidence tokens escalated to Redaction Gate.
                           </div>
                         )}
                       </div>
                     ) : (
                       <div style={{ backgroundColor: '#F8FAFC', border: '1px dashed #CBD5E1', borderRadius: '6px', padding: '1rem', textAlign: 'center', marginBottom: '1rem', fontSize: '0.8125rem', color: '#64748B' }}>
-                        Local Speech Recognition not yet executed for this audio.
+                        Speech Recognition not yet executed for this audio.
                       </div>
                     )}
                   </div>
@@ -1264,7 +1003,7 @@ export const App: React.FC = () => {
                   {/* Right Column: Transcript & Tokenisation Controls (Phase 12) */}
                   <div style={{ backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                      <h3 style={{ margin: 0, fontSize: '1rem', color: '#004B87' }}>Acoustic Processing & Redaction Actions</h3>
+                      <h3 style={{ margin: 0, fontSize: '1rem', color: '#004B87' }}>Privacy & Redaction Actions</h3>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <button
                           type="button"
@@ -1316,33 +1055,6 @@ export const App: React.FC = () => {
                             <span>Review Redactions Gate (Phase 9)</span>
                           )}
                         </button>
-
-                        {session.isAudioRedactedAndVerified && !session.cloudAccurateTranscript && (
-                          <button
-                            type="button"
-                            id="trigger-cloud-stt-btn"
-                            onClick={() => {
-                              setIsCloudSttModalOpen(true);
-                            }}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '0.375rem',
-                              backgroundColor: '#004B87',
-                              color: '#FFFFFF',
-                              border: 'none',
-                              padding: '0.4rem 0.875rem',
-                              borderRadius: '6px',
-                              fontWeight: 700,
-                              fontSize: '0.8125rem',
-                              cursor: 'pointer',
-                              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                            }}
-                          >
-                            <Cloud size={14} aria-hidden="true" />
-                            Transcribe via Cloud STT v2
-                          </button>
-                        )}
                       </div>
                     </div>
 
@@ -1365,7 +1077,7 @@ export const App: React.FC = () => {
                 </div>
 
                 {/* Phase 8: 3-Layer Identifier Detection & Review Panel */}
-                {session.localDraftTranscript && (
+                {session.transcript && (
                   <div style={{ marginTop: '1.5rem' }}>
                     <IdentifierReviewPanel
                       identifiers={session.detectedIdentifiers || []}
@@ -1422,7 +1134,7 @@ export const App: React.FC = () => {
                 No session data exists to view. This dashboard provides only anonymized aggregate counts, intake route distributions, and operational throughput.
               </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
               <div style={{ padding: '1rem', backgroundColor: '#EFF6FF', borderRadius: '6px' }}>
                 <div style={{ fontSize: '0.75rem', color: '#64748B' }}>Total Sessions Processed</div>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#004B87' }}>42</div>
@@ -1432,12 +1144,8 @@ export const App: React.FC = () => {
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#004B87' }}>24</div>
               </div>
               <div style={{ padding: '1rem', backgroundColor: '#EFF6FF', borderRadius: '6px' }}>
-                <div style={{ fontSize: '0.75rem', color: '#64748B' }}>Webex Telephony Intake</div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#004B87' }}>15</div>
-              </div>
-              <div style={{ padding: '1rem', backgroundColor: '#EFF6FF', borderRadius: '6px' }}>
                 <div style={{ fontSize: '0.75rem', color: '#64748B' }}>Attested File Imports</div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#004B87' }}>3</div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#004B87' }}>18</div>
               </div>
             </div>
           </div>
@@ -1492,81 +1200,6 @@ export const App: React.FC = () => {
         onClose={() => setIsRedactionGateOpen(false)}
         onProceedSuccess={() => {
           setIsRedactionGateOpen(false);
-          setIsVerificationModalOpen(true);
-        }}
-      />
-
-      {/* Audio Redaction & Verification Modal (Phase 10) */}
-      <AudioRedactionVerificationModal
-        isOpen={isVerificationModalOpen}
-        onClose={() => setIsVerificationModalOpen(false)}
-        onVerificationComplete={() => {
-          setIsVerificationModalOpen(false);
-          setIsCloudSttModalOpen(true);
-        }}
-        onReturnToGateWithSurvivors={(_survivors) => {
-          setIsVerificationModalOpen(false);
-          setIsRedactionGateOpen(true);
-        }}
-      />
-
-      {/* Cloud Speech-to-Text v2 Modal (Phase 11) */}
-      <CloudSttModal
-        isOpen={isCloudSttModalOpen}
-        onClose={() => setIsCloudSttModalOpen(false)}
-        onSuccess={(result) => {
-          setIsCloudSttModalOpen(false);
-          if (session) {
-            const alignResult = tokenisationEngine.alignAndTokeniseTranscript(
-              result.fullTranscript,
-              session.detectedIdentifiers || [],
-              session.redactedIntervals || [],
-              session.tokenMap || {}
-            );
-            volatileSessionStore.setWorkingTranscripts(
-              alignResult.tokenisedTranscript,
-              alignResult.detokenisedTranscript,
-              session.tokenMap || {}
-            );
-          }
-        }}
-        onFailure={(error) => {
-          setIsCloudSttModalOpen(false);
-          setCloudSttError(error.message);
-          setIsCloudSttFailureModalOpen(true);
-        }}
-      />
-
-      {/* Cloud STT Failure Choice Modal (Phase 11 - No Silent Fallback) */}
-      <CloudSttFailureModal
-        isOpen={isCloudSttFailureModalOpen}
-        errorMessage={cloudSttError}
-        onRetry={() => {
-          setIsCloudSttFailureModalOpen(false);
-          setIsCloudSttModalOpen(true);
-        }}
-        onProceedWithLocalTranscript={() => {
-          volatileSessionStore.setFallbackToLocalTranscript(
-            cloudSttError || 'Adviser chose Pass 1 local transcript after Cloud STT error.'
-          );
-          if (session) {
-            const rawLocal = session.localDraftTranscript || '';
-            const alignResult = tokenisationEngine.alignAndTokeniseTranscript(
-              rawLocal,
-              session.detectedIdentifiers || [],
-              session.redactedIntervals || [],
-              session.tokenMap || {}
-            );
-            volatileSessionStore.setWorkingTranscripts(
-              alignResult.tokenisedTranscript,
-              alignResult.detokenisedTranscript,
-              session.tokenMap || {}
-            );
-          }
-          setIsCloudSttFailureModalOpen(false);
-        }}
-        onCancel={() => {
-          setIsCloudSttFailureModalOpen(false);
         }}
       />
 
@@ -1583,3 +1216,4 @@ export const App: React.FC = () => {
     </div>
   );
 };
+

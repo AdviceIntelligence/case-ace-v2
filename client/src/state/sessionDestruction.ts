@@ -21,7 +21,6 @@
 import { volatileSessionStore } from './volatileStore.ts';
 import { sessionRecoveryManager } from './sessionRecoveryManager.ts';
 import { logSecurityEvent } from '../monitoring/eventLogger.ts';
-import { apiFetch } from '../config/apiClient.ts';
 
 export type SessionExitReason =
   | 'explicit_end'
@@ -119,11 +118,6 @@ export async function destroySession(options: DestroySessionOptions = {}): Promi
         new Uint8Array(currentState.redactedAudioBuffer).fill(0);
       } catch {}
     }
-    if (currentState.redactedAudioWavBuffer) {
-      try {
-        new Uint8Array(currentState.redactedAudioWavBuffer).fill(0);
-      } catch {}
-    }
   }
 
   // 3. Clear all session store data structures & release references
@@ -136,15 +130,12 @@ export async function destroySession(options: DestroySessionOptions = {}): Promi
     console.warn('[SessionDestruction] Error terminating recovery worker:', err);
   }
 
-  // 5. Revoke outstanding cloud credentials / clear client token cache
-  revokeClientCloudCredentials();
-
-  // 6. Clear clipboard if detokenised content was copied and platform permits
+  // 5. Clear clipboard if detokenised content was copied and platform permits
   if (hasDetokenisedContentInClipboard && !options.skipClipboardClear) {
     await clearClipboardIfPermitted();
   }
 
-  // 7. Dispatch a single non-PII monitoring telemetry event
+  // 6. Dispatch a single non-PII monitoring telemetry event
   try {
     logSecurityEvent({
       type: 'SESSION_ENDED',
@@ -159,7 +150,7 @@ export async function destroySession(options: DestroySessionOptions = {}): Promi
     console.warn('[SessionDestruction] Error logging session ended telemetry:', err);
   }
 
-  // 8. Assert post-destruction state guarantee
+  // 7. Assert post-destruction state guarantee
   assertSessionDestroyed();
 }
 
@@ -177,23 +168,6 @@ async function clearClipboardIfPermitted(): Promise<void> {
     } catch {
       // Permission might be denied in non-focused tabs or certain browser sandboxes
     }
-  }
-}
-
-/**
- * Revokes client-held downscoped cloud credentials and resets cache.
- */
-function revokeClientCloudCredentials(): void {
-  // If in browser context with active credential revocation endpoint
-  if (typeof window !== 'undefined' && typeof fetch !== 'undefined') {
-    try {
-      apiFetch('/api/v1/credentials/revoke', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      }).catch(() => {
-        // Non-blocking
-      });
-    } catch {}
   }
 }
 

@@ -273,10 +273,10 @@ describe('Phase 6B: Media Import & Sandboxed Decoding Pipeline', () => {
       for (const name of NETWORK_GLOBALS) expect(windowScope[name]()).toBe('reachable');
     });
 
-    it('has both worker entries route their sandbox through workerSandbox.ts', async () => {
+    it('has worker entries route their sandbox through workerSandbox.ts', async () => {
       const fs = await import('fs');
       const path = await import('path');
-      for (const entry of ['mediaDecoderWorker.ts', 'localAsrWorker.ts']) {
+      for (const entry of ['mediaDecoderWorker.ts']) {
         const content = fs.readFileSync(
           path.resolve(__dirname, '../../client/src/workers/', entry),
           'utf8',

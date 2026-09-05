@@ -19,7 +19,7 @@
 
 import { destroySession } from '../state/sessionDestruction.ts';
 
-export type IntakeRoute = 'live_in_person' | 'webex_telephony' | 'file_import';
+export type IntakeRoute = 'live_in_person' | 'file_import';
 
 export type SourceEquipment =
   | 'caw_olympus_dictaphone'
@@ -127,20 +127,6 @@ export class ConsentManager {
           ],
           affirmationStatement:
             'I confirm that I have explained these points to the client in terms they understood, and the client has affirmatively consented to being recorded.',
-        };
-
-      case 'webex_telephony':
-        return {
-          title: 'Cisco Webex / Telephone Call Consent Gate',
-          adviserInstructions:
-            'At the start of the call, inform the client before initiating recording. The record button remains disabled until confirmed:',
-          clientInformationPoints: [
-            'Advise the client that you wish to record the call to draft their case note.',
-            'Inform them that the audio is held only in temporary workstation memory and destroyed when the session ends.',
-            'Explain that declining or stopping recording does not affect the telephone advice consultation.',
-          ],
-          affirmationStatement:
-            'I confirm that I have informed the client on this call of the recording purpose and temporary memory retention, and the client has agreed to proceed.',
         };
 
       case 'file_import':
@@ -297,14 +283,10 @@ export class ConsentManager {
   /**
    * Withdraws consent with instant one-action destruction.
    */
-  public withdrawConsent(route?: IntakeRoute, onWebexContinue?: () => void): void {
+  public withdrawConsent(): void {
     destroySession({ reason: 'consent_withdrawal' }).catch((err) => {
       console.warn('[ConsentManager] destroySession error:', err);
     });
-
-    if (route === 'webex_telephony' && onWebexContinue) {
-      onWebexContinue();
-    }
   }
 }
 

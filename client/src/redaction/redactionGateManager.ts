@@ -15,7 +15,7 @@
  * - No skip path, no batch "redact all" bypass, no cross-session preference caching.
  */
 
-import { volatileSessionStore, type SessionState } from '../state/volatileStore.ts';
+import { volatileSessionStore, type SessionState, type AsrWord } from '../state/volatileStore.ts';
 import { logSecurityEvent } from '../monitoring/eventLogger.ts';
 
 export interface LowConfidenceItem {
@@ -58,15 +58,17 @@ export interface OutboundTransmissionDisclosure {
  */
 export function extractLowConfidenceItems(state: Readonly<SessionState>): LowConfidenceItem[] {
   const items: LowConfidenceItem[] = [];
-  const rawTranscript = state.localDraftTranscript || '';
+  const rawTranscript = state.transcript?.fullTranscript || '';
   const acknowledged = new Set(state.acknowledgedLowConfidenceIds);
 
-  // 1. From Local ASR Words
-  if (state.localAsrResult?.lowConfidenceWords) {
-    state.localAsrResult.lowConfidenceWords.forEach((w, index) => {
+  // 1. From Transcript Words (< 0.70 confidence)
+  const words: AsrWord[] = state.transcript?.words ?? state.transcript?.segments?.flatMap((s) => s.words) ?? [];
+  words
+    .filter((w: AsrWord) => w.confidence < 0.70)
+    .forEach((w: AsrWord, index: number) => {
       const id = `low_conf_word_${index}_${Math.round(w.start * 100)}`;
       
-      // Compute surrounding context (approx ±30 chars)
+      // Compute surrounding context (approx ±25 chars)
       const wordStartChar = Math.max(0, rawTranscript.toLowerCase().indexOf(w.word.toLowerCase()));
       const contextStart = Math.max(0, wordStartChar - 25);
       const contextEnd = Math.min(rawTranscript.length, wordStartChar + w.word.length + 25);
@@ -78,13 +80,12 @@ export function extractLowConfidenceItems(state: Readonly<SessionState>): LowCon
         startSec: w.start,
         endSec: w.end,
         confidence: w.confidence,
-        speaker: w.speaker,
+        speaker: w.speaker || 'unknown',
         surroundingContext: context ? `...${context.trim()}...` : `[${w.word}]`,
         isAcknowledged: acknowledged.has(id),
         sourceType: 'asr_token',
       });
     });
-  }
 
   // 2. From Detected Identifiers with confidence < 0.70
   state.detectedIdentifiers
@@ -156,7 +157,7 @@ export function getOutboundDisclosure(state: Readonly<SessionState>): OutboundTr
   const specialCategoryCount = activeIdentifiers.filter((d) => d.detectionLayer === 3).length;
   
   // Re-generate current tokenised transcript preview
-  const raw = state.localDraftTranscript || '';
+  const raw = state.transcript?.fullTranscript || '';
   let preview = raw;
 
   // Sort identifiers by start offset descending to avoid offset collision

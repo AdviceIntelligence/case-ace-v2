@@ -47,10 +47,10 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
   useEffect(() => {
     const current =
       viewMode === 'tokenised'
-        ? session.tokenisedWorkingTranscript || ''
-        : session.detokenisedWorkingTranscript || session.cloudAccurateTranscript || session.localDraftTranscript || '';
+        ? session.tokenisedWorkingTranscript || session.tokenisedTranscript || ''
+        : session.detokenisedWorkingTranscript || session.transcript?.fullTranscript || '';
     setTextValue(current);
-  }, [viewMode, session.tokenisedWorkingTranscript, session.detokenisedWorkingTranscript]);
+  }, [viewMode, session.tokenisedWorkingTranscript, session.detokenisedWorkingTranscript, session.transcript, session.tokenisedTranscript]);
 
   const handleToggleView = (newMode: 'tokenised' | 'detokenised') => {
     volatileSessionStore.setTranscriptViewMode(newMode);
@@ -135,11 +135,11 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
                 padding: '0.2rem 0.5rem',
                 borderRadius: '9999px',
                 fontWeight: 600,
-                backgroundColor: session.isFallbackToLocalTranscript ? '#FEF3C7' : '#EFF6FF',
-                color: session.isFallbackToLocalTranscript ? '#92400E' : '#1D4ED8',
+                backgroundColor: '#EFF6FF',
+                color: '#1D4ED8',
               }}
             >
-              {session.isFallbackToLocalTranscript ? 'Pass 1 Fallback' : 'Pass 2 Cloud (europe-west2)'}
+              Cloud STT (europe-west2)
             </span>
             {session.isTranscriptEdited && (
               <span

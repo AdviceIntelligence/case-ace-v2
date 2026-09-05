@@ -17,7 +17,6 @@ export const PERMITTED_EVENT_TYPES = new Set([
   'AUDIO_RECORDING_STARTED',
   'AUDIO_RECORDING_STOPPED',
   'FILE_IMPORTED',
-  'WEBEX_CALL_EVENT',
   'PASS1_LOCAL_ASR_COMPLETED',
   'IDENTIFIERS_DETECTED',
   'REDACTION_GATE_ENTERED',
@@ -46,7 +45,6 @@ export const PERMITTED_ROLES = new Set([
 
 export const PERMITTED_INTAKE_ROUTES = new Set([
   'live_in_person',
-  'webex_telephony',
   'file_import',
 ]);
 
@@ -82,7 +80,6 @@ export const PERMITTED_CONSENT_STATUSES = new Set([
 export const PERMITTED_ERROR_CODES = new Set([
   'ERR_NONE',
   'ERR_MIC_DENIED',
-  'ERR_WEBEX_STREAM_FAILED',
   'ERR_DECODE_FAILED',
   'ERR_LOCAL_ASR_FAILED',
   'ERR_CLOUD_STT_UNAVAILABLE',
@@ -122,10 +119,6 @@ export const PERMITTED_ROOT_KEYS = new Set([
   'gapsAcknowledgedCount',
   'draftToSignoffDurationMs',
   'consentStatus',
-  // Webex specific
-  'pseudonymousCallReference',
-  'callDurationSeconds',
-  'callEventCounts',
   // File Import specific
   'sourceEquipmentCategory',
   'importedRecordingDurationSeconds',
@@ -156,9 +149,6 @@ export interface ValidatedLogPayload {
   gapsAcknowledgedCount?: number;
   draftToSignoffDurationMs?: number;
   consentStatus?: string;
-  pseudonymousCallReference?: string;
-  callDurationSeconds?: number;
-  callEventCounts?: { joinCount: number; muteCount: number; holdCount: number; dropCount: number };
   sourceEquipmentCategory?: string;
   importedRecordingDurationSeconds?: number;
 }
@@ -222,13 +212,6 @@ export function validateLogPayload(payload: unknown): ValidatedLogPayload {
     assertNoPiiLeak(obj.pseudonymousSessionId, 'pseudonymousSessionId');
   }
 
-  if (obj.pseudonymousCallReference !== undefined) {
-    if (typeof obj.pseudonymousCallReference !== 'string' || !/^[a-zA-Z0-9_\-]+$/.test(obj.pseudonymousCallReference) || obj.pseudonymousCallReference.length > 64) {
-      throw new LogSchemaValidationError('pseudonymousCallReference must be a clean alphanumeric token under 64 chars.', 'pseudonymousCallReference');
-    }
-    assertNoPiiLeak(obj.pseudonymousCallReference, 'pseudonymousCallReference');
-  }
-
   // 5. Validate Enums
   if (obj.role !== undefined) {
     if (typeof obj.role !== 'string' || !PERMITTED_ROLES.has(obj.role)) {
@@ -275,7 +258,6 @@ export function validateLogPayload(payload: unknown): ValidatedLogPayload {
   validateNonNegativeInteger(obj.byteCounts, 'byteCounts');
   validateNonNegativeInteger(obj.gapsAcknowledgedCount, 'gapsAcknowledgedCount');
   validateNonNegativeInteger(obj.draftToSignoffDurationMs, 'draftToSignoffDurationMs');
-  validateNonNegativeNumber(obj.callDurationSeconds, 'callDurationSeconds');
   validateNonNegativeNumber(obj.importedRecordingDurationSeconds, 'importedRecordingDurationSeconds');
 
   if (obj.apiStatusCode !== undefined) {
@@ -325,19 +307,6 @@ export function validateLogPayload(payload: unknown): ValidatedLogPayload {
         throw new LogSchemaValidationError(`Unknown sub-field in reviewGateModifications: '${k}'`, 'reviewGateModifications');
       }
       validateNonNegativeInteger(rgm[k], `reviewGateModifications.${k}`);
-    }
-  }
-
-  if (obj.callEventCounts !== undefined) {
-    if (!obj.callEventCounts || typeof obj.callEventCounts !== 'object' || Array.isArray(obj.callEventCounts)) {
-      throw new LogSchemaValidationError('callEventCounts must be an object.', 'callEventCounts');
-    }
-    const cec = obj.callEventCounts as Record<string, unknown>;
-    for (const k of Object.keys(cec)) {
-      if (!['joinCount', 'muteCount', 'holdCount', 'dropCount'].includes(k)) {
-        throw new LogSchemaValidationError(`Unknown sub-field in callEventCounts: '${k}'`, 'callEventCounts');
-      }
-      validateNonNegativeInteger(cec[k], `callEventCounts.${k}`);
     }
   }
 

@@ -15,17 +15,14 @@
 
 import type { ConsentRecord, ImportProvenance } from '../consent/consentManager.ts';
 import type { SpeakerChannelMap } from '../audio/audioNormalizer.ts';
-import type { MergedRedactionInterval } from '../audio/audioRedactionEngine.ts';
 
-export type { MergedRedactionInterval, SpeakerChannelMap };
+export type { SpeakerChannelMap };
 
 export type SessionStage =
   | 'unauthenticated'
   | 'intake'
   | 'local_redaction'
   | 'redaction_review'
-  | 'audio_redacted'
-  | 'cloud_stt'
   | 'tokenisation'
   | 'prompt_review'
   | 'llm_draft'
@@ -34,7 +31,7 @@ export type SessionStage =
   | 'adviser_review'
   | 'signed_off';
 
-export type IntakeType = 'live_microphone' | 'webex_dialout' | 'file_import';
+export type IntakeType = 'live_microphone' | 'file_import';
 
 export interface AsrWord {
   word: string;
@@ -60,12 +57,11 @@ export interface AsrSegment {
 export interface TranscriptResult {
   segments: AsrSegment[];
   fullTranscript: string;
+  words?: AsrWord[];
   totalWords: number;
   lowConfidenceWordsCount: number;
   lowConfidenceWords: AsrWord[];
   executionDurationMs: number;
-  hardwareBackend?: 'webgpu' | 'wasm';
-  routeSpeakerSource?: 'webex_channel_split' | 'inferred_acoustic_diarisation';
   provider?: 'google_stt_v2';
   region?: string;
   dataLoggingEnabled?: false;
@@ -73,40 +69,7 @@ export interface TranscriptResult {
   speakerAttribution?: 'per_chunk_unresolved';
 }
 
-
 export type LocalAsrResult = TranscriptResult;
-
-export interface CloudAsrWord {
-  word: string;
-  startSec: number;
-  endSec: number;
-  confidence: number;
-  speakerTag: number; // 1 or 2
-}
-
-export interface CloudAsrSegment {
-  id: string;
-  speaker: 'adviser' | 'client' | 'unknown';
-  speakerTag: number;
-  startSec: number;
-  endSec: number;
-  text: string;
-  words: CloudAsrWord[];
-  avgConfidence: number;
-}
-
-export interface CloudAsrResult {
-  segments: CloudAsrSegment[];
-  fullTranscript: string;
-  totalWords: number;
-  avgConfidence: number;
-  requestDurationMs: number;
-  languageCode: 'en-GB';
-  modelUsed: string;
-  dataLoggingEnabled: boolean; // Must be false
-  phraseSetVersion: string;
-  region: 'europe-west2';
-}
 
 export type IdentifierLayer = 1 | 2 | 3;
 
@@ -228,10 +191,6 @@ export interface SessionState {
   rawAudioBuffer: ArrayBuffer | null;
   redactedAudioBuffer: ArrayBuffer | null;
   transcript: TranscriptResult | null;
-  draftTranscript: string | null;
-  localAsrResult: LocalAsrResult | null;
-  localDraftTranscript: string | null;
-  cloudAccurateTranscript: string | null;
   extractedEntities: ExtractedEntity[];
   detectedIdentifiers: DetectedIdentifier[];
   tokenMap: Record<string, string>; // surrogate_token -> original_pii
@@ -246,16 +205,6 @@ export interface SessionState {
   isGatePassed: boolean;
   manualRedactions: DetectedIdentifier[];
   redactionReviewAudit: RedactionReviewAudit | null;
-  // Phase 10 Audio Redaction & Verification State
-  verificationTranscript: string | null;
-  survivingIdentifiers: DetectedIdentifier[];
-  isAudioRedactedAndVerified: boolean;
-  redactedAudioWavBuffer: ArrayBuffer | null;
-  redactedIntervals: MergedRedactionInterval[];
-  // Phase 11 Cloud Speech-to-Text v2 State
-  cloudAsrResult: CloudAsrResult | null;
-  isFallbackToLocalTranscript: boolean;
-  cloudSttFailureReason: string | null;
   // Phase 12 Tokenisation & Detokenisation State
   transcriptViewMode: 'tokenised' | 'detokenised';
   tokenisedWorkingTranscript: string | null;
@@ -449,8 +398,6 @@ export class VolatileSessionStore {
     } else if (intakeTypeOrOptions && typeof intakeTypeOrOptions === 'object') {
       if (intakeTypeOrOptions.route === 'in_person' || intakeTypeOrOptions.route === 'live_in_person' || intakeTypeOrOptions.route === 'live_microphone') {
         resolvedIntakeType = 'live_microphone';
-      } else if (intakeTypeOrOptions.route === 'telephony_webex' || intakeTypeOrOptions.route === 'webex_dialout') {
-        resolvedIntakeType = 'webex_dialout';
       } else {
         resolvedIntakeType = 'file_import';
       }
@@ -469,10 +416,6 @@ export class VolatileSessionStore {
       rawAudioBuffer: null,
       redactedAudioBuffer: null,
       transcript: null,
-      draftTranscript: null,
-      localAsrResult: null,
-      localDraftTranscript: null,
-      cloudAccurateTranscript: null,
       extractedEntities: [],
       detectedIdentifiers: [],
       tokenMap: {},
@@ -493,14 +436,6 @@ export class VolatileSessionStore {
       isGatePassed: false,
       manualRedactions: [],
       redactionReviewAudit: null,
-      verificationTranscript: null,
-      survivingIdentifiers: [],
-      isAudioRedactedAndVerified: false,
-      redactedAudioWavBuffer: null,
-      redactedIntervals: [],
-      cloudAsrResult: null,
-      isFallbackToLocalTranscript: false,
-      cloudSttFailureReason: null,
       // Phase 12 defaults (Defaults to detokenised for factual checking)
       transcriptViewMode: 'detokenised',
       tokenisedWorkingTranscript: null,
@@ -662,34 +597,49 @@ export class VolatileSessionStore {
 
   // --- Transcript Accessors and Memory Hygiene ---
 
+  // --- Transcript and Entity Accessors ---
+
   public getTranscript(): Readonly<TranscriptResult> | null {
-    return this.state?.transcript ?? this.state?.localAsrResult ?? null;
+    return this.state?.transcript ?? null;
   }
 
   public getLocalAsrResult(): Readonly<LocalAsrResult> | null {
     return this.getTranscript();
   }
 
-  public setTranscript(result: TranscriptResult): void {
+  public setTranscript(resultOrText: TranscriptResult | string): void {
     if (!this.state) throw new Error('Cannot store transcript on uninitialised session.');
-    this.state.transcript = { ...result };
-    this.state.draftTranscript = result.fullTranscript;
-    this.state.localAsrResult = { ...result };
-    this.state.localDraftTranscript = result.fullTranscript;
+    if (typeof resultOrText === 'string') {
+      this.state.transcript = {
+        fullTranscript: resultOrText,
+        segments: [],
+        words: [],
+        totalWords: resultOrText.trim() ? resultOrText.trim().split(/\s+/).length : 0,
+        lowConfidenceWordsCount: 0,
+        lowConfidenceWords: [],
+        executionDurationMs: 0,
+        provider: 'google_stt_v2',
+        region: 'europe-west2',
+        dataLoggingEnabled: false,
+      };
+    } else {
+      this.state.transcript = { ...resultOrText };
+    }
     this.state.metadata.updatedAt = Date.now();
     this.notify();
   }
 
-  public setLocalAsrResult(result: LocalAsrResult): void {
-    this.setTranscript(result);
+  public setLocalAsrResult(result: LocalAsrResult | string): void {
+    this.setTranscript(result as any);
+  }
+
+  public setLocalDraftTranscript(transcript: string): void {
+    this.setTranscript(transcript);
   }
 
   public clearTranscript(): void {
     if (this.state) {
       this.state.transcript = null;
-      this.state.draftTranscript = null;
-      this.state.localAsrResult = null;
-      this.state.localDraftTranscript = null;
       this.state.metadata.updatedAt = Date.now();
       this.notify();
     }
@@ -699,72 +649,8 @@ export class VolatileSessionStore {
     this.clearTranscript();
   }
 
-  // --- Transcript and Entity Accessors ---
-
-  public setDraftTranscript(transcript: string): void {
-    if (!this.state) throw new Error('Cannot set transcript on uninitialised session.');
-    this.state.draftTranscript = transcript;
-    this.state.localDraftTranscript = transcript;
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  public setLocalDraftTranscript(transcript: string): void {
-    this.setDraftTranscript(transcript);
-  }
-
-  public setCloudAccurateTranscript(transcript: string): void {
-    if (!this.state) throw new Error('Cannot set cloud transcript on uninitialised session.');
-    this.state.cloudAccurateTranscript = transcript;
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  public getCloudAsrResult(): Readonly<CloudAsrResult> | null {
-    return this.state?.cloudAsrResult ?? null;
-  }
-
-  public setCloudAsrResult(result: CloudAsrResult): void {
-    if (!this.state) throw new Error('Cannot set Cloud ASR result on uninitialised session.');
-    this.state.cloudAsrResult = { ...result };
-    this.state.cloudAccurateTranscript = result.fullTranscript;
-    this.state.isFallbackToLocalTranscript = false;
-    this.state.cloudSttFailureReason = null;
-    this.state.stage = 'cloud_stt';
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  /**
-   * Explicit Adviser Decision: Fall back to Pass 1 Local Transcript on Cloud STT failure.
-   * Prominently flags that the case note is generated from lower-accuracy local ASR.
-   */
-  public setFallbackToLocalTranscript(reason: string): void {
-    if (!this.state) throw new Error('Cannot set fallback on uninitialised session.');
-    if (!this.state.localDraftTranscript) {
-      throw new Error('Cannot fall back: No local transcript exists in volatile session.');
-    }
-    this.state.isFallbackToLocalTranscript = true;
-    this.state.cloudSttFailureReason = reason;
-    this.state.cloudAccurateTranscript = this.state.localDraftTranscript;
-    this.state.stage = 'cloud_stt';
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  public setCloudSttFailure(reason: string): void {
-    if (!this.state) throw new Error('Cannot record Cloud STT failure on uninitialised session.');
-    this.state.cloudSttFailureReason = reason;
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  public clearCloudSttFailure(): void {
-    if (this.state) {
-      this.state.cloudSttFailureReason = null;
-      this.state.metadata.updatedAt = Date.now();
-      this.notify();
-    }
+  public getTokenisedTranscript(): string | null {
+    return this.state?.tokenisedTranscript ?? null;
   }
 
   public setDetectedIdentifiers(identifiers: DetectedIdentifier[]): void {
@@ -869,16 +755,9 @@ export class VolatileSessionStore {
           new Uint8Array(this.state.redactedAudioBuffer).fill(0);
         } catch {}
       }
-      if (this.state.redactedAudioWavBuffer) {
-        try {
-          new Uint8Array(this.state.redactedAudioWavBuffer).fill(0);
-        } catch {}
-      }
 
       this.state.clientPhoneNumber = null;
-      this.state.localAsrResult = null;
-      this.state.localDraftTranscript = null;
-      this.state.cloudAccurateTranscript = null;
+      this.state.transcript = null;
       this.state.extractedEntities = [];
       this.state.detectedIdentifiers = [];
       this.state.tokenMap = {};
@@ -889,19 +768,12 @@ export class VolatileSessionStore {
       this.state.speakerMap = null;
       this.state.rawAudioBuffer = null;
       this.state.redactedAudioBuffer = null;
-      this.state.redactedAudioWavBuffer = null;
       this.state.acknowledgedLowConfidenceIds = [];
       this.state.gateOpenedTimestampMs = null;
       this.state.gateCompletedTimestampMs = null;
       this.state.isGatePassed = false;
       this.state.manualRedactions = [];
       this.state.redactionReviewAudit = null;
-      this.state.verificationTranscript = null;
-      this.state.survivingIdentifiers = [];
-      this.state.isAudioRedactedAndVerified = false;
-      this.state.redactedIntervals = [];
-      this.state.cloudAsrResult = null;
-      this.state.cloudSttFailureReason = null;
       this.state.tokenisedWorkingTranscript = null;
       this.state.detokenisedWorkingTranscript = null;
       this.state.tokenIntegrityWarnings = [];
@@ -1002,7 +874,7 @@ export class VolatileSessionStore {
    */
   public getPendingLowConfidenceCount(): number {
     if (!this.state) return 0;
-    const lowConfWords = this.state.localAsrResult?.lowConfidenceWords || [];
+    const lowConfWords = this.state.transcript?.lowConfidenceWords || [];
     const lowConfIdentifiers = this.state.detectedIdentifiers.filter((d) => d.confidence < 0.70);
     
     // Total count of unique low confidence tokens
@@ -1047,83 +919,6 @@ export class VolatileSessionStore {
     this.state.metadata.updatedAt = now;
     this.notify();
     return true;
-  }
-
-  // --- Phase 10 Audio Redaction & Verification Methods ---
-
-  /**
-   * Commits verified redacted audio to volatile memory and immediately wipes raw audio (C1 / C4).
-   */
-  public commitVerifiedRedactedAudio(
-    redactedFloat32: ArrayBuffer,
-    wavBuffer: ArrayBuffer,
-    verificationTranscript: string,
-    intervals: MergedRedactionInterval[]
-  ): void {
-    if (!this.state) throw new Error('Cannot commit verified audio on uninitialised session.');
-
-    // 1. Overwrite and release unredacted raw audio buffer (Constraint C1 / Volatile Memory Discipline)
-    if (this.state.rawAudioBuffer) {
-      try {
-        new Uint8Array(this.state.rawAudioBuffer).fill(0);
-      } catch {}
-      this.state.rawAudioBuffer = null;
-    }
-
-    // 2. Commit verified redacted buffers
-    this.state.redactedAudioBuffer = redactedFloat32;
-    this.state.redactedAudioWavBuffer = wavBuffer;
-    this.state.verificationTranscript = verificationTranscript;
-    this.state.redactedIntervals = intervals;
-    this.state.isAudioRedactedAndVerified = true;
-    this.state.survivingIdentifiers = [];
-    this.state.stage = 'audio_redacted';
-    this.state.metadata.updatedAt = Date.now();
-
-    this.notify();
-  }
-
-  /**
-   * Handles verification failure (surviving identifiers detected in redacted audio).
-   * Re-locks the review gate and marks surviving identifiers (Fail Closed per C8).
-   */
-  public setVerificationFailure(survivors: DetectedIdentifier[], verificationTranscript: string): void {
-    if (!this.state) throw new Error('Cannot record verification failure on uninitialised session.');
-
-    this.state.survivingIdentifiers = survivors;
-    this.state.verificationTranscript = verificationTranscript;
-    this.state.isAudioRedactedAndVerified = false;
-    this.state.isGatePassed = false;
-    this.state.stage = 'redaction_review';
-    this.state.metadata.updatedAt = Date.now();
-
-    this.notify();
-  }
-
-  public clearVerificationSurvivors(): void {
-    if (this.state) {
-      this.state.survivingIdentifiers = [];
-      this.state.metadata.updatedAt = Date.now();
-      this.notify();
-    }
-  }
-
-  public setGatePassed(passed: boolean): void {
-    if (!this.state) throw new Error('Cannot set gate passed on uninitialised session.');
-    this.state.isGatePassed = passed;
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  public setAudioRedactedAndVerified(verified: boolean): void {
-    if (!this.state) throw new Error('Cannot set audio redacted and verified on uninitialised session.');
-    this.state.isAudioRedactedAndVerified = verified;
-    this.state.metadata.updatedAt = Date.now();
-    this.notify();
-  }
-
-  public getRedactedAudioWav(): ArrayBuffer | null {
-    return this.state?.redactedAudioWavBuffer ?? null;
   }
 
   // --- Phase 12: Working Transcripts & Tokenisation Controls ---
