@@ -193,9 +193,13 @@ export const App: React.FC = () => {
 
     try {
       await capture.start();
+      // An interview contains long silences and nobody touches the keyboard during one.
+      // Without this the session is destroyed mid-consultation, in front of the client.
+      idleTimeoutManager.suspend('recording');
     } catch (err: any) {
       setMediaError(err.message || 'Microphone access failed.');
       setCaptureState('idle');
+      idleTimeoutManager.resume('recording');
     }
   };
 
@@ -216,6 +220,7 @@ export const App: React.FC = () => {
 
     setIsAsrRunning(true);
     setAsrProgress(null);
+    idleTimeoutManager.suspend('transcribing');
 
     try {
       const float32Pcm = new Float32Array(rawAudio);
@@ -251,6 +256,7 @@ export const App: React.FC = () => {
       setMediaError(err?.message || 'Speech recognition encountered an error.');
     } finally {
       setIsAsrRunning(false);
+      idleTimeoutManager.resume('transcribing');
     }
   };
 
@@ -269,11 +275,15 @@ export const App: React.FC = () => {
     if (!liveCaptureRef.current || !activeConsentRecord) return;
     try {
       const result = liveCaptureRef.current.stop();
+      idleTimeoutManager.resume('recording');
       audioNormalizer.normalizeLiveCapture(result, activeConsentRecord);
       setCaptureState('stopped');
       await runTranscription();
     } catch (err: any) {
-      setMediaError(`Failed while finishing audio capture: ${err?.message || err}`);
+      idleTimeoutManager.resume('recording');
+      setMediaError(
+        `Could not finish the recording: ${err?.message || err}`,
+      );
       setCaptureState('idle');
     }
   };

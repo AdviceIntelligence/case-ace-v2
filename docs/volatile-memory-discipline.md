@@ -206,3 +206,20 @@ Automated test suites in `scripts/run-tests.mjs` verify:
 4. **TypedArray Memory Zeroing**: Audio buffers are filled with 0 on release.
 5. **SessionRecoveryWorker Lifecycle**: State restored on reload simulation; Worker terminated on logout/timeout.
 6. **Leaking Features Suppression**: `spellcheck="false"`, `autocomplete="off"`, `translate="no"` verified across all session inputs.
+
+## Inactivity timeout during a consultation
+
+The fifteen minute inactivity timeout destroys the session and logs the adviser out. It exists
+to protect a workstation left unattended.
+
+It does not run while a consultation is being recorded or transcribed. An adviser conducting an
+interview does not touch the keyboard, and a genuine advice interview contains long silences: a
+client reading a letter, finding a document, or taking the time they need to describe something
+difficult. Ten minutes of quiet is ordinary. With the timer running, the session would be
+destroyed and the recording zeroed part-way through, in front of the client.
+
+A machine with a live microphone in an advice interview is not an unattended machine, so work in
+progress suspends the timer rather than weakening it. The timer resumes the moment the work
+finishes. A session suspended for more than three hours is destroyed anyway, which is beyond the
+ninety minute cap on a single recording and can therefore only be reached by a session nobody
+came back to.

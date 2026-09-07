@@ -542,6 +542,77 @@ async function run() {
     assert.strictEqual(volatileSessionStore.getState(), null);
   });
 
+  // A genuine advice interview contains long silences: a client reading a letter, finding a
+  // document, or taking the time they need to describe something difficult. Ten minutes of
+  // quiet is ordinary, and the adviser is not touching the keyboard at any point. With the
+  // idle timer running, the session would be destroyed and the recording zeroed part-way
+  // through the consultation, in front of the client.
+  await test('A long silence during a consultation does not destroy the session', async () => {
+    const manager = new IdleTimeoutManager(0.01); // 600ms, so the test does not wait 15 minutes
+    let firedWhileRecording = false;
+
+    manager.start(() => {
+      firedWhileRecording = true;
+    });
+    manager.suspend('recording');
+
+    // Far longer than the timeout, with no mouse, key or scroll activity at all.
+    await new Promise((resolve) => setTimeout(resolve, 900));
+
+    assert.strictEqual(
+      firedWhileRecording,
+      false,
+      'The session was destroyed during a recording, which would lose the consultation',
+    );
+    assert.strictEqual(manager.isSuspended(), true);
+    assert.deepStrictEqual(manager.getSuspensionReasons(), ['recording']);
+
+    manager.stop();
+  });
+
+  await test('The timeout starts again the moment the consultation ends', async () => {
+    const manager = new IdleTimeoutManager(0.01);
+    let fired = false;
+
+    manager.start(() => {
+      fired = true;
+    });
+    manager.suspend('recording');
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    assert.strictEqual(fired, false);
+
+    manager.resume('recording');
+    assert.strictEqual(manager.isSuspended(), false, 'Still suspended after the work finished');
+
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    assert.strictEqual(fired, true, 'An unattended workstation was left protected by nothing');
+
+    manager.stop();
+  });
+
+  await test('Overlapping work holds the timeout off until all of it is done', async () => {
+    const manager = new IdleTimeoutManager(0.01);
+    let fired = false;
+
+    manager.start(() => {
+      fired = true;
+    });
+    manager.suspend('recording');
+    manager.suspend('transcribing');
+
+    manager.resume('recording');
+    assert.strictEqual(manager.isSuspended(), true, 'Released while transcription was still running');
+
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    assert.strictEqual(fired, false, 'Destroyed mid-transcription');
+
+    manager.resume('transcribing');
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    assert.strictEqual(fired, true);
+
+    manager.stop();
+  });
+
   await test('destroys volatile session on explicit logout', () => {
     volatileAuthStore.setAuthenticated(
       { id: 'usr_test2', email: 'test2@caw.org', name: 'Test 2', role: 'adviser', mfaVerified: true, provider: 'totp', issuedAt: Date.now(), expiresAt: Date.now() + 900 },
