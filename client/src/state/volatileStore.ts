@@ -64,7 +64,7 @@ export interface TranscriptResult {
   executionDurationMs: number;
   provider?: 'google_stt_v2';
   region?: string;
-  dataLoggingEnabled?: false;
+  dataLoggingOptedIn?: false;
   chunkCount?: number;
   speakerAttribution?: 'per_chunk_unresolved';
 }
@@ -620,7 +620,7 @@ export class VolatileSessionStore {
         executionDurationMs: 0,
         provider: 'google_stt_v2',
         region: 'europe-west2',
-        dataLoggingEnabled: false,
+        dataLoggingOptedIn: false,
       };
     } else {
       this.state.transcript = { ...resultOrText };

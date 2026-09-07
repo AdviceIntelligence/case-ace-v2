@@ -66,7 +66,12 @@ export interface TranscriptionResult {
   /** Where the words came from. Recorded so no reader has to infer it. */
   provider: 'google_stt_v2';
   region: string;
-  dataLoggingEnabled: false;
+  /**
+   * Google does not log customer audio or transcripts unless a project opts in to the data
+   * logging programme. This project has not, which is a project setting rather than
+   * anything this request can assert.
+   */
+  dataLoggingOptedIn: false;
   chunkCount: number;
   /**
    * Speaker labelling is resolved within a chunk but not across chunks, because each request
@@ -157,6 +162,58 @@ function parseCredentialResponse(body: unknown, status = 200): EphemeralCredenti
 }
 
 export const parseCredentialResponseForTesting = parseCredentialResponse;
+
+
+/**
+ * Speech-to-Text v2 model identifiers. `latest_long` is a v1 name and v2 rejects it.
+ * `long` is the general purpose long-form model, supported for en-GB on the European
+ * endpoints, with automatic punctuation, word timings and word confidence.
+ * https://docs.cloud.google.com/speech-to-text/docs/transcription-model
+ */
+export const STT_V2_MODEL = 'long';
+
+/**
+ * Fields RecognitionConfig actually has in speech.v2. Anything outside this set makes Google
+ * reject the whole request with "Invalid JSON payload received. Unknown name ... Cannot find
+ * field", which is what happened with an invented `dataLoggingConfig`.
+ * https://docs.cloud.google.com/speech-to-text/docs/reference/rpc/google.cloud.speech.v2
+ */
+export const RECOGNITION_CONFIG_FIELDS = [
+  'autoDecodingConfig',
+  'explicitDecodingConfig',
+  'model',
+  'languageCodes',
+  'features',
+  'adaptation',
+  'transcriptNormalization',
+  'translationConfig',
+] as const;
+
+/**
+ * Builds the RecognitionConfig for one chunk.
+ *
+ * On data logging: there is no per-request switch, and the request used to carry an invented
+ * `dataLoggingConfig` that made Google reject every consultation. Google does not log
+ * customer audio or transcripts by default; logging is an opt-in programme enabled per
+ * project, in exchange for discounted pricing. The control is therefore "this project has
+ * not opted in", which is a project setting to be evidenced in the DPIA, not a flag this
+ * code can set. https://docs.cloud.google.com/speech-to-text/docs/v1/data-logging
+ */
+export function buildRecognitionConfig(phraseSet: unknown): Record<string, unknown> {
+  return {
+    // The audio is sent as LINEAR16 WAV, so the RIFF header carries the encoding, sample rate
+    // and channel count. Without a decoding config the request is rejected outright.
+    autoDecodingConfig: {},
+    model: STT_V2_MODEL,
+    languageCodes: ['en-GB'],
+    features: {
+      enableAutomaticPunctuation: true,
+      enableWordTimeOffsets: true,
+      enableWordConfidence: true,
+    },
+    adaptation: { phraseSets: [{ inlinePhraseSet: phraseSet }] },
+  };
+}
 
 export class TranscriptionFailedError extends Error {
   public readonly chunkIndex: number;
@@ -253,7 +310,7 @@ export class UkCloudTranscriber {
       executionDurationMs: Date.now() - startedAt,
       provider: 'google_stt_v2',
       region: environment.gcpRegion,
-      dataLoggingEnabled: false,
+      dataLoggingOptedIn: false,
       chunkCount: chunks.length,
       speakerAttribution: 'per_chunk_unresolved',
     };
@@ -392,17 +449,7 @@ export class UkCloudTranscriber {
           'X-Goog-User-Project': creds.projectId,
         },
         body: JSON.stringify({
-          config: {
-            features: {
-              enableAutomaticPunctuation: true,
-              enableWordTimeOffsets: true,
-              enableWordConfidence: true,
-            },
-            model: 'latest_long',
-            languageCodes: ['en-GB'],
-            adaptation: { phraseSets: [{ inlinePhraseSet: phraseSet }] },
-            dataLoggingConfig: { enableDataLogging: false },
-          },
+          config: buildRecognitionConfig(phraseSet),
           content: encodeBase64(wavBuffer),
         }),
       });

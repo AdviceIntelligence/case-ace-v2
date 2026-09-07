@@ -42,7 +42,7 @@ import { testingEngine } from '../test/testingEngine.ts';
 import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
 import { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } from '../client/src/workers/workerSandbox.ts';
 import { planTranscriptionChunks, sliceChunk, MAX_CHUNK_SECONDS, chunkAudioBuffer } from '../client/src/asr/audioChunker.ts';
-import { UkCloudTranscriber, TranscriptionFailedError, parseCredentialResponseForTesting } from '../client/src/asr/ukCloudTranscriber.ts';
+import { UkCloudTranscriber, TranscriptionFailedError, parseCredentialResponseForTesting, buildRecognitionConfig, RECOGNITION_CONFIG_FIELDS, STT_V2_MODEL } from '../client/src/asr/ukCloudTranscriber.ts';
 import { ENVIRONMENTS } from '../client/src/config/environments.ts';
 import { logSecurityEvent, getTelemetryBuffer, clearTelemetryBuffer } from '../client/src/monitoring/eventLogger.ts';
 
@@ -1078,7 +1078,7 @@ async function run() {
       clientPhoneNumber: null,
       rawAudioBuffer: null,
       redactedAudioBuffer: null,
-      transcript: { fullTranscript: 'Redacted text', segments: [], words: [], totalWords: 2, lowConfidenceWordsCount: 0, lowConfidenceWords: [], executionDurationMs: 0, provider: 'google_stt_v2', region: 'europe-west2', dataLoggingEnabled: false },
+      transcript: { fullTranscript: 'Redacted text', segments: [], words: [], totalWords: 2, lowConfidenceWordsCount: 0, lowConfidenceWords: [], executionDurationMs: 0, provider: 'google_stt_v2', region: 'europe-west2', dataLoggingOptedIn: false },
       extractedEntities: [],
       tokenMap: { '[CLIENT_NAME_1]': 'Alice Smith' },
       tokenisedTranscript: 'Restorable tokenised transcript',
@@ -2006,7 +2006,7 @@ async function run() {
     assert.strictEqual(result.totalWords, 6);
     assert.strictEqual(result.lowConfidenceWordsCount, 2, 'Both 0.55 words should be flagged');
     assert.strictEqual(result.provider, 'google_stt_v2');
-    assert.strictEqual(result.dataLoggingEnabled, false);
+    assert.strictEqual(result.dataLoggingOptedIn, false);
     assert.strictEqual(result.region, 'europe-west2');
   });
 
@@ -2087,6 +2087,37 @@ async function run() {
   // consultation died on "Cannot read properties of undefined (reading 'endpoint')" before a
   // single byte of audio was sent. Both sides passed their own tests: the backend returned a
   // correct credential, the client parsed a correct wrapper, and nobody checked they agreed.
+  // Google rejects the whole request if RecognitionConfig carries a field it does not have,
+  // with "Invalid JSON payload received. Unknown name ... Cannot find field". Three separate
+  // faults shipped in one body: an invented `dataLoggingConfig`, the v1 model name
+  // `latest_long`, and no decoding config at all for WAV audio. Every consultation failed
+  // after the audio had already been captured.
+  await test('The recognition request carries only fields Speech-to-Text v2 has', () => {
+    const config = buildRecognitionConfig({ phrases: [{ value: 'universal credit', boost: 10 }] });
+
+    for (const field of Object.keys(config)) {
+      assert(
+        RECOGNITION_CONFIG_FIELDS.includes(field),
+        `RecognitionConfig has no field "${field}"; Google will reject the whole request`,
+      );
+    }
+
+    assert(!('dataLoggingConfig' in config), 'dataLoggingConfig is not a v2 field');
+    assert('autoDecodingConfig' in config, 'WAV audio needs a decoding config or it is rejected');
+    assert.strictEqual(config.languageCodes[0], 'en-GB');
+    assert.strictEqual(config.features.enableWordTimeOffsets, true, 'Word timings drive scrub-back');
+  });
+
+  await test('The transcription model is a Speech-to-Text v2 identifier, not a v1 one', () => {
+    // v1 names such as latest_long, latest_short and video are rejected by v2.
+    const V2_MODELS = ['long', 'short', 'telephony', 'telephony_short', 'chirp', 'chirp_2', 'chirp_3'];
+    assert(
+      V2_MODELS.includes(STT_V2_MODEL),
+      `"${STT_V2_MODEL}" is not a Speech-to-Text v2 model. Valid: ${V2_MODELS.join(', ')}`,
+    );
+    assert(!/^latest_/.test(STT_V2_MODEL), 'latest_* model names are v1 only');
+  });
+
   await test('The client can read the credential the backend actually returns', async () => {
     const adviser = {
       id: 'usr_adviser_contract',
