@@ -2177,6 +2177,44 @@ async function run() {
     assert.strictEqual(result.region, 'europe-west2');
   });
 
+  // The progress modal read progress.progressPercent and progress.currentChunk. Those are
+  // optional aliases nothing ever sets: the transcriber emits percentage and chunkIndex. An
+  // adviser watched a blank percentage and "Chunk of 27" for the whole of a 25 minute
+  // transcription, with no way to tell whether it was working or hung.
+  await test('The progress the transcriber emits has every field the screen reads', async () => {
+    const modal = fs.readFileSync(
+      path.join(rootDir, 'client/src/components/TranscriptProgressModal.tsx'),
+      'utf8',
+    );
+    const readFields = [...modal.matchAll(/progress[?]?\.([a-zA-Z]+)/g)].map((m) => m[1]);
+    assert(readFields.length > 0, 'Found no progress fields read by the modal');
+
+    const seen = [];
+    const transcriber = new UkCloudTranscriber();
+    await transcriber.transcribe(buildAudio([{ seconds: 120, loud: true }]), SR, {
+      onProgress: (p) => seen.push(p),
+      recognizeChunk: async () => ({
+        results: [{ alternatives: [{ transcript: 'rent', words: [{ word: 'rent', startOffset: '0s', endOffset: '1s', confidence: 0.9 }] }] }],
+      }),
+    });
+
+    assert(seen.length > 0, 'No progress was reported at all');
+    for (const field of new Set(readFields)) {
+      assert(
+        field in seen[0],
+        `The screen reads progress.${field}, which the transcriber never sets, so it renders blank`,
+      );
+      assert(
+        seen[0][field] !== undefined,
+        `progress.${field} is undefined, so it renders blank`,
+      );
+    }
+
+    // Chunk numbering is shown to a person, so it starts at one, not zero.
+    assert.strictEqual(seen[0].chunkIndex, 0);
+    assert(/chunkIndex \+ 1/.test(modal), 'The first chunk would be displayed as "Chunk 0"');
+  });
+
   await test('Transcript contains only what the recogniser returned, never invented tokens', async () => {
     // The stage this replaced fabricated words named token_1_1, token_1_2 and so on, from
     // speech energy alone, while reporting high confidence. Nothing may reach the redaction

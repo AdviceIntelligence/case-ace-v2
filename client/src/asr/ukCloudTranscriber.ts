@@ -43,11 +43,8 @@ const MAX_CHUNK_ATTEMPTS = 3;
 export interface TranscriptionProgress {
   type: 'PROGRESS';
   chunkIndex: number;
-  currentChunk?: number;
   totalChunks: number;
   percentage: number;
-  progressPercent?: number;
-  message?: string;
   processedSeconds: number;
   totalSeconds: number;
   elapsedMs: number;

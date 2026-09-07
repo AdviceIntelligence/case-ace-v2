@@ -26,10 +26,13 @@ export const TranscriptProgressModal: React.FC<TranscriptProgressModalProps> = (
 }) => {
   if (!isOpen) return null;
 
-  const percentage = progress ? progress.progressPercent : 0;
-  const currentChunk = progress ? progress.currentChunk : 0;
+  // These must be the field names the transcriber emits. They were progressPercent and
+  // currentChunk, which are optional aliases nothing ever sets, so the adviser watched a
+  // blank percentage and "Chunk of 27" for the whole of a 25 minute transcription.
+  const percentage = progress ? progress.percentage : 0;
+  const currentChunk = progress ? progress.chunkIndex + 1 : 0;
   const totalChunks = progress ? progress.totalChunks : 0;
-  const message = progress ? progress.message : 'Preparing transcription...';
+  const message = progress?.currentSegmentPreview || 'Starting...';
 
   return (
     <div

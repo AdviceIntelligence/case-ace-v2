@@ -42,11 +42,6 @@ export interface AudioChunk {
   startSeconds: number;
   endSeconds: number;
   durationSeconds: number;
-  chunkIndex?: number;
-  startSec?: number;
-  endSec?: number;
-  durationSec?: number;
-  pcmData?: Float32Array | Int16Array;
 }
 
 function rmsOver(pcm: Float32Array | Int16Array, start: number, length: number): number {
