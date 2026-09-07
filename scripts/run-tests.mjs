@@ -42,7 +42,7 @@ import { testingEngine } from '../test/testingEngine.ts';
 import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
 import { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } from '../client/src/workers/workerSandbox.ts';
 import { planTranscriptionChunks, sliceChunk, MAX_CHUNK_SECONDS, chunkAudioBuffer } from '../client/src/asr/audioChunker.ts';
-import { UkCloudTranscriber, TranscriptionFailedError, parseCredentialResponseForTesting, buildRecognitionConfig, RECOGNITION_CONFIG_FIELDS, STT_V2_MODEL } from '../client/src/asr/ukCloudTranscriber.ts';
+import { UkCloudTranscriber, TranscriptionFailedError, parseCredentialResponseForTesting, SpeechCredentialProvider, buildRecognitionConfig, RECOGNITION_CONFIG_FIELDS, STT_V2_MODEL } from '../client/src/asr/ukCloudTranscriber.ts';
 import { ENVIRONMENTS } from '../client/src/config/environments.ts';
 import { logSecurityEvent, getTelemetryBuffer, clearTelemetryBuffer } from '../client/src/monitoring/eventLogger.ts';
 
@@ -2168,8 +2168,12 @@ async function run() {
         assert(err instanceof TranscriptionFailedError, `Wrong error type: ${err.name}`);
         assert.strictEqual(err.chunkIndex, 1);
         assert(
-          /has not been transcribed/.test(err.message),
-          'The error must say the consultation was not transcribed',
+          /No part of the transcript is kept/.test(err.message),
+          'The error must say no partial transcript is produced',
+        );
+        assert(
+          /recording is safe/i.test(err.message),
+          'The error must tell the adviser their recording survived',
         );
         return true;
       },
@@ -2212,6 +2216,114 @@ async function run() {
       `"${STT_V2_MODEL}" is not a Speech-to-Text v2 model. Valid: ${V2_MODELS.join(', ')}`,
     );
     assert(!/^latest_/.test(STT_V2_MODEL), 'latest_* model names are v1 only');
+  });
+
+  // A Speech-to-Text credential lasts five minutes. One was minted before the first chunk and
+  // reused for every chunk after it. An hour of audio is about sixty-five chunks, so from
+  // roughly minute five every request came back 401 and the whole consultation failed. An
+  // adviser would have lost an hour of a client's time and had to ask them to say it again.
+  await test('A credential is renewed before it expires, so a long consultation survives', async () => {
+    const realFetch = globalThis.fetch;
+    let mints = 0;
+
+    const credentialWithTtl = (seconds) => ({
+      ok: true,
+      status: 200,
+      json: async () => ({
+        purpose: 'speech-to-text',
+        provider: 'gcp-impersonated-service-account',
+        region: 'europe-west2',
+        projectId: 'case-ace-v2',
+        endpoint: 'https://europe-west2-speech.googleapis.com',
+        accessToken: `token_${++mints}`,
+        expiresAt: new Date(Date.now() + seconds * 1000).toISOString(),
+        ttlSeconds: seconds,
+        issuedToUser: 'usr_adviser',
+        role: 'adviser',
+      }),
+    });
+
+    try {
+      // A five minute credential: the first call mints, a second call reuses it.
+      globalThis.fetch = async () => credentialWithTtl(300);
+      const provider = new SpeechCredentialProvider();
+      const first = await provider.get();
+      const second = await provider.get();
+      assert.strictEqual(first.accessToken, second.accessToken, 'A valid credential was re-minted');
+      assert.strictEqual(mints, 1);
+
+      // One about to expire must be replaced before it is used, not after it fails.
+      globalThis.fetch = async () => credentialWithTtl(30);
+      const nearlyDead = new SpeechCredentialProvider();
+      await nearlyDead.get();
+      await nearlyDead.get();
+      assert.strictEqual(mints, 3, 'A credential inside the renewal margin was reused');
+
+      // A rejected token is dropped so the next attempt fetches a new one.
+      globalThis.fetch = async () => credentialWithTtl(300);
+      const rejected = new SpeechCredentialProvider();
+      const before = await rejected.get();
+      rejected.invalidate();
+      const after = await rejected.get();
+      assert.notStrictEqual(before.accessToken, after.accessToken, 'invalidate() did nothing');
+    } finally {
+      globalThis.fetch = realFetch;
+    }
+  });
+
+  await test('Transcription continues across a credential expiring mid-consultation', async () => {
+    // Sixty-five chunks is roughly an hour. The eleventh request fails the way an expired
+    // token does; the consultation must recover rather than end.
+    const pcm = buildAudio([{ seconds: 400, loud: true }]);
+    let calls = 0;
+    let rejectedOnce = false;
+
+    const transcriber = new UkCloudTranscriber();
+    const result = await transcriber.transcribe(pcm, SR, {
+      recognizeChunk: async () => {
+        calls++;
+        if (calls === 3 && !rejectedOnce) {
+          rejectedOnce = true;
+          const err = new Error('Speech-to-Text returned 401: Invalid or expired access token');
+          err.name = 'CloudSttApiError';
+          err.isRetryable = true;
+          throw err;
+        }
+        return {
+          results: [
+            {
+              alternatives: [
+                {
+                  transcript: 'rent arrears',
+                  words: [
+                    { word: 'rent', startOffset: '0s', endOffset: '1s', confidence: 0.95 },
+                    { word: 'arrears', startOffset: '1s', endOffset: '2s', confidence: 0.94 },
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+      },
+    });
+
+    assert(rejectedOnce, 'The expiry was never exercised');
+    assert(result.chunkCount > 1, 'A 400 second recording should be several chunks');
+    assert.strictEqual(
+      result.segments.length,
+      result.chunkCount,
+      'A chunk was lost when the credential expired',
+    );
+    assert.strictEqual(result.totalWords, result.chunkCount * 2);
+  });
+
+  await test('When transcription does fail, the message says the recording is safe', () => {
+    const err = new TranscriptionFailedError(
+      { index: 4, startSeconds: 200, endSeconds: 255 },
+      'network error',
+    );
+    assert(/recording is safe/i.test(err.message), 'The adviser is not told their audio survived');
+    assert(/try again/i.test(err.message), 'The adviser is not told they can retry');
   });
 
   await test('The client can read the credential the backend actually returns', async () => {

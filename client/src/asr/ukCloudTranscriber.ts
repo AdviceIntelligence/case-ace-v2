@@ -32,6 +32,7 @@ import { audioRedactionEngine } from '../audio/audioRedactionEngine.ts';
 import { buildCloudSttPhraseSet } from './adviceSectorPhraseSet.ts';
 import { planTranscriptionChunks, sliceChunk, type AudioChunk } from './audioChunker.ts';
 import { environment } from '../config/environments.ts';
+import { volatileAuthStore } from '../state/authStore.ts';
 import type { AsrSegment, AsrWord } from '../state/volatileStore.ts';
 
 export const LOW_CONFIDENCE_THRESHOLD = 0.7;
@@ -106,36 +107,105 @@ interface EphemeralCredential {
   role: string;
 }
 
-async function obtainEphemeralCredential(authToken?: string): Promise<EphemeralCredential> {
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
-  if (authToken) {
-    headers['Authorization'] = `Bearer ${authToken}`;
+/**
+ * Keeps a usable Speech-to-Text credential available for as long as the consultation runs.
+ *
+ * The credential lasts five minutes. A single credential was minted once, before the first
+ * chunk, and reused for every chunk after it. An hour of audio is roughly sixty-five chunks,
+ * so from about minute five onward every request came back 401 and the whole consultation
+ * failed. An adviser would have lost an hour of a client's time, and the client would have to
+ * be asked to say it all again.
+ *
+ * The adviser's own session token expires too, after fifteen minutes, at which point the
+ * credential endpoint itself answers 401. That is refreshed here as well, once, rather than
+ * ending the consultation.
+ */
+export class SpeechCredentialProvider {
+  /** Re-mint this long before expiry, so a request in flight never uses a dead token. */
+  private static readonly RENEW_MARGIN_MS = 60_000;
+
+  private current: EphemeralCredential | null = null;
+  private currentExpiresAtMs = 0;
+  private hasRefreshedSession = false;
+
+  public async get(): Promise<EphemeralCredential> {
+    const stillGood =
+      this.current && Date.now() < this.currentExpiresAtMs - SpeechCredentialProvider.RENEW_MARGIN_MS;
+    if (stillGood) return this.current!;
+
+    this.current = await this.mint();
+    const expiry = Date.parse(this.current.expiresAt);
+    this.currentExpiresAtMs = Number.isFinite(expiry)
+      ? expiry
+      : Date.now() + (this.current.ttlSeconds || 300) * 1000;
+    return this.current;
   }
 
-  const response = await fetch(`${environment.apiBaseUrl}/api/v1/credentials/issue`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      purpose: 'speech-to-text',
-      ttlSeconds: 300,
-    }),
-  });
-
-  if (!response.ok) {
-    const body = await response.json().catch(() => ({}) as any);
-    throw new CloudSttApiError(
-      `Credential issuance failed with ${response.status}: ${body?.error || response.statusText}`,
-      response.status,
-      response.status >= 500 || response.status === 429,
-    );
+  /** Called when Google rejects a token, so the next attempt fetches a fresh one. */
+  public invalidate(): void {
+    this.current = null;
+    this.currentExpiresAtMs = 0;
   }
 
-  // The endpoint returns the credential object itself, not a wrapper. Reading data.credential
-  // yielded undefined, and the first use of it failed with "Cannot read properties of
-  // undefined (reading 'endpoint')", which named neither the endpoint nor the mismatch.
-  return parseCredentialResponse(await response.json(), response.status);
+  private async mint(): Promise<EphemeralCredential> {
+    let response = await this.requestCredential();
+
+    // 401 here is the adviser's session, not the Google token. Refresh it once and retry,
+    // rather than losing a consultation because the login aged out mid-interview.
+    if (response.status === 401 && !this.hasRefreshedSession) {
+      this.hasRefreshedSession = true;
+      if (await refreshAdviserSession()) {
+        response = await this.requestCredential();
+      }
+    }
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}) as any);
+      throw new CloudSttApiError(
+        `Could not get permission to transcribe (${response.status}): ` +
+          `${body?.error || response.statusText}`,
+        response.status,
+        response.status >= 500 || response.status === 429 || response.status === 401,
+      );
+    }
+
+    return parseCredentialResponse(await response.json(), response.status);
+  }
+
+  private async requestCredential(): Promise<Response> {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    const token = volatileAuthStore.getAccessToken();
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    return fetch(`${environment.apiBaseUrl}/api/v1/credentials/issue`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ purpose: 'speech-to-text', ttlSeconds: 300 }),
+    });
+  }
+}
+
+/** Exchanges the refresh token for a new session. Returns false if it cannot. */
+async function refreshAdviserSession(): Promise<boolean> {
+  const refreshToken = volatileAuthStore.getRefreshToken();
+  if (!refreshToken) return false;
+
+  try {
+    const response = await fetch(`${environment.apiBaseUrl}/api/v1/auth/refresh`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    });
+    if (!response.ok) return false;
+
+    const data = await response.json();
+    if (!data?.accessToken) return false;
+
+    volatileAuthStore.setTokens(data.accessToken, data.refreshToken);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -224,9 +294,11 @@ export class TranscriptionFailedError extends Error {
     const from = Math.round(chunk.startSeconds);
     const to = Math.round(chunk.endSeconds);
     super(
-      `Transcription failed for the audio between ${from}s and ${to}s after ${MAX_CHUNK_ATTEMPTS} ` +
-        `attempts: ${cause}. The consultation has not been transcribed. No partial transcript is ` +
-        `produced, because a silently missing passage could hide an identifier from review.`,
+      `Could not transcribe the audio between ${from}s and ${to}s after ${MAX_CHUNK_ATTEMPTS} ` +
+        `attempts: ${cause}\n\n` +
+        'Your recording is safe and still open in this session. Nothing has been lost, and you ' +
+        'can try again. No part of the transcript is kept, because a silently missing passage ' +
+        'could hide a personal detail from your check.',
     );
     this.name = 'TranscriptionFailedError';
     this.chunkIndex = chunk.index;
@@ -433,14 +505,19 @@ export class UkCloudTranscriber {
    * Builds the real Google recogniser: one short-lived credential reused across every chunk of
    * the consultation, so a 40 minute session mints one token rather than forty.
    */
-  private async createGoogleRecognizer(authToken?: string): Promise<RecognizeChunkFn> {
-    const creds = await obtainEphemeralCredential(authToken);
+  private async createGoogleRecognizer(_authToken?: string): Promise<RecognizeChunkFn> {
+    const credentials = new SpeechCredentialProvider();
     const phraseSet = buildCloudSttPhraseSet();
-    const url =
-      `${creds.endpoint}/v2/projects/${creds.projectId}/locations/${environment.gcpRegion}` +
-      `/recognizers/_:recognize`;
 
+    // A credential is resolved per chunk rather than once per consultation, so a five minute
+    // token cannot end a sixty minute interview. The provider hands back the cached one until
+    // it is close to expiry, so a normal session still mints a handful, not one per chunk.
     return async (wavBuffer: ArrayBuffer) => {
+      const creds = await credentials.get();
+      const url =
+        `${creds.endpoint}/v2/projects/${creds.projectId}/locations/${environment.gcpRegion}` +
+        `/recognizers/_:recognize`;
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -455,11 +532,17 @@ export class UkCloudTranscriber {
       });
 
       if (!response.ok) {
+        // A rejected token must not end the consultation: drop it so the retry mints a new one.
+        if (response.status === 401 || response.status === 403) credentials.invalidate();
+
         const body = await response.json().catch(() => ({}) as any);
         throw new CloudSttApiError(
-          `Speech-to-Text v2 returned ${response.status}: ${body?.error?.message || response.statusText}`,
+          `Speech-to-Text returned ${response.status}: ${body?.error?.message || response.statusText}`,
           response.status,
-          response.status >= 500 || response.status === 429,
+          response.status >= 500 ||
+            response.status === 429 ||
+            response.status === 401 ||
+            response.status === 403,
         );
       }
 

@@ -808,7 +808,33 @@ export const App: React.FC = () => {
                   fontSize: '0.875rem',
                 }}
               >
-                <strong>Problem:</strong> {mediaError}
+                <div style={{ whiteSpace: 'pre-line' }}>
+                  <strong>Problem:</strong> {mediaError}
+                </div>
+                {/* The recording stays in memory when transcription fails, so the adviser can
+                    try again rather than losing an hour of a client's time. */}
+                {volatileSessionStore.getRawAudio() && !isAsrRunning && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMediaError(null);
+                      void runTranscription();
+                    }}
+                    style={{
+                      marginTop: '0.75rem',
+                      backgroundColor: '#B91C1C',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '6px',
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Try again
+                  </button>
+                )}
               </div>
             )}
 
