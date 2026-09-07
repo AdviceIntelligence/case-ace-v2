@@ -71,6 +71,13 @@ const EVENT_TYPE_NORMALIZATION: Record<string, PermittedClientEventType> = {
   case_note_generated: 'CASE_NOTE_DRAFT_COMPLETED',
   case_note_draft_completed: 'CASE_NOTE_DRAFT_COMPLETED',
   adviser_signoff_completed: 'ADVISER_SIGNOFF_COMPLETED',
+  // Names the application actually emits. Anything absent here falls through to
+  // toUpperCase(), produces a name the backend does not permit, and the event is dropped with
+  // HTTP 400. Sign-off, clipboard and verification events were being lost this way.
+  signoff_completed: 'ADVISER_SIGNOFF_COMPLETED',
+  detokenised_clipboard_copied: 'CASEBOOK_EXPORT_COPIED',
+  redaction_verification_passed: 'ACOUSTIC_VERIFICATION_COMPLETED',
+  redaction_verification_failed: 'ACOUSTIC_VERIFICATION_COMPLETED',
   casebook_export_copied: 'CASEBOOK_EXPORT_COPIED',
   credentials_requested: 'CREDENTIALS_REQUESTED',
   credentials_revoked: 'CREDENTIALS_REVOKED',
@@ -79,6 +86,14 @@ const EVENT_TYPE_NORMALIZATION: Record<string, PermittedClientEventType> = {
 };
 
 const buffer: Record<string, unknown>[] = [];
+
+/**
+ * Returns and clears the payloads emitted since the last call, so tests can assert on what
+ * would actually be sent rather than on what the emitter is assumed to send.
+ */
+export function drainBufferForTesting(): Record<string, unknown>[] {
+  return buffer.splice(0, buffer.length);
+}
 
 /**
  * Normalizes an incoming event type to the permitted upper snake case name.

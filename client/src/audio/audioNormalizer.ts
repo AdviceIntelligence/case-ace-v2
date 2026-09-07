@@ -17,7 +17,7 @@
 
 import type { IntakeRoute, ConsentRecord } from '../consent/consentManager.ts';
 import { volatileSessionStore } from '../state/volatileStore.ts';
-import { apiFetch } from '../config/apiClient.ts';
+import { logSecurityEvent } from '../monitoring/eventLogger.ts';
 
 export interface SpeakerChannelMap {
   isDualChannel: boolean;
@@ -134,21 +134,24 @@ export class AudioNormalizer {
     volatileSessionStore.setStage('local_redaction');
   }
 
-  private async sendIntakeTelemetry(intakeRoute: IntakeRoute, durationMs: number): Promise<void> {
-    try {
-      if (typeof fetch !== 'undefined') {
-        await apiFetch('/api/v1/monitoring/events', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            stage: 'intake_completed',
-            intakeRoute,
-            durationMs,
-            success: true,
-          }),
-        }).catch(() => {});
-      }
-    } catch {}
+  /**
+   * Records that audio arrived, through the same emitter as every other event.
+   *
+   * This used to POST its own hand-rolled body straight to the monitoring endpoint:
+   * { stage, intakeRoute, durationMs, success }. That is not the validated log schema, so the
+   * backend rejected every one with HTTP 400 and the audit log never recorded that a
+   * consultation had been captured at all. Going through logSecurityEvent means the payload
+   * is built and named the same way as everything else, and cannot drift again.
+   */
+  private sendIntakeTelemetry(intakeRoute: IntakeRoute, durationMs: number): void {
+    logSecurityEvent({
+      type: intakeRoute === 'file_import' ? 'FILE_IMPORTED' : 'AUDIO_RECORDING_STOPPED',
+      details: {
+        stageReached: 'recording',
+        stageDurationMs: Math.round(durationMs),
+        audioDurationSeconds: Math.round(durationMs / 1000),
+      },
+    });
   }
 }
 

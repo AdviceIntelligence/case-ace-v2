@@ -1725,6 +1725,61 @@ async function run() {
   // 10. Suite 10: Phase 16 - Monitoring and Audit Logging
   console.log('\nSuite 10: Phase 16 - Strict Monitoring & Audit Logging');
 
+  // The intake telemetry used to POST its own hand-rolled body straight to the endpoint,
+  // bypassing the emitter and the schema. Every consultation's "audio captured" event was
+  // rejected with HTTP 400, so the audit log held no record that a session had happened.
+  // Asserting on the emitter's real output, validated by the real validator, is the only
+  // version of this test that would have caught it.
+  await test('Every event the client can emit is accepted by the backend log validator', async () => {
+    const { logSecurityEvent, drainBufferForTesting } = await import(
+      '../client/src/monitoring/eventLogger.ts'
+    );
+
+    if (typeof drainBufferForTesting !== 'function') {
+      assert.fail(
+        'eventLogger must expose drainBufferForTesting() so the emitted payload can be ' +
+          'checked against the validator rather than assumed correct.',
+      );
+    }
+
+    const emitted = [
+      { type: 'AUDIO_RECORDING_STOPPED', details: { stageReached: 'recording', stageDurationMs: 1200 } },
+      { type: 'FILE_IMPORTED', details: { stageReached: 'recording', audioDurationSeconds: 90 } },
+      { type: 'case_note_generated', details: { draftToSignoffDurationMs: 4000 } },
+      { type: 'signoff_completed', details: {} },
+      { type: 'casebook_export_copied', details: {} },
+      { type: 'detokenised_clipboard_copied', details: {} },
+      { type: 'redaction_gate_completed', details: { gapsAcknowledgedCount: 2 } },
+      { type: 'cloud_stt_transcription_completed', details: { audioDurationSeconds: 120 } },
+      { type: 'SESSION_ENDED', details: { totalSessionDurationMs: 60000 } },
+    ];
+
+    // Every type name the application actually passes to logSecurityEvent, read from source,
+    // so an event added later is covered without anyone remembering to extend this list.
+    const clientSource = fs
+      .readdirSync(path.join(rootDir, 'client/src'), { recursive: true })
+      .filter((f) => typeof f === 'string' && /\.tsx?$/.test(f))
+      .map((f) => fs.readFileSync(path.join(rootDir, 'client/src', f), 'utf8'))
+      .join('\n');
+    const emittedInSource = [
+      ...clientSource.matchAll(/logSecurityEvent\(\{\s*type:\s*'([^']+)'/g),
+    ].map((m) => m[1]);
+    assert(emittedInSource.length > 0, 'Found no logSecurityEvent call sites to check');
+    for (const type of emittedInSource) {
+      if (!emitted.some((e) => e.type === type)) emitted.push({ type, details: {} });
+    }
+
+    drainBufferForTesting();
+    for (const event of emitted) logSecurityEvent(event);
+    const payloads = drainBufferForTesting();
+
+    assert.strictEqual(payloads.length, emitted.length, 'Not every event produced a payload');
+    for (const payload of payloads) {
+      // Throws LogSchemaValidationError if the backend would reject it with HTTP 400.
+      validateLogPayload(payload);
+    }
+  });
+
   await test('Log schema enforces whitelist and rejects any forbidden or free-text field', () => {
     const valid = validateLogPayload({
       eventType: 'SESSION_INITIALISED',
