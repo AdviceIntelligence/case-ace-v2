@@ -254,7 +254,7 @@ export const CaseNoteReviewPanel: React.FC<CaseNoteReviewPanelProps> = ({
               }}
             >
               <Eye size={14} color={viewMode === 'detokenised' ? '#0284C7' : '#64748B'} />
-              Detokenised (Plaintext)
+              Real details
             </button>
             <button
               type="button"
@@ -732,7 +732,7 @@ export const CaseNoteReviewPanel: React.FC<CaseNoteReviewPanelProps> = ({
               color: readiness.gapsRemaining === 0 ? '#166534' : '#991B1B',
             }}
           >
-            {readiness.acknowledgedGapsCount}/{readiness.totalGapsCount} Gaps Acknowledged
+            {readiness.acknowledgedGapsCount}/{readiness.totalGapsCount} gaps checked
           </span>
 
           {readiness.totalLowConfidenceCount > 0 && (
@@ -772,7 +772,7 @@ export const CaseNoteReviewPanel: React.FC<CaseNoteReviewPanelProps> = ({
               color: readiness.professionalDeclarationConfirmed ? '#166534' : '#64748B',
             }}
           >
-            {readiness.professionalDeclarationConfirmed ? 'Declaration Signed' : 'Declaration Required'}
+            {readiness.professionalDeclarationConfirmed ? 'Declaration Signed' : 'Confirm below'}
           </span>
         </div>
 
@@ -799,7 +799,7 @@ export const CaseNoteReviewPanel: React.FC<CaseNoteReviewPanelProps> = ({
           }}
         >
           <Check size={16} />
-          {readiness.canSignoff ? 'Sign Off & Export Casebook Record' : 'Sign Off Locked (Complete Checklist)'}
+          {readiness.canSignoff ? 'Sign Off & Export Casebook Record' : 'Finish the checklist to sign off'}
         </button>
       </div>
 

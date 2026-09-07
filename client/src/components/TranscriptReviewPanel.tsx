@@ -1,6 +1,6 @@
 /**
  * @file TranscriptReviewPanel.tsx
- * @description Interactive Working Transcript Review, Tokenisation Toggle,
+ * @description Interactive Transcript, Tokenisation Toggle,
  * Live Bidirectional Editing, and Safe Clipboard Export Component.
  * 
  * Invariants:
@@ -127,7 +127,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#0F172A' }}>
-              Working Transcript Review
+              Transcript
             </h3>
             <span
               style={{
@@ -160,7 +160,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
             )}
           </div>
           <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
-            Verify factual accuracy or correct transcription errors. All edits sync live between views.
+            Check it against what was said. Edits apply to both views.
           </p>
         </div>
 
@@ -197,7 +197,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
             }}
           >
             <Eye size={14} />
-            Detokenised (Plaintext)
+            Real details
           </button>
 
           <button
@@ -221,7 +221,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
             }}
           >
             <Shield size={14} />
-            Tokenised (Pseudonymised)
+            Hidden
           </button>
         </div>
       </div>
@@ -246,7 +246,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
         >
           <AlertTriangle size={16} color="#D97706" style={{ flexShrink: 0 }} />
           <span>
-            ⚠️ <strong>PLAINTEXT DETOKENISED VIEW</strong> — Contains real client identifiable names and addresses for adviser accuracy review. DO NOT paste into unsecured external channels.
+            ⚠️ <strong>PLAINTEXT DETOKENISED VIEW</strong> — Do not paste this anywhere outside Casebook.
           </span>
         </div>
       ) : (
@@ -268,7 +268,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
         >
           <Shield size={16} color="#0284C7" style={{ flexShrink: 0 }} />
           <span>
-            🛡️ <strong>PSEUDONYMISED TOKENISED VIEW</strong> — Real identifiers are substituted with numbered surrogate tokens (e.g. [CLIENT_FORENAME]). Safe for transmission to AI note drafter.
+            🛡️ <strong>Details hidden</strong> — Real identifiers are substituted with numbered surrogate tokens (e.g. [CLIENT_FORENAME]). Safe for transmission to AI note drafter.
           </span>
         </div>
       )}
@@ -345,7 +345,7 @@ export const TranscriptReviewPanel: React.FC<TranscriptReviewPanelProps> = ({
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: '#64748B' }}>
           <Lock size={14} color="#059669" />
-          <span>Token map confined to RAM (VolatileStore). File downloads disabled per C1.</span>
+          <span>Nothing is written to disk and nothing can be downloaded.</span>
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>

@@ -370,7 +370,7 @@ export const App: React.FC = () => {
     if (!session.isGatePassed) {
       volatileSessionStore.openRedactionGate();
       setIsRedactionGateOpen(true);
-      setMediaError('Adviser Redaction Review Gate (Phase 9) must be completed before generating case notes.');
+      setMediaError('Check what gets hidden (Phase 9) must be completed before generating case notes.');
       return;
     }
 
@@ -559,7 +559,7 @@ export const App: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              <Trash2 size={14} /> Withdraw Consent (Instant Destroy)
+              <Trash2 size={14} /> Stop and erase
             </button>
           </div>
         </aside>
@@ -767,7 +767,7 @@ export const App: React.FC = () => {
                   Nothing is saved. Closing this tab erases everything.
                 </h2>
                 <p style={{ margin: 0, fontSize: '0.875rem', color: '#1E293B' }}>
-                  All session data exists solely in volatile RAM. Storage APIs are blocked. The AI model that drafts the case note never sees client identifiers.
+                  Nothing is written to disk. The AI that writes the note never sees the client's name.
                 </p>
               </div>
 
@@ -791,7 +791,7 @@ export const App: React.FC = () => {
                   }}
                 >
                   <Trash2 size={14} aria-hidden="true" />
-                  Withdraw Consent (Instant Destroy)
+                  Stop and erase
                 </button>
               )}
             </div>
@@ -808,7 +808,7 @@ export const App: React.FC = () => {
                   fontSize: '0.875rem',
                 }}
               >
-                <strong>Intake / Privacy Error:</strong> {mediaError}
+                <strong>Problem:</strong> {mediaError}
               </div>
             )}
 
@@ -958,7 +958,7 @@ export const App: React.FC = () => {
                   <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                       <div>
-                        <h3 style={{ margin: 0, fontSize: '1rem', color: '#004B87' }}>UK Sovereign Transcription (europe-west2)</h3>
+                        <h3 style={{ margin: 0, fontSize: '1rem', color: '#004B87' }}>Transcript</h3>
                         <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
                           Route: {session.consentRecord?.route || 'in-memory'} • 16kHz Float32 PCM
                         </span>
@@ -972,7 +972,7 @@ export const App: React.FC = () => {
                     {session.transcript ? (
                       <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '6px', padding: '0.75rem', marginBottom: '1rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#334155' }}>Transcription Status:</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#334155' }}>Transcript</span>
                           <span style={{ fontSize: '0.6875rem', padding: '0.125rem 0.375rem', borderRadius: '4px', backgroundColor: '#DCFCE7', color: '#166534', fontWeight: 600 }}>
                             europe-west2 • {session.transcript.executionDurationMs}ms
                           </span>
@@ -1001,7 +1001,7 @@ export const App: React.FC = () => {
                       </div>
                     ) : (
                       <div style={{ backgroundColor: '#F8FAFC', border: '1px dashed #CBD5E1', borderRadius: '6px', padding: '1rem', textAlign: 'center', marginBottom: '1rem', fontSize: '0.8125rem', color: '#64748B' }}>
-                        Speech Recognition not yet executed for this audio.
+                        Not transcribed yet.
                       </div>
                     )}
                   </div>
@@ -1029,7 +1029,7 @@ export const App: React.FC = () => {
                           }}
                         >
                           <Shield size={14} aria-hidden="true" />
-                          Re-Scan Identifiers (Phase 8)
+                          Check again
                         </button>
 
                         <button
@@ -1058,13 +1058,13 @@ export const App: React.FC = () => {
                           {session.isGatePassed ? (
                             <span>Redaction Gate Passed ✓</span>
                           ) : (
-                            <span>Review Redactions Gate (Phase 9)</span>
+                            <span>Check what gets hidden</span>
                           )}
                         </button>
                       </div>
                     </div>
 
-                    {/* Phase 12 Interactive Working Transcript Review Panel */}
+                    {/* Phase 12 Interactive Transcript Panel */}
                     <TranscriptReviewPanel
                       session={session}
                       onProceedToDrafting={handleGenerateCaseNote}

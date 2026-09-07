@@ -91,7 +91,7 @@ export const IdentifierReviewPanel: React.FC<IdentifierReviewPanelProps> = ({
             </h3>
           </div>
           <span style={{ fontSize: '0.75rem', color: '#93C5FD', display: 'block', marginTop: '0.25rem' }}>
-            Optimised for Recall over Precision • All named third parties protected
+            Names, dates of birth, addresses, phone numbers, emails and NI numbers
           </span>
         </div>
 
@@ -113,7 +113,7 @@ export const IdentifierReviewPanel: React.FC<IdentifierReviewPanelProps> = ({
           }}
         >
           {showOriginals ? <EyeOff size={14} /> : <Eye size={14} />}
-          {showOriginals ? 'Mask Original PII' : 'Reveal Original PII'}
+          {showOriginals ? 'Mask Original PII' : 'Show real details'}
         </button>
       </div>
 

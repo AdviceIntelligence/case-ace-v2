@@ -128,24 +128,20 @@ export function checkGateReadiness(state: Readonly<SessionState> | null): GateRe
     };
   }
 
+  // Low-confidence words are no longer a gate. The adviser was made to acknowledge every word
+  // the recogniser was unsure about, one at a time, with no way to correct any of them. It
+  // stopped the consultation dead and taught people to click through warnings. Unclear words
+  // are still surfaced, as information, in the transcript they can edit.
   const allItems = extractLowConfidenceItems(state);
-  const pendingItems = allItems.filter((item) => !item.isAcknowledged);
-  const blockingReasons: string[] = [];
-
-  if (pendingItems.length > 0) {
-    blockingReasons.push(
-      `${pendingItems.length} low-confidence acoustic region(s) (<0.70 confidence) must be individually auditioned and acknowledged.`
-    );
-  }
 
   return {
-    canProceed: pendingItems.length === 0,
+    canProceed: true,
     totalLowConfidenceCount: allItems.length,
-    acknowledgedCount: allItems.length - pendingItems.length,
-    pendingCount: pendingItems.length,
-    pendingItems,
+    acknowledgedCount: allItems.length,
+    pendingCount: 0,
+    pendingItems: [],
     allLowConfidenceItems: allItems,
-    blockingReasons,
+    blockingReasons: [],
   };
 }
 

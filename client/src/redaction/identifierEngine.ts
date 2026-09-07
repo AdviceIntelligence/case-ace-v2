@@ -22,7 +22,6 @@ import type {
 } from '../state/volatileStore.ts';
 import { matchLayer1StructuredIdentifiers } from './layer1StructuredMatcher.ts';
 import { matchLayer2UnstructuredNer } from './layer2UnstructuredNer.ts';
-import { matchLayer3SpecialCategories } from './layer3SpecialCategoryClassifier.ts';
 
 export interface IdentifierDetectionResult {
   identifiers: DetectedIdentifier[];
@@ -33,6 +32,42 @@ export interface IdentifierDetectionResult {
   specialCategoryCount: number;
   totalDetected: number;
 }
+
+
+/**
+ * What Case Ace hides, and nothing else.
+ *
+ * The engine used to redact any capitalised organisation, school, surgery, hospital, refuge
+ * or distinctive occupation, plus a whole special-category layer. That removed the substance
+ * of the consultation: "DWP" and "ESA" are not personal data, they are the case. A case note
+ * drafted from a transcript with the benefits and agencies stripped out is worthless, and an
+ * adviser confronted with dozens of redactions they must not accept learns to click through
+ * them, which is worse than no gate at all.
+ *
+ * Scope is now the six things that identify a person:
+ *   names, dates of birth, addresses, telephone numbers, email addresses, NI numbers.
+ *
+ * Everything else stays in the transcript and reaches the drafting model.
+ */
+export const REDACTABLE_CATEGORIES: ReadonlySet<IdentifierCategory> = new Set([
+  // Names of individuals, whoever they are.
+  'client_name',
+  'third_party_name',
+  'child_name',
+  'partner_name',
+  'ex_partner_name',
+  'landlord_name',
+  'employer_name',
+  'support_worker_name',
+  'official_name',
+  // Direct personal identifiers.
+  'date_of_birth',
+  'street_address',
+  'uk_postcode',
+  'phone_number',
+  'email_address',
+  'national_insurance',
+]);
 
 export class IdentifierEngine {
   /**
@@ -55,10 +90,17 @@ export class IdentifierEngine {
       };
     }
 
-    // Step 1: Collect candidates from all 3 layers
-    const layer1Candidates = matchLayer1StructuredIdentifiers(transcript);
-    const layer2Candidates = matchLayer2UnstructuredNer(transcript);
-    const layer3Candidates = matchLayer3SpecialCategories(transcript);
+    // Step 1: Collect candidates, keeping only what is in scope.
+    //
+    // Layer 3 classified special categories such as health, immigration status and domestic
+    // abuse. Those are exactly the facts an advice case note has to record, so it no longer
+    // runs. What it protected against is handled by the surrogate tokens: the drafting model
+    // sees the disclosure without the name attached to it.
+    const inScope = (c: { category: IdentifierCategory }) => REDACTABLE_CATEGORIES.has(c.category);
+
+    const layer1Candidates = matchLayer1StructuredIdentifiers(transcript).filter(inScope);
+    const layer2Candidates = matchLayer2UnstructuredNer(transcript).filter(inScope);
+    const layer3Candidates: typeof layer2Candidates = [];
 
     // Step 2: Combine and sort candidates by character start index
     interface MergedCandidate {

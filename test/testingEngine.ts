@@ -10,7 +10,7 @@
  */
 
 import { SYNTHETIC_CORPUS, type SyntheticScenario } from './corpus/syntheticAdviceCorpus.ts';
-import { identifierEngine } from '../client/src/redaction/identifierEngine.ts';
+import { identifierEngine, REDACTABLE_CATEGORIES } from '../client/src/redaction/identifierEngine.ts';
 import { validateLogPayload, LogSchemaValidationError } from '../backend/src/logging/logSchema.ts';
 import { auditLogStore } from '../backend/src/logging/logStore.ts';
 
@@ -63,7 +63,13 @@ export class TestingEngine {
       const detectionResult = identifierEngine.detectIdentifiers(scenario.transcript);
       const detectedSpans = detectionResult.identifiers;
 
-      const groundTruth = scenario.groundTruthIdentifiers;
+      // Recall is measured only over what Case Ace is meant to hide. The corpus ground truth
+      // also marks organisations, benefits, medical practices and special categories, which
+      // are deliberately left in: "DWP" and "ESA" are the case, not personal data. Scoring
+      // against them would punish the engine for behaving correctly.
+      const groundTruth = scenario.groundTruthIdentifiers.filter(
+        (gt) => gt && gt.category && REDACTABLE_CATEGORIES.has(gt.category as any),
+      );
 
       for (const gt of groundTruth) {
         if (!gt || !gt.value) continue;

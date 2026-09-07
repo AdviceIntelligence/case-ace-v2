@@ -166,7 +166,7 @@ export const DetokenisedCopyModal: React.FC<DetokenisedCopyModalProps> = ({
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
               <ShieldAlert size={18} color="#059669" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <strong>Zero Local Disk Writing:</strong> In compliance with privacy policy (C1), saving detokenised files to disk is disabled.
+                <strong>Nothing saved:</strong> In compliance with privacy policy (C1), saving detokenised files to disk is disabled.
               </div>
             </div>
           </div>

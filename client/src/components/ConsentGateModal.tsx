@@ -363,7 +363,7 @@ export const ConsentGateModal: React.FC<ConsentGateModalProps> = ({
           >
             <AlertTriangle size={18} color="#D97706" style={{ flexShrink: 0, marginTop: '2px' }} aria-hidden="true" />
             <p style={{ margin: 0, fontSize: '0.75rem', color: '#92400E', lineHeight: 1.4 }}>
-              <strong>Zero Client PII Rule:</strong> The consent record stores only the timestamp, route, adviser identifier, and controlled provenance tags.
+              <strong>What is recorded:</strong> The consent record stores only the timestamp, route, adviser identifier, and controlled provenance tags.
               No client names, case references, or file names are ever recorded.
             </p>
           </div>

@@ -29,7 +29,7 @@ import { consentManager } from '../client/src/consent/consentManager.ts';
 import { dominantSpeakerDetector, DominantSpeakerDetector } from '../client/src/audio/dominantSpeakerDetector.ts';
 import { LiveAudioCapture } from '../client/src/audio/liveAudioCapture.ts';
 import { audioNormalizer } from '../client/src/audio/audioNormalizer.ts';
-import { identifierEngine } from '../client/src/redaction/identifierEngine.ts';
+import { identifierEngine, REDACTABLE_CATEGORIES } from '../client/src/redaction/identifierEngine.ts';
 import { matchLayer1StructuredIdentifiers } from '../client/src/redaction/layer1StructuredMatcher.ts';
 import { extractNameLikeSpan } from '../client/src/redaction/layer2UnstructuredNer.ts';
 import { tokenisationEngine } from '../client/src/tokenisation/tokenisationEngine.ts';
@@ -1278,6 +1278,62 @@ async function run() {
   // "my partner Sarah left" captured "Sarah left", destroying the verb. On ordinary advice
   // dialogue containing no identifiers, the engine produced a false positive every forty
   // words and the transcript could not be read.
+  // The engine redacted anything capitalised it recognised as an organisation, school,
+  // surgery, hospital or refuge, plus a whole special-category layer. That removed the case
+  // from the case note: DWP and ESA are not personal data, they are what the consultation is
+  // about. Scope is now the six things that identify a person.
+  await test('Only personal details are hidden, and the substance of the case survives', () => {
+    const transcript =
+      'The client is Sarah Okonkwo, date of birth 14th of March 1985. She lives at ' +
+      '12 Fairfield Road, SW18 1DN. Her number is 07700 900123 and her email is ' +
+      'sarah.o@example.com. Her National Insurance number is QQ 12 34 56 C. She has been ' +
+      'sanctioned by the DWP and her ESA was stopped. She is under Wandsworth Council for ' +
+      'housing and attends St George\'s Hospital. Her landlord Mr Patel wants possession.';
+
+    const result = identifierEngine.detectIdentifiers(transcript, null);
+    const output = result.tokenisedTranscript;
+
+    // Every one of the six kinds is caught.
+    for (const expected of [
+      'Sarah Okonkwo',
+      '14th of March 1985',
+      '12 Fairfield Road',
+      'SW18 1DN',
+      '07700 900123',
+      'sarah.o@example.com',
+      'QQ 12 34 56 C',
+      'Mr Patel',
+    ]) {
+      assert(
+        result.identifiers.some((i) => i.text === expected),
+        `"${expected}" was not hidden`,
+      );
+      assert(!output.includes(expected), `"${expected}" survived into the drafting payload`);
+    }
+
+    // And the case itself is still there for the note to be written from.
+    for (const material of ['DWP', 'ESA', 'Wandsworth Council', "St George's Hospital", 'sanctioned', 'possession']) {
+      assert(output.includes(material), `"${material}" was redacted, but it is the case, not an identifier`);
+    }
+  });
+
+  await test('Nothing outside the six personal categories can be redacted', () => {
+    const outOfScope = [
+      'nhs_number', 'bank_sort_code', 'bank_account_number', 'benefit_reference',
+      'passport_number', 'home_office_reference', 'court_case_number', 'hmrc_reference',
+      'identifying_organisation', 'identifying_school', 'identifying_medical_practice',
+      'identifying_hospital', 'identifying_refuge',
+    ];
+    for (const category of outOfScope) {
+      assert(
+        !REDACTABLE_CATEGORIES.has(category),
+        `${category} is in scope, but the agreed scope is names, dates of birth, addresses, ` +
+          'phone numbers, emails and NI numbers only',
+      );
+    }
+    assert.strictEqual(REDACTABLE_CATEGORIES.size, 15, 'Scope changed without the test being updated');
+  });
+
   await test('Ordinary advice dialogue containing no identifiers is left completely alone', () => {
     const transcript =
       'Good morning. Thanks for coming in today. So you said your Universal Credit has been ' +
