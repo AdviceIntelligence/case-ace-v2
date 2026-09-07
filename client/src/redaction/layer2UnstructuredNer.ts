@@ -58,6 +58,73 @@ const ROLE_PATTERNS = [
   { regex: /\b(?:my name is|I am|client is|interviewing|advising|speaking with)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\b/gi, category: 'client_name' as const, prefix: 'CLIENT_NAME' },
 ];
 
+
+/**
+ * Words that are never a person's name, however they are capitalised.
+ *
+ * Needed because every ROLE_PATTERNS regex carries the `i` flag, which silently nullifies the
+ * `[A-Z][a-z]+` capitalisation constraint written into each pattern. With `i`, "my son was
+ * ill" matched as the child's name "was", "I am worried about" matched as the client's name
+ * "worried about", and "my partner Sarah left" captured "Sarah left", eating the verb. On
+ * ordinary advice dialogue containing no identifiers at all, the engine produced a false
+ * positive roughly every forty words, and the resulting transcript could not be read.
+ */
+const NEVER_A_NAME = new Set([
+  'a', 'about', 'after', 'again', 'against', 'all', 'also', 'always', 'am', 'an', 'and', 'any',
+  'are', 'as', 'asked', 'at', 'back', 'be', 'because', 'been', 'before', 'being', 'both', 'but',
+  'by', 'called', 'came', 'can', 'come', 'could', 'did', 'do', 'does', 'doing', 'done', 'down',
+  'each', 'even', 'ever', 'every', 'few', 'for', 'friend', 'from', 'gave', 'get', 'give', 'go',
+  'going', 'gone', 'got', 'had', 'has', 'have', 'having', 'he', 'her', 'here', 'hers', 'him',
+  'his', 'how', 'i', 'if', 'in', 'into', 'is', 'it', 'its', 'just', 'keep', 'kept', 'knew',
+  'know', 'last', 'later', 'left', 'less', 'let', 'like', 'lived', 'lives', 'living', 'look',
+  'looked', 'made', 'make', 'many', 'may', 'me', 'might', 'mine', 'more', 'most', 'moved',
+  'much', 'must', 'my', 'need', 'needed', 'needs', 'never', 'new', 'next', 'no', 'not', 'now',
+  'of', 'off', 'often', 'on', 'once', 'one', 'only', 'or', 'other', 'our', 'out', 'over',
+  'owes', 'own', 'paid', 'pays', 'put', 'ran', 'rang', 'said', 'same', 'saw', 'say', 'says',
+  'see', 'seen', 'sent', 'she', 'should', 'since', 'so', 'some', 'still', 'stopped', 'such',
+  'take', 'taken', 'tell', 'than', 'that', 'the', 'their', 'them', 'then', 'there', 'these',
+  'they', 'this', 'those', 'though', 'thought', 'through', 'to', 'told', 'too', 'took', 'try',
+  'tried', 'under', 'until', 'up', 'us', 'used', 'very', 'was', 'we', 'well', 'went', 'were',
+  'what', 'when', 'where', 'which', 'while', 'who', 'why', 'will', 'with', 'without', 'work',
+  'worked', 'working', 'worried', 'would', 'yet', 'you', 'your', 'yours',
+]);
+
+/** Honorifics that may legitimately begin a captured name. */
+const HONORIFICS = new Set(['mr', 'mrs', 'ms', 'miss', 'dr', 'doctor', 'rev', 'judge']);
+
+/**
+ * Accepts a captured span only if it actually looks like a person's name: every word begins
+ * with a capital in the source text, and no word is ordinary English. Trailing words that fail
+ * the test are dropped rather than swallowed, so "Sarah left" yields "Sarah" and keeps "left"
+ * in the transcript.
+ *
+ * Returns the trimmed name, or null when nothing name-like remains.
+ */
+export function extractNameLikeSpan(captured: string): string | null {
+  const words = captured.trim().split(/\s+/).filter(Boolean);
+  const kept: string[] = [];
+
+  for (const word of words) {
+    const bare = word.replace(/[.,;:]$/, '');
+    const lower = bare.toLowerCase().replace(/\./g, '');
+
+    if (HONORIFICS.has(lower) && kept.length === 0) {
+      kept.push(word);
+      continue;
+    }
+    // Capitalisation is the evidence. Without it there is no reason to think this is a name.
+    if (!/^[A-Z][a-z'\-]*$/.test(bare)) break;
+    if (NEVER_A_NAME.has(lower)) break;
+    kept.push(bare);
+  }
+
+  // An honorific on its own names nobody.
+  if (kept.length === 0) return null;
+  if (kept.length === 1 && HONORIFICS.has(kept[0].toLowerCase().replace(/\./g, ''))) return null;
+
+  return kept.join(' ');
+}
+
 /**
  * Executes Layer 2 Unstructured Named Entity Recognition.
  */
@@ -84,14 +151,25 @@ export function matchLayer2UnstructuredNer(transcript: string): RawCandidate[] {
   };
 
   // 1. CONTEXTUAL ROLE-BASED THIRD PARTY AND CLIENT NAME MATCHING
+  //
+  // The captured span is validated before it is accepted. The patterns are written with
+  // `[A-Z][a-z]+` to require a capitalised name, but they carry the `i` flag, which cancels
+  // that requirement. Rather than rewrite nine patterns and rely on nobody adding a tenth with
+  // the flag, the capitalisation rule is enforced here, where it cannot be bypassed.
   for (const roleDef of ROLE_PATTERNS) {
+    roleDef.regex.lastIndex = 0;
     let match: RegExpExecArray | null;
     while ((match = roleDef.regex.exec(transcript)) !== null) {
-      const name = match[1];
-      if (name && name.length >= 2) {
-        const nameStart = match.index + match[0].indexOf(name);
-        addCandidate(roleDef.category, name, nameStart, nameStart + name.length, 0.98, roleDef.prefix);
-      }
+      const captured = match[1];
+      if (!captured) continue;
+
+      const name = extractNameLikeSpan(captured);
+      if (!name || name.length < 2) continue;
+
+      const nameStart = match.index + match[0].indexOf(name);
+      if (nameStart < match.index) continue;
+
+      addCandidate(roleDef.category, name, nameStart, nameStart + name.length, 0.98, roleDef.prefix);
     }
   }
 
@@ -125,7 +203,7 @@ export function matchLayer2UnstructuredNer(transcript: string): RawCandidate[] {
     const second = match[2];
     const firstLower = first.toLowerCase();
 
-    if (FIRST_NAMES.has(firstLower)) {
+    if (FIRST_NAMES.has(firstLower) && !NEVER_A_NAME.has(firstLower) && !NEVER_A_NAME.has(second.toLowerCase())) {
       // Exclude common non-name capitalised word pairs (e.g., "Citizens Advice", "Universal Credit", "High Street", "South West")
       const combined = `${first} ${second}`;
       const lowerCombined = combined.toLowerCase();
@@ -149,7 +227,15 @@ export function matchLayer2UnstructuredNer(transcript: string): RawCandidate[] {
   while ((match = singleNameRegex.exec(transcript)) !== null) {
     const word = match[1];
     const lower = word.toLowerCase();
-    if (FIRST_NAMES.has(lower) && word.length >= 3) {
+
+    // A capitalised word at the start of a sentence carries no evidence of being a name: it
+    // is capitalised because it begins a sentence. Automatic punctuation from the transcriber
+    // capitalises every sentence, so without this "Will they accept that" was redacted as a
+    // person called Will.
+    const before = transcript.slice(0, match.index);
+    const startsSentence = /(^|[.!?]["')\]]?\s+)$/.test(before);
+
+    if (!startsSentence && !NEVER_A_NAME.has(lower) && FIRST_NAMES.has(lower) && word.length >= 3) {
       // Check surrounding words for speech attribution or direct address
       const preceding = transcript.slice(Math.max(0, match.index - 25), match.index).toLowerCase();
       const following = transcript.slice(match.index + word.length, Math.min(transcript.length, match.index + word.length + 25)).toLowerCase();

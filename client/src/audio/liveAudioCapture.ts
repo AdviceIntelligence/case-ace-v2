@@ -26,12 +26,18 @@ export interface LiveCaptureOptions {
   onDominantSpeakerAnalysis?: (analysis: DominantSpeakerAnalysis) => void;
 }
 
+/** How long to wait for the first samples before telling the adviser nothing is arriving. */
+const SILENT_CAPTURE_GRACE_MS = 3000;
+
 export class LiveAudioCapture {
   private state: CaptureState = 'idle';
   private audioContext: AudioContext | null = null;
   private mediaStream: MediaStream | null = null;
   private sourceNode: MediaStreamAudioSourceNode | null = null;
   private processorNode: ScriptProcessorNode | AudioWorkletNode | null = null;
+  private silentCaptureTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Set by the UI so a silent microphone surfaces to the adviser, not the console. */
+  public onSilentCapture: ((message: string) => void) | null = null;
 
   private pcmChunks: Float32Array[] = [];
   private totalSamplesCaptured = 0;
@@ -112,16 +118,72 @@ export class LiveAudioCapture {
         };
 
         this.sourceNode.connect(scriptProcessor);
-        scriptProcessor.connect(this.audioContext.destination);
+        // A zero-gain sink keeps the processor pulling audio without routing the microphone
+        // to the speakers, which caused feedback when the adviser was not on a headset.
+        const silentSink = this.audioContext.createGain();
+        silentSink.gain.value = 0;
+        scriptProcessor.connect(silentSink);
+        silentSink.connect(this.audioContext.destination);
         this.processorNode = scriptProcessor;
+
+        // An AudioContext created after an await has lost the user-activation chain, so the
+        // browser may start it suspended. In that state onaudioprocess never fires: the
+        // microphone light comes on, the on-screen counter runs from the wall clock, and not
+        // one sample is captured. This is the defect that made recordings silently empty.
+        if (this.audioContext.state === 'suspended') {
+          await this.audioContext.resume();
+        }
+        if (this.audioContext.state !== 'running') {
+          throw new Error(
+            `The browser did not start audio capture (state: ${this.audioContext.state}). ` +
+              'Nothing would be recorded, so recording has not begun.',
+          );
+        }
       }
 
       this.setState('recording');
       this.startTimers();
       this.updateTitle(true);
+      this.startSilentCaptureWatchdog();
     } catch (err: any) {
       this.cleanup();
       throw new Error(`Microphone initialization failed: ${err.message || err}`);
+    }
+  }
+
+  /**
+   * Reports whether audio is actually arriving, as opposed to the clock running.
+   * The UI must show this: an adviser cannot otherwise tell a working recording from a
+   * broken one, which is exactly how an empty consultation reached a live pilot.
+   */
+  public getCapturedSampleCount(): number {
+    return this.totalSamplesCaptured;
+  }
+
+  public isReceivingAudio(): boolean {
+    return this.totalSamplesCaptured > 0;
+  }
+
+  /**
+   * Fails loudly if no samples have arrived shortly after recording begins, rather than
+   * letting the adviser talk for forty minutes into nothing.
+   */
+  private startSilentCaptureWatchdog(): void {
+    this.clearSilentCaptureWatchdog();
+    this.silentCaptureTimer = setTimeout(() => {
+      if (this.state === 'recording' && this.totalSamplesCaptured === 0) {
+        this.onSilentCapture?.(
+          'No sound is reaching Case Ace. Check that the right microphone is selected and ' +
+            'that the browser has permission, then start again.',
+        );
+      }
+    }, SILENT_CAPTURE_GRACE_MS);
+  }
+
+  private clearSilentCaptureWatchdog(): void {
+    if (this.silentCaptureTimer) {
+      clearTimeout(this.silentCaptureTimer);
+      this.silentCaptureTimer = null;
     }
   }
 
@@ -289,6 +351,7 @@ export class LiveAudioCapture {
   }
 
   private cleanup(): void {
+    this.clearSilentCaptureWatchdog();
     if (this.mediaStream) {
       this.mediaStream.getTracks().forEach((track) => track.stop());
       this.mediaStream = null;

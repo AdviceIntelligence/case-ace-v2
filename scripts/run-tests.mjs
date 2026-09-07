@@ -31,6 +31,7 @@ import { LiveAudioCapture } from '../client/src/audio/liveAudioCapture.ts';
 import { audioNormalizer } from '../client/src/audio/audioNormalizer.ts';
 import { identifierEngine } from '../client/src/redaction/identifierEngine.ts';
 import { matchLayer1StructuredIdentifiers } from '../client/src/redaction/layer1StructuredMatcher.ts';
+import { extractNameLikeSpan } from '../client/src/redaction/layer2UnstructuredNer.ts';
 import { tokenisationEngine } from '../client/src/tokenisation/tokenisationEngine.ts';
 import { destroySession, assertSessionDestroyed, markDetokenisedContentCopied, isDetokenisedClipboardPresent } from '../client/src/state/sessionDestruction.ts';
 import { sessionRecoveryManager } from '../client/src/state/sessionRecoveryManager.ts';
@@ -1189,6 +1190,102 @@ async function run() {
   });
 
   // 8. Phase 6: Consent Gate, Intake Routes & Audio Normalisation
+  // Every ROLE_PATTERNS regex in Layer 2 carries the `i` flag, which cancels the
+  // `[A-Z][a-z]+` capitalisation requirement written into it. "my son was ill" was redacted
+  // as a child called "was"; "I am worried about" as a client called "worried about"; and
+  // "my partner Sarah left" captured "Sarah left", destroying the verb. On ordinary advice
+  // dialogue containing no identifiers, the engine produced a false positive every forty
+  // words and the transcript could not be read.
+  await test('Ordinary advice dialogue containing no identifiers is left completely alone', () => {
+    const transcript =
+      'Good morning. Thanks for coming in today. So you said your Universal Credit has been ' +
+      'sanctioned. Can you tell me what happened? Well I missed an appointment at the Jobcentre ' +
+      'because my son was ill. And did you tell them why. I tried to ring but I was on hold for ' +
+      'ages. Will they accept that as good reason. Have you asked for a mandatory ' +
+      'reconsideration. That is the first step. You have one month from the date of the ' +
+      'decision. What about my rent. I am worried I will lose the flat. Have you spoken to your ' +
+      'landlord about the arrears. Not yet. I was too embarrassed.';
+
+    const result = identifierEngine.detectIdentifiers(transcript, null);
+    assert.strictEqual(
+      result.identifiers.length,
+      0,
+      `Redacted ${result.identifiers.length} things that are not identifiers: ` +
+        result.identifiers.map((i) => `${i.category}="${i.text}"`).join(', '),
+    );
+    assert.strictEqual(
+      result.tokenisedTranscript,
+      transcript,
+      'The transcript was altered even though it contains no identifiers',
+    );
+  });
+
+  await test('Real names are still redacted, and the words around them survive', () => {
+    const transcript =
+      'I am worried about my son Daniel. My landlord Mr Patel sent a letter. ' +
+      'My partner Sarah left in March.';
+
+    const result = identifierEngine.detectIdentifiers(transcript, null);
+    const found = result.identifiers.map((i) => i.text).sort();
+    assert.deepStrictEqual(
+      found,
+      ['Daniel', 'Mr Patel', 'Sarah'],
+      `Expected exactly the three names, got: ${found.join(', ')}`,
+    );
+
+    // The verb after a name must not be swallowed into the surrogate: an adviser reading
+    // "My partner [PARTNER_1] in March" cannot tell that the partner left.
+    assert(
+      / left in March/.test(result.tokenisedTranscript),
+      `The word "left" was consumed into a surrogate: ${result.tokenisedTranscript}`,
+    );
+    assert(
+      /I am worried about/.test(result.tokenisedTranscript),
+      `"worried about" was redacted as a name: ${result.tokenisedTranscript}`,
+    );
+  });
+
+  await test('A capitalised word starting a sentence is not treated as a name', () => {
+    // Automatic punctuation capitalises the first word of every sentence, so sentence position
+    // is not evidence of a name. "Will", "May", "Mark" and "Grace" all appear this way.
+    for (const sentence of [
+      'Will they accept that as good reason.',
+      'May I take your date of birth.',
+      'Mark the letter as urgent.',
+      'Grace periods do not apply here.',
+    ]) {
+      const result = identifierEngine.detectIdentifiers(`We discussed the appeal. ${sentence}`, null);
+      assert.strictEqual(
+        result.identifiers.length,
+        0,
+        `"${sentence}" produced a redaction: ${result.identifiers.map((i) => i.text).join(', ')}`,
+      );
+    }
+  });
+
+  await test('extractNameLikeSpan keeps names and rejects ordinary English', () => {
+    assert.strictEqual(extractNameLikeSpan('Daniel'), 'Daniel');
+    assert.strictEqual(extractNameLikeSpan('Sarah Jones'), 'Sarah Jones');
+    assert.strictEqual(extractNameLikeSpan('Mr Patel'), 'Mr Patel');
+    assert.strictEqual(extractNameLikeSpan('Sarah left'), 'Sarah', 'Trailing verb must be dropped');
+    assert.strictEqual(extractNameLikeSpan('was'), null);
+    assert.strictEqual(extractNameLikeSpan('worried about'), null);
+    assert.strictEqual(extractNameLikeSpan('about the'), null);
+    assert.strictEqual(extractNameLikeSpan('Mr'), null, 'An honorific alone names nobody');
+  });
+
+  await test('A recording that captured no audio is refused with a plain explanation', () => {
+    // The live capture used to create its AudioContext after an await, losing user activation,
+    // so the browser could start it suspended. onaudioprocess never fired, the on-screen
+    // counter ran from the wall clock, and the adviser saw a healthy recording that contained
+    // nothing. Whatever the cause, an empty recording must never reach transcription silently.
+    assert.throws(
+      () => planTranscriptionChunks(new Float32Array(0), 16000),
+      /contains no audio/i,
+      'An empty recording must be refused, not transcribed as silence',
+    );
+  });
+
   await test('Layer 1 detects identifiers as they are actually dictated, not only as written', () => {
     // Every string below is verbatim output from Cloud Speech-to-Text on a real recorded
     // consultation, or a close variant of it. Before these were handled, a spoken National
