@@ -270,6 +270,46 @@ async function run() {
     }
   });
 
+  // Two components were written entirely in Tailwind utility classes while Tailwind was not a
+  // dependency. The classes compiled to nothing, so both screens rendered as unstyled HTML
+  // with default browser form controls, one of them being the redaction review gate: the
+  // screen where an adviser decides what is hidden. Nothing failed, nothing warned, and the
+  // build succeeded, because an unknown className is not an error in React.
+  await test('A styling system the code depends on is actually installed', () => {
+    const clientDir = path.join(rootDir, 'client/src');
+    const sources = fs
+      .readdirSync(clientDir, { recursive: true })
+      .filter((f) => typeof f === 'string' && /\.tsx?$/.test(f));
+
+    // Utility class shapes that only mean anything if Tailwind is compiling them.
+    const TAILWIND_SHAPE = /className="[^"]*\b(?:bg|text|border|ring)-(?:slate|amber|emerald|rose|sky|indigo)-\d{2,3}\b/;
+
+    const usingTailwind = sources.filter((file) =>
+      TAILWIND_SHAPE.test(fs.readFileSync(path.join(clientDir, file), 'utf8')),
+    );
+
+    if (usingTailwind.length === 0) return; // Nothing depends on it, nothing to install.
+
+    const devDeps = clientPkg.devDependencies || {};
+    assert(
+      devDeps.tailwindcss,
+      `${usingTailwind.length} component(s) use Tailwind utility classes but tailwindcss is not ` +
+        `a dependency, so those classes render as nothing: ${usingTailwind.join(', ')}`,
+    );
+
+    const stylesheet = fs.readFileSync(path.join(rootDir, 'client/src/styles/index.css'), 'utf8');
+    assert(
+      /@tailwind\s+utilities/.test(stylesheet),
+      'tailwindcss is installed but the stylesheet never emits its utilities, so the classes ' +
+        'still compile to nothing.',
+    );
+
+    assert(
+      fs.existsSync(path.join(rootDir, 'client/tailwind.config.js')),
+      'Tailwind needs a config naming the files to scan, or it emits no classes for them.',
+    );
+  });
+
   await test('validates CycloneDX 1.5 SBOM generated in evidence/sbom.json', () => {
     const sbomPath = path.join(rootDir, 'evidence/sbom.json');
     assert(fs.existsSync(sbomPath), 'evidence/sbom.json does not exist');

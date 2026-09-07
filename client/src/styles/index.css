@@ -1,4 +1,18 @@
 /* Case Ace v2.0 - Clean Accessible Self-Hosted CSS */
+
+/*
+ * Tailwind. Two components, RedactionReviewGateModal and TranscriptProgressModal, were
+ * written entirely in Tailwind utility classes while Tailwind was never a dependency. Those
+ * classes compiled to nothing, so both screens rendered as unstyled HTML with default browser
+ * form controls. One of them is the redaction review gate, the screen where an adviser decides
+ * what is hidden from the drafting model.
+ *
+ * Everything is compiled into this stylesheet and served from the site's own origin, so the
+ * Content Security Policy stays style-src 'self' with no inline styles and no external CSS.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Self-contained System Font Stack: Zero External Font Downloads */
 :root {
   --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";

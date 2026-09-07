@@ -51,3 +51,17 @@ The following dependencies were evaluated and explicitly rejected:
 * **Google Fonts / Adobe Typekit**: **REJECTED**. Violates CSP and privacy constraints. System fonts and self-hosted fonts are used exclusively.
 * **Axios / Request wrappers**: **REJECTED**. Native `fetch` API provides all required HTTP capabilities with zero supply chain overhead.
 * **Redux Persist / LocalStorage adapters**: **REJECTED**. Violates Constraint C1 (Zero Non-Volatile Persistence).
+
+## Build-time styling
+
+### tailwindcss
+Pinned `3.4.17`. Build-time only; nothing from Tailwind is shipped as a runtime dependency.
+Two components, `RedactionReviewGateModal` and `TranscriptProgressModal`, were authored in
+Tailwind utility classes while Tailwind was absent from the project, so those classes compiled
+to nothing and both screens rendered as unstyled HTML. Tailwind compiles them into the
+first-party stylesheet at build time, which keeps the Content Security Policy at
+`style-src 'self'` with no inline styles and no external CSS.
+
+### postcss, autoprefixer
+Pinned `8.5.1` and `10.4.20`. Build-time only. PostCSS is how Vite runs Tailwind; autoprefixer
+adds vendor prefixes for the browsers CAW workstations run.
