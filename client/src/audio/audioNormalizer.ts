@@ -110,7 +110,13 @@ export class AudioNormalizer {
 
   private validatePcmBuffer(buffer: ArrayBuffer): void {
     if (!buffer || buffer.byteLength === 0) {
-      throw new Error('Audio normalisation failed: PCM buffer is empty or missing.');
+      // Written for the adviser, who is the person who sees it. The technical wording that
+      // used to appear here told them nothing they could act on.
+      throw new Error(
+        'No sound was captured, so there is nothing to work from. Check that the right ' +
+          'microphone is selected and that this site has permission to use it, then record ' +
+          'again. Nothing has been sent anywhere.',
+      );
     }
     // Float32 samples must align to 4 bytes
     if (buffer.byteLength % 4 !== 0) {

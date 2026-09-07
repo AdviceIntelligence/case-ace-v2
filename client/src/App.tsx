@@ -181,6 +181,12 @@ export const App: React.FC = () => {
       },
     });
 
+    // Without this the watchdog in LiveAudioCapture has nowhere to report, and a microphone
+    // that is delivering nothing stays invisible behind a running counter.
+    capture.onSilentCapture = (message) => {
+      setMediaError(message);
+    };
+
     liveCaptureRef.current = capture;
     volatileSessionStore.initSession('live_microphone', currentUser.id);
     volatileSessionStore.setConsentRecord(consent);
