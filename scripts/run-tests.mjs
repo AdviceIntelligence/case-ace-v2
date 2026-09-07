@@ -42,7 +42,7 @@ import { testingEngine } from '../test/testingEngine.ts';
 import { cspHeader, cspMeta, CSP_PLACEHOLDER } from '../client/src/config/csp.ts';
 import { installWorkerNetworkSandbox, isWorkerScope, NETWORK_GLOBALS } from '../client/src/workers/workerSandbox.ts';
 import { planTranscriptionChunks, sliceChunk, MAX_CHUNK_SECONDS, chunkAudioBuffer } from '../client/src/asr/audioChunker.ts';
-import { UkCloudTranscriber, TranscriptionFailedError } from '../client/src/asr/ukCloudTranscriber.ts';
+import { UkCloudTranscriber, TranscriptionFailedError, parseCredentialResponseForTesting } from '../client/src/asr/ukCloudTranscriber.ts';
 import { ENVIRONMENTS } from '../client/src/config/environments.ts';
 import { logSecurityEvent, getTelemetryBuffer, clearTelemetryBuffer } from '../client/src/monitoring/eventLogger.ts';
 
@@ -2081,6 +2081,49 @@ async function run() {
     );
 
     assert.strictEqual(attempts, 3, `Expected 3 attempts before giving up, got ${attempts}`);
+  });
+
+  // The client read `data.credential` from a response that is the credential itself, so every
+  // consultation died on "Cannot read properties of undefined (reading 'endpoint')" before a
+  // single byte of audio was sent. Both sides passed their own tests: the backend returned a
+  // correct credential, the client parsed a correct wrapper, and nobody checked they agreed.
+  await test('The client can read the credential the backend actually returns', async () => {
+    const adviser = {
+      id: 'usr_adviser_contract',
+      email: 'adviser@caw.org.uk',
+      name: 'Adviser Alice',
+      role: 'adviser',
+      mfaVerified: true,
+      provider: 'totp',
+      issuedAt: Math.floor(Date.now() / 1000),
+      expiresAt: Math.floor(Date.now() / 1000) + 900,
+    };
+
+    const restoreMinter = CredentialIssuerService.setTokenMinterForTesting(async () => ({
+      accessToken: 'stub_token_contract',
+    }));
+
+    try {
+      // Exactly what the route serialises: res.status(200).json(credential).
+      const issued = await CredentialIssuerService.issueCredential(adviser, 'speech-to-text', 300);
+      const overTheWire = JSON.parse(JSON.stringify(issued));
+
+      const parsed = parseCredentialResponseForTesting(overTheWire);
+
+      assert.strictEqual(parsed.endpoint, 'https://europe-west2-speech.googleapis.com');
+      assert.strictEqual(parsed.accessToken, 'stub_token_contract');
+      assert(typeof parsed.projectId === 'string' && parsed.projectId.length > 0);
+    } finally {
+      restoreMinter();
+    }
+  });
+
+  await test('A credential the client cannot use fails by name, not as a TypeError', () => {
+    assert.throws(
+      () => parseCredentialResponseForTesting({ credential: { endpoint: 'https://x' } }),
+      /accessToken, endpoint, projectId missing/,
+      'A wrapped or malformed credential must say what is missing',
+    );
   });
 
   await test('Silence produces an empty transcript rather than fabricated speech', async () => {

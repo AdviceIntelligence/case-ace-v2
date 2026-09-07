@@ -127,9 +127,36 @@ async function obtainEphemeralCredential(authToken?: string): Promise<EphemeralC
     );
   }
 
-  const data = await response.json();
-  return data.credential;
+  // The endpoint returns the credential object itself, not a wrapper. Reading data.credential
+  // yielded undefined, and the first use of it failed with "Cannot read properties of
+  // undefined (reading 'endpoint')", which named neither the endpoint nor the mismatch.
+  return parseCredentialResponse(await response.json(), response.status);
 }
+
+/**
+ * Validates that a credential response carries what this client needs, and says what is
+ * missing when it does not. Exported for the contract test, which feeds it the exact object
+ * the backend route serialises.
+ */
+function parseCredentialResponse(body: unknown, status = 200): EphemeralCredential {
+  const credential = (body ?? {}) as Partial<EphemeralCredential>;
+
+  const missing = (['accessToken', 'endpoint', 'projectId'] as const).filter(
+    (field) => typeof credential[field] !== 'string' || credential[field] === '',
+  );
+  if (missing.length > 0) {
+    throw new CloudSttApiError(
+      'The credential service returned a response this client cannot use: ' +
+        `${missing.join(', ')} missing. Transcription cannot start.`,
+      status,
+      false,
+    );
+  }
+
+  return credential as EphemeralCredential;
+}
+
+export const parseCredentialResponseForTesting = parseCredentialResponse;
 
 export class TranscriptionFailedError extends Error {
   public readonly chunkIndex: number;
