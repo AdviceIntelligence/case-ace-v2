@@ -196,6 +196,48 @@ async function run() {
     );
   });
 
+  // Firebase Hosting matches header rules against the REQUESTED path, before the single page
+  // rewrite. A visitor asks for "/", not "/index.html", so a no-store rule written against
+  // "/index.html" never applied to the page anyone actually loads. The page was served with
+  // Firebase's default max-age=3600, so for an hour after every deploy advisers kept running
+  // the previous version of Case Ace, silently, because the old hashed assets still exist.
+  // This cost several rounds of "the deploy did not take effect" during the pilot build.
+  await test('the deployed page is never cached, while hashed assets still are', () => {
+    const appTarget = firebaseConfig.hosting.find((h) => h.target === 'app');
+    assert(appTarget, 'firebase.json has no "app" hosting target');
+
+    const HASHED_ASSETS = '**/*.@(js|css|wasm|woff2|png|svg)';
+
+    // Firebase applies every matching rule in order, so the last match for a given header
+    // wins. Resolve Cache-Control the way Hosting would, for a request to the site root.
+    const resolveCacheControl = (requestPath, isHashedAsset) => {
+      let value = null;
+      for (const entry of appTarget.headers) {
+        const matchesEverything = entry.source === '**';
+        const matchesAssets = entry.source === HASHED_ASSETS && isHashedAsset;
+        const matchesLiterally = entry.source === requestPath;
+        if (!matchesEverything && !matchesAssets && !matchesLiterally) continue;
+        for (const header of entry.headers) {
+          if (header.key === 'Cache-Control') value = header.value;
+        }
+      }
+      return value;
+    };
+
+    const rootPolicy = resolveCacheControl('/', false);
+    assert(
+      rootPolicy && /no-store/.test(rootPolicy),
+      `A request for "/" resolves to Cache-Control "${rootPolicy}". The page must be no-store, ` +
+        'or advisers keep running the previous deploy.',
+    );
+
+    const assetPolicy = resolveCacheControl('/assets/index-abc123.js', true);
+    assert(
+      assetPolicy && /immutable/.test(assetPolicy),
+      `Hashed assets resolve to "${assetPolicy}"; they must stay immutable so the site is fast.`,
+    );
+  });
+
   await test('the nginx image serves the generated pilot policy', () => {
     assert(
       nginxConfigContent.includes(cspHeader('pilot')),
